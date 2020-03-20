@@ -15,6 +15,7 @@ ssh-keygen -t rsa
 sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
 upgrade_oh_my_zsh
 
+chmod 744 ~/.oh-my-zsh/oh-my-zsh.sh
 chsh -s $(which zsh)
 
 # Setting iterm2 integration with zsh
