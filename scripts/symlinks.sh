@@ -13,6 +13,9 @@ ln -s ~/dotfiles/.tmux.conf ~/.tmux.conf
 ln -s ~/dotfiles/.tmuxinator ~/.tmuxinator
 ln -s ~/dotfiles/shell-sources ~/shell-sources
 
+ln -s ~/dotfiles/tmux-inactive-panes ~/tmux-inactive-panes
+ln -s ~/dotfiles/tmux-tomorrow ~/tmux-tomorrow
+
 # Creation of projects and Yandex.Disk folders
 if [ ! -d "~/projects" ]; then
     mkdir ~/projects

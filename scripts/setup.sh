@@ -5,6 +5,8 @@ xcode-select —-install
 # Creating XDG_CONFIG_HOME
 mkdir -p ${XDG_CONFIG_HOME:=$HOME/.config}
 
+ssh-keygen -t rsa
+
 # Running main scripts
 ./macos.sh
 ./brew.sh

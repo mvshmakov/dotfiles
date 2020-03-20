@@ -53,8 +53,8 @@ source ~/.iterm2_shell_integration.zsh
 # Add tab completion for SSH hostnames based on ~/.ssh/config, ignoring wildcards
 [ -e "$HOME/.ssh/config" ] && complete -o "default" -o "nospace" -W "$(grep "^Host" ~/.ssh/config | grep -v "[?*]" | cut -d " " -f2- | tr ' ' '\n')" scp sftp ssh;
 
-source ./shell-souces/.aliases
-source ./shell-souces/.exports
-source ./shell-souces/.functions
+source ~/shell-souces/.aliases
+source ~/shell-souces/.exports
+source ~/shell-souces/.functions
 
 ssh-add ~/.ssh/id_rsa
