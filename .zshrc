@@ -1,5 +1,5 @@
 # Path to your oh-my-zsh installation.
-export ZSH="~/.oh-my-zsh"
+export ZSH="/Users/mvshmakov/.oh-my-zsh"
 # How often to auto-update ZSH (in days).
 export UPDATE_ZSH_DAYS=7
 
@@ -45,17 +45,19 @@ plugins=(
     tmux
     vscode
     zsh-autosuggestions
+    zsh-output-highlighting
 )
 
-source $HOME/.oh-my-zsh/oh-my-zsh.sh
-source $HOME/.iterm2_shell_integration.zsh
-source $HOME/.zsh/zsh-autosuggestions/zsh-autosuggestions.zsh
+source ~/.oh-my-zsh/oh-my-zsh.sh
+
+source ~/.oh-my-zsh/custom/plugins/.iterm2_shell_integration.zsh
+source ~/.oh-my-zsh/custom/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
+
+source ~/shell-sources/.aliases
+source ~/shell-sources/.exports
+source ~/shell-sources/.functions
 
 # Add tab completion for SSH hostnames based on ~/.ssh/config, ignoring wildcards
 [ -e "$HOME/.ssh/config" ] && complete -o "default" -o "nospace" -W "$(grep "^Host" ~/.ssh/config | grep -v "[?*]" | cut -d " " -f2- | tr ' ' '\n')" scp sftp ssh;
 
-source $HOME/shell-sources/.aliases
-source $HOME/shell-sources/.exports
-source $HOME/shell-sources/.functions
-
-ssh-add $HOME/.ssh/id_rsa
+ssh-add ~/.ssh/id_rsa

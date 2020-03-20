@@ -11,10 +11,10 @@ ssh-keygen -t rsa
 ./macos.sh
 ./brew.sh
 ./shell.sh
+./symlinks.sh
 
+# Installing NodeJS LTS
 nvm install --lts --latest-npm --reinstall-packages-from='lts/*'
 echo "NodeJS setup completed!"
-
-./symlinks.sh
 
 echo "Setup completed!"

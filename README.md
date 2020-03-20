@@ -5,10 +5,12 @@ Dotfiles for macOS (relevant for Catalina 10.15+)
 
 ```
 sudo softwareupdate -i -a
-cd $HOME && git clone https://github.com/mvshmakov/dotfiles.git
+cd ~/projects && git clone https://github.com/mvshmakov/dotfiles.git
 cd dotfiles && git submodule update --init --recursive
 ./scripts/setup.sh
 ```
+
+Iterm2's `com.googlecode.iterm2.plist` is in `$HOME` folder, so you need to set it also in iterm2 settings in order to load it.
 
 # Useful commands
 

@@ -1,19 +1,23 @@
 #!/bin/sh
 
+DOTFILES_PATH="Users/mvshmakov/projects/dotfiles"
+
 # Links dotfiles with home folder
-rm ~/.zshrc && ln -s ~/dotfiles/.zshrc ~/.zshrc
-rm ~/.curlrc && ln -s ~/dotfiles/.curlrc ~/.curlrc
-rm ~/.gitconfig && ln -s ~/dotfiles/.gitconfig ~/.gitconfig
-rm ~/.gitignore && ln -s ~/dotfiles/.gitignore ~/.gitignore
-rm ~/.gitignore_global && ln -s ~/dotfiles/.gitignore_global ~/.gitignore_global
-rm ~/.gitmodules && ln -s ~/dotfiles/.gitmodules ~/.gitmodules
-rm ~/.tmux.conf && ln -s ~/dotfiles/.tmux.conf ~/.tmux.conf
+rm ~/.zshrc; ln -s $DOTFILES_PATH/.zshrc ~/.zshrc
+rm ~/.curlrc; ln -s $DOTFILES_PATH/.curlrc ~/.curlrc
+rm ~/.gitconfig; ln -s $DOTFILES_PATH/.gitconfig ~/.gitconfig
+rm ~/.gitignore; ln -s $DOTFILES_PATH/.gitignore ~/.gitignore
+rm ~/.gitignore_global; ln -s $DOTFILES_PATH/.gitignore_global ~/.gitignore_global
+rm ~/.gitmodules; ln -s $DOTFILES_PATH/.gitmodules ~/.gitmodules
+rm ~/.tmux.conf; ln -s $DOTFILES_PATH/.tmux.conf ~/.tmux.conf
 
-rm ~/.tmuxinator && ln -s ~/dotfiles/.tmuxinator ~/.tmuxinator
-ln -s ~/dotfiles/shell-sources ~/shell-sources
+rm ~/.tmuxinator; ln -s $DOTFILES_PATH/.tmuxinator ~/.tmuxinator
+ln -s $DOTFILES_PATH/shell-sources ~/shell-sources
 
-ln -s ~/dotfiles/tmux-inactive-panes ~/tmux-inactive-panes
-ln -s ~/dotfiles/tmux-tomorrow ~/tmux-tomorrow
+ln -s $DOTFILES_PATH/tmux-inactive-panes ~/tmux-inactive-panes
+ln -s $DOTFILES_PATH/tmux-tomorrow ~/tmux-tomorrow
+
+cp $DOTFILES_PATH/iterm2/com.googlecode.iterm2.plist ~/com.googlecode.iterm2.plist 
 
 # Creation of projects and Yandex.Disk folders
 if [ ! -d "~/projects" ]; then
