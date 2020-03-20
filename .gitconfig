@@ -1,0 +1,23 @@
+[core]
+	excludesfile = /Users/mvshmakovmv/.gitignore_global
+	precomposeUnicode = true
+[difftool "sourcetree"]
+	cmd = opendiff \"$LOCAL\" \"$REMOTE\"
+	path = 
+[mergetool "sourcetree"]
+	cmd = /Applications/SourceTree.app/Contents/Resources/opendiff-w.sh \"$LOCAL\" \"$REMOTE\" -ancestor \"$BASE\" -merge \"$MERGED\"
+	trustExitCode = true
+[user]
+	name = Maxim Shmakov
+	email = mvshmakov@mail.ru
+[commit]
+	template = /Users/mvshmakovmv/.stCommitMsg
+[credential "github.com"]
+	interactive = always
+[credential]
+	helper = osxkeychain
+[filter "lfs"]
+	clean = git-lfs clean -- %f
+	smudge = git-lfs smudge -- %f
+	process = git-lfs filter-process
+	required = true

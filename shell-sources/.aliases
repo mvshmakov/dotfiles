@@ -1,0 +1,64 @@
+# ZSH aliases
+alias zshrc="$EDITOR ~/.zshrc"
+alias ohmyzsh="$EDITOR ~/.oh-my-zsh"
+
+# Reload the shell (i.e. invoke as a login shell)
+alias reload="exec ${SHELL} -l"
+
+# Print each PATH entry on a separate line
+alias path='echo -e ${PATH//:/\\n}'
+
+# Recursively delete `.DS_Store` files
+alias cleands="find . -type f -name '*.DS_Store' -ls -delete"
+
+# Browsers
+alias chrome='/Applications/Google\ Chrome.app/Contents/MacOS/Google\ Chrome'
+alias chromium='/Applications/Chromium.app/Contents/MacOS/Chromium'
+alias yabro='/Applications/Yandex.app/Contents/MacOS/Yandex'
+alias firefox='/Applications/Firefox.app/Contents/MacOS/Firefox'
+alias safari='/Applications/Safari.app/Contents/MacOS/Safari'
+alias opera='/Applications/Opera.app/Contents/MacOS/Opera'
+
+# Always enable colored `grep` output
+# Note: `GREP_OPTIONS="--color=auto"` is deprecated, hence the alias usage.
+alias grep='grep --color=auto'
+alias fgrep='fgrep --color=auto'
+alias egrep='egrep --color=auto'
+
+# ls
+alias ll='ls -alF'
+alias la='ls -A'
+alias l='ls -CF'
+
+# cd
+alias ..='cd ..'
+alias ...='cd ../..'
+alias ....='cd ../../..'
+alias desktop='cd ~/Desktop'
+alias documents='cd ~/Documents'
+alias disk='cd ~/Yandex.Disk.localized'
+
+# General
+alias please='sudo !!'
+
+# Merge PDF files, preserving hyperlinks
+# Usage: `mergepdf input{1,2,3}.pdf`
+alias mergepdf='gs -q -dNOPAUSE -dBATCH -sDEVICE=pdfwrite -sOutputFile=_merged.pdf'
+
+# locks the screen (when going AFK)
+alias afk="/System/Library/CoreServices/Menu\ Extras/User.menu/Contents/Resources/CGSession -suspend"
+
+# CPU/Memory usage
+alias topmem='top -stats "pid,command,mem,cpu" -o mem'
+alias topcpu='top -stats "pid,command,cpu,mem" -o cpu'
+
+# IP addresses
+alias ip="dig +short myip.opendns.com @resolver1.opendns.com"
+alias localip="ipconfig getifaddr en0"
+alias ips="ifconfig -a | grep -o 'inet6\? \(addr:\)\?\s\?\(\(\([0-9]\+\.\)\{3\}[0-9]\+\)\|[a-fA-F0-9:]\+\)' | awk '{ sub(/inet6? (addr:)? ?/, \"\"); print }'"
+
+# macOS has no `md5sum`, so use `md5` as a fallback
+command -v md5sum > /dev/null || alias md5sum="md5"
+
+# macOS has no `sha1sum`, so use `shasum` as a fallback
+command -v sha1sum > /dev/null || alias sha1sum="shasum"
