@@ -1,5 +1,3 @@
-# Path to your oh-my-zsh installation.
-export ZSH="~/.oh-my-zsh"
 # How often to auto-update ZSH (in days).
 export UPDATE_ZSH_DAYS=7
 
@@ -47,15 +45,15 @@ plugins=(
     zsh-autosuggestions
 )
 
-source $ZSH/oh-my-zsh.sh
-source ~/.iterm2_shell_integration.zsh
-source ~/.zsh/zsh-autosuggestions/zsh-autosuggestions.zsh
+source $HOME/.oh-my-zsh/oh-my-zsh.sh
+source $HOME/.iterm2_shell_integration.zsh
+source $HOME/.zsh/zsh-autosuggestions/zsh-autosuggestions.zsh
 
 # Add tab completion for SSH hostnames based on ~/.ssh/config, ignoring wildcards
 [ -e "$HOME/.ssh/config" ] && complete -o "default" -o "nospace" -W "$(grep "^Host" ~/.ssh/config | grep -v "[?*]" | cut -d " " -f2- | tr ' ' '\n')" scp sftp ssh;
 
-source ~/shell-sources/.aliases
-source ~/shell-sources/.exports
-source ~/shell-sources/.functions
+source $HOME/shell-sources/.aliases
+source $HOME/shell-sources/.exports
+source $HOME/shell-sources/.functions
 
-ssh-add ~/.ssh/id_rsa
+ssh-add $HOME/.ssh/id_rsa

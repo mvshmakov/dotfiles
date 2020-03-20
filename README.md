@@ -5,7 +5,7 @@ Dotfiles for macOS (relevant for Catalina 10.15+)
 
 ```
 sudo softwareupdate -i -a
-cd ~ && git clone https://github.com/mvshmakov/dotfiles.git
+cd $HOME && git clone https://github.com/mvshmakov/dotfiles.git
 cd dotfiles && git submodule update --init --recursive
 ./scripts/setup.sh
 ```
