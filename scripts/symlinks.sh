@@ -1,6 +1,6 @@
 #!/bin/sh
 
-DOTFILES_PATH="Users/mvshmakov/projects/dotfiles"
+DOTFILES_PATH="/Users/mvshmakov/projects/dotfiles"
 
 # Links dotfiles with home folder
 rm ~/.zshrc; ln -s $DOTFILES_PATH/.zshrc ~/.zshrc
