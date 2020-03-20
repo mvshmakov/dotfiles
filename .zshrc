@@ -1,3 +1,5 @@
+# Path to your oh-my-zsh installation.
+export ZSH="~/.oh-my-zsh"
 # How often to auto-update ZSH (in days).
 export UPDATE_ZSH_DAYS=7
 
