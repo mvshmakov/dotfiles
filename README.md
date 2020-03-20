@@ -17,6 +17,7 @@ cd dot-files && git submodule update --init --recursive
 
 # Useful links
 
+- [awesome-dotfiles](https://github.com/webpro/awesome-dotfiles)
 - [iterm2](https://iterm2.com)
 - [homebrew](https://brew.sh)
 - [tmux](https://github.com/tmux/tmux)
