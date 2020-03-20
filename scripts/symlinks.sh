@@ -1,16 +1,15 @@
 #!/bin/sh
 
 # Links dotfiles with home folder
-ln -s ~/dotfiles/.zshrc ~/.zshrc
-ln -s ~/dotfiles/.curlrc ~/.curlrc
-ln -s ~/dotfiles/.gitconfig ~/.gitconfig
-ln -s ~/dotfiles/.gitignore ~/.gitignore
-ln -s ~/dotfiles/.gitignore_global ~/.gitignore_global
-ln -s ~/dotfiles/.gitmodules ~/.gitmodules
-ln -s ~/dotfiles/.zshrc ~/.zshrc
-ln -s ~/dotfiles/.tmux.conf ~/.tmux.conf
+rm ~/.zshrc && ln -s ~/dotfiles/.zshrc ~/.zshrc
+rm ~/.curlrc && ln -s ~/dotfiles/.curlrc ~/.curlrc
+rm ~/.gitconfig && ln -s ~/dotfiles/.gitconfig ~/.gitconfig
+rm ~/.gitignore && ln -s ~/dotfiles/.gitignore ~/.gitignore
+rm ~/.gitignore_global && ln -s ~/dotfiles/.gitignore_global ~/.gitignore_global
+rm ~/.gitmodules && ln -s ~/dotfiles/.gitmodules ~/.gitmodules
+rm ~/.tmux.conf && ln -s ~/dotfiles/.tmux.conf ~/.tmux.conf
 
-ln -s ~/dotfiles/.tmuxinator ~/.tmuxinator
+rm ~/.tmuxinator && ln -s ~/dotfiles/.tmuxinator ~/.tmuxinator
 ln -s ~/dotfiles/shell-sources ~/shell-sources
 
 ln -s ~/dotfiles/tmux-inactive-panes ~/tmux-inactive-panes
