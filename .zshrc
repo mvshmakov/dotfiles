@@ -1,5 +1,5 @@
 # Path to your oh-my-zsh installation.
-export ZSH="/Users/mvshmakov/.oh-my-zsh"
+export ZSH="/Users/$USER/.oh-my-zsh"
 # How often to auto-update ZSH (in days).
 export UPDATE_ZSH_DAYS=7
 
@@ -61,3 +61,9 @@ source ~/shell-sources/.functions
 [ -e "$HOME/.ssh/config" ] && complete -o "default" -o "nospace" -W "$(grep "^Host" ~/.ssh/config | grep -v "[?*]" | cut -d " " -f2- | tr ' ' '\n')" scp sftp ssh;
 
 ssh-add ~/.ssh/id_rsa
+
+# GRC colorizes nifty unix tools all over the place
+if (( $+commands[grc] )) && (( $+commands[brew] ))
+then
+  source `brew --prefix`/etc/grc.bashrc
+fi

@@ -1,4 +1,8 @@
 anaconda
+android-file-transfer
+android-platform-tool
+app-cleaner
+asciinema
 atom
 betterzip
 chromium
@@ -6,11 +10,13 @@ discord
 docker
 electrum
 fbreader
+figma
 firefox
 flash-player
 grammarly
 insomnia
 iterm2
+java
 keepassx
 kitematic
 mactex
@@ -25,6 +31,7 @@ qlvideo
 quicklook-json
 quicklookase
 skype
+speedtest-cli
 steam
 teamviewer
 tor-browser
@@ -34,4 +41,5 @@ virtualbox-extension-pack
 vlc
 webpquicklook
 wireshark
+wkhtmltopdf
 zeplin

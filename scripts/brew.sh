@@ -11,6 +11,11 @@ BREW_PREFIX=$(brew --prefix)
 xargs brew install < ../brew/packages.txt
 xargs brew cask install < ../brew/casks.txt
 
+# Brew aliases ability
+brew tap homebrew/aliases
+# Brew casks ability
+brew tap homebrew/cask
+
 # GNU core utilities are installed (those that come with macOS are outdated).
 # Don’t forget to add `$(brew --prefix coreutils)/libexec/gnubin` to `$PATH`.
 ln -s "${BREW_PREFIX}/bin/gsha256sum" "${BREW_PREFIX}/bin/sha256sum"

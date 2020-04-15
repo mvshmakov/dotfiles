@@ -9,7 +9,7 @@ alias reload="exec ${SHELL} -l"
 alias path='echo -e ${PATH//:/\\n}'
 
 # Recursively delete `.DS_Store` files
-alias cleands="find . -type f -name '*.DS_Store' -ls -delete"
+alias clean_ds="find . -type f -name '*.DS_Store' -ls -delete"
 
 # Browsers
 alias chrome='/Applications/Google\ Chrome.app/Contents/MacOS/Google\ Chrome'
@@ -31,20 +31,29 @@ alias ll='ls -alF'
 alias la='ls -A'
 alias l='ls -CF'
 
+alias cp='cp -r'
+alias df='df -h'
+
 # cd
 alias ..='cd ..'
 alias ...='cd ../..'
 alias ....='cd ../../..'
-alias desktop='cd ~/Desktop'
-alias documents='cd ~/Documents'
+alias d='cd ~/Desktop'
+alias ds='cd ~/Downloads'
+alias docs='cd ~/Documents'
 alias disk='cd ~/Yandex.Disk.localized'
 
 # General
 alias please='sudo !!'
+alias cp_pubkey="more ~/.ssh/id_rsa.pub | pbcopy | echo '=> Public key copied to pasteboard.'"
 
 # Merge PDF files, preserving hyperlinks
-# Usage: `mergepdf input{1,2,3}.pdf`
+# Usage: `mergepdf input{1,2,3}.pdf` or `mergepdf_local` for PDFs in folder merge
 alias mergepdf='gs -q -dNOPAUSE -dBATCH -sDEVICE=pdfwrite -sOutputFile=_merged.pdf'
+alias mergepdf_local='ls -a | grep .pdf$ | xargs gs -q -dNOPAUSE -dBATCH -sDEVICE=pdfwrite -sOutputFile=_merged.pdf'
+
+# Convert ipynb to pdf using wkhtmltopdf
+alias ipynb2pdf='jupyter nbconvert --to html notebook.ipynb && wkhtmltopdf notebook.html notebook.pdf'
 
 # locks the screen (when going AFK)
 alias afk="/System/Library/CoreServices/Menu\ Extras/User.menu/Contents/Resources/CGSession -suspend"
@@ -60,6 +69,18 @@ alias ips="ifconfig -a | grep -o 'inet6\? \(addr:\)\?\s\?\(\(\([0-9]\+\.\)\{3\}[
 
 # macOS has no `md5sum`, so use `md5` as a fallback
 command -v md5sum > /dev/null || alias md5sum="md5"
-
 # macOS has no `sha1sum`, so use `shasum` as a fallback
 command -v sha1sum > /dev/null || alias sha1sum="shasum"
+
+# XCode aliases
+alias ios="open /Applications/Xcode.app/Contents/Developer/Applications/Simulator.app"
+alias watchos="open /Applications/Xcode.app/Contents/Developer/Applications/Simulator\ \(Watch\).app"
+
+# tmux aliases
+alias tmuxify="tmux -CC attach || tmux -CC new"
+
+# Homebrew
+# Forcing brew install (without updating)
+brew alias i='!HOMEBREW_NO_AUTO_UPDATE=1 brew install'
+brew alias ic='!HOMEBREW_NO_AUTO_UPDATE=1 brew cask install'
+alias brew-upgrade='brew upgrade && brew cask upgrade && brew doctor && brew cleanup'
