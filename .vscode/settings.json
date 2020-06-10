@@ -1,0 +1,9 @@
+{
+  "cSpell.language": "en,en-US,ru",
+  "editor.formatOnSave": true,
+  "window.zoomLevel": 0,
+  "tabnine.experimentalAutoImports": 0,
+  "workbench.iconTheme": "vscode-icons",
+  "workbench.colorTheme": "Atom One Dark",
+  "vsicons.dontShowNewVersionMessage": true
+}

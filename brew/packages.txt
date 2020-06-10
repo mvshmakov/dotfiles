@@ -8,6 +8,7 @@ fzf
 gdbm
 gettext
 ghostscript
+gh
 git
 git-lfs
 gnu-sed

@@ -18,7 +18,7 @@ ln -s $DOTFILES_PATH/shell-sources ~/shell-sources
 ln -s $DOTFILES_PATH/tmux-inactive-panes ~/tmux-inactive-panes
 ln -s $DOTFILES_PATH/tmux-tomorrow ~/tmux-tomorrow
 
-cp $DOTFILES_PATH/iterm2/com.googlecode.iterm2.plist ~/com.googlecode.iterm2.plist 
+cp $DOTFILES_PATH/iterm2/com.googlecode.iterm2.plist ~/com.googlecode.iterm2.plist
 
 # Creation of projects and Yandex.Disk folders
 if [ ! -d "~/projects" ]; then
@@ -42,7 +42,7 @@ if [ -L "~/Desktop/projects" ]; then
     else
         echo "Symlink \"~/Desktop/projects\" is broken!"
     fi
-elif [ -e "~/Desktop/projects" ] ; then
+    elif [ -e "~/Desktop/projects" ] ; then
     echo "Something with name \"projects\" already exists on Desktop!"
 else
     ln -s ~/projects ~/Desktop/projects
@@ -55,7 +55,7 @@ if [ -L "~/Desktop/Yandex.Disk" ]; then
     else
         echo "Symlink \"~/Desktop/Yandex.Disk\" is broken!"
     fi
-elif [ -e "~/Desktop/Yandex.Disk" ] ; then
+    elif [ -e "~/Desktop/Yandex.Disk" ] ; then
     echo "Something with name \"Yandex.Disk\" already exists on Desktop!"
 else
     ln -s ~/Yandex.Disk.localized ~/Desktop/Yandex.Disk

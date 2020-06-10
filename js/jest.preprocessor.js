@@ -10,10 +10,10 @@ module.exports = {
         if (isTypescriptFile) {
             return tsc.transpileModule(src, {
                 compilerOptions: tsConfig.compilerOptions,
-                fileName: path
+                fileName: path,
             }).outputText;
         }
 
         return src;
-    }
+    },
 };

@@ -3,6 +3,7 @@
 </p>
 
 # dotfiles
+
 Dotfiles for macOS (relevant for Catalina 10.15+)
 
 # Setup
@@ -19,9 +20,13 @@ ITerm2's `com.googlecode.iterm2.plist` is in `$HOME` folder, so you need to set 
 # Useful commands
 
 ##### 1) Dump all of the installed brew packages: `brew list > packages.txt`
+
 ##### 2) Dump all of the installed brew casks: `brew cask list > casks.txt`
 
+##### 3) Dump all vscode extensions to shell commands: `code --list-extensions | xargs -L 1 echo code --install-extension`
+
 # TODO:
+
 ##### 1) Add vim configuration
 
 # Useful links

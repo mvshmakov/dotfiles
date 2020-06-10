@@ -6,8 +6,8 @@
 
 # Saving screenshots in ~/screenshots
 if [ ! -d ~/screenshots ]; then
-  mkdir ~/screenshots
-  echo 'created ~/screenshots'
+    mkdir ~/screenshots
+    echo 'created ~/screenshots'
 fi
 
 echo 'Screenshots will be saved to ~/screenshots'
@@ -25,7 +25,7 @@ echo 'Set intitinal key repeat to 15'
 defaults write -g InitialKeyRepeat -int 15
 
 # Always show scrollbars
-defaults write NSGlobalDomain AppleShowScrollBars -string "Always"
+# defaults write NSGlobalDomain AppleShowScrollBars -string "Always"
 
 # Set language and text formats
 defaults write NSGlobalDomain AppleLanguages -array "en-RU" "ru-RU"
