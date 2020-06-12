@@ -2,8 +2,7 @@
 export PATH=$HOME/bin:/usr/local/bin:$PATH
 
 # Path customization
-export PATH="/usr/local/anaconda3/bin:$PATH"
-export PATH="/usr/local/opt/coreutils/libexec/gnubin:$PATH"
+export PATH="/usr/local/sbin:/usr/local/opt/coreutils/libexec/gnubin:$PATH"
 
 # You may need to manually set your language environment
 export LANG=en_US.UTF-8

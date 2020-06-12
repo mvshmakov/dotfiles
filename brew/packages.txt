@@ -13,10 +13,12 @@ git
 git-lfs
 gnu-sed
 grc
+heroku
 highlight
 htop
 imagemagick
 jpeg
+jupyterlab
 libevent
 libidn2
 libtiff
@@ -31,8 +33,9 @@ nvm
 openjdk
 openssl@1.1
 pcre
-pyenv
+pipenv
 postgresql
+pyenv
 readline
 rsync
 ruby

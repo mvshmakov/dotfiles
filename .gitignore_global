@@ -1,6 +1,11 @@
 # Folder view configuration files
 .DS_Store
 Desktop.ini
+.settings
+.vscode
+.idea
+.history
+.git
 
 # Thumbnail cache files
 ._*
@@ -9,3 +14,11 @@ Thumbs.db
 # Files that might appear on external disks
 .Spotlight-V100
 .Trashes
+
+# Node.JS
+pids
+logs
+results
+
+node_modules
+npm-debug.log

@@ -1,27 +1,51 @@
 [core]
 	excludesfile = /Users/mvshmakovmv/.gitignore_global
+	whitespace = fix,-indent-with-non-tab,trailing-space,cr-at-eol
+	quotepath = false
+    editor = nano
 	precomposeUnicode = true
-[difftool "sourcetree"]
-	cmd = opendiff \"$LOCAL\" \"$REMOTE\"
-	path = 
-[mergetool "sourcetree"]
-	cmd = /Applications/SourceTree.app/Contents/Resources/opendiff-w.sh \"$LOCAL\" \"$REMOTE\" -ancestor \"$BASE\" -merge \"$MERGED\"
+[alias]
+	grep = grep -Ii
+	diff = diff --word-diff
+
+[diff]
+	tool = Kaleidoscope
+[difftool]
+	prompt = false
+[difftool "Kaleidoscope"]
+	cmd = ksdiff --partial-changeset --relative-path \"$MERGED\" -- \"$LOCAL\" \"$REMOTE\"
+
+[merge]
+	tool = Kaleidoscope
+[mergetool]
+	prompt = false
+[mergetool "Kaleidoscope"]
+	cmd = ksdiff --merge --output \"$MERGED\" --base \"$BASE\" -- \"$LOCAL\" --snapshot \"$REMOTE\" --snapshot
 	trustExitCode = true
+
 [user]
 	name = Maxim Shmakov
 	email = mvshmakov@mail.ru
-[commit]
-	template = /Users/mvshmakovmv/.stCommitMsg
-[credential "github.com"]
-	interactive = always
+[github]
+    user = mvshmakov
 [credential]
 	helper = osxkeychain
+[credential "github.com"]
+	interactive = always
+
+[commit]
+	template = /Users/mvshmakovmv/.stCommitMsg
+[push]
+	default = current
+[pull]
+	ff = only
+
+[color "branch"]
+    current = green
+    remote = blue
+
 [filter "lfs"]
 	clean = git-lfs clean -- %f
 	smudge = git-lfs smudge -- %f
 	process = git-lfs filter-process
 	required = true
-[push]
-	default = current
-[pull]
-	ff = only

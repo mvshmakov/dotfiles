@@ -15,6 +15,10 @@ xargs brew cask install < ../brew/casks.txt
 brew tap homebrew/aliases
 # Brew casks ability
 brew tap homebrew/cask
+# Heroku casks
+brew tap heroku/brew
+# Font casks
+brew tap homebrew/cask-fonts
 
 # GNU core utilities are installed (those that come with macOS are outdated).
 # Don’t forget to add `$(brew --prefix coreutils)/libexec/gnubin` to `$PATH`.

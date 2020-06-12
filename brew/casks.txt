@@ -1,3 +1,4 @@
+alfred
 anaconda
 android-file-transfer
 android-platform-tool
@@ -6,13 +7,17 @@ asciinema
 atom
 betterzip
 chromium
+dash
 discord
+djview
 docker
 electrum
 fbreader
 figma
 firefox
 flash-player
+font-fira-code
+google-chrome
 grammarly
 insomnia
 iterm2
