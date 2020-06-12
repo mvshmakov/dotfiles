@@ -31,7 +31,8 @@ nvm
 openjdk
 openssl@1.1
 pcre
-python
+pyenv
+postgresql
 readline
 rsync
 ruby

@@ -35,7 +35,6 @@ plugins=(
     last-working-dir
     node
     npm
-    npx
     nvm
     osx
     pep8
@@ -67,3 +66,5 @@ if (( $+commands[grc] )) && (( $+commands[brew] ))
 then
     source `brew --prefix`/etc/grc.bashrc
 fi
+
+eval "$(pyenv init -)"

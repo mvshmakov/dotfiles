@@ -17,7 +17,7 @@ fi
 
 # Other
 export MANPATH="/usr/local/man:$MANPATH"
-export SSH_KEY_PATH="~/.ssh/rsa_id"
+export SSH_KEY_PATH="~/.ssh/id_rsa"
 
 # Make Python use UTF-8 encoding for output to stdin, stdout, and stderr.
 export PYTHONIOENCODING='UTF-8';
@@ -31,3 +31,6 @@ export HISTCONTROL='ignoreboth';
 export NVM_DIR="$HOME/.nvm"
   [ -s "/usr/local/opt/nvm/nvm.sh" ] && . "/usr/local/opt/nvm/nvm.sh"  # This loads nvm
   [ -s "/usr/local/opt/nvm/etc/bash_completion.d/nvm" ] && . "/usr/local/opt/nvm/etc/bash_completion.d/nvm"  # This loads nvm bash_completion
+
+# https://stackoverflow.com/questions/55839111/installing-psycopg2-fails-on-macos-with-unclear-error-message
+export LDFLAGS="-L/usr/local/opt/openssl/lib"

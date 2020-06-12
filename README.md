@@ -29,6 +29,8 @@ ITerm2's `com.googlecode.iterm2.plist` is in `$HOME` folder, so you need to set 
 
 ##### 1) Add vim configuration
 
+##### 2) XDG_CONFIG_DIR
+
 # Useful links
 
 - [awesome-dotfiles](https://github.com/webpro/awesome-dotfiles)

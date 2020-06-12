@@ -12,7 +12,8 @@ rm ~/.gitignore_global; ln -s $DOTFILES_PATH/.gitignore_global ~/.gitignore_glob
 rm ~/.gitmodules; ln -s $DOTFILES_PATH/.gitmodules ~/.gitmodules
 rm ~/.tmux.conf; ln -s $DOTFILES_PATH/.tmux.conf ~/.tmux.conf
 
-rm ~/.tmuxinator; ln -s $DOTFILES_PATH/.tmuxinator ~/.tmuxinator
+rm -rf ~/.ssh; ln -s $DOTFILES_PATH/.ssh ~/.ssh
+rm -rf ~/.tmuxinator; ln -s $DOTFILES_PATH/.tmuxinator ~/.tmuxinator
 ln -s $DOTFILES_PATH/shell-sources ~/shell-sources
 
 ln -s $DOTFILES_PATH/tmux-inactive-panes ~/tmux-inactive-panes

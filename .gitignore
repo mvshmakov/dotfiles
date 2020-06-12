@@ -10,3 +10,7 @@ Thumbs.db
 .Spotlight-V100
 .Trashes
 .history
+
+# .ssh
+.ssh/id_rsa
+.ssh/id_rsa.pub
