@@ -1,12 +1,13 @@
+[alias]
+	grep = grep -Ii
+	diff = diff --word-diff
 [core]
-	excludesfile = /Users/mvshmakovmv/.gitignore_global
+	excludesfile = ~/.gitignore_global
 	whitespace = fix,-indent-with-non-tab,trailing-space,cr-at-eol
 	quotepath = false
     editor = nano
 	precomposeUnicode = true
-[alias]
-	grep = grep -Ii
-	diff = diff --word-diff
+
 
 [diff]
 	tool = Kaleidoscope
@@ -15,6 +16,7 @@
 [difftool "Kaleidoscope"]
 	cmd = ksdiff --partial-changeset --relative-path \"$MERGED\" -- \"$LOCAL\" \"$REMOTE\"
 
+
 [merge]
 	tool = Kaleidoscope
 [mergetool]
@@ -22,6 +24,7 @@
 [mergetool "Kaleidoscope"]
 	cmd = ksdiff --merge --output \"$MERGED\" --base \"$BASE\" -- \"$LOCAL\" --snapshot \"$REMOTE\" --snapshot
 	trustExitCode = true
+
 
 [user]
 	name = Maxim Shmakov
@@ -33,6 +36,7 @@
 [credential "github.com"]
 	interactive = always
 
+
 [commit]
 	template = /Users/mvshmakovmv/.stCommitMsg
 [push]
@@ -40,9 +44,11 @@
 [pull]
 	ff = only
 
+
 [color "branch"]
     current = green
     remote = blue
+
 
 [filter "lfs"]
 	clean = git-lfs clean -- %f

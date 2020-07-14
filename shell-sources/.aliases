@@ -88,3 +88,6 @@ alias brew-upgrade='brew update && brew upgrade && brew cask upgrade && brew doc
 # TTL for free network sharing, 65 - "on", 64 - "off"
 alias ttl_64="sudo sysctl -w net.inet.ip.ttl=64"
 alias ttl_65="sudo sysctl -w net.inet.ip.ttl=65"
+
+# Dotfiles help aliases
+alias aliases="cat ~/shell-sources/.aliases"

@@ -26,6 +26,7 @@ plugins=(
     autopep8
     brew
     colorize
+    colored-man-pages
     common-aliases
     django
     docker
