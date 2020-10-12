@@ -15,6 +15,8 @@ xargs brew cask install < ../brew/casks.txt
 brew tap homebrew/aliases
 # Brew casks ability
 brew tap homebrew/cask
+# Brew casks extended ability
+brew tap homebrew/cask-versions
 # Heroku casks
 brew tap heroku/brew
 # Font casks

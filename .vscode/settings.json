@@ -1,14 +1,34 @@
 {
   "cSpell.language": "en,en-US,ru",
-  "editor.formatOnSave": true,
-  "window.zoomLevel": 0,
-  "tabnine.experimentalAutoImports": true,
-  "workbench.iconTheme": "vscode-icons",
-  "workbench.colorTheme": "Atom One Dark",
-  "vsicons.dontShowNewVersionMessage": true,
+  "cSpell.userWords": ["Shmakov", "mvshmakov", "telegraf"],
+
   "diffEditor.ignoreTrimWhitespace": false,
+
+  "editor.accessibilitySupport": "off",
   "editor.defaultFormatter": "esbenp.prettier-vscode",
-  "python.linting.flake8Enabled": true,
+  "editor.fontFamily": "FiraCode-Retina",
+  "editor.fontLigatures": true,
+  "editor.formatOnSave": true,
   "editor.suggestSelection": "first",
-  "vsintellicode.modify.editor.suggestSelection": "automaticallyOverrodeDefaultValue"
+  "[python]": {
+    "editor.defaultFormatter": "ms-python.python"
+  },
+
+  "git.confirmSync": false,
+  "git.autofetch": true,
+
+  "python.dataScience.askForKernelRestart": false,
+  "python.languageServer": "Microsoft",
+  "python.linting.flake8Enabled": true,
+
+  "tabnine.experimentalAutoImports": true,
+
+  "vsicons.dontShowNewVersionMessage": true,
+  "vsintellicode.modify.editor.suggestSelection": "automaticallyOverrodeDefaultValue",
+
+  "window.zoomLevel": 0,
+
+  "workbench.colorTheme": "Atom One Dark",
+  "workbench.iconTheme": "vscode-icons",
+  "workbench.startupEditor": "welcomePage"
 }

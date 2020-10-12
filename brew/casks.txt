@@ -15,8 +15,10 @@ electrum
 fbreader
 figma
 firefox
+firefox-developer-edition
 flash-player
 font-fira-code
+font-hack-nerd-font
 google-chrome
 grammarly
 insomnia
@@ -24,6 +26,7 @@ iterm2
 java
 keepassx
 kitematic
+lens
 mactex
 mendeley-desktop
 mqttfx
@@ -35,6 +38,7 @@ qlstephen
 qlvideo
 quicklook-json
 quicklookase
+quik
 skype
 speedtest-cli
 steam

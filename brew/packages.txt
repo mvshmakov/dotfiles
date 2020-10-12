@@ -1,7 +1,10 @@
 asciinema
+awscli
+axel
 bat
 coreutils
 docker
+eksctl
 exiftool
 findutils
 fzf
@@ -12,6 +15,7 @@ gh
 git
 git-lfs
 gnu-sed
+gron
 grc
 heroku
 highlight
@@ -19,6 +23,7 @@ htop
 imagemagick
 jpeg
 jupyterlab
+kubectl
 libevent
 libidn2
 libtiff
@@ -26,6 +31,7 @@ libunistring
 libyaml
 lsyncd
 lua
+minikube
 ncurses
 nginx
 node
@@ -40,6 +46,7 @@ readline
 rsync
 ruby
 sqlite
+tldr
 tmux
 tmuxinator
 tree

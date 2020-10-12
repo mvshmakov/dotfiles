@@ -43,6 +43,8 @@
 	default = current
 [pull]
 	ff = only
+[tag]
+    sort = version:refname 
 
 
 [color "branch"]
@@ -55,3 +57,5 @@
 	smudge = git-lfs smudge -- %f
 	process = git-lfs filter-process
 	required = true
+[branch]
+	autosetupmerge = false

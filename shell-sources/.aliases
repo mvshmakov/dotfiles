@@ -83,7 +83,7 @@ alias tmuxify="tmux -CC attach || tmux -CC new"
 # Forcing brew install (without updating)
 brew alias i='!HOMEBREW_NO_AUTO_UPDATE=1 brew install'
 brew alias ic='!HOMEBREW_NO_AUTO_UPDATE=1 brew cask install'
-alias brew-upgrade='brew update && brew upgrade && brew cask upgrade && brew doctor && brew cleanup'
+alias brew-upgrade='brew update && brew upgrade && brew upgrade --cask && brew doctor && brew cleanup'
 
 # TTL for free network sharing, 65 - "on", 64 - "off"
 alias ttl_64="sudo sysctl -w net.inet.ip.ttl=64"
