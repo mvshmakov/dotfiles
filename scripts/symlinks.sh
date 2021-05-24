@@ -1,10 +1,11 @@
-#!/bin/sh
+#! /usr/bin/env sh
 
 # TODO: a good way to get rid of this file is to use XDG_CONFIG_DIR
 DOTFILES_PATH="/Users/$USER/projects/dotfiles"
 
 # Links dotfiles with home folder
 rm ~/.zshrc; ln -s $DOTFILES_PATH/.zshrc ~/.zshrc
+rm ~/.zprofile; ln -s $DOTFILES_PATH/.zprofile ~/.zprofile
 rm ~/.curlrc; ln -s $DOTFILES_PATH/.curlrc ~/.curlrc
 rm ~/.gitconfig; ln -s $DOTFILES_PATH/.gitconfig ~/.gitconfig
 rm ~/.gitignore; ln -s $DOTFILES_PATH/.gitignore ~/.gitignore
@@ -14,7 +15,12 @@ rm ~/.tmux.conf; ln -s $DOTFILES_PATH/.tmux.conf ~/.tmux.conf
 
 rm -rf ~/.ssh; ln -s $DOTFILES_PATH/.ssh ~/.ssh
 rm -rf ~/.tmuxinator; ln -s $DOTFILES_PATH/.tmuxinator ~/.tmuxinator
-ln -s $DOTFILES_PATH/shell-sources ~/shell-sources
+
+rm -rf ~/shell-sources; ln -s $DOTFILES_PATH/shell-sources ~/shell-sources
+rm -rf ~/bin; ln -s /Users/mvshmakov/projects/dotfiles/bin ~/bin
+
+ln -s $DOTFILES_PATH/.config/nvim ~/.config/nvim
+ln -s $DOTFILES_PATH/.config/zathura ~/.config/zathura
 
 ln -s $DOTFILES_PATH/tmux-inactive-panes ~/tmux-inactive-panes
 ln -s $DOTFILES_PATH/tmux-tomorrow ~/tmux-tomorrow

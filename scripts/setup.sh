@@ -1,6 +1,6 @@
-#!/bin/sh
+#! /usr/bin/env sh
 
-xcode-select —-install
+xcode-select --install
 
 # Creating XDG_CONFIG_HOME
 mkdir -p ${XDG_CONFIG_HOME:=$HOME/.config}

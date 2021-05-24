@@ -1,6 +1,45 @@
-# ZSH aliases
-alias zshrc="$EDITOR ~/.zshrc"
-alias ohmyzsh="$EDITOR ~/.oh-my-zsh"
+## Sane defaults ##
+
+# TODO: do we need color=auto?
+# alias ls='ls --color=auto'
+alias cp='cp -r'
+alias df='df -h'
+alias bat='bat --paging=never'
+alias brew='HOMEBREW_NO_AUTO_UPDATE=1 brew'
+
+alias v='nvim'
+alias g='git'
+
+alias ll='ls -alF'
+alias la='ls -A'
+alias l='ls -CF'
+
+# Always enable colored `grep` output
+# Note: `GREP_OPTIONS="--color=auto"` is deprecated, hence the alias usage.
+alias grep='grep --color=auto'
+alias fgrep='fgrep --color=auto'
+alias egrep='egrep --color=auto'
+
+alias ..='cd ..'
+alias ..2='cd ../..'
+alias ..3='cd ../../..'
+alias ..4='cd ../../../..'
+alias ..5='cd ../../../../..'
+
+alias desktop='cd ~/Desktop'
+alias downloads='cd ~/Downloads'
+alias documents='cd ~/Documents'
+alias disk='cd ~/Yandex.Disk.localized'
+
+## General ##
+
+# Browserss
+alias chrome='/Applications/Google\ Chrome.app/Contents/MacOS/Google\ Chrome'
+alias chromium='/Applications/Chromium.app/Contents/MacOS/Chromium'
+alias yabro='/Applications/Yandex.app/Contents/MacOS/Yandex'
+alias firefox='/Applications/Firefox.app/Contents/MacOS/Firefox'
+alias safari='/Applications/Safari.app/Contents/MacOS/Safari'
+alias opera='/Applications/Opera.app/Contents/MacOS/Opera'
 
 # Reload the shell (i.e. invoke as a login shell)
 alias reload="exec ${SHELL} -l"
@@ -11,43 +50,9 @@ alias path='echo -e ${PATH//:/\\n}'
 # Recursively delete `.DS_Store` files
 alias clean_ds="find . -type f -name '*.DS_Store' -ls -delete"
 
-# Browsers
-alias chrome='/Applications/Google\ Chrome.app/Contents/MacOS/Google\ Chrome'
-alias chromium='/Applications/Chromium.app/Contents/MacOS/Chromium'
-alias yabro='/Applications/Yandex.app/Contents/MacOS/Yandex'
-alias firefox='/Applications/Firefox.app/Contents/MacOS/Firefox'
-alias safari='/Applications/Safari.app/Contents/MacOS/Safari'
-alias opera='/Applications/Opera.app/Contents/MacOS/Opera'
-
-# Always enable colored `grep` output
-# Note: `GREP_OPTIONS="--color=auto"` is deprecated, hence the alias usage.
-alias grep='grep --color=auto'
-alias fgrep='fgrep --color=auto'
-alias egrep='egrep --color=auto'
-
-# ls
-alias ls='ls --color=auto'
-alias ll='ls -alF'
-alias la='ls -A'
-alias l='ls -CF'
-
-alias cp='cp -r'
-alias df='df -h'
-
-# cd
-alias ..='cd ..'
-alias ...='cd ../..'
-alias ....='cd ../../..'
-alias d='cd ~/Desktop'
-alias ds='cd ~/Downloads'
-alias docs='cd ~/Documents'
-alias disk='cd ~/Yandex.Disk.localized'
-
-# General
-alias please='sudo !!'
 alias cp_pubkey="more ~/.ssh/id_rsa.pub | pbcopy | echo '=> Public key copied to pasteboard.'"
 
-# Merge PDF files, preserving hyperlinks
+# Merge PDF files, preserving symbolic links
 # Usage: `mergepdf input{1,2,3}.pdf` or `mergepdf_local` for PDFs in folder merge
 alias mergepdf='gs -q -dNOPAUSE -dBATCH -sDEVICE=pdfwrite -sOutputFile=_merged.pdf'
 alias mergepdf_local='ls -a | grep .pdf$ | xargs gs -q -dNOPAUSE -dBATCH -sDEVICE=pdfwrite -sOutputFile=_merged.pdf'
@@ -55,7 +60,7 @@ alias mergepdf_local='ls -a | grep .pdf$ | xargs gs -q -dNOPAUSE -dBATCH -sDEVIC
 # Convert ipynb to pdf using wkhtmltopdf
 alias ipynb2pdf='jupyter nbconvert --to html notebook.ipynb && wkhtmltopdf notebook.html notebook.pdf'
 
-# locks the screen (when going AFK)
+# Locks the screen
 alias afk="/System/Library/CoreServices/Menu\ Extras/User.menu/Contents/Resources/CGSession -suspend"
 
 # CPU/Memory usage
@@ -82,12 +87,18 @@ alias tmuxify="tmux -CC attach || tmux -CC new"
 # Homebrew
 # Forcing brew install (without updating)
 brew alias i='!HOMEBREW_NO_AUTO_UPDATE=1 brew install'
-brew alias ic='!HOMEBREW_NO_AUTO_UPDATE=1 brew cask install'
-alias brew-upgrade='brew update && brew upgrade && brew upgrade --cask && brew doctor && brew cleanup'
+brew alias ic='!HOMEBREW_NO_AUTO_UPDATE=1 brew install --cask'
+alias brew-upgrade='brew update && brew upgrade && brew upgrade --cask && brew cleanup && brew autoremove && brew doctor'
 
 # TTL for free network sharing, 65 - "on", 64 - "off"
 alias ttl_64="sudo sysctl -w net.inet.ip.ttl=64"
 alias ttl_65="sudo sysctl -w net.inet.ip.ttl=65"
 
-# Dotfiles help aliases
-alias aliases="cat ~/shell-sources/.aliases"
+# Shorthand for `tree` with hidden files and color enabled, ignoring
+# the `.git` and `node_modules` directories, listing directories first.
+# The output gets piped into `less` with options to preserve color and
+# line numbers, unless the output is small enough for one screen.
+alias tree="tree -aC -I '.git|node_modules' --dirsfirst "$@" | less -FRNX"
+
+# Lists available aliases
+alias aliases="cat ~/shell-sources/aliasrc"

@@ -1,0 +1,4 @@
+$include /etc/inputrc
+
+# Do what "set -o vi" does in ZSH (vim editing mode) to whatever uses readline.
+set editing-mode vi

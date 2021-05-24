@@ -61,7 +61,6 @@ Session.vim
 Sessionx.vim
 
 # Temporary
-.netrwhist
 *~
 
 # Auto-generated tag files
@@ -72,3 +71,6 @@ tags
 # Projects
 .env
 *.log
+
+# netrw history
+.netrwhist

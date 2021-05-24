@@ -2,10 +2,11 @@ alfred
 anaconda
 android-file-transfer
 android-platform-tool
-app-cleaner
 asciinema
 atom
 betterzip
+brave-browser
+browserosaurus
 chromium
 dash
 discord
@@ -19,18 +20,22 @@ firefox-developer-edition
 flash-player
 font-fira-code
 font-hack-nerd-font
+gimp
 google-chrome
 grammarly
 insomnia
 iterm2
 java
-keepassx
-kitematic
+keycastr
 lens
+libreoffice
 mactex
 mendeley-desktop
 mqttfx
+neovim
 opera
+# Mount drive through SFTP
+osxfuse
 qlcolorcode
 qlimagesize
 qlmarkdown

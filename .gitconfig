@@ -1,29 +1,24 @@
 [alias]
-	grep = grep -Ii
 	diff = diff --word-diff
+	grep = grep -Ii
+	# Show commit changes by hash through default difftool
+    showtool = "!showci () { rev=${1:-HEAD}; git difftool --dir-diff $rev~1 $rev; }; showci $1"
+	# Put only staged files in the stash
+    stash-staged = !git stash --keep-index && \
+                   git stash && \
+                   git stash apply stash@{1} && \
+                   git stash show -p | git apply -R && \
+                   git stash drop stash@{1}
 [core]
-	excludesfile = ~/.gitignore_global
-	whitespace = fix,-indent-with-non-tab,trailing-space,cr-at-eol
-	quotepath = false
-    editor = nano
+    editor = nvim
+	excludesfile = ~/.gitignore
+	pager = delta
+	# Useful when sharing a repository between Mac OS and Linux or Windows (only for MacOS)
+	# https://git-scm.com/docs/git-config#Documentation/git-config.txt-coreprecomposeUnicode
 	precomposeUnicode = true
-
-
-[diff]
-	tool = Kaleidoscope
-[difftool]
-	prompt = false
-[difftool "Kaleidoscope"]
-	cmd = ksdiff --partial-changeset --relative-path \"$MERGED\" -- \"$LOCAL\" \"$REMOTE\"
-
-
-[merge]
-	tool = Kaleidoscope
-[mergetool]
-	prompt = false
-[mergetool "Kaleidoscope"]
-	cmd = ksdiff --merge --output \"$MERGED\" --base \"$BASE\" -- \"$LOCAL\" --snapshot \"$REMOTE\" --snapshot
-	trustExitCode = true
+	# To display non-english characters in a readable way
+	quotepath = false
+	whitespace = fix,-indent-with-non-tab,trailing-space,cr-at-eol
 
 
 [user]
@@ -33,18 +28,48 @@
     user = mvshmakov
 [credential]
 	helper = osxkeychain
-[credential "github.com"]
+	# Prompt credentials if required
 	interactive = always
 
 
-[commit]
-	template = /Users/mvshmakovmv/.stCommitMsg
+# Git-delta related setup
+# https://github.com/dandavison/delta
+[interactive]
+    diffFilter = delta --color-only
+[delta]
+    features = side-by-side line-numbers decorations
+	syntax-theme = Nord
+[delta "decorations"]
+    commit-decoration-style = bold green box ul
+    file-style = bold yellow ul
+    file-decoration-style = none
+    hunk-header-decoration-style = yellow box
+
+[merge]
+	tool = vimdiff3
+	log = true
+	conflictstyle = diff3
+[mergetool]
+	prompt = false
+# Auto track the origin on checkout
+# and auto rebase stuff on pull
+# https://stackoverflow.com/a/22147540
+[branch]
+	autosetupmerge = always
+	autosetuprebase = always
+    sort = -committerdate
+[diff]
+	# Detects and highlights moved piecies of code
+	colorMoved = zebra
 [push]
+	# By default push to the current remote
 	default = current
 [pull]
-	ff = only
+	# Pulling with rebase
+	rebase = true
+	default = current
 [tag]
-    sort = version:refname 
+    sort = version:refname
 
 
 [color "branch"]
@@ -57,5 +82,3 @@
 	smudge = git-lfs smudge -- %f
 	process = git-lfs filter-process
 	required = true
-[branch]
-	autosetupmerge = false

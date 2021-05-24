@@ -51,37 +51,28 @@ function fs() {
 	fi;
 }
 
-# Use Git’s colored diff when available
-hash git &>/dev/null;
-if [ $? -eq 0 ]; then
-	function diff() {
-		git diff --no-index --color-words "$@";
-	}
-fi;
-
 # Run `dig` and display the most useful info
 function digga() {
 	dig +nocmd "$1" any +multiline +noall +answer;
 }
 
-# `tre` is a shorthand for `tree` with hidden files and color enabled, ignoring
-# the `.git` directory, listing directories first. The output gets piped into
-# `less` with options to preserve color and line numbers, unless the output is
-# small enough for one screen.
-function tre() {
-	tree -aC -I '.git|node_modules|bower_components' --dirsfirst "$@" | less -FRNX;
+function speedup_spotlight() {
+	find . -type d -path './.*' \
+		-prune -o -path './Pictures*' \
+		-prune -o -path './Library*' \
+		-prune -o -path '*node_modules/*' \
+		-prune -o -type d -name 'node_modules' -exec touch '{}/.metadata_never_index' \; \
+		-print
 }
 
-function h265_to_h264() {
-	mkdir h264vids
+# Hides and restores all the files
+# on the desktop (the `presentation mode`)
+function hide_desktop() {
+	defaults write com.apple.finder CreateDesktop false;
+	killall Finder;
+}
 
-	for f in *.mp4 *.MP4 *.mkv *MKV
-	do
-		audioformat=$(ffprobe -loglevel error -select_streams a:0 -show_entries stream=codec_name -of default=nw=1:nk=1 "$f")
-		if [ "$audioformat" = "aac" ]; then
-			ffmpeg -i "$f" -c:v libx264 -crf 23 -preset medium -c:a copy -movflags +faststart h264vids/"${f%.*}.mp4"
-		else
-			ffmpeg -i "$f" -c:v libx264 -crf 23 -preset medium -c:a aac -movflags +faststart h264vids/"${f%.*}.mp4"
-		fi
-	done
+function show_desktop() {
+	defaults write com.apple.finder CreateDesktop true;
+	killall Finder;
 }
