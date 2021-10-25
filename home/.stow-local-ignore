@@ -1,0 +1,7 @@
+# TODO: we need to get rid of all files from this list
+# somehow automating the installation  process
+
+.vscode
+brew
+macos
+scripts

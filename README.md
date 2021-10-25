@@ -10,10 +10,13 @@ Dotfiles for macOS (relevant for Catalina 10.15+)
 
 ```
 sudo softwareupdate -i -a
-cd ~/projects && git clone https://github.com/mvshmakov/dotfiles.git
+mkdir -p ~/projects/personal
+cd ~/projects/personal && git clone https://github.com/mvshmakov/dotfiles.git
 cd dotfiles && git submodule update --init --recursive
-./scripts/setup.sh
+stow -vSt ~ *
 ```
+
+To restow the symlinks, use `stow --restow -vSt ~ {project}`. To simulate te stow process outcome without modifying the system, use `stow --no -vSt ~ *`.
 
 ITerm2's `com.googlecode.iterm2.plist` is in `$HOME` folder, so you need to set it also in ITerm2 settings in order to load it.
 
@@ -25,11 +28,15 @@ ITerm2's `com.googlecode.iterm2.plist` is in `$HOME` folder, so you need to set 
 
 ##### 3) Dump all vscode extensions to shell commands: `code --list-extensions | xargs -L 1 echo code --install-extension`
 
-# TODO:
+##### 4) `stow --restow {folder}`
+
+# TODO
 
 ##### 1) Add vim configuration
 
 ##### 2) XDG_CONFIG_DIR
+
+##### 3) Add a _stow_ call to set up the dotfiles
 
 # Comments for packages in `brew` folder
 

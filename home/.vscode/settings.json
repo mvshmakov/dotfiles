@@ -1,0 +1,33 @@
+{
+  "cSpell.language": "en,en-US,ru",
+  "cSpell.userWords": ["Shmakov", "mvshmakov", "telegraf"],
+
+  "diffEditor.ignoreTrimWhitespace": false,
+
+  "editor.accessibilitySupport": "off",
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
+  "editor.fontFamily": "FiraCode-Retina",
+  "editor.fontLigatures": true,
+  "editor.formatOnSave": true,
+  "editor.suggestSelection": "first",
+  "[python]": {
+    "editor.defaultFormatter": "ms-python.python"
+  },
+
+  "git.confirmSync": false,
+  "git.autofetch": true,
+
+  "python.languageServer": "Default",
+  "python.linting.flake8Enabled": true,
+
+  "tabnine.experimentalAutoImports": true,
+
+  "vsicons.dontShowNewVersionMessage": true,
+  "vsintellicode.modify.editor.suggestSelection": "automaticallyOverrodeDefaultValue",
+
+  "window.zoomLevel": 0,
+
+  "workbench.colorTheme": "Atom One Dark",
+  "workbench.iconTheme": "vscode-icons",
+  "workbench.startupEditor": "none"
+}

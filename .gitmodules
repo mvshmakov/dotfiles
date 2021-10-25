@@ -1,7 +1,0 @@
-[submodule "tmux-tomorrow"]
-	path = tmux-tomorrow
-	url = https://github.com/edouard-lopez/tmux-tomorrow.git
-
-[submodule "tmux-inactive-panes"]
-	path = tmux-inactive-panes
-	url = https://github.com/jtbairdsr/tmux-inactive-panes.git
