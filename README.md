@@ -13,10 +13,10 @@ sudo softwareupdate -i -a
 mkdir -p ~/projects/personal
 cd ~/projects/personal && git clone https://github.com/mvshmakov/dotfiles.git
 cd dotfiles && git submodule update --init --recursive
-stow -vSt ~ *
+stow --stow -vt ~ */
 ```
 
-To restow the symlinks, use `stow --restow -vSt ~ {project}`. To simulate te stow process outcome without modifying the system, use `stow --no -vSt ~ *`.
+To restow/repair the symlinks, use `stow --restow -vt ~ */`. To simulate the stow process outcome without modifying the filesystem, use `stow --stow --no -vt ~ */`. `*/` is the ZSH glob which expands only in the folders.
 
 ITerm2's `com.googlecode.iterm2.plist` is in `$HOME` folder, so you need to set it also in ITerm2 settings in order to load it.
 
@@ -30,24 +30,32 @@ ITerm2's `com.googlecode.iterm2.plist` is in `$HOME` folder, so you need to set 
 
 ##### 4) `stow --restow {folder}`
 
+# Z-based navigation
+
+#### `z {pattern}[TAB]` will expand the path Z detected
+
+#### ``
+
 # TODO
 
 ##### 1) Add vim configuration
 
-##### 2) XDG_CONFIG_DIR
+##### 2) Get rid of `home` folder and place all home files in the respected folders, e.g., home/.bashrc -> bash/.bashrc.
 
-##### 3) Add a _stow_ call to set up the dotfiles
+# Comments for packages in the `brew` folder
 
-# Comments for packages in `brew` folder
-
-- `ql` is an alias for quick look MacOS files feature.
+- `ql` is an alias for a quick look MacOS files feature.
 - `bat` is a good alternative to `cat` for `JSON` files.
+
+If you want your current system configuration to match your Brewfile
+
+`brew bundle --force cleanup`
 
 # Useful links
 
 - [awesome-dotfiles](https://github.com/webpro/awesome-dotfiles)
 - [zsh-users](https://github.com/zsh-users)
-- [iterm2](https://iterm2.com)
+- [alacritty](https://github.com/alacritty/alacritty)
 - [homebrew](https://brew.sh)
 - [tmux](https://github.com/tmux/tmux)
 - [tmuxinator](https://github.com/tmuxinator/tmuxinator)

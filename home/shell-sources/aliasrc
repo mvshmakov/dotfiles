@@ -1,13 +1,13 @@
-## Sane defaults ##
+# To list all aliases just type `alias`
 
 # TODO: do we need color=auto?
 # alias ls='ls --color=auto'
 alias cp='cp -r'
 alias df='df -h'
-alias bat='bat --paging=never'
 alias brew='HOMEBREW_NO_AUTO_UPDATE=1 brew'
 
 alias v='nvim'
+alias vim='nvim'
 alias g='git'
 alias r='ranger'
 
@@ -27,14 +27,9 @@ alias ..3='cd ../../..'
 alias ..4='cd ../../../..'
 alias ..5='cd ../../../../..'
 
-alias desktop='cd ~/Desktop'
-alias downloads='cd ~/Downloads'
-alias documents='cd ~/Documents'
-alias disk='cd ~/Yandex.Disk.localized'
-
 ## General ##
 
-# Browserss
+# Browsers
 alias chrome='/Applications/Google\ Chrome.app/Contents/MacOS/Google\ Chrome'
 alias chromium='/Applications/Chromium.app/Contents/MacOS/Chromium'
 alias yabro='/Applications/Yandex.app/Contents/MacOS/Yandex'
@@ -80,15 +75,11 @@ command -v sha1sum > /dev/null || alias sha1sum="shasum"
 
 # XCode aliases
 alias ios="open /Applications/Xcode.app/Contents/Developer/Applications/Simulator.app"
-alias watchos="open /Applications/Xcode.app/Contents/Developer/Applications/Simulator\ \(Watch\).app"
 
 # tmux aliases
 alias tmuxify="tmux -CC attach || tmux -CC new"
 
 # Homebrew
-# Forcing brew install (without updating)
-brew alias i='!HOMEBREW_NO_AUTO_UPDATE=1 brew install'
-brew alias ic='!HOMEBREW_NO_AUTO_UPDATE=1 brew install --cask'
 alias brew-upgrade='brew update && brew upgrade && brew upgrade --cask && brew cleanup && brew autoremove && brew doctor'
 
 # TTL for free network sharing, 65 - "on", 64 - "off"
@@ -100,6 +91,3 @@ alias ttl_65="sudo sysctl -w net.inet.ip.ttl=65"
 # The output gets piped into `less` with options to preserve color and
 # line numbers, unless the output is small enough for one screen.
 alias tree="tree -aC -I '.git|node_modules' --dirsfirst "$@" | less -FRNX"
-
-# Lists available aliases
-alias aliases="cat ~/shell-sources/aliasrc"

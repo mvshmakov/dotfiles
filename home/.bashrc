@@ -11,11 +11,9 @@ SAVEHIST=10000000
 HISTFILESIZE=1000000000
 # Omit duplicates and commands that begin with a space from history.
 HISTCONTROL='ignoreboth';
-HISTFILE=~/.cache/bash/history
+HISTFILE=$XDG_DATA_HOME/bash/history
 
 ssh-add ~/.ssh/id_rsa
-
-set -o vi
 
 # GRC colorizes nifty unix tools all over the place
 if (( $+commands[grc] )) && (( $+commands[brew] ))
@@ -24,7 +22,6 @@ then
 fi
 
 eval "$(pyenv init -)"
-eval $(thefuck --alias)
 
 source ~/shell-sources/aliasrc
 source ~/shell-sources/.functions

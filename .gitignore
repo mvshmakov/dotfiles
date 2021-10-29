@@ -4,11 +4,7 @@ home/.ssh/known_hosts
 
 home/.bash_history
 
-zsh/.config/zsh/.zsh_sessions
 zsh/.config/zsh/.zcompdump*
-zsh/.config/zsh/.zdirs
-zsh/.config/zsh/.zsh_history
-zsh/.config/zsh/.zshrc.zwc
 
 # Include VSCode config
 !home/.vscode

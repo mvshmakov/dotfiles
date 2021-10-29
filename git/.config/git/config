@@ -2,15 +2,15 @@
 	diff = diff --word-diff
 	grep = grep -Ii
 	# Show commit changes by hash through default difftool
-    showtool = "!showci () { rev=${1:-HEAD}; git difftool --dir-diff $rev~1 $rev; }; showci $1"
+	showtool = "!showci () { rev=${1:-HEAD}; git difftool --dir-diff $rev~1 $rev; }; showci $1"
 	# Put only staged files in the stash
-    stash-staged = !git stash --keep-index && \
-                   git stash && \
-                   git stash apply stash@{1} && \
-                   git stash show -p | git apply -R && \
-                   git stash drop stash@{1}
+	stash-staged = !git stash --keep-index && \
+				   git stash && \
+				   git stash apply stash@{1} && \
+				   git stash show -p | git apply -R && \
+				   git stash drop stash@{1}
 [core]
-    editor = nvim
+	editor = nvim
 	pager = delta
 	# Useful when sharing a repository between Mac OS and Linux or Windows (only for MacOS)
 	# https://git-scm.com/docs/git-config#Documentation/git-config.txt-coreprecomposeUnicode
@@ -24,7 +24,7 @@
 	name = Maxim Shmakov
 	email = mvshmakov@mail.ru
 [github]
-    user = mvshmakov
+	user = mvshmakov
 [credential]
 	helper = osxkeychain
 	# Prompt credentials if required
@@ -34,15 +34,15 @@
 # Git-delta related setup
 # https://github.com/dandavison/delta
 [interactive]
-    diffFilter = delta --color-only
+	diffFilter = delta --color-only
 [delta]
-    features = side-by-side line-numbers decorations
+	features = side-by-side line-numbers decorations
 	syntax-theme = Nord
 [delta "decorations"]
-    commit-decoration-style = bold green box ul
-    file-style = bold yellow ul
-    file-decoration-style = none
-    hunk-header-decoration-style = yellow box
+	commit-decoration-style = bold green box ul
+	file-style = bold yellow ul
+	file-decoration-style = none
+	hunk-header-decoration-style = yellow box
 
 [merge]
 	tool = vimdiff3
@@ -56,7 +56,7 @@
 [branch]
 	autosetupmerge = always
 	autosetuprebase = always
-    sort = -committerdate
+	sort = -committerdate
 [diff]
 	# Detects and highlights moved piecies of code
 	colorMoved = zebra
@@ -68,12 +68,12 @@
 	rebase = true
 	default = current
 [tag]
-    sort = version:refname
+	sort = version:refname
 
 
 [color "branch"]
-    current = green
-    remote = blue
+	current = green
+	remote = blue
 
 
 [filter "lfs"]

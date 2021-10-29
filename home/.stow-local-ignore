@@ -1,5 +1,6 @@
 # TODO: we need to get rid of all files from this list
-# somehow automating the installation  process
+# by migrating them in the respected folders on top without
+# the .config folder if it is not supported, e.g., bash
 
 .vscode
 brew

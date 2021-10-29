@@ -11,7 +11,9 @@
 
 # Before we enter ZSH we are not able to access XDG_CONFIG_HOME, so need to use ~ here
 import:
-  - ~/.config/alacritty/alacritty-onedark.yml
+  - ~/.config/alacritty/colors.yml
+  - ~/.config/alacritty/fonts.yml
+
 # Any items in the `env` entry below will be added as
 # environment variables. Some entries may override variables
 # set by alacritty itself.
@@ -24,62 +26,62 @@ import:
 # available, otherwise `xterm-256color` is used.
 #TERM: alacritty
 
-#window:
-# Window dimensions (changes require restart)
-#
-# Number of lines/columns (not pixels) in the terminal. The number of columns
-# must be at least `2`, while using a value of `0` for columns and lines will
-# fall back to the window manager's recommended size.
-#dimensions:
-#  columns: 0
-#  lines: 0
+window:
+  # Window dimensions (changes require restart)
+  #
+  # Number of lines/columns (not pixels) in the terminal. The number of columns
+  # must be at least `2`, while using a value of `0` for columns and lines will
+  # fall back to the window manager's recommended size.
+  dimensions:
+    columns: 120
+    lines: 40
 
-# Window position (changes require restart)
-#
-# Specified in number of pixels.
-# If the position is not set, the window manager will handle the placement.
-#position:
-#  x: 0
-#  y: 0
+  # Window position (changes require restart)
+  #
+  # Specified in number of pixels.
+  # If the position is not set, the window manager will handle the placement.
+  #position:
+  #  x: 0
+  #  y: 0
 
-# Window padding (changes require restart)
-#
-# Blank space added around the window in pixels. This padding is scaled
-# by DPI and the specified value is always added at both opposing sides.
-#padding:
-#  x: 0
-#  y: 0
+  # Window padding (changes require restart)
+  #
+  # Blank space added around the window in pixels. This padding is scaled
+  # by DPI and the specified value is always added at both opposing sides.
+  padding:
+    x: 10
+    y: 30
 
-# Spread additional padding evenly around the terminal content.
-#dynamic_padding: false
+  # Spread additional padding evenly around the terminal content.
+  dynamic_padding: true
 
-# Window decorations
-#
-# Values for `decorations`:
-#     - full: Borders and title bar
-#     - none: Neither borders nor title bar
-#
-# Values for `decorations` (macOS only):
-#     - transparent: Title bar, transparent background and title bar buttons
-#     - buttonless: Title bar, transparent background and no title bar buttons
-#decorations: full
+  # Window decorations
+  #
+  # Values for `decorations`:
+  #     - full: Borders and title bar
+  #     - none: Neither borders nor title bar
+  #
+  # Values for `decorations` (macOS only):
+  #     - transparent: Title bar, transparent background and title bar buttons
+  #     - buttonless: Title bar, transparent background and no title bar buttons
+  decorations: transparent
 
-# Startup Mode (changes require restart)
-#
-# Values for `startup_mode`:
-#   - Windowed
-#   - Maximized
-#   - Fullscreen
-#
-# Values for `startup_mode` (macOS only):
-#   - SimpleFullscreen
-#startup_mode: Windowed
+  # Startup Mode (changes require restart)
+  #
+  # Values for `startup_mode`:
+  #   - Windowed
+  #   - Maximized
+  #   - Fullscreen
+  #
+  # Values for `startup_mode` (macOS only):
+  #   - SimpleFullscreen
+  startup_mode: Windowed
 
-# Window title
-#title: Alacritty
+  # Window title
+  title: Alacritty
 
-# Allow terminal applications to change Alacritty's window title.
-#dynamic_title: true
+  # Allow terminal applications to change Alacritty's window title.
+  dynamic_title: true
 
 # Window class (Linux/BSD only):
 #class:
@@ -103,86 +105,34 @@ import:
 #multiplier: 3
 
 # Font configuration
-#font:
-# Normal (roman) font face
-#normal:
-# Font family
-#
-# Default:
-#   - (macOS) Menlo
-#   - (Linux/BSD) monospace
-#   - (Windows) Consolas
-#family: monospace
+font:
+  # Point size
+  size: 12.0
 
-# The `style` can be specified to pick a specific face.
-#style: Regular
+  # Offset is the extra space around each character. `offset.y` can be thought
+  # of as modifying the line spacing, and `offset.x` as modifying the letter
+  # spacing.
+  #offset:
+  #  x: 0
+  #  y: 0
 
-# Bold font face
-#bold:
-# Font family
-#
-# If the bold family is not specified, it will fall back to the
-# value specified for the normal font.
-#family: monospace
+  # Glyph offset determines the locations of the glyphs within their cells with
+  # the default being at the bottom. Increasing `x` moves the glyph to the
+  # right, increasing `y` moves the glyph upward.
+  #glyph_offset:
+  #  x: 0
+  #  y: 0
 
-# The `style` can be specified to pick a specific face.
-#style: Bold
+  # Thin stroke font rendering (macOS only)
+  #
+  # Thin strokes are suitable for retina displays, but for non-retina screens
+  # it is recommended to set `use_thin_strokes` to `false`.
+  use_thin_strokes: true
 
-# Italic font face
-#italic:
-# Font family
-#
-# If the italic family is not specified, it will fall back to the
-# value specified for the normal font.
-#family: monospace
+  # If `true`, bold text is drawn using the bright color variants.
+  draw_bold_text_with_bright_colors: true
 
-# The `style` can be specified to pick a specific face.
-#style: Italic
-
-# Bold italic font face
-#bold_italic:
-# Font family
-#
-# If the bold italic family is not specified, it will fall back to the
-# value specified for the normal font.
-#family: monospace
-
-# The `style` can be specified to pick a specific face.
-#style: Bold Italic
-
-# Point size
-#size: 11.0
-
-# Offset is the extra space around each character. `offset.y` can be thought
-# of as modifying the line spacing, and `offset.x` as modifying the letter
-# spacing.
-#offset:
-#  x: 0
-#  y: 0
-
-# Glyph offset determines the locations of the glyphs within their cells with
-# the default being at the bottom. Increasing `x` moves the glyph to the
-# right, increasing `y` moves the glyph upward.
-#glyph_offset:
-#  x: 0
-#  y: 0
-
-# Thin stroke font rendering (macOS only)
-#
-# Thin strokes are suitable for retina displays, but for non-retina screens
-# it is recommended to set `use_thin_strokes` to `false`.
-#use_thin_strokes: true
-
-# If `true`, bold text is drawn using the bright color variants.
-#draw_bold_text_with_bright_colors: false
-
-# Colors (Tomorrow Night)
 #colors:
-# Default colors
-#primary:
-#  background: '#1d1f21'
-#  foreground: '#c5c8c6'
-
 # Bright and dim foreground colors
 #
 # The dimmed foreground color is calculated automatically if it is not
@@ -368,41 +318,37 @@ import:
 # When set to `true`, selected text will be copied to the primary clipboard.
 #save_to_clipboard: false
 
-#cursor:
-# Cursor style
-#style:
-# Cursor shape
-#
-# Values for `shape`:
-#   - ▇ Block
-#   - _ Underline
-#   - | Beam
-#shape: Block
+cursor:
+  # Cursor style
+  #
+  # Values for `style`:
+  #   - ▇ Block
+  #   - _ Underline
+  #   - | Beam
+  style: Block
 
-# Cursor blinking state
-#
-# Values for `blinking`:
-#   - Never: Prevent the cursor from ever blinking
-#   - Off: Disable blinking by default
-#   - On: Enable blinking by default
-#   - Always: Force the cursor to always blink
-#blinking: Off
+  # Cursor blinking state
+  #
+  # Values for `blinking`:
+  #   - Never: Prevent the cursor from ever blinking
+  #   - Off: Disable blinking by default
+  #   - On: Enable blinking by default
+  #   - Always: Force the cursor to always blink
+  blinking: Never
+  # Vi mode cursor style
+  #
+  # If the vi mode cursor style is `None` or not specified, it will fall back to
+  # the style of the active value of the normal cursor.
+  #
+  # See `cursor.style` for available options.
+  #vi_mode_style: None
 
-# Vi mode cursor style
-#
-# If the vi mode cursor style is `None` or not specified, it will fall back to
-# the style of the active value of the normal cursor.
-#
-# See `cursor.style` for available options.
-#vi_mode_style: None
+  # Cursor blinking interval in milliseconds.
+  #blink_interval: 750
 
-# Cursor blinking interval in milliseconds.
-#blink_interval: 750
-
-# If this is `true`, the cursor will be rendered as a hollow box when the
-# window is not focused.
-#unfocused_hollow: true
-
+  # If this is `true`, the cursor will be rendered as a hollow box when the
+  # window is not focused.
+  unfocused_hollow: true
 # Thickness of the cursor relative to the cell width as floating point number
 # from `0.0` to `1.0`.
 #thickness: 0.15

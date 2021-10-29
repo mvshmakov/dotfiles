@@ -10,6 +10,14 @@ export PATH="$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH"
 
 export XDG_CONFIG_HOME=$HOME/.config
 export XDG_CACHE_HOME=$HOME/.cache
+export XDG_DATA_HOME=$HOME/.local/share
+export XDG_STATE_HOME=$HOME/.local/state
+
+export INPUTRC=$XDG_CONFIG_HOME/readline/inputrc
+export HOMEBREW_BREWFILE=$XDG_CONFIG_HOME/brew/Brewfile
+
+export _Z_DATA=$XDG_DATA_HOME/z
+export LESSHISTFILE=$XDG_DATA_HOME/less/history
 
 # You may need to manually set your language environment
 export LANG=en_US.UTF-8
@@ -28,11 +36,10 @@ fi
 export READER="zathura"
 export BROWSER="brave"
 export VIDEO="mpv"
-export COLORTERM="truecolor"
 export PAGER="less"
 export GIT_PAGER="delta"
 
-export INPUTRC="$XDG_CONFIG_HOME"/readline/inputrc
+export COLORTERM="truecolor"
 
 # ZSH-related
 # Path to your oh-my-zsh installation.
@@ -54,20 +61,14 @@ export SSH_KEY_PATH="~/.ssh/id_rsa"
 # Make Python use UTF-8 encoding for output to stdin, stdout, and stderr.
 export PYTHONIOENCODING='UTF-8';
 
-export NVM_DIR="$HOME/.nvm"
-  [ -s "/usr/local/opt/nvm/nvm.sh" ] && . "/usr/local/opt/nvm/nvm.sh"  # This loads nvm
-  [ -s "/usr/local/opt/nvm/etc/bash_completion.d/nvm" ] && . "/usr/local/opt/nvm/etc/bash_completion.d/nvm"  # This loads nvm bash_completion
-
 # Use bat as fzf preview tool
 export FZF_DEFAULT_OPTS="--preview 'bat --color=always --style=numbers --line-range=:500 {}'"
-export BAT_THEME="Monokai Extended"
-
-# https://stackoverflow.com/questions/55839111/installing-psycopg2-fails-on-macos-with-unclear-error-message
-export LDFLAGS="-L/usr/local/opt/openssl/lib"
+# Preview all themes:
+# bat --list-themes | fzf --preview="bat --theme={} --color=always /path/to/file"
+export BAT_THEME="OneHalfDark"
 
 # Add pyenv executable to PATH and
 # enable shims by adding the following
 # to ~/.profile and ~/.zprofile:
 export PYENV_ROOT="$HOME/.pyenv"
 export PATH="$PYENV_ROOT/bin:$PATH"
-eval "$(pyenv init --path)"

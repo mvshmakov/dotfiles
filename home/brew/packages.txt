@@ -46,9 +46,7 @@ minikube
 ncurses
 nginx
 node
-nvm
 openjdk
-openssl@1.1
 pcre
 pipenv
 postgresql
@@ -61,7 +59,6 @@ ruby
 sshfs
 sqlite
 svgo
-thefuck
 tldr
 trash
 tmux

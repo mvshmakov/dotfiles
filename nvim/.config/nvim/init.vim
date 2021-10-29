@@ -15,6 +15,8 @@ if exists('termguicolors')
   set termguicolors
 endif
 
+syntax on
+colorscheme onedark
 
 noremap <Up>    <Nop>
 noremap <Down>  <Nop>

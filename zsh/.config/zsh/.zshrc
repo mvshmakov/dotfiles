@@ -7,10 +7,10 @@
 # TODO: Speed up zsh compinit by only checking cache once a day.
 # https://gist.github.com/ctechols/ca1035271ad134841284
 autoload -Uz compinit
-if [[ -n ${ZDOTDIR}/.zcompdump(#qN.mh+24) ]]; then
-  compinit
+if [[ -n $XDG_CACHE_HOME/zsh/zcompdump-$USER-$ZSH_VERSION(#qN.mh+24) ]]; then
+  compinit -d $XDG_CACHE_HOME/zsh/zcompdump-$ZSH_VERSION
 else
-  compinit -C
+  compinit -C -d $XDG_CACHE_HOME/zsh/zcompdump-$ZSH_VERSION
 fi
 
 # Uncomment the following line to enable command auto-correction.
@@ -19,13 +19,31 @@ ENABLE_CORRECTION="true"
 # Uncomment the following line to display red dots whilst waiting for completion.
 COMPLETION_WAITING_DOTS="true"
 
-# Increase Bash history size. Allow 1 000 000 entries; the default is 500.
+# Increase ZSH history size. Allow 1 000 000 entries; the default is 500.
 HISTSIZE=1000000
 SAVEHIST=10000000
 HISTFILESIZE=1000000000
-# Omit duplicates and commands that begin with a space from history.
-HISTCONTROL='ignoreboth';
-HISTFILE=~/.cache/zsh/history
+HISTFILE=$XDG_DATA_HOME/zsh/history
+
+# Ensures that commands are added to the history immediately.
+# Otherwise, the history appended only when the shell exits and it could be lost.
+# setopt INC_APPEND_HISTORY
+# setopt EXTENDED_HISTORY         # record timestamp of command in HISTFILE
+# setopt SHARE_HISTORY            # share command history data
+
+# setopt HIST_IGNORE_SPACE        # ignore commands that start with space
+# setopt HIST_IGNORE_ALL_DUPS     # Complete command duplicates are not added to the history
+# setopt HIST_FIND_NO_DUPS        # Ctrl + R will ignore dups durng a search
+# setopt HIST_EXPIRE_DUPS_FIRST   # delete duplicates first when HISTFILE size exceeds HISTSIZE
+# setopt HIST_VERIFY              # show command with history expansion to user before running it
+
+# cd works as pushd
+# setopt auto_pushd
+# setopt pushd_ignore_dups
+# setopt pushdminus
+
+# Allow to type bash-like comments in the shells
+# setopt interactivecomments
 
 source ~/.oh-my-zsh/custom/plugins/.iterm2_shell_integration.zsh
 source ~/.oh-my-zsh/custom/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
@@ -52,16 +70,14 @@ plugins=(
     last-working-dir
     # Completion as well as adding many useful aliases
     npm
-    # Autocompletions
-    nvm
     pip
     ripgrep
     # Prefixes the previous command with sudo on double ESC
     sudo
-    # Fixes commands for us
-    thefuck
     # Autocompletion
     yarn
+    # Jump to frecenct directories: https://github.com/rupa/z
+    z
     # Adds autosuggestions like in Fish
     zsh-autosuggestions
     # Highlights stuff
@@ -93,16 +109,11 @@ antigen apply
 
 ssh-add ~/.ssh/id_rsa
 
-set -o vi
-
 # GRC colorizes nifty unix tools all over the place
 if (( $+commands[grc] )) && (( $+commands[brew] ))
 then
     source `brew --prefix`/etc/grc.bashrc
 fi
-
-eval "$(pyenv init -)"
-eval $(thefuck --alias)
 
 source ~/.oh-my-zsh/oh-my-zsh.sh
 
@@ -118,3 +129,6 @@ eval "$(pyenv init -)"
 
 # Activate *direnv* https://direnv.net/docs/hook.html#zsh
 eval "$(direnv hook zsh)"
+
+# https://github.com/Schniz/fnm#zsh
+eval "$(fnm env)"
