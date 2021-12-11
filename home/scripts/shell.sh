@@ -1,6 +1,8 @@
-#! /usr/bin/env sh
+#!/usr/bin/env bash
 
-set -e
+# Unofficial Bash strict mode http://redsymbol.net/articles/unofficial-bash-strict-mode/
+set -euo pipefail
+IFS=$'\n\t'
 
 # Installing oh-my-zsh
 sudo sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"

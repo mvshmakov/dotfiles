@@ -1,6 +1,9 @@
-#! /usr/bin/env sh
+#!/usr/bin/env bash
 
-# Install brew and update
+# Unofficial Bash strict mode http://redsymbol.net/articles/unofficial-bash-strict-mode/
+set -euo pipefail
+IFS=$'\n\t'
+
 /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
 brew update && brew upgrade
 

@@ -1,4 +1,9 @@
-#! /usr/bin/env sh
+#!/usr/bin/env bash
+
+# Unofficial Bash strict mode http://redsymbol.net/articles/unofficial-bash-strict-mode/
+set -euo pipefail
+IFS=$'\n\t'
+
 
 # Creation of projects and Yandex.Disk folders
 if [ ! -d "~/projects" ]; then
