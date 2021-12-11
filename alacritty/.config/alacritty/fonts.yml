@@ -36,36 +36,36 @@ schemes:
 
   iosevka: &iosevka
     normal:
-      family: "Iosevka SS05"
+      family: "Iosevka Nerd Font"
       style: Regular
 
     bold:
-      family: "Iosevka SS05"
+      family: "Iosevka Nerd Font"
       style: Bold
 
     italic:
-      family: "Iosevka SS05"
+      family: "Iosevka Nerd Font"
       style: Italic
 
     bold_italic:
-      family: "Iosevka SS05"
+      family: "Iosevka Nerd Font"
       style: Bold Italic
 
   fira_code: &fira_code
     normal:
-      family: "Fira Code"
+      family: "FiraCode Nerd Font"
       style: Retina
 
     bold:
-      family: "Fira Code"
+      family: "FiraCode Nerd Font"
       style: Bold
 
     italic:
-      family: "Fira Code"
+      family: "FiraCode Nerd Font"
       style: Italic
 
     bold_italic:
-      family: "Fira Code"
+      family: "FiraCode Nerd Font"
       style: Bold Italic
 
 font: *fira_code
