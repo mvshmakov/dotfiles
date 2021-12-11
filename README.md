@@ -18,6 +18,8 @@ stow --stow -vt ~ */
 
 To restow/repair the symlinks, use `stow --restow -vt ~ */`. To simulate the stow process outcome without modifying the filesystem, use `stow --stow --no -vt ~ */`. `*/` is the ZSH glob which expands only in the folders.
 
+If you want to add the submodule, consider running `git submodule add --name {name} https://github.com/{author}/{name}.git {tool}/.config/{tool}/{name}` instead of just adding the corresponding submodule definition in the `.gitmodules`.
+
 ITerm2's `com.googlecode.iterm2.plist` is in `$HOME` folder, so you need to set it also in ITerm2 settings in order to load it.
 
 # Useful commands
@@ -33,14 +35,6 @@ ITerm2's `com.googlecode.iterm2.plist` is in `$HOME` folder, so you need to set 
 # Z-based navigation
 
 #### `z {pattern}[TAB]` will expand the path Z detected
-
-#### ``
-
-# TODO
-
-##### 1) Add vim configuration
-
-##### 2) Get rid of `home` folder and place all home files in the respected folders, e.g., home/.bashrc -> bash/.bashrc.
 
 # Comments for packages in the `brew` folder
 
