@@ -13,15 +13,14 @@ HISTFILESIZE=1000000000
 HISTCONTROL='ignoreboth';
 HISTFILE=$XDG_DATA_HOME/bash/history
 
-ssh-add ~/.ssh/id_rsa
+# Be quiet on success
+ssh-add -q ~/.ssh/id_rsa
 
 # GRC colorizes nifty unix tools all over the place
 if (( $+commands[grc] )) && (( $+commands[brew] ))
 then
     source `brew --prefix`/etc/grc.bashrc
 fi
-
-eval "$(pyenv init -)"
 
 source ~/shell-sources/aliasrc
 source ~/shell-sources/.functions
@@ -35,3 +34,5 @@ eval "$(pyenv init -)"
 
 # Activate *direnv* https://direnv.net/docs/hook.html#zsh
 eval "$(direnv hook bash)"
+
+[ -f ~/.fzf.bash ] && source ~/.fzf.bash

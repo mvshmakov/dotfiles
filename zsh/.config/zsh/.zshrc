@@ -45,9 +45,9 @@ HISTFILE=$XDG_DATA_HOME/zsh/history
 # Allow to type bash-like comments in the shells
 # setopt interactivecomments
 
-source ~/.oh-my-zsh/custom/plugins/.iterm2_shell_integration.zsh
+# source ~/.oh-my-zsh/custom/plugins/.iterm2_shell_integration.zsh
 source ~/.oh-my-zsh/custom/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
-source ~/.oh-my-zsh/custom/plugins/zsh-output-highlighting/zsh-output-highlighting.zsh
+# source ~/.oh-my-zsh/custom/plugins/zsh-output-highlighting/zsh-output-highlighting.zsh
 # source ~/.oh-my-zsh/custom/plugins/zsh-history-substring-search/zsh-history-substring-search.zsh
 
 plugins=(
@@ -81,7 +81,7 @@ plugins=(
     # Adds autosuggestions like in Fish
     zsh-autosuggestions
     # Highlights stuff
-    zsh-output-highlighting
+    # zsh-output-highlighting
 )
 
 source $(brew --prefix)/share/antigen/antigen.zsh
@@ -107,7 +107,8 @@ antigen theme robbyrussell
 # Tell Antigen that you're done
 antigen apply
 
-ssh-add ~/.ssh/id_rsa
+# Be quiet on success
+ssh-add -q ~/.ssh/id_rsa
 
 # GRC colorizes nifty unix tools all over the place
 if (( $+commands[grc] )) && (( $+commands[brew] ))
@@ -132,3 +133,22 @@ eval "$(direnv hook zsh)"
 
 # https://github.com/Schniz/fnm#zsh
 eval "$(fnm env)"
+
+# For directory colors definition support in file.
+# See https://www.gnu.org/software/coreutils/manual/html_node/dircolors-invocation.html#dircolors-invocation
+eval "$(dircolors $XDG_CONFIG_HOME/dircolors/dir_colors)"
+
+# Create a `main` session and load it by default to the shell
+# https://unix.stackexchange.com/a/113768
+if command -v tmux &> /dev/null &&
+    [ -n "$PS1" ] &&
+    # Uncomment to enable tmux init in more broad cases
+    # [[ ! "$TERM" =~ screen ]] &&
+    # [[ ! "$TERM" =~ tmux ]] &&
+    # Uncomment to init tmux only on the kitty 
+    [ "$TERM" = "xterm-kitty" ] &&
+    [ -z "$TMUX" ]; then
+  exec tmux new-session -A -s main
+fi
+
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
