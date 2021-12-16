@@ -10,9 +10,14 @@ Dotfiles for macOS (relevant for Catalina 10.15+)
 
 ```
 sudo softwareupdate -i -a
-mkdir -p ~/projects/personal
-cd ~/projects/personal && git clone https://github.com/mvshmakov/dotfiles.git
-cd dotfiles && git submodule update --init --recursive
+
+mkdir -p ~/projects/personal && cd ~/projects/personal
+git clone https://github.com/mvshmakov/dotfiles.git && cd dotfiles
+git submodule update --init --recursive
+
+/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+/opt/homebrew/bin/brew bundle install --file ./brew/.config/brew/Brewfile
+
 stow --stow -vt ~ */
 ```
 
@@ -41,7 +46,7 @@ ITerm2's `com.googlecode.iterm2.plist` is in `$HOME` folder, so you need to set 
 - `ql` is an alias for a quick look MacOS files feature.
 - `bat` is a good alternative to `cat` for `JSON` files.
 
-If you want your current system configuration to match your Brewfile
+If you want your current system configuration to match your Brewfile (purge all non-fixed deps)
 
 `brew bundle --force cleanup`
 
