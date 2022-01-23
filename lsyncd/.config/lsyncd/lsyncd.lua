@@ -28,6 +28,7 @@ for from_source, target_source in pairs(sourceList) do
             archive = true,
             compress = true,
             bwlimit   = 2000,
+            -- TODO: use SSH_KEY_PATH
             rsh = "ssh -i"..home.."/.ssh/id_rsa"
             -- rsh = "/usr/bin/ssh -p 22 -o StrictHostKeyChecking=no"
             -- If you want to specify another port, use the rsh

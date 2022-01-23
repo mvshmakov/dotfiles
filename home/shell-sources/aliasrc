@@ -47,6 +47,7 @@ alias path='echo -e ${PATH//:/\\n}'
 alias clean_ds="find . -type f -name '*.DS_Store' -ls -delete"
 
 alias cp_pubkey="more ~/.ssh/id_rsa.pub | pbcopy | echo '=> Public key copied to pasteboard.'"
+alias cp_test_pubkey="more ~/.ssh/id_rsa-test.pub | pbcopy | echo '=> Public key copied to pasteboard.'"
 
 # Merge PDF files, preserving symbolic links
 # Usage: `mergepdf input{1,2,3}.pdf` or `mergepdf_local` for PDFs in folder merge

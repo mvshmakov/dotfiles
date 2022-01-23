@@ -109,6 +109,7 @@ antigen apply
 
 # Be quiet on success
 ssh-add -q ~/.ssh/id_rsa
+ssh-add -q ~/.ssh/id_rsa-test
 
 # GRC colorizes nifty unix tools all over the place
 if (( $+commands[grc] )) && (( $+commands[brew] ))

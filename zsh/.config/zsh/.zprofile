@@ -64,6 +64,7 @@ export MANPATH="/usr/local/man:$MANPATH"
 export MANPAGER="sh -c 'col -bx | bat -l man -p'"
 
 export SSH_KEY_PATH="~/.ssh/id_rsa"
+export SSH_TEST_KEY_PATH="~/.ssh/id_rsa-test"
 
 # Make Python use UTF-8 encoding for output to stdin, stdout, and stderr.
 export PYTHONIOENCODING='UTF-8';
