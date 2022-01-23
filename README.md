@@ -13,12 +13,12 @@ sudo softwareupdate -i -a
 
 mkdir -p ~/projects/personal && cd ~/projects/personal
 git clone https://github.com/mvshmakov/dotfiles.git && cd dotfiles
+
 git submodule update --init --recursive
+stow --stow -vt ~ */
 
 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
-/opt/homebrew/bin/brew bundle install --file ./brew/.config/brew/Brewfile
-
-stow --stow -vt ~ */
+brew bundle install --file ~/.config/brew/Brewfile
 ```
 
 To restow/repair the symlinks, use `stow --restow -vt ~ */`. To simulate the stow process outcome without modifying the filesystem, use `stow --stow --no -vt ~ */`. `*/` is the ZSH glob which expands only in the folders.

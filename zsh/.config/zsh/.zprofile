@@ -1,12 +1,9 @@
-# For coming from bash you might have to change your $PATH.
-export PATH=$HOME/bin:/usr/local/bin:$PATH:$HOME/.cargo/bin
-# Path customization
-export PATH="/usr/local/sbin:$(brew --prefix coreutils)/libexec/gnubin:$PATH"
 if [ -d "$HOME/bin" ] ; then
     export PATH="$HOME/bin:$PATH"
 fi
-
-export PATH="$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH"
+export PATH="/opt/homebrew/bin:/opt/homebrew/sbin:$PATH"
+export PATH="$(brew --prefix coreutils)/libexec/gnubin:$PATH"
+export PATH="$PATH:$(yarn global bin)"
 
 export XDG_CONFIG_HOME=$HOME/.config
 export XDG_CACHE_HOME=$HOME/.cache
@@ -80,5 +77,5 @@ export HIGHLIGHT_STYLE=nord
 # enable shims by adding the following
 # to ~/.profile and ~/.zprofile:
 export PYENV_ROOT="$XDG_DATA_HOME/.pyenv"
-export PATH="$PYENV_ROOT/bin:$PATH"
+export PATH="$PATH:$PYENV_ROOT/bin"
 eval "$(pyenv init --path)"

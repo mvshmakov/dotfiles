@@ -1,11 +1,13 @@
-home/.ssh/id_rsa
-home/.ssh/id_rsa.pub
+home/.ssh/id_rsa*
 home/.ssh/known_hosts
 
 home/.bash_history
 
 zsh/.config/zsh/.zcompdump*
 zsh/.config/zsh/.zsh_sessions
+
+karabiner/.config/karabiner/assets
+karabiner/.config/karabiner/automatic_backups
 
 # Include VSCode config
 !home/.vscode
