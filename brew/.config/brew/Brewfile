@@ -101,6 +101,7 @@ brew "zegervdv/zathura/zathura"
 brew "zegervdv/zathura/zathura-djvu"
 brew "zegervdv/zathura/zathura-pdf-poppler"
 
+cask "1password"
 cask "adobe-acrobat-reader"
 cask "alacritty"
 cask "amethyst"
