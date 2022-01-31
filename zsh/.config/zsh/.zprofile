@@ -40,7 +40,7 @@ else
 fi
 
 export READER="zathura"
-export BROWSER="brave"
+export BROWSER="Brave.app"
 export VIDEO="mpv"
 export PAGER="less"
 export GIT_PAGER="delta"

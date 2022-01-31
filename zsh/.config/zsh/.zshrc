@@ -46,7 +46,7 @@ HISTFILE=$XDG_DATA_HOME/zsh/history
 # setopt interactivecomments
 
 # source ~/.oh-my-zsh/custom/plugins/.iterm2_shell_integration.zsh
-source ~/.oh-my-zsh/custom/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
+# source ~/.oh-my-zsh/custom/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
 # source ~/.oh-my-zsh/custom/plugins/zsh-output-highlighting/zsh-output-highlighting.zsh
 # source ~/.oh-my-zsh/custom/plugins/zsh-history-substring-search/zsh-history-substring-search.zsh
 
@@ -79,7 +79,7 @@ plugins=(
     # Jump to frecenct directories: https://github.com/rupa/z
     z
     # Adds autosuggestions like in Fish
-    zsh-autosuggestions
+    # zsh-autosuggestions
     # Highlights stuff
     # zsh-output-highlighting
 )
@@ -100,6 +100,7 @@ antigen bundle command-not-found
 # Syntax highlighting bundle
 # Should be the last one https://github.com/zsh-users/zsh-syntax-highlighting/blob/master/INSTALL.md#antigen
 antigen bundle zsh-users/zsh-syntax-highlighting
+antigen bundle zsh-users/zsh-autosuggestions
 
 # Load the theme
 antigen theme robbyrussell
@@ -108,13 +109,13 @@ antigen theme robbyrussell
 antigen apply
 
 # Be quiet on success
-ssh-add -q ~/.ssh/id_rsa
-ssh-add -q ~/.ssh/id_rsa-test
+eval "$(ssh-add -q ~/.ssh/id_rsa)"
+eval "$(ssh-add -q ~/.ssh/id_rsa-test)"
 
 # GRC colorizes nifty unix tools all over the place
 if (( $+commands[grc] )) && (( $+commands[brew] ))
 then
-    source `brew --prefix`/etc/grc.bashrc
+    source "$(brew --prefix grc)"
 fi
 
 source ~/.oh-my-zsh/oh-my-zsh.sh

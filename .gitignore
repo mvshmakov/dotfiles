@@ -6,6 +6,7 @@ tmux/.config/tmux/plugins
 !tmux/.config/tmux/plugins/tpm
 
 zsh/.config/zsh/.zcompdump*
+zsh/.config/zsh/.zshrc.*
 zsh/.config/zsh/.zsh_sessions
 
 karabiner/.config/karabiner/assets
