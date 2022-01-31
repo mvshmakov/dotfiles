@@ -110,9 +110,4 @@ defaults -currentHost write com.apple.ImageCapture disableHotPlug -bool true
 # Save screenshots in PNG format (other options: BMP, GIF, JPG, PDF, TIFF)
 defaults write com.apple.screencapture type -string "png"
 
-# Add custom remappings
-
-cp ../macos/com.mvshmakov.CapsLockEsc.plist ~/Library/LaunchAgents/
-launchctl load ~/Library/LaunchAgents/com.ldaws.CapslockBackspace.plist
-
 echo "MacOS setup completed!"
