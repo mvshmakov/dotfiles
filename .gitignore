@@ -3,6 +3,7 @@ home/.ssh/known_hosts
 home/.bash_history
 
 tmux/.config/tmux/plugins
+!tmux/.config/tmux/plugins/tpm
 
 zsh/.config/zsh/.zcompdump*
 zsh/.config/zsh/.zsh_sessions
