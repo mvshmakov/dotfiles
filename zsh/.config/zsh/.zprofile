@@ -30,13 +30,13 @@ export LANG=en_US.UTF-8
 
 # Preferred editor for local and remote sessions
 if [[ -n $SSH_CONNECTION ]]; then
-  # Remote editor
-  export EDITOR='vim'
-  export VISUAL="vim"
+    # Remote editor
+    export EDITOR='vim'
+    export VISUAL="vim"
 else
-  # Local editor
-  export EDITOR='nvim'
-  export VISUAL="nvim"
+    # Local editor
+    export EDITOR='nvim'
+    export VISUAL="nvim"
 fi
 
 export READER="zathura"
@@ -65,6 +65,9 @@ export SSH_TEST_KEY_PATH="~/.ssh/id_rsa-test"
 
 # Make Python use UTF-8 encoding for output to stdin, stdout, and stderr.
 export PYTHONIOENCODING='UTF-8';
+# To correctly link and build psycopg2: https://stackoverflow.com/a/69403177/12349023
+export LDFLAGS="-L/opt/homebrew/opt/libpq/lib -L/opt/homebrew/opt/openssl@3/lib"
+export CPPFLAGS="-I/opt/homebrew/opt/libpq/include -I/opt/homebrew/opt/openssl@3/include"
 
 # Use bat as fzf preview tool
 export FZF_DEFAULT_OPTS="--preview 'bat --color=always --style=numbers --line-range=:500 {}'"

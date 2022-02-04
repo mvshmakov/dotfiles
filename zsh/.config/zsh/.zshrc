@@ -25,6 +25,9 @@ SAVEHIST=10000000
 HISTFILESIZE=1000000000
 HISTFILE=$XDG_DATA_HOME/zsh/history
 
+# Omit duplicates and commands that begin with a space from history.
+HISTCONTROL='ignoreboth';
+
 # Ensures that commands are added to the history immediately.
 # Otherwise, the history appended only when the shell exits and it could be lost.
 # setopt INC_APPEND_HISTORY
