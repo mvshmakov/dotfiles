@@ -6,7 +6,7 @@
 
 Dotfiles for macOS (relevant for Catalina 10.15+)
 
-# Setup
+## Setup
 
 ```bash
 sudo softwareupdate -i -a
@@ -29,18 +29,18 @@ ITerm2's `com.googlecode.iterm2.plist` is in the `$HOME` folder, so you need to 
 
 The last step would be to generate new SSH key pair and add it to the required services.
 
-# Useful commands
+## Useful commands
 
 1. Dump all of the installed brew packages: `brew list > packages.txt`
 2. Dump all of the installed brew casks: `brew list --cask > casks.txt`
 3. Dump all vscode extensions to shell commands: `code --list-extensions | xargs -L 1 echo code --install-extension`
 4. `stow --restow {folder}`
 
-# Z-based navigation
+## Z-based navigation
 
 * `z {pattern}[TAB]` will expand the path Z detected
 
-# Comments for packages in the `brew` folder
+## Comments for packages in the `brew` folder
 
 * `ql` is an alias for a quick look MacOS files feature.
 * `bat` is a good alternative to `cat` for `JSON` files.
@@ -49,7 +49,11 @@ If you want your current system configuration to match your Brewfile (purge all 
 
 `brew bundle --force cleanup`
 
-# Useful links
+## TODO
+
+* Use `shfmt` after [`zsh` support](https://github.com/mvdan/sh/issues/120)
+
+## Useful links
 
 * [awesome-dotfiles](https://github.com/webpro/awesome-dotfiles)
 * [zsh-users](https://github.com/zsh-users)
@@ -59,7 +63,7 @@ If you want your current system configuration to match your Brewfile (purge all 
 * [tmuxinator](https://github.com/tmuxinator/tmuxinator)
 * [webvim](https://github.com/vim-dist/webvim)
 
-# Literature
+## Literature
 
 * [Colours in terminal](https://gist.github.com/XVilka/8346728#true-color-detection)
 * ["\[WTF IS \033\[30;47m???", a practical cheat-sheet](https://gist.github.com/DNA/ebb9258089e9e1dfd08c58695b3cd6f1)
