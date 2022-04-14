@@ -1,4 +1,4 @@
-if [ -d "$HOME/bin" ] ; then
+if [ -d "$HOME/bin" ]; then
     export PATH="$HOME/bin:$PATH"
 fi
 export PATH="/opt/homebrew/bin:/opt/homebrew/sbin:$PATH"
@@ -64,17 +64,22 @@ export SSH_KEY_PATH="~/.ssh/id_rsa"
 export SSH_TEST_KEY_PATH="~/.ssh/id_rsa-test"
 
 # Make Python use UTF-8 encoding for output to stdin, stdout, and stderr.
-export PYTHONIOENCODING='UTF-8';
+export PYTHONIOENCODING='UTF-8'
 # To correctly link and build psycopg2: https://stackoverflow.com/a/69403177/12349023
 export LDFLAGS="-L/opt/homebrew/opt/libpq/lib -L/opt/homebrew/opt/openssl@3/lib"
 export CPPFLAGS="-I/opt/homebrew/opt/libpq/include -I/opt/homebrew/opt/openssl@3/include"
 
 # Use bat as fzf preview tool
+# TODO: does not work well for reverse-i-search
 export FZF_DEFAULT_OPTS="--preview 'bat --color=always --style=numbers --line-range=:500 {}'"
 # Preview all themes:
 # bat --list-themes | fzf --preview="bat --theme={} --color=always /path/to/file"
 export BAT_THEME="Nord"
 export HIGHLIGHT_STYLE=nord
+
+# For pinentry-mac
+GPG_TTY=$(tty)
+export GPG_TTY
 
 # Add pyenv executable to PATH and
 # enable shims by adding the following
