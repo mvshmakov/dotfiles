@@ -1,83 +1,81 @@
+[user]
+    name = Maxim Shmakov
+    email = mvshmakov@mail.ru
+    signingkey = 88C371E66837B278
+[gpg]
+    program = /opt/homebrew/bin/gpg
+[github]
+    user = mvshmakov
+[credential]
+    helper = osxkeychain
+    # Prompt credentials if required
+    interactive = always
+
 [alias]
-	diff = diff --word-diff
-	grep = grep -Ii
-	# Show commit changes by hash through default difftool
-	showtool = "!showci () { rev=${1:-HEAD}; git difftool --dir-diff $rev~1 $rev; }; showci $1"
-	# Put only staged files in the stash
-	stash-staged = !git stash --keep-index && \
+    diff = diff --word-diff
+    grep = grep -Ii
+    logs = log --show-signature
+    # Put only staged files in the stash
+    stash-staged = !git stash --keep-index && \
 				   git stash && \
 				   git stash apply stash@{1} && \
 				   git stash show -p | git apply -R && \
 				   git stash drop stash@{1}
+
 [core]
-	editor = nvim
-	pager = delta
-	# Useful when sharing a repository between Mac OS and Linux or Windows (only for MacOS)
-	# https://git-scm.com/docs/git-config#Documentation/git-config.txt-coreprecomposeUnicode
-	precomposeUnicode = true
-	# To display non-english characters in a readable way
-	quotepath = false
-	whitespace = fix,-indent-with-non-tab,trailing-space,cr-at-eol
+    pager = delta
+    # Useful when sharing a repository between Mac OS and Linux or Windows (only for MacOS)
+    # https://git-scm.com/docs/git-config#Documentation/git-config.txt-coreprecomposeUnicode
+    precomposeUnicode = true
+    # To display non-english characters in a readable way
+    quotepath = false
+    whitespace = fix,-indent-with-non-tab,trailing-space,cr-at-eol
 
+[commit]
+    gpgSign = true
+    template = ~/.config/git/gitmessage
+[tag]
+    gpgSign = true
+    sort = version:refname
 
-[user]
-	name = Maxim Shmakov
-	email = mvshmakov@mail.ru
-[github]
-	user = mvshmakov
-[credential]
-	helper = osxkeychain
-	# Prompt credentials if required
-	interactive = always
+[init]
+    # git will init new repo with the main branch as default
+    defaultBranch = main
+[branch]
+    # Auto track the origin on checkout
+    # and auto rebase stuff on pull
+    # https://stackoverflow.com/a/22147540
+    autosetupmerge = always
+    autosetuprebase = always
+    sort = -committerdate
+    prompt = false
+[checkout]
+    defaultRemote = origin
+[diff]
+    # Detect moved blocks of code and style them
+    # differently from the usual removed/added lines
+    colorMoved = default
 
+[merge]
+    tool = vimdiff3
+    log = true
+    conflictstyle = diff3
+[push]
+    # Not all git servers support this
+    # https://people.kernel.org/monsieuricon/signed-git-pushes
+    gpgSign = if-asked
+    # By default push to the upstream remote
+    default = upstream
+[pull]
+    # Pulling with rebase
+    rebase = true
+    default = upstream
 
 # Git-delta related setup
 # https://github.com/dandavison/delta
 [interactive]
-	diffFilter = delta --color-only
+    diffFilter = delta --color-only
 [delta]
-	features = side-by-side line-numbers decorations
-	syntax-theme = Nord
-[delta "decorations"]
-	commit-decoration-style = bold green box ul
-	file-style = bold yellow ul
-	file-decoration-style = none
-	hunk-header-decoration-style = yellow box
-
-[merge]
-	tool = vimdiff3
-	log = true
-	conflictstyle = diff3
-[mergetool]
-	prompt = false
-# Auto track the origin on checkout
-# and auto rebase stuff on pull
-# https://stackoverflow.com/a/22147540
-[branch]
-	autosetupmerge = always
-	autosetuprebase = always
-	sort = -committerdate
-[diff]
-	# Detects and highlights moved piecies of code
-	colorMoved = zebra
-[push]
-	# By default push to the current remote
-	default = current
-[pull]
-	# Pulling with rebase
-	rebase = true
-	default = current
-[tag]
-	sort = version:refname
-
-
-[color "branch"]
-	current = green
-	remote = blue
-
-
-[filter "lfs"]
-	clean = git-lfs clean -- %f
-	smudge = git-lfs smudge -- %f
-	process = git-lfs filter-process
-	required = true
+    navigate = true
+    side-by-side = true
+    line-numbers = true

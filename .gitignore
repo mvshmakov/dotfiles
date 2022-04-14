@@ -1,5 +1,4 @@
 home/.ssh/id_rsa*
-home/.ssh/known_hosts
 home/.bash_history
 
 tmux/.config/tmux/plugins
