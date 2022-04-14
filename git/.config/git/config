@@ -1,3 +1,9 @@
+# General usage tips:
+# 1) To generate a log for some release, run:
+# ```sh
+# git shortlog 833c8c9b087d58bef57a10fc414b4b0168fcb085...HEAD -n
+# ```
+
 [user]
     name = Maxim Shmakov
     email = mvshmakov@mail.ru
@@ -10,18 +16,16 @@
     helper = osxkeychain
     # Prompt credentials if required
     interactive = always
-
 [alias]
     diff = diff --word-diff
     grep = grep -Ii
-    logs = log --show-signature
+    log-oneline = log --oneline --decorate
     # Put only staged files in the stash
     stash-staged = !git stash --keep-index && \
 				   git stash && \
 				   git stash apply stash@{1} && \
 				   git stash show -p | git apply -R && \
 				   git stash drop stash@{1}
-
 [core]
     pager = delta
     # Useful when sharing a repository between Mac OS and Linux or Windows (only for MacOS)
@@ -29,18 +33,29 @@
     precomposeUnicode = true
     # To display non-english characters in a readable way
     quotepath = false
-    whitespace = fix,-indent-with-non-tab,trailing-space,cr-at-eol
-
+    # This setup should leave you with CRLF endings in Windows checkouts,
+    # but LF endings on macOS and Linux systems and in the repository.
+    autocrlf = input
+    # Detect whitespace errors https://stackoverflow.com/a/592014/12349023
+    whitespace = tab-in-indent,trailing-space,cr-at-eol
 [commit]
+    verbose = true
     gpgSign = true
     template = ~/.config/git/gitmessage
 [tag]
     gpgSign = true
-    sort = version:refname
-
+    sort = -version:refname
 [init]
-    # git will init new repo with the main branch as default
+    # Init new repo with the main branch as default
     defaultBranch = main
+[apply]
+    # Strip whitespaces when applying patches based on core.whitespace
+    # https://stackoverflow.com/a/592014/12349023
+    whitespace = fix
+[fetch]
+    # Remove all local references to remote that are no longer available
+    prune = true
+    pruneTags = true
 [branch]
     # Auto track the origin on checkout
     # and auto rebase stuff on pull
@@ -55,22 +70,32 @@
     # Detect moved blocks of code and style them
     # differently from the usual removed/added lines
     colorMoved = default
-
+[log]
+    showSignature = true
 [merge]
-    tool = vimdiff3
     log = true
-    conflictstyle = diff3
+    tool = vimdiff3
+    conflictStyle = diff3
 [push]
     # Not all git servers support this
     # https://people.kernel.org/monsieuricon/signed-git-pushes
     gpgSign = if-asked
-    # By default push to the upstream remote
+    # By default push to the upstream
     default = upstream
 [pull]
-    # Pulling with rebase
     rebase = true
     default = upstream
-
+[rebase]
+    # Enables !squash usage on rebase, for details see
+    # https://thoughtbot.com/blog/autosquashing-git-commits
+    autoSquash = true
+    # Allow to rebase even on a dirty worktree
+    # e.g., allow pull --rebase with local changes
+    autoStash = true
+[help]
+    # Autocorrect misspelled command and allow
+    # 2 seconds to cancel them
+    autocorrect = 20
 # Git-delta related setup
 # https://github.com/dandavison/delta
 [interactive]
