@@ -52,6 +52,7 @@ If you want your current system configuration to match your Brewfile (purge all 
 ## TODO
 
 * Use `shfmt` after [`zsh` support](https://github.com/mvdan/sh/issues/120)
+* Use `git subtree` instead of `git module` to [manage dependencies](https://www.atlassian.com/git/tutorials/git-subtree)
 
 ## Useful links
 
