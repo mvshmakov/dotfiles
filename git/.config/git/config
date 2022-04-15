@@ -1,7 +1,7 @@
 # General usage tips:
 # 1) To generate a log for some release, run:
 # ```sh
-# git shortlog 833c8c9b087d58bef57a10fc414b4b0168fcb085...HEAD -n
+# git shortlog commit_id...HEAD -n
 # ```
 
 [user]
@@ -32,7 +32,7 @@
     # https://git-scm.com/docs/git-config#Documentation/git-config.txt-coreprecomposeUnicode
     precomposeUnicode = true
     # To display non-english characters in a readable way
-    quotepath = false
+    quotePath = false
     # This setup should leave you with CRLF endings in Windows checkouts,
     # but LF endings on macOS and Linux systems and in the repository.
     autocrlf = input
@@ -60,8 +60,8 @@
     # Auto track the origin on checkout
     # and auto rebase stuff on pull
     # https://stackoverflow.com/a/22147540
-    autosetupmerge = always
-    autosetuprebase = always
+    autoSetupMerge = always
+    autoSetupRebase = always
     sort = -committerdate
     prompt = false
 [checkout]
@@ -95,7 +95,7 @@
 [help]
     # Autocorrect misspelled command and allow
     # 2 seconds to cancel them
-    autocorrect = 20
+    autoCorrect = 20
 # Git-delta related setup
 # https://github.com/dandavison/delta
 [interactive]
