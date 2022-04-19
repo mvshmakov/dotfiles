@@ -63,7 +63,6 @@
     autoSetupMerge = always
     autoSetupRebase = always
     sort = -committerdate
-    prompt = false
 [checkout]
     defaultRemote = origin
 [diff]
@@ -80,11 +79,12 @@
     # Not all git servers support this
     # https://people.kernel.org/monsieuricon/signed-git-pushes
     gpgSign = if-asked
-    # By default push to the upstream
-    default = upstream
+    # Do not care about --set-upstream, just push
+    # to the {defaultRemote}/{sameBranchName}
+    default = current
 [pull]
     rebase = true
-    default = upstream
+    default = current
 [rebase]
     # Enables !squash usage on rebase, for details see
     # https://thoughtbot.com/blog/autosquashing-git-commits
@@ -93,9 +93,8 @@
     # e.g., allow pull --rebase with local changes
     autoStash = true
 [help]
-    # Autocorrect misspelled command and allow
-    # 2 seconds to cancel them
-    autoCorrect = 20
+    # Ask to autocorrect misspelled command
+    autoCorrect = prompt
 # Git-delta related setup
 # https://github.com/dandavison/delta
 [interactive]
