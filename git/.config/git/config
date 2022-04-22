@@ -12,6 +12,11 @@
     program = /opt/homebrew/bin/gpg
 [github]
     user = mvshmakov
+[sendemail]
+	smtpEncryption = tls
+	smtpServer = smtp.mail.ru
+	smtpUser = mvshmakov@mail.ru
+	smtpServerPort = 465
 [credential]
     helper = osxkeychain
     # Prompt credentials if required
