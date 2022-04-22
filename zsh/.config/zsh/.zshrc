@@ -138,6 +138,8 @@ eval "$(direnv hook zsh)"
 
 # https://github.com/Schniz/fnm#zsh
 eval "$(fnm env)"
+# Only now yarn will be available as binary in PATH
+export PATH="$PATH:$(yarn global bin)"
 
 # For directory colors definition support in file.
 # See https://www.gnu.org/software/coreutils/manual/html_node/dircolors-invocation.html#dircolors-invocation

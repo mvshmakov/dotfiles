@@ -1,14 +1,17 @@
-if [ -d "$HOME/bin" ]; then
-    export PATH="$HOME/bin:$PATH"
-fi
-export PATH="/opt/homebrew/bin:/opt/homebrew/sbin:$PATH"
-export PATH="$(brew --prefix coreutils)/libexec/gnubin:$PATH"
-export PATH="$PATH:$(yarn global bin)"
+export XDG_CONFIG_HOME="$HOME/.config"
+export XDG_CACHE_HOME="$HOME/.cache"
+export XDG_DATA_HOME="$HOME/.local/share"
+export XDG_STATE_HOME="$HOME/.local/state"
+# Non-standard env variable name, but recommended location
+# https://specifications.freedesktop.org/basedir-spec/basedir-spec-latest.html
+# https://github.com/rust-lang/cargo/issues/1734#issuecomment-665247169
+export XDG_BIN_HOME="$HOME/.local/bin"
 
-export XDG_CONFIG_HOME=$HOME/.config
-export XDG_CACHE_HOME=$HOME/.cache
-export XDG_DATA_HOME=$HOME/.local/share
-export XDG_STATE_HOME=$HOME/.local/state
+# pip install --user, also cargo installs user binaries there, see
+# https://github.com/rust-lang/cargo/issues/1734#issuecomment-163936588
+export PATH="$XDG_BIN_HOME:$PATH"
+export PATH="/opt/homebrew/bin:$PATH"
+export PATH="$(brew --prefix)/sbin:$(brew --prefix coreutils)/libexec/gnubin:$PATH"
 
 export INPUTRC=$XDG_CONFIG_HOME/readline/inputrc
 export HOMEBREW_BREWFILE=$XDG_CONFIG_HOME/brew/Brewfile
