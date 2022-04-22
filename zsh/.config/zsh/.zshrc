@@ -1,3 +1,10 @@
+# Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.config/zsh/.zshrc.
+# Initialization code that may require console input (password prompts, [y/n]
+# confirmations, etc.) must go above this block; everything else may go below.
+if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
+  source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
+fi
+
 # Run to measure startup time:
 # https://blog.askesis.pl/post/2017/04/how-to-debug-zsh-startup-time.html
 # time  zsh -i -c exit
@@ -108,7 +115,9 @@ antigen bundle zsh-users/zsh-syntax-highlighting
 antigen bundle zsh-users/zsh-autosuggestions
 
 # Load the theme
-antigen theme robbyrussell
+# antigen theme spaceship-prompt/spaceship-prompt  # too slow
+antigen theme romkatv/powerlevel10k
+# antigen theme agnoster                           # not the best customizability
 
 # Tell Antigen that you're done
 antigen apply
@@ -161,3 +170,6 @@ if command -v tmux &> /dev/null &&
 fi
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+
+# To customize prompt, run `p10k configure` or edit ~/.config/zsh/.p10k.zsh.
+[[ ! -f ~/.config/zsh/.p10k.zsh ]] || source ~/.config/zsh/.p10k.zsh
