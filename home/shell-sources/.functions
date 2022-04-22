@@ -1,3 +1,15 @@
+# Upgrades all brew packages and checks for issues
+function brew-upgrade() {
+	# Updates brew itself
+	brew update
+	# Upgrades packages including non-necessary (e.g., transitive)
+	brew upgrade --greedy
+	brew cleanup
+	brew autoremove
+	# Here we filter out some spammy checks of brew doctor
+	brew doctor $(brew doctor --list-checks | grep -vE 'check_for_stray_(dylibs|static_libs|headers)|check_for_config_scripts|check_for_non_prefixed_coreutils')
+}
+
 # Create a directory and enter in it
 function mkd() {
     mkdir -p "$@" && cd "$@";

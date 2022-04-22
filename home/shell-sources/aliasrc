@@ -80,9 +80,6 @@ alias ios="open /Applications/Xcode.app/Contents/Developer/Applications/Simulato
 # tmux aliases
 alias tmuxify="tmux -CC attach || tmux -CC new"
 
-# Homebrew
-alias brew-upgrade='brew update && brew upgrade --greedy && brew cleanup && brew autoremove && brew doctor'
-
 # TTL for free network sharing, 65 - "on", 64 - "off"
 alias ttl_64="sudo sysctl -w net.inet.ip.ttl=64"
 alias ttl_65="sudo sysctl -w net.inet.ip.ttl=65"
