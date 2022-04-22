@@ -37,20 +37,21 @@ HISTCONTROL='ignoreboth';
 
 # Ensures that commands are added to the history immediately.
 # Otherwise, the history appended only when the shell exits and it could be lost.
-# setopt INC_APPEND_HISTORY
-# setopt EXTENDED_HISTORY         # record timestamp of command in HISTFILE
-# setopt SHARE_HISTORY            # share command history data
+setopt INC_APPEND_HISTORY
+setopt EXTENDED_HISTORY # record timestamp of command in HISTFILE
+setopt SHARE_HISTORY    # share command history data
 
-setopt HIST_IGNORE_SPACE        # ignore commands that start with space
-setopt HIST_IGNORE_ALL_DUPS     # Complete command duplicates are not added to the history
-setopt HIST_FIND_NO_DUPS        # Ctrl + R will ignore dups durng a search
-setopt HIST_EXPIRE_DUPS_FIRST   # delete duplicates first when HISTFILE size exceeds HISTSIZE
-# setopt HIST_VERIFY              # show command with history expansion to user before running it
+setopt HIST_IGNORE_SPACE      # ignore commands that start with space
+setopt HIST_IGNORE_ALL_DUPS   # Complete command duplicates are not added to the history
+setopt HIST_FIND_NO_DUPS      # Ctrl + R will ignore dups durng a search
+setopt HIST_EXPIRE_DUPS_FIRST # delete duplicates first when HISTFILE size exceeds HISTSIZE
+setopt HIST_VERIFY            # show command with history expansion to user before running it
 
-# cd works as pushd
-# setopt auto_pushd
-# setopt pushd_ignore_dups
-# setopt pushdminus
+# Makes cd work as pushd
+setopt auto_pushd
+setopt pushd_ignore_dups
+# Exchanges the meanings of '+'' and '-' when used with a number to specify a directory in the stack.
+setopt pushdminus
 
 # Allow to type bash-like comments in the shells
 # setopt interactivecomments
