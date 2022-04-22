@@ -10,24 +10,22 @@ HISTSIZE=1000000
 SAVEHIST=10000000
 HISTFILESIZE=1000000000
 # Omit duplicates and commands that begin with a space from history.
-HISTCONTROL='ignoreboth';
-HISTFILE=$XDG_DATA_HOME/bash/history
+HISTCONTROL="ignoreboth"
+HISTFILE="$XDG_DATA_HOME/bash/history"
 
 # Be quiet on success
 ssh-add -q ~/.ssh/id_rsa
 ssh-add -q ~/.ssh/id_rsa-test
 
 # GRC colorizes nifty unix tools all over the place
-if (( $+commands[grc] )) && (( $+commands[brew] ))
-then
-    source "$(brew --prefix grc)"
-fi
+GRC_ALIASES=true
+source "$(brew --prefix)/etc/grc.sh"
 
 source ~/shell-sources/aliasrc
 source ~/shell-sources/.functions
 
 # Add tab completion for SSH hostnames based on ~/.ssh/config, ignoring wildcards
-[ -e "$HOME/.ssh/config" ] && complete -o "default" -o "nospace" -W "$(grep "^Host" ~/.ssh/config | grep -v "[?*]" | cut -d " " -f2- | tr ' ' '\n')" scp sftp ssh;
+[ -e "$HOME/.ssh/config" ] && complete -o "default" -o "nospace" -W "$(grep "^Host" ~/.ssh/config | grep -v "[?*]" | cut -d " " -f2- | tr ' ' '\n')" scp sftp ssh
 
 # Load pyenv into the shell by adding
 # the following to ~/.zshrc:

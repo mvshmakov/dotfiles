@@ -14,10 +14,10 @@ fi
 # TODO: Speed up zsh compinit by only checking cache once a day.
 # https://gist.github.com/ctechols/ca1035271ad134841284
 autoload -Uz compinit
-if [[ -n $XDG_CACHE_HOME/zsh/zcompdump-$USER-$ZSH_VERSION(#qN.mh+24) ]]; then
-  compinit -d $XDG_CACHE_HOME/zsh/zcompdump-$ZSH_VERSION
+if [[ -n "$XDG_CACHE_HOME/zsh/zcompdump-$USER-$ZSH_VERSION(#qN.mh+24)" ]]; then
+  compinit -d "$XDG_CACHE_HOME/zsh/zcompdump-$ZSH_VERSION"
 else
-  compinit -C -d $XDG_CACHE_HOME/zsh/zcompdump-$ZSH_VERSION
+  compinit -C -d "$XDG_CACHE_HOME/zsh/zcompdump-$ZSH_VERSION"
 fi
 
 # Uncomment the following line to enable command auto-correction.
@@ -30,10 +30,10 @@ COMPLETION_WAITING_DOTS="true"
 HISTSIZE=1000000
 SAVEHIST=10000000
 HISTFILESIZE=1000000000
-HISTFILE=$XDG_DATA_HOME/zsh/history
+HISTFILE="$XDG_DATA_HOME/zsh/history"
 
 # Omit duplicates and commands that begin with a space from history.
-HISTCONTROL='ignoreboth';
+HISTCONTROL="ignoreboth"
 
 # Ensures that commands are added to the history immediately.
 # Otherwise, the history appended only when the shell exits and it could be lost.
@@ -62,37 +62,34 @@ setopt pushdminus
 # source ~/.oh-my-zsh/custom/plugins/zsh-history-substring-search/zsh-history-substring-search.zsh
 
 plugins=(
-    # Provides common aliases e.g for ls and cp
-    common-aliases
-    # Copies the directory name/file content
-    copydir
-    copyfile
-    # Auto-completion for docker
-    docker
-    # Unpacks passed archive
-    extract
-    # Some git aliases
-    git
-    # 
-    history-substring-search
-    # Enables fzf's fuzzy auto-completion and key bindings
-    fzf
-    # Keeps track of the last used working directory and automatically jumps into it for new shells
-    last-working-dir
-    # Completion as well as adding many useful aliases
-    npm
-    pip
-    ripgrep
-    # Prefixes the previous command with sudo on double ESC
-    sudo
-    # Autocompletion
-    yarn
-    # Jump to frecenct directories: https://github.com/rupa/z
-    z
-    # Adds autosuggestions like in Fish
-    # zsh-autosuggestions
-    # Highlights stuff
-    # zsh-output-highlighting
+  # Provides common aliases e.g for ls and cp
+  common-aliases
+  # Copies the directory name/file content
+  copydir
+  copyfile
+  # Auto-completion for docker
+  docker
+  # Unpacks passed archive
+  extract
+  # Some git aliases
+  git
+  history-substring-search
+  # Enables fzf's fuzzy auto-completion and key bindings
+  fzf
+  # Keeps track of the last used working directory and automatically jumps into it for new shells
+  last-working-dir
+  # Completion as well as adding many useful aliases
+  npm
+  pip
+  ripgrep
+  # Prefixes the previous command with sudo on double ESC
+  sudo
+  # Autocompletion
+  yarn
+  # Adds autosuggestions like in Fish
+  # zsh-autosuggestions
+  # Highlights stuff
+  # zsh-output-highlighting
 )
 
 source $(brew --prefix)/share/antigen/antigen.zsh
@@ -110,10 +107,10 @@ antigen bundle command-not-found
 # Speeds up original https://github.com/rupa/z tool
 antigen bundle agkozak/zsh-z
 
+antigen bundle zsh-users/zsh-autosuggestions
 # Syntax highlighting bundle
 # Should be the last one https://github.com/zsh-users/zsh-syntax-highlighting/blob/master/INSTALL.md#antigen
 antigen bundle zsh-users/zsh-syntax-highlighting
-antigen bundle zsh-users/zsh-autosuggestions
 
 # Load the theme
 # antigen theme spaceship-prompt/spaceship-prompt  # too slow
@@ -128,18 +125,13 @@ eval "$(ssh-add -q ~/.ssh/id_rsa)"
 eval "$(ssh-add -q ~/.ssh/id_rsa-test)"
 
 # GRC colorizes nifty unix tools all over the place
-if (( $+commands[grc] )) && (( $+commands[brew] ))
-then
-    source "$(brew --prefix grc)"
-fi
-
-source ~/.oh-my-zsh/oh-my-zsh.sh
+source "$(brew --prefix grc)"
 
 source ~/shell-sources/aliasrc
 source ~/shell-sources/.functions
 
 # Add tab completion for SSH hostnames based on ~/.ssh/config, ignoring wildcards
-[ -e "$HOME/.ssh/config" ] && complete -o "default" -o "nospace" -W "$(grep "^Host" ~/.ssh/config | grep -v "[?*]" | cut -d " " -f2- | tr ' ' '\n')" scp sftp ssh;
+[ -e "$HOME/.ssh/config" ] && complete -o "default" -o "nospace" -W "$(grep "^Host" ~/.ssh/config | grep -v "[?*]" | cut -d " " -f2- | tr ' ' '\n')" scp sftp ssh
 
 # Load pyenv into the shell by adding
 # the following to ~/.zshrc:
@@ -155,18 +147,19 @@ export PATH="$PATH:$(yarn global bin)"
 
 # For directory colors definition support in file.
 # See https://www.gnu.org/software/coreutils/manual/html_node/dircolors-invocation.html#dircolors-invocation
+# Also https://www.nordtheme.com/docs/ports/dircolors/installation
 eval "$(dircolors $XDG_CONFIG_HOME/dircolors/dir_colors)"
 
 # Create a `main` session and load it by default to the shell
 # https://unix.stackexchange.com/a/113768
-if command -v tmux &> /dev/null &&
-    [ -n "$PS1" ] &&
-    # Uncomment to enable tmux init in more broad cases
-    # [[ ! "$TERM" =~ screen ]] &&
-    # [[ ! "$TERM" =~ tmux ]] &&
-    # Uncomment to init tmux only on the kitty 
-    [ "$TERM" = "xterm-kitty" ] &&
-    [ -z "$TMUX" ]; then
+if command -v tmux &>/dev/null &&
+  [ -n "$PS1" ] &&
+  # Uncomment to enable tmux init in more broad cases
+  # [[ ! "$TERM" =~ screen ]] &&
+  # [[ ! "$TERM" =~ tmux ]] &&
+  # Uncomment to init tmux only on the kitty
+  [ "$TERM" = "xterm-kitty" ] &&
+  [ -z "$TMUX" ]; then
   exec tmux new-session -A -s main
 fi
 
