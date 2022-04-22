@@ -37,3 +37,5 @@ eval "$(pyenv init -)"
 eval "$(direnv hook bash)"
 
 [ -f ~/.fzf.bash ] && source ~/.fzf.bash
+
+source "$(brew --prefix)/etc/profile.d/z.sh"

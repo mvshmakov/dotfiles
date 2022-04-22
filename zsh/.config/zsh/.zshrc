@@ -99,6 +99,8 @@ antigen bundle heroku
 antigen bundle pip
 antigen bundle lein
 antigen bundle command-not-found
+# Speeds up original https://github.com/rupa/z tool
+antigen bundle agkozak/zsh-z
 
 # Syntax highlighting bundle
 # Should be the last one https://github.com/zsh-users/zsh-syntax-highlighting/blob/master/INSTALL.md#antigen

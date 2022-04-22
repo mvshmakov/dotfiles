@@ -25,8 +25,11 @@ export HOMEBREW_BREWFILE=$XDG_CONFIG_HOME/brew/Brewfile
 export SHELL_SESSION_DIR=$XDG_STATE_HOME/zsh/sessions
 export SHELL_SESSION_FILE=$SHELL_SESSION_DIR/$TERM_SESSION_ID
 
-export _Z_DATA=$XDG_DATA_HOME/z
-export LESSHISTFILE=$XDG_DATA_HOME/less/history
+# Is needed for bash's rupa/z package
+# https://github.com/agkozak/zsh-z/issues/20#issuecomment-743363567
+export _Z_DATA="$XDG_DATA_HOME/z"
+# Is needed for zsh's agkozak/zsh-z alternative
+export ZSHZ_DATA="$XDG_DATA_HOME/z"
 
 # You may need to manually set your language environment
 export LANG=en_US.UTF-8
