@@ -18,6 +18,13 @@ Plug 'godlygeek/tabular'
 " Make cursors available on several lines
 Plug 'terryma/vim-multiple-cursors'
 
+" Mainly because it is required for the telescope
+Plug 'nvim-lua/plenary.nvim'
+" File explorer
+Plug 'nvim-telescope/telescope.nvim'
+" Improves highlighting + is a dependency of telescope
+Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
+
 " Autocompletion {{{
 Plug 'github/copilot.vim'
 Plug 'neoclide/coc.nvim', { 'branch': 'release' }
@@ -84,7 +91,10 @@ syntax on
 " Does nothing related to the vim-plug, enables ftplugins
 " https://vi.stackexchange.com/questions/4541/vundle-filetype-plugin-indent-on-messes-with-tabwidth
 filetype plugin indent on
+
 colorscheme nord
+" Enable underline font support https://www.nordtheme.com/docs/ports/vim/configuration#underline-style
+let g:nord_underline = 1
 
 " Enable auto-formatting despite the '// @format' option at the top of the
 " file. In addition, if the config is not present, just abort formatting.
@@ -96,6 +106,8 @@ let g:prettier#autoformat_config_present = 1
 let g:airline_powerline_fonts=1
 let g:airline#extensions#tabline#enabled=1
 let g:airline#extensions#tabline#formatter = 'unique_tail_improved'
+
+let NERDTreeShowHidden=1
 
 " Providers executables {{{
 set pyxversion=3
@@ -179,10 +191,17 @@ function! CentreCursor()
 endfunction
 
 " Mappings{{{
+" Disable arrow keys completely
 noremap <Up>    <Nop>
 noremap <Down>  <Nop>
 noremap <Left>  <Nop>
 noremap <Right> <Nop>
+
+" Find files using Telescope command-line sugar.
+nnoremap <leader>ff <cmd>Telescope find_files hidden=true<cr>
+nnoremap <leader>fg <cmd>Telescope live_grep<cr>
+nnoremap <leader>fb <cmd>Telescope buffers<cr>
+nnoremap <leader>fh <cmd>Telescope help_tags<cr>
 
 let g:sessions_dir = '$XDG_STATE_HOME/nvim/sessions'
 exec 'nnoremap <Leader>ss :Obsession ' . g:sessions_dir . '/*.vim<C-D><BS><BS><BS><BS><BS>'
