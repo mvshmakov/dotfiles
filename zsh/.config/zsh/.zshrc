@@ -124,8 +124,8 @@ antigen apply
 eval "$(ssh-add -q ~/.ssh/id_rsa)"
 eval "$(ssh-add -q ~/.ssh/id_rsa-test)"
 
-# GRC colorizes nifty unix tools all over the place
-source "$(brew --prefix grc)"
+# Colorizes common UNIX tools output (GRC - Generic Colorizer)
+[[ -s "$(brew --prefix grc)" ]] && source "$(brew --prefix grc)"
 
 source ~/shell-sources/aliasrc
 source ~/shell-sources/.functions

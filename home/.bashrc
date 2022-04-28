@@ -17,9 +17,9 @@ HISTFILE="$XDG_DATA_HOME/bash/history"
 ssh-add -q ~/.ssh/id_rsa
 ssh-add -q ~/.ssh/id_rsa-test
 
-# GRC colorizes nifty unix tools all over the place
+# Colorizes common UNIX tools output (GRC - Generic Colorizer)
 GRC_ALIASES=true
-source "$(brew --prefix)/etc/grc.sh"
+[[ -s "$(brew --prefix grc)" ]] && source "$(brew --prefix grc)"
 
 source ~/shell-sources/aliasrc
 source ~/shell-sources/.functions
