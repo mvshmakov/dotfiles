@@ -3,6 +3,10 @@
 # ```sh
 # git shortlog commit_id...HEAD -n
 # ```
+# 2) While you can call these remotes anything you want, a common convention
+# is to use origin as the remote for your forked repository (this will be
+# created automatically when you run git clone) and upstream for the official repository.
+# Source: https://www.atlassian.com/git/tutorials/comparing-workflows/forking-workflow
 
 [user]
     name = Maxim Shmakov
