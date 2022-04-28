@@ -97,3 +97,8 @@ export GPG_TTY
 export PYENV_ROOT="$XDG_DATA_HOME/.pyenv"
 export PATH="$PATH:$PYENV_ROOT/bin"
 eval "$(pyenv init --path)"
+
+# https://github.com/Schniz/fnm#zsh
+eval "$(fnm env)"
+# Only now yarn will be available as binary in PATH
+export PATH="$PATH:$(yarn global bin)"

@@ -140,15 +140,10 @@ eval "$(pyenv init -)"
 # Activate *direnv* https://direnv.net/docs/hook.html#zsh
 eval "$(direnv hook zsh)"
 
-# https://github.com/Schniz/fnm#zsh
-eval "$(fnm env)"
-# Only now yarn will be available as binary in PATH
-export PATH="$PATH:$(yarn global bin)"
-
-# For directory colors definition support in file.
+# Sets up and exports correct LS_COLORS to provide the highliting for different UNIX tools output (e.g., ls, tree, etc.)
 # See https://www.gnu.org/software/coreutils/manual/html_node/dircolors-invocation.html#dircolors-invocation
 # Also https://www.nordtheme.com/docs/ports/dircolors/installation
-eval "$(dircolors $XDG_CONFIG_HOME/dircolors/dir_colors)"
+test -r "$XDG_CONFIG_HOME/dircolors/dir_colors" && eval $(dircolors "$XDG_CONFIG_HOME/dircolors/dir_colors")
 
 # Create a `main` session and load it by default to the shell
 # https://unix.stackexchange.com/a/113768
