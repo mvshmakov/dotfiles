@@ -16,6 +16,11 @@ export PATH="$(brew --prefix)/sbin:$(brew --prefix coreutils)/libexec/gnubin:$PA
 export INPUTRC="$XDG_CONFIG_HOME/readline/inputrc"
 export HOMEBREW_BREWFILE="$XDG_CONFIG_HOME/brew/Brewfile"
 
+# Configuring Homebrew shell completions.
+# This must be done before compinit is called.
+# https://docs.brew.sh/Shell-Completion#configuring-completions-in-zsh
+export FPATH="$(brew --prefix)/share/zsh/site-functions:${FPATH}"
+
 # Opt-out from analytics https://consoledonottrack.com/
 export DO_NOT_TRACK=1
 
