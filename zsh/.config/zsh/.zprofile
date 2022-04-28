@@ -78,12 +78,6 @@ export MANPAGER="sh -c 'col -bx | bat -l man -p'"
 export SSH_KEY_PATH="~/.ssh/id_rsa"
 export SSH_TEST_KEY_PATH="~/.ssh/id_rsa-test"
 
-# Make Python use UTF-8 encoding for output to stdin, stdout, and stderr.
-export PYTHONIOENCODING='UTF-8'
-# To correctly link and build psycopg2: https://stackoverflow.com/a/69403177/12349023
-export LDFLAGS="-L$(brew --prefix libpq)/lib -L$(brew --prefix openssl)/lib"
-export CPPFLAGS="-I$(brew --prefix libpq)/include -I$(brew --prefix openssl)/include"
-
 # Use bat as fzf preview tool
 # TODO: does not work well for reverse-i-search
 export FZF_DEFAULT_OPTS="--preview 'bat --color=always --style=numbers --line-range=:500 {}'"
@@ -94,6 +88,15 @@ export HIGHLIGHT_STYLE=nord
 
 # For pinentry-mac
 export GPG_TTY=$(tty)
+
+# Make Python use UTF-8 encoding for output to stdin, stdout, and stderr.
+export PYTHONIOENCODING='UTF-8'
+# Use a startup file for the interactive shell
+export PYTHONSTARTUP="$XDG_CONFIG_HOME/python/pythonstartup.py"
+
+# To correctly link and build psycopg2: https://stackoverflow.com/a/69403177/12349023
+export LDFLAGS="-L$(brew --prefix libpq)/lib -L$(brew --prefix openssl)/lib"
+export CPPFLAGS="-I$(brew --prefix libpq)/include -I$(brew --prefix openssl)/include"
 
 # Add pyenv executable to PATH and
 # enable shims by adding the following

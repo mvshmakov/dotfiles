@@ -28,7 +28,8 @@ ENABLE_CORRECTION="true"
 COMPLETION_WAITING_DOTS="true"
 
 # Increase ZSH history size. Allow 1 000 000 entries; the default is 500.
-HISTSIZE=1000000
+# Exporting for the $XDG_CONFIG_HOME/python/pythonstartup.py
+export HISTSIZE=1000000
 SAVEHIST=10000000
 HISTFILESIZE=1000000000
 HISTFILE="$XDG_DATA_HOME/zsh/history"
