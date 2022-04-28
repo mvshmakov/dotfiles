@@ -105,7 +105,7 @@ export CPPFLAGS="-I$(brew --prefix libpq)/include -I$(brew --prefix openssl)/inc
 # Add pyenv executable to PATH and
 # enable shims by adding the following
 # to ~/.profile and ~/.zprofile:
-export PYENV_ROOT="$XDG_DATA_HOME/.pyenv"
+export PYENV_ROOT="$XDG_DATA_HOME/pyenv"
 export PATH="$PATH:$PYENV_ROOT/bin"
 eval "$(pyenv init --path)"
 
