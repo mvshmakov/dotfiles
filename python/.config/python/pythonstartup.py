@@ -2,6 +2,10 @@
 # executed before the first prompt is displayed in interactive mode.
 # https://docs.python.org/3/using/cmdline.html#envvar-PYTHONSTARTUP
 #
+# Sample code which supports concurrent interactive sessions, by only
+# appending the new history is taken from
+# https://docs.python.org/3/library/readline.html?highlight=readline#example
+#
 # The goal is to store interactive Python shell history in
 # $XDG_STATE_HOME/python/python_history instead of ~/.python_history.
 
