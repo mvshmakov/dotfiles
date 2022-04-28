@@ -27,8 +27,16 @@ source ~/shell-sources/.functions
 # Add tab completion for SSH hostnames based on ~/.ssh/config, ignoring wildcards
 [ -e "$HOME/.ssh/config" ] && complete -o "default" -o "nospace" -W "$(grep "^Host" ~/.ssh/config | grep -v "[?*]" | cut -d " " -f2- | tr ' ' '\n')" scp sftp ssh
 
+# Add pyenv executable to PATH and
+# enable shims by adding the following
+# to ~/.profile and ~/.zprofile:
+export PYENV_ROOT="$XDG_DATA_HOME/pyenv"
+export PATH="$PATH:$PYENV_ROOT/bin"
 # Load pyenv into the shell
 eval "$(pyenv init -)"
+
+# https://github.com/Schniz/fnm#bash
+eval "$(fnm env --use-on-cd)"
 
 # Activate *direnv* https://direnv.net/docs/hook.html#zsh
 eval "$(direnv hook bash)"

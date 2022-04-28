@@ -110,6 +110,6 @@ export PATH="$PATH:$PYENV_ROOT/bin"
 eval "$(pyenv init --path)"
 
 # https://github.com/Schniz/fnm#zsh
-eval "$(fnm env)"
+eval "$(fnm env --use-on-cd)"
 # Only now yarn will be available as binary in PATH
 export PATH="$PATH:$(yarn global bin)"
