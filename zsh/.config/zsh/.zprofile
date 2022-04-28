@@ -16,6 +16,9 @@ export PATH="$(brew --prefix)/sbin:$(brew --prefix coreutils)/libexec/gnubin:$PA
 export INPUTRC="$XDG_CONFIG_HOME/readline/inputrc"
 export HOMEBREW_BREWFILE="$XDG_CONFIG_HOME/brew/Brewfile"
 
+# Opt-out from analytics https://consoledonottrack.com/
+export DO_NOT_TRACK=1
+
 # To move .zsh_sessions and friends out of the dotfiles repo
 #
 # These are used by Apple in /etc/zshrc, which is sourced _before_ .zshrc
