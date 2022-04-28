@@ -54,6 +54,7 @@ brew "imagemagick"
 brew "inetutils"
 brew "jq"
 brew "jupyterlab"
+brew "lazydocker"
 brew "lazygit"
 # PostgreSQl
 brew "libpq"
