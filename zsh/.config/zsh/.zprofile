@@ -89,6 +89,10 @@ export HIGHLIGHT_STYLE=nord
 # For pinentry-mac
 export GPG_TTY=$(tty)
 
+# Make ~/.wgetrc, ~/.wget-hsts compliant with XDG Base Directory spec.
+# Note: wget does not support env variables in wgetrc, so need to use an absolute path.
+export WGETRC="$XDG_CONFIG_HOME/wget/wgetrc"
+
 # Make Python use UTF-8 encoding for output to stdin, stdout, and stderr.
 export PYTHONIOENCODING='UTF-8'
 # Use a startup file for the interactive shell
