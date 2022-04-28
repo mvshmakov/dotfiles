@@ -2,7 +2,7 @@ export XDG_CONFIG_HOME="$HOME/.config"
 export XDG_CACHE_HOME="$HOME/.cache"
 export XDG_DATA_HOME="$HOME/.local/share"
 export XDG_STATE_HOME="$HOME/.local/state"
-# Non-standard env variable name, but recommended location
+# Non-standard XDG env variable name, but recommended location
 # https://specifications.freedesktop.org/basedir-spec/basedir-spec-latest.html
 # https://github.com/rust-lang/cargo/issues/1734#issuecomment-665247169
 export XDG_BIN_HOME="$HOME/.local/bin"
@@ -93,8 +93,7 @@ export BAT_THEME="Nord"
 export HIGHLIGHT_STYLE=nord
 
 # For pinentry-mac
-GPG_TTY=$(tty)
-export GPG_TTY
+export GPG_TTY=$(tty)
 
 # Add pyenv executable to PATH and
 # enable shims by adding the following

@@ -11,7 +11,8 @@ fi
 # Injects profiling code for zsh
 # zmodload zsh/zprof
 
-# TODO: Speed up zsh compinit by only checking cache once a day.
+# TODO: speed up zsh compinit by only checking cache once a day.
+# TODO: check if this even works
 # https://gist.github.com/ctechols/ca1035271ad134841284
 autoload -Uz compinit
 if [[ -n "$XDG_CACHE_HOME/zsh/zcompdump-$USER-$ZSH_VERSION(#qN.mh+24)" ]]; then
