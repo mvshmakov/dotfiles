@@ -1,6 +1,15 @@
+# Colorizes common UNIX tools output (GRC - Generic Colorizer)
+[[ -s "$(brew --prefix)/etc/grc.zsh" ]] && source "$(brew --prefix)/etc/grc.zsh"
+
+# Sets up and exports correct LS_COLORS to provide the highliting for different UNIX tools output (e.g., ls, tree, etc.)
+# See https://www.gnu.org/software/coreutils/manual/html_node/dircolors-invocation.html#dircolors-invocation
+# Also https://www.nordtheme.com/docs/ports/dircolors/installation
+test -r "$XDG_CONFIG_HOME/dircolors/dir_colors" && eval $(dircolors "$XDG_CONFIG_HOME/dircolors/dir_colors")
+
 # Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.config/zsh/.zshrc.
 # Initialization code that may require console input (password prompts, [y/n]
 # confirmations, etc.) must go above this block; everything else may go below.
+# After the initialization, it is impossible to enable GRC.
 if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
   source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
 fi
@@ -126,9 +135,6 @@ antigen apply
 eval "$(ssh-add -q ~/.ssh/id_rsa)"
 eval "$(ssh-add -q ~/.ssh/id_rsa-test)"
 
-# Colorizes common UNIX tools output (GRC - Generic Colorizer)
-[[ -s "$(brew --prefix grc)" ]] && source "$(brew --prefix grc)"
-
 source ~/shell-sources/aliasrc
 source ~/shell-sources/.functions
 
@@ -141,12 +147,6 @@ eval "$(pyenv init -)"
 
 # Activate *direnv* https://direnv.net/docs/hook.html#zsh
 eval "$(direnv hook zsh)"
-
-# Sets up and exports correct LS_COLORS to provide the highliting for different UNIX tools output (e.g., ls, tree, etc.)
-# See https://www.gnu.org/software/coreutils/manual/html_node/dircolors-invocation.html#dircolors-invocation
-# Also https://www.nordtheme.com/docs/ports/dircolors/installation
-test -r "$XDG_CONFIG_HOME/dircolors/dir_colors" && eval $(dircolors "$XDG_CONFIG_HOME/dircolors/dir_colors")
-
 # Create a `main` session and load it by default to the shell
 # https://unix.stackexchange.com/a/113768
 if command -v tmux &>/dev/null &&

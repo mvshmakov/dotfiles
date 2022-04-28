@@ -19,7 +19,7 @@ ssh-add -q ~/.ssh/id_rsa-test
 
 # Colorizes common UNIX tools output (GRC - Generic Colorizer)
 GRC_ALIASES=true
-[[ -s "$(brew --prefix grc)" ]] && source "$(brew --prefix grc)"
+[[ -s "$(brew --prefix)/etc/grc.sh" ]] && source "$(brew --prefix)/etc/grc.sh"
 
 source ~/shell-sources/aliasrc
 source ~/shell-sources/.functions
