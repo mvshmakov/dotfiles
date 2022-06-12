@@ -23,6 +23,7 @@ export FPATH="$(brew --prefix)/share/zsh/site-functions:${FPATH}"
 
 # Opt-out from analytics https://consoledonottrack.com/
 export DO_NOT_TRACK=1
+export HOMEBREW_NO_ANALYTICS=1
 
 # To move .zsh_sessions and friends out of the dotfiles repo
 #
