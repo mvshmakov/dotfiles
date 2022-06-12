@@ -72,8 +72,8 @@ export FZF_BASE=$(brew --prefix fzf)
 export FZF_DEFAULT_COMMAND="rg --files --no-ignore-vcs --hidden"
 
 export MANPATH="/usr/local/man:$MANPATH"
-# Using bat as a colorizing pager for man
-export MANPAGER="sh -c 'col -bx | bat -l man -p'"
+# Use nvim for man pager https://muru.dev/2015/08/28/vim-for-man.html
+export MANPAGER="col -b | nvim -c 'set ft=man nomod nolist ignorecase' -"
 
 export SSH_KEY_PATH=~/.ssh/id_rsa
 export SSH_TEST_KEY_PATH=~/.ssh/id_rsa-test
