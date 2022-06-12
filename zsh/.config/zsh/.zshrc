@@ -132,8 +132,8 @@ antigen theme romkatv/powerlevel10k
 antigen apply
 
 # Be quiet on success
-eval "$(ssh-add -q ~/.ssh/id_rsa)"
-eval "$(ssh-add -q ~/.ssh/id_rsa-test)"
+eval "$(ssh-add -q --apple-use-keychain $SSH_KEY_PATH)"
+eval "$(ssh-add -q --apple-use-keychain $SSH_TEST_KEY_PATH)"
 
 source ~/shell-sources/aliasrc
 source ~/shell-sources/.functions
@@ -149,16 +149,16 @@ eval "$(pyenv init -)"
 eval "$(direnv hook zsh)"
 # Create a `main` session and load it by default to the shell
 # https://unix.stackexchange.com/a/113768
-if command -v tmux &>/dev/null &&
-  [ -n "$PS1" ] &&
-  # Uncomment to enable tmux init in more broad cases
-  # [[ ! "$TERM" =~ screen ]] &&
-  # [[ ! "$TERM" =~ tmux ]] &&
-  # Uncomment to init tmux only on the kitty
-  [ "$TERM" = "xterm-kitty" ] &&
-  [ -z "$TMUX" ]; then
-  exec tmux new-session -A -s main
-fi
+# if command -v tmux &>/dev/null &&
+#   [ -n "$PS1" ] &&
+#   # Uncomment to enable tmux init in more broad cases
+#   # [[ ! "$TERM" =~ screen ]] &&
+#   # [[ ! "$TERM" =~ tmux ]] &&
+#   # Init tmux only in kitty
+#   [ "$TERM" = "xterm-kitty" ] &&
+#   [ -z "$TMUX" ]; then
+#   exec tmux new-session -A -s main
+# fi
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 

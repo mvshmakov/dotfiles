@@ -14,8 +14,8 @@ HISTCONTROL="ignoreboth"
 HISTFILE="$XDG_DATA_HOME/bash/history"
 
 # Be quiet on success
-ssh-add -q ~/.ssh/id_rsa
-ssh-add -q ~/.ssh/id_rsa-test
+ssh-add -q --apple-use-keychain $SSH_KEY_PATH
+ssh-add -q --apple-use-keychain $SSH_TEST_KEY_PATH
 
 # Colorizes common UNIX tools output (GRC - Generic Colorizer)
 GRC_ALIASES=true

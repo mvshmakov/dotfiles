@@ -75,6 +75,10 @@ brew "onefetch"
 brew "openjdk"
 # Mainly for PostgreSQl 
 brew "openssl"
+# Make SSH up to date
+brew "openssh"
+# Same as pinentry for GPG, but for SSH
+brew "theseal/ssh-askpass/ssh-askpass"
 brew "openvpn"
 brew "perl"
 brew "php"

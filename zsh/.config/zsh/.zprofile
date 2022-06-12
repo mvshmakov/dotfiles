@@ -75,8 +75,12 @@ export MANPATH="/usr/local/man:$MANPATH"
 # Using bat as a colorizing pager for man
 export MANPAGER="sh -c 'col -bx | bat -l man -p'"
 
-export SSH_KEY_PATH="~/.ssh/id_rsa"
-export SSH_TEST_KEY_PATH="~/.ssh/id_rsa-test"
+export SSH_KEY_PATH=~/.ssh/id_rsa
+export SSH_TEST_KEY_PATH=~/.ssh/id_rsa-test
+# Required for the ssh-askpass https://github.com/theseal/ssh-askpass/blob/master/ssh-askpass.plist#L14-L15
+export SSH_ASKPASS="$(brew --prefix theseal/ssh-askpass/ssh-askpass)/bin/ssh-askpass"
+# Sudo prompt with be taken from SSH_ASKPASS
+export SUDO_ASKPASS="$SSH_ASKPASS"
 
 # Use bat as fzf preview tool
 # TODO: does not work well for reverse-i-search
