@@ -39,8 +39,8 @@ export _Z_DATA="$XDG_DATA_HOME/z"
 # Is needed for zsh's agkozak/zsh-z alternative
 export ZSHZ_DATA="$XDG_DATA_HOME/z"
 
-# Manually setting up language environment
-export LANG=en_US.UTF-8
+# Resetting base directories to comply with XDG Base Directory spec
+export GNUPGHOME="$XDG_DATA_HOME/gnupg"
 export LESSHISTFILE="$XDG_DATA_HOME/less/history"
 
 # Preferred editor for local and remote sessions
@@ -92,6 +92,10 @@ export HIGHLIGHT_STYLE=nord
 
 # For pinentry-mac
 export GPG_TTY=$(tty)
+# Just for the convenience, e.g.
+# gpg --edit-key $GPGKEY
+export GPGKEY="88C371E66837B278"
+
 
 # Make ~/.wgetrc, ~/.wget-hsts compliant with XDG Base Directory spec.
 # Note: wget does not support env variables in wgetrc, so need to use an absolute path.

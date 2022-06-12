@@ -40,9 +40,7 @@ brew "git-lfs"
 brew "gnu-sed"
 brew "gnu-tar"
 brew "gnu-which"
-brew "gnupg"
 brew "gotop"
-brew "gpg"
 brew "grc"
 brew "heroku"
 # Is required to fix the ranger's freezes
@@ -82,8 +80,6 @@ brew "theseal/ssh-askpass/ssh-askpass"
 brew "openvpn"
 brew "perl"
 brew "php"
-brew "pinentry"
-brew "pinentry-mac"
 brew "pipenv"
 brew "postgresql"
 brew "pyenv"
@@ -224,9 +220,17 @@ cask "yubico-yubikey-personalization-gui"
 cask "yubico-yubikey-piv-manager"
 cask "zeplin"
 
-# Cloud mount/manipulation tool
-brew "rclone"
-cask "kapitainsky-rclone-browser"
+# GnuPG & friends
+brew "gnupg"
+brew "pinentry-mac"
+# OpenPGP key archivation to paper / unarchivation from it
+# https://www.jabberwocky.com/software/paperkey
+# https://wiki.archlinux.org/title/Paperkey
+brew "paperkey"
+brew "qrencode"
+brew "zbar"
+# Apple Mail plugin for OpenPGP
+cask "free-gpgmail"
 
 # Seperseded by cron as a powerful calendar
 # cask "meetingbar"

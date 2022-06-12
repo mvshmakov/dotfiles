@@ -43,6 +43,8 @@ Plug 'junegunn/fzf', { 'do': './install --all', 'on': 'FZF' }
 Plug 'tpope/vim-dadbod'
 " For git commands inside VIM
 Plug 'tpope/vim-fugitive'
+" Allows to open GPG-encrypted files and edit them natively without decryption
+Plug 'jamessan/vim-gnupg'
 " For the +- inside the files
 Plug 'airblade/vim-gitgutter'
 " For saving vim sessions
