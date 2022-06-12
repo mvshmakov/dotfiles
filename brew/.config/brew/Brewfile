@@ -245,10 +245,15 @@ cask "obsidian"
 # cask "hiddenbar"
 cask "bartender"
 
-# Superseded by mountain duck
+# Cloud mount/manipulation tools.
+# Superseded by mountain duck, but it does not really
+# play nicely with Cryptomator vaults natively, so still
+# using the standalone Cryptomator app
 # cask "google-drive"
-# cask "cryptomator"
 # cask "yandex-disk"
+brew "rclone"
+cask "kapitainsky-rclone-browser"
+cask "cryptomator"
 cask "mountain-duck"
 
 mas "Amphetamine", id: 937984704
