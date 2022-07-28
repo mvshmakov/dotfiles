@@ -41,8 +41,9 @@
     # Detect whitespace errors https://stackoverflow.com/a/592014/12349023
     whitespace = tab-in-indent,trailing-space,cr-at-eol
 [alias]
-    diff = diff --word-diff
     grep = grep -Ii
+
+    last = log -1 HEAD --stat
     log-oneline = log --oneline --decorate
     # Put only staged files in the stash
     stash-staged = !git_stash_staged
