@@ -88,9 +88,13 @@
     # Not all git servers support this
     # https://people.kernel.org/monsieuricon/signed-git-pushes
     gpgSign = if-asked
-    # Do not care about --set-upstream, just push
-    # to the {defaultRemote}/{sameBranchName}
-    default = current
+    # This option is only about what to do if there is no refspec provided to git push
+    # https://git-scm.com/docs/git-config#Documentation/git-config.txt-pushdefault
+    # simple is the default one and as autoSetupRemote is set up, it is enough for 
+    # convenient centralized workflow
+    default = simple
+    # Assume --set-upstream on default push when no upstream tracking exists for the current branch
+    autoSetupRemote = true
 [pull]
     rebase = true
     default = current
