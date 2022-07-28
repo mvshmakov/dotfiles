@@ -83,6 +83,7 @@
 [merge]
     log = true
     tool = vimdiff3
+	# https://psung.blogspot.com/2011/02/reducing-merge-headaches-git-meets.html 
     conflictStyle = diff3
 [push]
     # Not all git servers support this
