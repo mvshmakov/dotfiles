@@ -134,7 +134,11 @@ let g:loaded_python_provider=0
 let g:loaded_perl_provider=0
 let g:loaded_ruby_provider=0
 "}}}
-"
+
+" Vim's <leader> key is a way of creating a namespace for commands
+" you want to define. Vim already maps most keys and combinations
+" of Ctrl + (some key), so <leader>(some key) should be used for
+" custom stuff.
 let mapleader = ","
 let maplocalleader = " "
 
