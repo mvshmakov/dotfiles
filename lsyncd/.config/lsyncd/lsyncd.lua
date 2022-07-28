@@ -13,7 +13,7 @@ settings {
 }
 
 sourceList = {}
-sourceList[home..'/projects/work/iterative/viewer'] = '/home/pi/projects/work/iterative/viewer'
+sourceList[home..'/projects/work/iterative/studio'] = '/home/pi/projects/work/iterative/studio'
 
 for from_source, target_source in pairs(sourceList) do
     sync {
