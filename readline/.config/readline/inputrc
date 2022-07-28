@@ -1,6 +1,5 @@
-# This file affects settings that affect all programs that use the GNU readline library
+# This file affects settings that affect all programs that use the GNU readline library/utility
 
 $include /etc/inputrc
 
-# Do what "set -o vi" does in ZSH (vim editing mode) to whatever uses readline.
 set editing-mode vi

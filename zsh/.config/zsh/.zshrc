@@ -164,3 +164,6 @@ eval "$(direnv hook zsh)"
 
 # To customize prompt, run `p10k configure` or edit ~/.config/zsh/.p10k.zsh.
 [[ ! -f ~/.config/zsh/.p10k.zsh ]] || source ~/.config/zsh/.p10k.zsh
+
+# TODO: enable vi mode, but need to check if the plugin needed like https://github.com/softmoth/zsh-vim-mode
+# bindkey -v
