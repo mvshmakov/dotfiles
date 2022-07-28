@@ -4,7 +4,7 @@
 # A big list of comonly used brew packages
 # https://github.com/joelparkerhenderson/brewfile/blob/master/Brewfile
 
-# Migrate it all on Nix and leave here anly what cannot be installed through Nix
+# TODO: migrate it all on Nix and leave here only what cannot be installed through Nix
 
 tap "homebrew/aliases"
 tap "homebrew/bundle"
@@ -16,16 +16,16 @@ tap "heroku/brew"
 tap "str4d.xyz/rage", "https://str4d.xyz/rage"
 
 brew "antigen"
+brew "avifquicklook"
 brew "awscli"
 brew "axel"
-brew "bash"
 brew "bat"
 brew "bitwarden-cli"
 brew "cheat"
-brew "checkbashisms"
 brew "circleci"
 brew "clang-format"
 brew "coreutils"
+brew "curl"
 brew "direnv"
 brew "eksctl"
 brew "ffmpeg"
@@ -47,6 +47,7 @@ brew "heroku"
 # https://github.com/ranger/ranger/issues/1787#issuecomment-691528698https://github.com/ranger/ranger/issues/1787#issuecomment-691528698
 brew "highlight"
 brew "htop"
+brew "i2p"
 brew "imagemagick"
 # ftp, telnet, etc.
 brew "inetutils"
@@ -60,12 +61,16 @@ brew "logrotate"
 brew "lsyncd"
 brew "lua"
 brew "luajit-openresty"
+# A convenient wrapper around launchctl
+brew "lunchy"
 brew "make"
 brew "mas"
 brew "midnight-commander"
 brew "mobile-shell"
 brew "mpv"
 brew "nasm"
+# Replaces a built-in MacOS version of ncurses for the sake of having an up-to-date terminfo
+brew "ncurses"
 brew "neofetch"
 brew "neovim"
 brew "nginx"
@@ -86,6 +91,12 @@ brew "pyenv"
 brew "qemu"
 brew "rage"
 brew "ranger"
+# GNU utility to edit the command lines as they are typed in.
+# Was extracted from bash, now used pretty much everywhere the prompt
+# exists. zsh uses zle instead.
+# $XDG_CONFIG_HOME/readline/inputrc is the config file.
+# https://www.youtube.com/watch?v=MxRTh8wlmJk
+# https://tiswww.case.edu/php/chet/readline/rltop.html
 brew "readline"
 # Nice backup tool
 brew "restic"
@@ -108,8 +119,6 @@ brew "tree"
 brew "wget"
 brew "ykman"
 brew "yq"
-brew "zsh"
-brew "zsh-history-substring-search"
 brew "eth-p/software/bat-extras"
 brew "zegervdv/zathura/zathura"
 brew "zegervdv/zathura/zathura-djvu"
@@ -128,9 +137,10 @@ cask "betterzip"
 cask "brave-browser"
 cask "browserosaurus"
 cask "browserstacklocal"
+# Hold the command key a bit longer to get a list of all active shortcuts of the current application
+cask "cheatsheet"
 cask "chromium"
 cask "cloudflare-warp"
-cask "coinomi-wallet"
 cask "crossover"
 cask "dash"
 cask "deluge"
@@ -139,9 +149,10 @@ cask "discord"
 cask "dotnet-sdk"
 cask "djview"
 cask "docker"
-cask "electrum"
+# Nicest diagramming/drawing app
+cask "drawio"
+cask "duplicati"
 cask "element"
-cask "exodus"
 cask "fbreader"
 cask "figma"
 cask "firefox"
@@ -160,7 +171,6 @@ cask "google-chrome"
 cask "gnucash"
 cask "grammarly"
 cask "hazeover"
-cask "insomnia"
 cask "karabiner-elements"
 cask "keycastr"
 cask "kitty"
@@ -168,10 +178,17 @@ cask "ksdiff"
 cask "lantern"
 cask "launchcontrol"
 cask "libreoffice"
+# Nice and open-source outbound firewall
+cask "lulu"
 cask "macfuse"
 cask "mendeley"
 cask "microsoft-auto-update"
 cask "microsoft-edge"
+# I do not really use it anymore, but still keeping it for the time being
+# cask "microsoft-office"
+
+# Control the brightness of multiple screens
+cask "monitorcontrol"
 cask "mqttfx"
 cask "ngrok"
 cask "notion"
@@ -182,7 +199,14 @@ cask "openemu"
 cask "origin"
 cask "playonmac"
 cask "porting-kit"
+
+# Crypto wallets
+cask "electrum"
+
+# Request sending Apps
 cask "postman"
+# cask "insomnia"
+
 cask "prismatik"
 cask "qlcolorcode"
 cask "qlimagesize"
@@ -231,6 +255,14 @@ brew "qrencode"
 brew "zbar"
 # Apple Mail plugin for OpenPGP
 cask "free-gpgmail"
+
+# Shell-related
+brew "bash"
+brew "checkbashisms"
+brew "shellcheck"
+brew "shfmt"
+brew "zsh"
+brew "zsh-history-substring-search"
 
 # Seperseded by cron as a powerful calendar
 # cask "meetingbar"
