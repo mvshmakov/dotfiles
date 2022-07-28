@@ -16,6 +16,9 @@ export XDG_BIN_HOME="$HOME/.local/bin"
 export PATH="$XDG_BIN_HOME:$PATH"
 export PATH="/opt/homebrew/bin:$PATH"
 export PATH="$(brew --prefix)/sbin:$(brew --prefix coreutils)/libexec/gnubin:$PATH"
+# Use latest ncurses version for the most up-to-date terminfo tables
+# It is possible to check which one is active with `infocmp -x tmux-256color`
+export PATH="$(brew --prefix ncurses)/bin:$PATH"
 
 export INPUTRC="$XDG_CONFIG_HOME/readline/inputrc"
 export HOMEBREW_BREWFILE="$XDG_CONFIG_HOME/brew/Brewfile"
