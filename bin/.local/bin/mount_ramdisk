@@ -1,4 +1,4 @@
-#! /usr/bin/env sh
+#! /usr/bin/env bash
 
 set -euo pipefail
 
@@ -13,5 +13,5 @@ done
 if [ ! -d /Volumes/$RAMDISK_NAME ]; then
     echo "Creating ramdisk '$RAMDISK_NAME'..."
     # Mount 2 GB APFS ramdisk partition with RAMDISK_NAME
-    diskutil partitionDisk $(hdiutil attach -nomount ram://$((2048 * 2048))) 1 GPTFormat APFS $RAMDISK_NAME '100%'
+    diskutil partitionDisk "$(hdiutil attach -nomount ram://$((2048 * 2048)))" 1 GPTFormat APFS $RAMDISK_NAME '100%'
 fi
