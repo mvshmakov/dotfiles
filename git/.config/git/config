@@ -9,9 +9,12 @@
 # Source: https://www.atlassian.com/git/tutorials/comparing-workflows/forking-workflow
 
 [user]
-    name = Maxim Shmakov
-    email = mvshmakov@mail.ru
     signingkey = 88C371E66837B278
+    useConfigOnly = true
+[includeIf "gitdir:~/projects/"]
+    path = config-personal
+[includeIf "gitdir:~/projects/work/iterative/"]
+    path = config-iterative
 [gpg]
     program = /opt/homebrew/bin/gpg
 [github]
