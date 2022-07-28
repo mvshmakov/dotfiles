@@ -1,0 +1,14 @@
+#!/usr/bin/env bash
+
+set -euo pipefail
+IFS=$'\n\t'
+
+[ "$#" -eq 1 ] || {
+    usage
+    echo >&2 "1 argument required, $# provided"
+    exit 1
+}
+
+# Grep with extended regexp + ignore case through all the modified files
+# Source: https://stackoverflow.com/a/52617554/12349023
+grep -sniE "$1" "$(git ls-files -om --exclude-standard)"

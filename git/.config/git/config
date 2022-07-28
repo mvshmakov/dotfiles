@@ -43,6 +43,12 @@
 [alias]
     grep = grep -Ii
 
+    gml = !git_grep_modified_lines
+    gmf = !git_grep_modified_files
+    todo = gml "TODO|FIXME"
+    todo-files = gmf "TODO|FIXME"
+    todo-all = grep -sniE "TODO" $(git ls-files -com --exclude-standard)
+
     last = log -1 HEAD --stat
     log-oneline = log --oneline --decorate
     # Put only staged files in the stash
