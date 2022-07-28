@@ -2,6 +2,8 @@
 # https://sw.kovidgoyal.net/kitty/faq/#keys-such-as-arrow-keys-backspace-delete-home-end-etc-do-not-work-when-using-su-or-sudo
 export LANG=en_US.UTF-8 LC_ALL=en_US.UTF-8
 
+# XDG Base Directory specification
+# https://specifications.freedesktop.org/basedir-spec/basedir-spec-latest.html
 export XDG_CONFIG_HOME="$HOME/.config"
 export XDG_CACHE_HOME="$HOME/.cache"
 export XDG_DATA_HOME="$HOME/.local/share"
@@ -103,7 +105,6 @@ export GPG_TTY=$(tty)
 # Just for the convenience, e.g.
 # gpg --edit-key $GPGKEY
 export GPGKEY="88C371E66837B278"
-
 
 # Make ~/.wgetrc, ~/.wget-hsts compliant with XDG Base Directory spec.
 # Note: wget does not support env variables in wgetrc, so need to use an absolute path.
