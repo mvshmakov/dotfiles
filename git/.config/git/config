@@ -53,6 +53,9 @@
     log-oneline = log --oneline --decorate
     # Put only staged files in the stash
     stash-staged = !git_stash_staged
+    # Will present the list of most recent commits to select and call git commit --fixup on it
+    # https://jordanelver.co.uk/blog/2020/06/04/fixing-commits-with-git-commit-fixup-and-git-rebase-autosquash/#automating-further
+    fixup = "!git log -n 50 --pretty=format:'%h %s' --no-show-signature --no-merges | fzf | cut -c -7 | xargs -o git commit --fixup"
 [commit]
     verbose = true
     gpgSign = true
@@ -106,8 +109,9 @@
     rebase = true
     default = current
 [rebase]
-    # Enables !squash usage on rebase, for details see
+    # During the interactive rebase, auto-squashes !fixup commits
     # https://thoughtbot.com/blog/autosquashing-git-commits
+    # https://jordanelver.co.uk/blog/2020/06/04/fixing-commits-with-git-commit-fixup-and-git-rebase-autosquash/#autosquash
     autoSquash = true
     # Allow to rebase even on a dirty worktree
     # e.g., allow pull --rebase with local changes

@@ -1,4 +1,5 @@
 # Title: Summary, imperative, start upper case, don't end with a period
+# Format: <type>(<scope>?): <summary> (e.g., `fix(brew): add missing "htop" package`)
 # No more than 50 chars. #### 50 chars is here:  #
 
 # Remember blank line between title and body.

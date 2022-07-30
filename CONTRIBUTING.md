@@ -30,12 +30,14 @@ shfmt -i 2 -ci -bn -l -d .
 Name your branches meaningfully.
 
 **Real world example:**
-```(feature|bugfix|hotfix)/what-my-pr-does```
+```(feature|bugfix|hotfix)/(issue-number)-what-my-pr-does```
 
 ### Commit Messages
 
-- Commit header is limited to 72 characters.
-- Commit body and footer is limited to 100 characters per line.
+- Commit header is limited to 50 characters - [source](https://chris.beams.io/posts/git-commit/).
+- Commit header should answer the "what" question - [source](https://github.blog/2022-06-30-write-better-commits-build-better-projects/#explain-the-context).
+- Commit body and footer is limited to 72 characters per line - [source](https://chris.beams.io/posts/git-commit/).
+- Commit body should answer the "why" question - [source](https://github.blog/2022-06-30-write-better-commits-build-better-projects/#explain-the-context).
 
 **Commit header format:**
 
@@ -71,3 +73,13 @@ Name your branches meaningfully.
 ```feat(quickfix): add 'q' binding to quit quickfix window when focused```
 
 ```fix(installer): add missing "HOME" variable```
+
+#### Commit flow
+
+Inside a feature branch, the commits must be small and atomic (self-containing and non-broken). Feature working flow should be the following:
+
+1. Create WIP commits in possibly arbitrary order, but try to keep them scoped.
+2. When the feature is finished, reorder commits in a meaningful order starting from the main functionality and adding the supplementary things in separate atomic commits. The first commit must be the one with the main feature + a good description as git providers extract it to prefill {P|M}R information. If necessary, utilize fixup/squash during the interactive rebase.
+3. Utilize manual `git commit --fixup` (`git fixup` in this dotfiles) or [git absorb](https://github.com/tummychow/git-absorb) with interactive rebase + --autosquash to be able to embed requested review changes into the semantically similar commits.
+
+[Source](https://github.blog/2022-06-30-write-better-commits-build-better-projects/).
