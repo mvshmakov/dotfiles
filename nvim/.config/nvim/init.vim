@@ -27,9 +27,6 @@ Plug 'kabouzeid/nvim-lspinstall'
 "}}}
 
 " VIM IDE stuff {{{
-" NERD tree will be loaded on the first invocation of NERDTreeToggle command
-Plug 'scrooloose/nerdtree', { 'on': 'NERDTreeToggle' }
-Plug 'Xuyuanp/nerdtree-git-plugin'
 " Plugin outside ~/.nvim/plugged with post-update hook
 " TODO: use ths thing or fzf.vim?
 Plug 'junegunn/fzf', { 'do': './install --all', 'on': 'FZF' }
@@ -97,8 +94,6 @@ let g:prettier#autoformat_config_present = 1
 let g:airline_powerline_fonts=1
 let g:airline#extensions#tabline#enabled=1
 let g:airline#extensions#tabline#formatter = 'unique_tail_improved'
-
-let NERDTreeShowHidden=1
 
 " Providers executables {{{
 set pyxversion=3
