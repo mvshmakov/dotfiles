@@ -171,6 +171,9 @@ set wildmode=full
 " TextEdit might fail if hidden is not set (coc.nvim)
 set hidden
 
+" GitGutter update gap: https://github.com/airblade/vim-gitgutter#when-signs-take-a-few-seconds-to-appear
+set updatetime=100
+
 " The following is from https://csswizardry.com/2017/03/configuring-git-and-vim/
 " Force the cursor onto a new line after 80 characters
 set textwidth=80
