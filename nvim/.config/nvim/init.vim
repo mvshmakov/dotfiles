@@ -11,19 +11,13 @@ call plug#begin('$XDG_DATA_HOME/nvim/plugged')
 " Use cs"' to replace double quote by the single one.
 " To replace something to a tag, use cst
 Plug 'tpope/vim-surround'
-" Comment stuff out (V + gc to toggle)
-Plug 'tpope/vim-commentary'
-" Align tabular structures (as markdown tables or text)
-Plug 'godlygeek/tabular'
-" Make cursors available on several lines
-Plug 'terryma/vim-multiple-cursors'
+Plug 'tpope/vim-commentary' " Comment stuff out (V + gc to toggle)
+Plug 'godlygeek/tabular' " Align tabular structures (as markdown tables or text)
+Plug 'terryma/vim-multiple-cursors' " Make cursors available on several lines
 
-" Mainly because it is required for the telescope
-Plug 'nvim-lua/plenary.nvim'
-" File explorer
-Plug 'nvim-telescope/telescope.nvim'
-" Improves highlighting + is a dependency of telescope
-Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
+Plug 'nvim-lua/plenary.nvim' " Mainly because it is required for the telescope
+Plug 'nvim-telescope/telescope.nvim' " File explorer
+Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'} " Improves highlighting + is a dependency of telescope
 
 " Autocompletion {{{
 Plug 'github/copilot.vim'
@@ -39,18 +33,13 @@ Plug 'Xuyuanp/nerdtree-git-plugin'
 " Plugin outside ~/.nvim/plugged with post-update hook
 " TODO: use ths thing or fzf.vim?
 Plug 'junegunn/fzf', { 'do': './install --all', 'on': 'FZF' }
-" Database exploration tool
-Plug 'tpope/vim-dadbod'
-" For git commands inside VIM
-Plug 'tpope/vim-fugitive'
-" Allows to open GPG-encrypted files and edit them natively without decryption
-Plug 'jamessan/vim-gnupg'
-" For the +- inside the files
-Plug 'airblade/vim-gitgutter'
-" For saving vim sessions
-Plug 'tpope/vim-obsession'
-" Shows which key was pressed and what is available further
-Plug 'liuchengxu/vim-which-key', { 'on': ['WhichKey', 'WhichKey!'] }
+Plug 'tpope/vim-dadbod' " Database exploration tool
+Plug 'tpope/vim-fugitive' " For git commands inside VIM
+Plug 'kdheepak/lazygit.nvim' " For lazygit support
+Plug 'jamessan/vim-gnupg' " Allows to open GPG-encrypted files and edit them natively without decryption
+Plug 'airblade/vim-gitgutter' " For the +- inside the files
+Plug 'tpope/vim-obsession' " For saving vim sessions
+Plug 'liuchengxu/vim-which-key', { 'on': ['WhichKey', 'WhichKey!'] } " Shows which key was pressed and what is available further
 
 " Preview CSS colors as bg of the same HEX
 Plug 'ap/vim-css-color'
