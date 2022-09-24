@@ -131,6 +131,13 @@ let g:loaded_ruby_provider=0
 let mapleader = ","
 let maplocalleader = " "
 
+" Netrw file explorer settings
+let g:netrw_banner = 0 " hide banner above files
+let g:netrw_liststyle = 3 " tree instead of plain view
+let g:netrw_browse_split = 1 " open new file in the right split
+let g:netrw_winsize = 15 " width of the netrw window in percentages
+let g:netrw_preview = 1 " preview file on the right split
+
 " Basic configuration {{{
 " Enable all features of VIM
 set nocompatible
