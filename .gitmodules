@@ -1,7 +1,3 @@
-[submodule "vim-plug"]
-	path = nvim/.config/nvim/vim-plug
-	url = https://github.com/junegunn/vim-plug.git
-
 [submodule "nord-kitty"]
 	path = kitty/.config/kitty/nord-kitty
 	url = https://github.com/connorholyday/nord-kitty.git
