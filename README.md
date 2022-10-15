@@ -27,7 +27,7 @@ ITerm2's `com.googlecode.iterm2.plist` is in the `$HOME` folder, so you need to 
 
 The last step would be to generate new SSH key pair and add it to the required services.
 
-One should also enable the `Reduced motion` option in the `System Preferences` to reduce the speed of window/desktop switching.
+One should also enable the `Reduced motion` option in the `System Preferences` to increase the speed of window/desktop switching.
 
 ## Useful commands
 
@@ -49,8 +49,14 @@ If you want your current system configuration to match your Brewfile (purge all 
 
 `brew bundle --force cleanup`
 
+## NeoVIM after stow
+
+* Run `:Copilot setup`
+
 ## TODO
 
+* Warn about exiting from the git commit message template on non-empty message
+* If possible, simplify the GPG signature sign in git log to make it smaller but still present
 * Use `markdownlint` for the documentation
 * Run `prettier` on `md`/`yml`/etc. on pre-commit
 * Use `shfmt` + `shellcheck` + `checkbashisms` on scripts from dotfiles + document it
