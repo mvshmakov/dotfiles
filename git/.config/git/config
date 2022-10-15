@@ -29,6 +29,8 @@
     # Prompt credentials if required
     interactive = always
 [core]
+    # lazygit wants this to be present besides $EDITOR
+    editor = nvim
     pager = delta
     # Useful when sharing a repository between Mac OS and Linux or Windows (only for MacOS)
     # https://git-scm.com/docs/git-config#Documentation/git-config.txt-coreprecomposeUnicode
