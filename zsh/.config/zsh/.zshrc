@@ -147,6 +147,15 @@ eval "$(ssh-add -q --apple-use-keychain $SSH_TEST_KEY_PATH)"
 source ~/shell-sources/aliasrc
 source ~/shell-sources/.functions
 
+# TODO: enable vi mode, but need to check if the plugin needed like https://github.com/softmoth/zsh-vim-mode
+# bindkey -v
+
+# To enable alt+arrow keys navigation in zsh's readline alternative ZLE
+# https://zsh.sourceforge.io/Doc/Release/Zsh-Line-Editor.html
+# https://apple.stackexchange.com/a/365225/444276
+bindkey "\e\e[D" backward-word
+bindkey "\e\e[C" forward-word
+
 # Add tab completion for SSH hostnames based on ~/.ssh/config, ignoring wildcards
 [ -e "$HOME/.ssh/config" ] && complete -o "default" -o "nospace" -W "$(grep "^Host" ~/.ssh/config | grep -v "[?*]" | cut -d " " -f2- | tr ' ' '\n')" scp sftp ssh
 
