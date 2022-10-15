@@ -1,5 +1,23 @@
-# This file affects settings that affect all programs that use the GNU readline library/utility
+# This file affects settings that affect all programs that use the GNU readline.
+# ZSH uses its own implementation of readline, which does not read this file.
 
 $include /etc/inputrc
 
 set editing-mode vi
+
+set completion-ignore-case On
+# Will cause readline to print possible completions after the first
+# Tab press, even if there is more than one.
+set show-all-if-ambiguous On
+# Includes file extension on completion
+set visible-stats On
+# Includes a trailing slash on directories
+set mark-directories On
+# Will ask for displaying completions only after 300 items
+set completion-query-items 300
+
+# To enable alt+arrow navigation
+# https://apple.stackexchange.com/a/365225/444276
+"\e\e[D": backward-word
+"\e\e[C": forward-word
+
