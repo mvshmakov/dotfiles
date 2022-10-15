@@ -64,6 +64,7 @@ Name your branches meaningfully.
 - **feat**: new feature for the user
 - **fix**: bug fix
 - **perf**: performance improvement
+- **config**: changes to configuration files
 - **refactor**: code change that neither fixes a bug nor adds a feature
 - **test**: adding missing tests or correcting existing tests
 - **chore**: all the rest, including version bump for plugins
