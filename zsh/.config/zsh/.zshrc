@@ -1,3 +1,5 @@
+#!/usr/bin/env zsh
+
 # Colorizes common UNIX tools output (GRC - Generic Colorizer)
 [[ -s "$(brew --prefix)/etc/grc.zsh" ]] && source "$(brew --prefix)/etc/grc.zsh"
 
