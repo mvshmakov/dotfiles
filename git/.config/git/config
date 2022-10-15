@@ -91,7 +91,7 @@
     showSignature = true
 [merge]
     log = true
-    tool = vimdiff3
+    tool = nvimdiff3
 	# https://psung.blogspot.com/2011/02/reducing-merge-headaches-git-meets.html 
     conflictStyle = diff3
 [push]
