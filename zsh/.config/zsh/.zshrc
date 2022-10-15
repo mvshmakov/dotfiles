@@ -8,6 +8,9 @@
 # Also https://www.nordtheme.com/docs/ports/dircolors/installation
 test -r "$XDG_CONFIG_HOME/dircolors/dir_colors" && eval $(dircolors "$XDG_CONFIG_HOME/dircolors/dir_colors")
 
+# https://github.com/romkatv/powerlevel10k#how-do-i-initialize-direnv-when-using-instant-prompt
+(( ${+commands[direnv]} )) && emulate zsh -c "$(direnv export zsh)"
+
 # Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.config/zsh/.zshrc.
 # Initialization code that may require console input (password prompts, [y/n]
 # confirmations, etc.) must go above this block; everything else may go below.
@@ -163,8 +166,6 @@ bindkey "\e\e[C" forward-word
 # the following to ~/.zshrc:
 eval "$(pyenv init -)"
 
-# Activate *direnv* https://direnv.net/docs/hook.html#zsh
-eval "$(direnv hook zsh)"
 # Create a `main` session and load it by default to the shell
 # https://unix.stackexchange.com/a/113768
 # if command -v tmux &>/dev/null &&
@@ -184,3 +185,6 @@ eval "$(direnv hook zsh)"
 # Auto-inserted by $(brew --prefix)/opt/fzf/install
 # Can be uninstalled with uninstall script
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+
+# Activate *direnv* https://direnv.net/docs/hook.html#zsh
+(( ${+commands[direnv]} )) && emulate zsh -c "$(direnv hook zsh)"
