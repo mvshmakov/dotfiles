@@ -1,4 +1,7 @@
 home/.ssh/id_rsa*
+# TODO: version in dotfiles-private
+home/.ssh/known_hosts*
+
 home/.bash_history
 
 tmux/.config/tmux/plugins
