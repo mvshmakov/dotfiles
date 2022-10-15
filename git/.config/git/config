@@ -50,6 +50,13 @@
     todo = gml "TODO|FIXME"
     todo-files = gmf "TODO|FIXME"
     todo-all = grep -sniE "TODO" $(git ls-files -com --exclude-standard)
+    
+	# Hides some files from indexing (e.g., when playing with config options)
+	# Source: https://stackoverflow.com/a/50375706/12349023
+    hide = update-index --assume-unchanged
+    unhide = update-index --no-assume-unchanged
+    unhide-all = ! git ls-files -v | grep '^[a-z]' | cut -c3- | xargs git unhide --
+    hidden = ! git ls-files -v | grep '^[a-z]' | cut -c3-
 
     last = log -1 HEAD --stat
     log-oneline = log --oneline --decorate
