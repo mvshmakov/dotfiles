@@ -29,13 +29,15 @@ fi
 # https://docs.brew.sh/Shell-Completion#configuring-completions-in-zsh
 if type brew &>/dev/null
 then
-  FPATH="$(brew --prefix)/share/zsh/site-functions:${FPATH}"
+  export FPATH="$(brew --prefix)/share/zsh/site-functions:${FPATH}"
 fi
 
 # TODO: speed up zsh compinit by only checking cache once a day.
 # TODO: check if this even works
 # https://gist.github.com/ctechols/ca1035271ad134841284
 autoload -Uz compinit
+# Enable hidden files completion
+_comp_options+=(globdots)
 if [[ -n "$XDG_CACHE_HOME/zsh/zcompdump-$USER-$ZSH_VERSION(#qN.mh+24)" ]]; then
   compinit -d "$XDG_CACHE_HOME/zsh/zcompdump-$ZSH_VERSION"
 else
@@ -153,11 +155,16 @@ source ~/shell-sources/.functions
 # TODO: enable vi mode, but need to check if the plugin needed like https://github.com/softmoth/zsh-vim-mode
 # bindkey -v
 
-# To enable alt+arrow keys navigation in zsh's readline alternative ZLE
+# To enable alt+arrow keys navigation in zsh's ZLE (readline alternative)
 # https://zsh.sourceforge.io/Doc/Release/Zsh-Line-Editor.html
 # https://apple.stackexchange.com/a/365225/444276
 bindkey "\e\e[D" backward-word
 bindkey "\e\e[C" forward-word
+bindkey "^[[5D" beginning-of-line
+bindkey "^[[5C" end-of-line
+bindkey "^[[3~" delete-char
+bindkey "^[^N" newtab
+bindkey "^?" backward-delete-char
 
 # Add tab completion for SSH hostnames based on ~/.ssh/config, ignoring wildcards
 [ -e "$HOME/.ssh/config" ] && complete -o "default" -o "nospace" -W "$(grep "^Host" ~/.ssh/config | grep -v "[?*]" | cut -d " " -f2- | tr ' ' '\n')" scp sftp ssh
