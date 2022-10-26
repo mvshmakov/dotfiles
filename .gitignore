@@ -1,8 +1,9 @@
 home/.ssh/id_rsa*
-# TODO: version in dotfiles-private
+# TODO: version both in dotfiles-private
 home/.ssh/known_hosts*
-
 home/.bash_history
+
+nvim/.config/nvim/plugin/packer_compiled.lua
 
 tmux/.config/tmux/plugins
 !tmux/.config/tmux/plugins/tpm
