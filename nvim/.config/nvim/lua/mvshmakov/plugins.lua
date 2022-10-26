@@ -132,7 +132,8 @@ return packer.startup(function(use)
 
     -- Treesitter - improves highlighting + is a dependency of Telescope
     -- Official recommendation from homebrew/neovim to install it
-    use "nvim-treesitter/nvim-treesitter"
+    -- :TSUpdate updates the parsers which helps to be on the cutting edge
+    use { "nvim-treesitter/nvim-treesitter", run = ":TSUpdate" }
     use "nvim-treesitter/nvim-treesitter-context" -- Adds a context line on top of editor window
 
     -- Comments with `gc`
