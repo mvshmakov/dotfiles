@@ -52,6 +52,9 @@ brew "i2p"
 brew "imagemagick"
 # ftp, telnet, etc.
 brew "inetutils"
+brew "jc"
+# Converts output of unix commands to JSON
+# https://github.com/kellyjonbrazil/jc
 brew "jq"
 brew "jupyterlab"
 brew "lazydocker"
