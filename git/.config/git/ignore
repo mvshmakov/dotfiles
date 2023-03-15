@@ -47,6 +47,12 @@ tags
 .env.development
 .env.production
 
+# direnv default configuration file
+# https://direnv.net/
+.envrc
+# directory created by direnv's "layout python"
+.direnv
+
 # Next.js build output
 .next
 out
@@ -69,3 +75,6 @@ lerna-debug.log*
 # Jupyter notebooks
 .ipynb_checkpoints
 */.ipynb_checkpoints/*
+
+# git-sim artefacts
+git-sim_media/
