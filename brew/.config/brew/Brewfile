@@ -15,6 +15,12 @@ tap "heroku/brew"
 # Rust implementation of `age`
 tap "str4d.xyz/rage", "https://str4d.xyz/rage"
 
+# FUSE implementations
+tap "macos-fuse-t/homebrew-cask"
+brew "fuse-t"
+# More of a deprecated one since macOS 12.3 (https://docs.cryptomator.org/en/1.7/desktop/volume-type/#macfuse)
+cask "macfuse"
+
 brew "antigen"
 brew "avifquicklook"
 brew "awscli"
@@ -28,6 +34,8 @@ brew "coreutils"
 brew "curl"
 brew "direnv"
 brew "eksctl"
+# Reads/modifies EXIF and video metadata
+brew "exiftool"
 brew "ffmpeg"
 brew "findutils"
 brew "fnm"
@@ -59,6 +67,12 @@ brew "jq"
 brew "jupyterlab"
 brew "lazydocker"
 brew "lazygit"
+# VimTeX uses latexmk as the default compiler backend
+# latexmk is getting bundled with texlive
+# https://mg.readthedocs.io/latexmk.html#installation
+brew "texlive"
+# Backend processor for BibLaTeX
+brew "biber"
 # PostgreSQl
 brew "libpq"
 brew "logrotate"
@@ -139,9 +153,8 @@ cask "amethyst"
 # As no Android devices at the moment
 # cask "android-file-transfer"
 # cask "android-platform-tools"
+cask "anydesk"
 cask "appcleaner"
-cask "authy"
-cask "betterzip"
 cask "brave-browser"
 cask "browserosaurus"
 cask "browserstacklocal"
@@ -169,9 +182,10 @@ cask "flash-npapi"
 # Nerd fonts for the powerlevel10k and vim-airline
 cask "font-fira-code-nerd-font"
 cask "font-fira-mono-nerd-font"
-cask "font-iosevka-nerd-font"
 cask "font-jetbrains-mono-nerd-font"
 cask "font-sauce-code-pro-nerd-font"
+# Free font builder
+cask "birdfont"
 
 cask "inkscape"
 cask "gimp"
@@ -182,7 +196,12 @@ cask "grammarly"
 cask "hazeover"
 cask "karabiner-elements"
 cask "keycastr"
+
+# Best archiving tool so far
 cask "keka"
+# Is payed + has annoying paywall notifications
+# cask "betterzip"
+
 cask "kitty"
 cask "ksdiff"
 cask "lantern"
@@ -190,7 +209,6 @@ cask "launchcontrol"
 cask "libreoffice"
 # Nice and open-source outbound firewall
 cask "lulu"
-cask "macfuse"
 cask "mendeley"
 cask "microsoft-auto-update"
 cask "microsoft-edge"
@@ -200,6 +218,8 @@ cask "microsoft-edge"
 # Control the brightness of multiple screens
 cask "monitorcontrol"
 cask "mqttfx"
+# The perfect open-source RSS reading tool
+cask "netnewswire"
 cask "ngrok"
 cask "notion"
 cask "numi"
@@ -228,20 +248,23 @@ cask "quicklookase"
 cask "quik"
 cask "raycast"
 cask "raspberry-pi-imager"
-cask "rocket"
+# Replaced by Raycast's built-in emoji searcher
+# cask "rocket"
 cask "shottr"
 cask "skype"
 cask "slack"
 cask "steam"
 cask "stats"
-# DB manupulation/browsing tool
-cask "tableplus"
-cask "teamviewer"
+
+# DB manupulation/browsing tools
+cask "dbeaver-community"
+# Nice UI, but is proprietory and paid
+# cask "tableplus"
+
 cask "tor-browser"
 cask "tunnelblick"
 # Desktop widgets
 cask "ubersicht"
-cask "veracrypt"
 cask "visual-studio-code"
 cask "virtualbox"
 cask "virtualbox-extension-pack"
@@ -252,10 +275,17 @@ cask "whatsapp"
 cask "wireshark"
 cask "wkhtmltopdf"
 cask "yandex"
+cask "yandex-music-unofficial"
 cask "yubico-yubikey-manager"
 cask "yubico-yubikey-personalization-gui"
 cask "yubico-yubikey-piv-manager"
 cask "zeplin"
+
+cask "cryptomator"
+cask "veracrypt"
+# Authy is superseeded by the KeePass
+# cask "authy"
+cask "keepassxc"
 
 # GnuPG & friends
 brew "gnupg"
@@ -266,8 +296,14 @@ brew "pinentry-mac"
 brew "paperkey"
 brew "qrencode"
 brew "zbar"
+
+# Very nice app, but does not support GPG. Apple Mail + GPG plugin is enough
+# mas "Spark", id: 1176895641
+# One of the best apps in terms of extensibility and functional + has GPG support
+# cask "thunderbird"
 # Apple Mail plugin for OpenPGP
 cask "free-gpgmail"
+cask "mailtrackerblocker"
 
 # Shell-related
 brew "bash"
@@ -277,10 +313,12 @@ brew "shfmt"
 brew "zsh"
 brew "zsh-history-substring-search"
 
-# Seperseded by cron as a powerful calendar
-# cask "meetingbar"
+# Does not show the event details in the tray
 # cask "itsycal"
-cask "cron"
+# Cron is nice, but not really different from Apple Calendar
+# cask "cron"
+# MeetingBar + Apple Calendar combo works the best
+cask "meetingbar"
 
 # Superseded by obsidian
 # cask "joplin"
@@ -295,10 +333,11 @@ cask "bartender"
 # play nicely with Cryptomator vaults natively, so still
 # using the standalone Cryptomator app
 # cask "google-drive"
-# cask "yandex-disk"
+cask "yandex-disk"
+# iOS does not work well with background syncs, so syncthing is not really convenient to use
+# cask "syncthing"
 brew "rclone"
 cask "kapitainsky-rclone-browser"
-cask "cryptomator"
 cask "mountain-duck"
 
 mas "Amphetamine", id: 937984704
@@ -309,7 +348,6 @@ mas "Keynote", id: 409183694
 mas "Notchmeister", id: 1599169747
 mas "Pages", id: 409201541
 mas "Pocket", id: 568494494
-mas "Spark", id: 1176895641
 mas "Tailscale", id: 1475387142
 mas "Telegram", id: 747648890
 mas "Todoist", id: 585829637
