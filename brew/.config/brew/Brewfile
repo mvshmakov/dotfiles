@@ -339,6 +339,8 @@ cask "yandex-disk"
 brew "rclone"
 cask "kapitainsky-rclone-browser"
 cask "mountain-duck"
+# Creates a TmpFS disk in RAM on login
+cask "tmpdisk"
 
 mas "Amphetamine", id: 937984704
 mas "Bitwarden", id: 1352778147
