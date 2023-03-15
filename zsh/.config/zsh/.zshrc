@@ -37,7 +37,6 @@ fi
 # https://gist.github.com/ctechols/ca1035271ad134841284
 autoload -Uz compinit
 # Enable hidden files completion
-_comp_options+=(globdots)
 if [[ -n "$XDG_CACHE_HOME/zsh/zcompdump-$USER-$ZSH_VERSION(#qN.mh+24)" ]]; then
   compinit -d "$XDG_CACHE_HOME/zsh/zcompdump-$ZSH_VERSION"
 else
@@ -51,6 +50,8 @@ ENABLE_CORRECTION="true"
 
 # Uncomment the following line to display red dots whilst waiting for completion.
 COMPLETION_WAITING_DOTS="true"
+
+export DBUS_SESSION_BUS_ADDRESS="unix:path=$DBUS_LAUNCHD_SESSION_BUS_SOCKET"
 
 # Increase ZSH history size. Allow 1 000 000 entries; the default is 500.
 # Exporting for the $XDG_CONFIG_HOME/python/pythonstartup.py

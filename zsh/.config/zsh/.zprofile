@@ -65,6 +65,8 @@ export ZSHZ_DATA="$XDG_DATA_HOME/z"
 export GNUPGHOME="$XDG_DATA_HOME/gnupg"
 export LESSHISTFILE="$XDG_DATA_HOME/less/history"
 
+export DBUS_SESSION_BUS_ADDRESS="unix:path=$DBUS_LAUNCHD_SESSION_BUS_SOCKET"
+
 # Preferred editor for local and remote sessions
 if [[ -n $SSH_CONNECTION ]]; then
     # Remote editor
