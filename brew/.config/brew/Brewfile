@@ -80,14 +80,11 @@ brew "lsyncd"
 brew "lua"
 brew "luarocks" # lua package manager
 brew "luajit-openresty"
-# A convenient wrapper around launchctl
-brew "lunchy"
 brew "make"
 brew "mas"
 brew "midnight-commander"
 brew "mobile-shell"
 brew "mpv"
-brew "nasm"
 # Replaces a built-in MacOS version of ncurses for the sake of having an up-to-date terminfo
 brew "ncurses"
 brew "neofetch"
@@ -147,7 +144,6 @@ brew "zegervdv/zathura/zathura-pdf-poppler"
 
 cask "1password"
 cask "adobe-acrobat-reader"
-cask "alacritty"
 cask "alt-tab"
 cask "amethyst"
 # As no Android devices at the moment
@@ -155,12 +151,9 @@ cask "amethyst"
 # cask "android-platform-tools"
 cask "anydesk"
 cask "appcleaner"
-cask "brave-browser"
-cask "browserosaurus"
 cask "browserstacklocal"
 # Hold the command key a bit longer to get a list of all active shortcuts of the current application
 cask "cheatsheet"
-cask "chromium"
 cask "cloudflare-warp"
 cask "crossover"
 cask "dash"
@@ -176,7 +169,6 @@ cask "duplicati"
 cask "element"
 cask "fbreader"
 cask "figma"
-cask "firefox"
 cask "flash-npapi"
 
 # Nerd fonts for the powerlevel10k and vim-airline
@@ -190,7 +182,6 @@ cask "birdfont"
 cask "inkscape"
 cask "gimp"
 cask "gog-galaxy"
-cask "google-chrome"
 cask "gnucash"
 cask "grammarly"
 cask "hazeover"
@@ -202,18 +193,35 @@ cask "keka"
 # Is payed + has annoying paywall notifications
 # cask "betterzip"
 
-cask "kitty"
-cask "ksdiff"
-cask "lantern"
+# Browsers
+cask "chromium"
+cask "google-chrome"
+cask "microsoft-edge"
+cask "firefox"
+cask "brave-browser"
+cask "tor-browser"
+# Browsers manager
+cask "browserosaurus"
+
+# The only feature-rich terminal emulator for MacOS with blur background/ligatures is iTerm2
+cask "iterm2"
+# cask "alacritty"
+# cask "kitty"
+
+# The best launchd/ctl inspector/editor
 cask "launchcontrol"
-cask "libreoffice"
+# A convenient wrapper around launchctl
+# brew "lunchy"
+
+cask "lantern"
 # Nice and open-source outbound firewall
 cask "lulu"
 cask "mendeley"
-cask "microsoft-auto-update"
-cask "microsoft-edge"
-# I do not really use it anymore, but still keeping it for the time being
+
+# Microsoft Office stuff can be replaced with LibreOffice
+# cask "microsoft-auto-update"
 # cask "microsoft-office"
+cask "libreoffice"
 
 # Control the brightness of multiple screens
 cask "monitorcontrol"
@@ -232,6 +240,7 @@ cask "porting-kit"
 
 # Crypto wallets
 cask "electrum"
+cask "monero-wallet"
 
 # Request sending Apps
 cask "postman"
@@ -261,11 +270,16 @@ cask "dbeaver-community"
 # Nice UI, but is proprietory and paid
 # cask "tableplus"
 
-cask "tor-browser"
+# Editors
+cask "visual-studio-code"
+mas "Xcode", id: 497799835
+
+# Difftool, not needed anymore due to NVIM and VSCode
+# cask "ksdiff"
+
 cask "tunnelblick"
 # Desktop widgets
 cask "ubersicht"
-cask "visual-studio-code"
 cask "virtualbox"
 cask "virtualbox-extension-pack"
 cask "vk-messenger"
@@ -276,20 +290,24 @@ cask "wireshark"
 cask "wkhtmltopdf"
 cask "yandex"
 cask "yandex-music-unofficial"
-cask "yubico-yubikey-manager"
-cask "yubico-yubikey-personalization-gui"
-cask "yubico-yubikey-piv-manager"
 cask "zeplin"
 
 cask "cryptomator"
 cask "veracrypt"
+mas "Bitwarden", id: 1352778147
 # Authy is superseeded by the KeePass
 # cask "authy"
 cask "keepassxc"
 
+# Yubikey tools
+cask "yubico-yubikey-manager"
+cask "yubico-yubikey-personalization-gui"
+cask "yubico-yubikey-piv-manager"
+
 # GnuPG & friends
 brew "gnupg"
 brew "pinentry-mac"
+
 # OpenPGP key archivation to paper / unarchivation from it
 # https://www.jabberwocky.com/software/paperkey
 # https://wiki.archlinux.org/title/Paperkey
@@ -305,7 +323,7 @@ brew "zbar"
 cask "free-gpgmail"
 cask "mailtrackerblocker"
 
-# Shell-related
+# Shells & shell-related
 brew "bash"
 brew "checkbashisms"
 brew "shellcheck"
@@ -342,8 +360,11 @@ cask "mountain-duck"
 # Creates a TmpFS disk in RAM on login
 cask "tmpdisk"
 
+# Best todo list tracker
+cask "ticktick"
+# cask "todoist"
+
 mas "Amphetamine", id: 937984704
-mas "Bitwarden", id: 1352778147
 mas "Dropover", id: 1355679052
 mas "GIPHY CAPTURE", id: 668208984
 mas "Keynote", id: 409183694
@@ -352,5 +373,3 @@ mas "Pages", id: 409201541
 mas "Pocket", id: 568494494
 mas "Tailscale", id: 1475387142
 mas "Telegram", id: 747648890
-mas "Todoist", id: 585829637
-mas "Xcode", id: 497799835
