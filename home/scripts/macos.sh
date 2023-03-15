@@ -111,13 +111,16 @@ defaults -currentHost write com.apple.ImageCapture disableHotPlug -bool true
 defaults write com.apple.screencapture type -string "png"
 
 ###############################################################################
-# GnuPG setup with Apple mail                                                 #
+# Apple Mail setup                                                            #
 ###############################################################################
 
-# Enables "Manage plugins" button in Apple Mail
+# Enables "Manage plugins" button in Apple Mail (needed for GPG/other plugins)
 # https://help.mailbutler.io/help/manage-plug-ins-button-is-gone-from-apple-mail
 sudo defaults write "/Library/Preferences/com.apple.mail" EnableBundles 1
 defaults write com.apple.mail EnableBundles -bool true
 defaults write com.apple.mail BundleCompatibilityVersion 4
+
+# View attachments as files, without previews
+defaults write com.apple.mail DisableInlineAttachmentViewing -bool yes
 
 echo "MacOS setup completed!"
