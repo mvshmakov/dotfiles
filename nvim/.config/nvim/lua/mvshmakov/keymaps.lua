@@ -31,10 +31,19 @@ keymap("", "<Left>", "<Nop>", opts)
 keymap("", "<Right>", "<Nop>", opts)
 
 -- Find files using Telescope command-line sugar
-keymap("n", "<leader>ff", ":Telescope find_files<CR>", opts)
+-- TODO: find out how to search hidden files without this
+keymap("n", "<leader>ff", ":Telescope find_files hidden=true<CR>", opts)
 keymap("n", "<leader>fg", ":Telescope live_grep<CR>", opts)
 keymap("n", "<leader>fb", ":Telescope buffers<CR>", opts)
 keymap("n", "<leader>fh", ":Telescope help_tags<CR>", opts)
+
+keymap("n", "]t", function()
+    require("todo-comments").jump_next()
+end, { desc = "Next todo comment" })
+
+keymap("n", "[t", function()
+    require("todo-comments").jump_prev()
+end, { desc = "Previous todo comment" })
 
 -- Clear search highlights on pressing \ (backslash) twice
 keymap("n", "\\", ":noh<CR>", opts)

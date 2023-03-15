@@ -6,8 +6,13 @@ end
 configs.setup({
     -- TODO: list the languages explicitly and unify with lsp configs
     ensure_installed = "all", -- one of "all" or a list of languages
-    ignore_install = { "phpdoc" }, -- List of parsers to ignore installing
-    highlight = { enable = true }, -- false will disable the whole extension
+    ignore_install = { -- the list of parsers to ignore installing
+        "latex", -- as suggested in ":h vimtex-faq-treesitter"
+    },
+    highlight = {
+        enable = true, -- false will disable the whole extension
+        disable = { "latex" }, -- as suggested in ":h vimtex-faq-treesitter"
+    },
     autopairs = { enable = true },
     indent = { enable = true },
 })

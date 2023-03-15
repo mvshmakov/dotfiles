@@ -3,10 +3,10 @@ if not status_ok then
     return
 end
 
-local actions = require "telescope.actions"
+local actions = require("telescope.actions")
 
-telescope.setup {
-    find_command = { 'rg', '--files', '--hidden' },
+telescope.setup({
+    find_command = { "rg", "--files", "--hidden" },
 
     defaults = {
         prompt_prefix = " ",
@@ -17,8 +17,8 @@ telescope.setup {
 
         picker = {
             find_files = {
-                find_command = { 'rg', '--files', '--hidden' },
-            }
+                find_command = { "rg", "--files", "--hidden" },
+            },
         },
 
         -- For the live grep
@@ -31,7 +31,7 @@ telescope.setup {
             "--smart-case",
             "--hidden",
             -- To trim the indentation at the beginning of presented line in the result window
-            "--trim"
+            "--trim",
         },
 
         mappings = {
@@ -43,7 +43,7 @@ telescope.setup {
             },
         },
     },
-}
+})
 
 -- TODO: setup telescope image preview
 -- e.g., https://alpha2phi.medium.com/neovim-101-image-viewer-7f5d35db637a
@@ -88,11 +88,10 @@ telescope.setup {
 --     },
 -- })
 
-
-require("telescope").load_extension('media_files')
+require("telescope").load_extension("media_files")
 require("telescope").load_extension("gh")
 -- To get fzf loaded and working with telescope, you need to call
 -- load_extension, somewhere after setup function:
-require('telescope').load_extension('fzf')
-require('telescope').load_extension('z')
-require('telescope').load_extension('neoclip')
+require("telescope").load_extension("fzf")
+require("telescope").load_extension("z")
+require("telescope").load_extension("neoclip")

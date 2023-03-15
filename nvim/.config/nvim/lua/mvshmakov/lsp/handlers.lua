@@ -71,14 +71,13 @@ M.on_attach = function(client, bufnr)
         client.server_capabilities.documentFormattingProvider = false
     end
 
-    if client.name == "sumneko_lua" then
+    if client.name == "lua_ls" then
         client.server_capabilities.documentFormattingProvider = false
     end
 
     M.capabilities = vim.lsp.protocol.make_client_capabilities()
     M.capabilities.textDocument.completion.completionItem.snippetSupport = true
     M.capabilities = cmp_nvim_lsp.default_capabilities(M.capabilities)
-
 
     lsp_keymaps(bufnr)
     -- TODO: decide if I need illuminate

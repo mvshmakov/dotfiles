@@ -60,6 +60,8 @@ vim.g.netrw_browse_split = 3 -- open new file in the right split
 -- vim.g.netrw_winsize = 15 -- width of the netrw window in percentages
 vim.g.netrw_preview = 1 -- preview file on the right split
 
+vim.g.vimtex_view_method = "zathura"
+
 vim.opt.scrolloff = 999 -- keeps cursor in the center of screen if possible
 vim.opt.sidescrolloff = 8 -- keeps 8 chars from left/right of the screen when scrolling
 
@@ -68,7 +70,7 @@ vim.opt.backup = false -- creates a backup file
 
 -- TODO: validate the following
 vim.opt.cmdheight = 1 -- more space in the neovim command line for displaying messages
-vim.opt.completeopt = { "menuone", "noselect" } -- mostly just for cmp
+vim.opt.completeopt = { "menu", "menuone", "noselect" } -- mostly just for cmp
 vim.opt.conceallevel = 0 -- so that `` is visible in markdown files
 vim.opt.hlsearch = true -- highlight all matches on previous search pattern
 vim.opt.pumheight = 10 -- pop up menu height
@@ -91,6 +93,6 @@ vim.opt.signcolumn = "yes" -- always show the sign column, otherwise it would sh
 vim.opt.wrap = false -- display lines as one long line
 vim.opt.guifont = "monospace:h17" -- the font used in graphical neovim applications
 vim.opt.fillchars.eob = " "
-vim.opt.shortmess:append "c"
+vim.opt.shortmess:append("c")
 vim.opt.whichwrap:append("<,>,[,],h,l")
 vim.opt.iskeyword:append("-")
