@@ -4,7 +4,6 @@
 # alias ls='ls --color=auto'
 alias cp='cp -r'
 alias df='df -h'
-alias brew='HOMEBREW_NO_AUTO_UPDATE=1 brew'
 
 alias v='nvim'
 alias vim='nvim'
