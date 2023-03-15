@@ -1,0 +1,8 @@
+# Simulate git commands
+# https://github.com/initialcommit-com/git-sim
+git-sim
+
+# Python client, needed by ':checkhealth'
+neovim
+
+pre-commit
