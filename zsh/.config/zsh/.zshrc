@@ -44,6 +44,8 @@ else
   compinit -C -d "$XDG_CACHE_HOME/zsh/zcompdump-$ZSH_VERSION"
 fi
 
+_comp_options+=(globdots)
+
 # Uncomment the following line to enable command auto-correction.
 ENABLE_CORRECTION="true"
 
