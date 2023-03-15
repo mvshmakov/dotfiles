@@ -6,8 +6,8 @@
 
 # Saving screenshots in ~/screenshots
 if [ ! -d ~/screenshots ]; then
-    mkdir ~/screenshots
-    echo 'created ~/screenshots'
+	mkdir ~/screenshots
+	echo 'created ~/screenshots'
 fi
 
 echo 'Screenshots will be saved to ~/screenshots'
@@ -37,7 +37,7 @@ defaults write NSGlobalDomain AppleMetricUnits -bool true
 sudo defaults write /Library/Preferences/com.apple.loginwindow showInputMenu -bool true
 
 # Set the timezone; see `sudo systemsetup -listtimezones` for other values
-sudo systemsetup -settimezone "Europe/Moscow" > /dev/null
+sudo systemsetup -settimezone "Europe/Moscow" >/dev/null
 
 # Disable the "Are you sure you want to open this application?" dialog
 defaults write com.apple.LaunchServices LSQuarantine -bool false

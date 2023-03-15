@@ -12,8 +12,6 @@ BREW_PREFIX=$(brew --prefix)
 
 # Brew aliases ability
 brew tap homebrew/aliases
-# Brew casks ability
-brew tap homebrew/cask
 # Brew casks extended ability
 brew tap homebrew/cask-versions
 # Yubikey manager, etc.
@@ -29,13 +27,13 @@ brew tap heroku/brew
 brew tap zegervdv/zathura
 
 # Install brew packages and casks
-xargs brew install < ../brew/packages.txt
-xargs brew install --cask < ../brew/casks.txt
+xargs brew install <../brew/packages.txt
+xargs brew install --cask <../brew/casks.txt
 
 # Transferring libs for zathura: https://github.com/zegervdv/homebrew-zathura#installation
-mkdir -p $(brew --prefix zathura)/lib/zathura
-ln -s $(brew --prefix zathura-djvu)/libdjvu.dylib $(brew --prefix zathura)/lib/zathura/libdjvu.dylib
-ln -s $(brew --prefix zathura-pdf-poppler)/libpdf-poppler.dylib $(brew --prefix zathura)/lib/zathura/libpdf-poppler.dylib
+mkdir -p "$(brew --prefix zathura)"/lib/zathura
+ln -s "$(brew --prefix zathura-djvu)"/libdjvu.dylib "$(brew --prefix zathura)"/lib/zathura/libdjvu.dylib
+ln -s "$(brew --prefix zathura-pdf-poppler)"/libpdf-poppler.dylib "$(brew --prefix zathura)"/lib/zathura/libpdf-poppler.dylib
 
 # GNU core utilities are installed (those that come with macOS are outdated).
 # Don't forget to add `$(brew --prefix coreutils)/libexec/gnubin` to `$PATH`.
