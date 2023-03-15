@@ -1,0 +1,6 @@
+# https://github.com/JohnnyMorganz/StyLua#options
+indent_type = "Spaces"
+
+# These make some code lines unreadable
+# collapse_simple_statement = "Always"
+# call_parentheses = "NoSingleString"
