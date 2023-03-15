@@ -15,19 +15,36 @@ export XDG_BIN_HOME="$HOME/.local/bin"
 
 # pip install --user, also cargo installs user binaries there, see
 # https://github.com/rust-lang/cargo/issues/1734#issuecomment-163936588
-export PATH="$XDG_BIN_HOME:$PATH"
-export PATH="/opt/homebrew/bin:$PATH"
-export PATH="$(brew --prefix)/sbin:$(brew --prefix coreutils)/libexec/gnubin:$PATH"
+PATH="$XDG_BIN_HOME:$PATH"
+# Cannot be a $(brew --prefix)
+PATH="/opt/homebrew/bin:$PATH"
+PATH="$(brew --prefix)/sbin:$(brew --prefix coreutils)/libexec/gnubin:$PATH"
 # Use latest ncurses version for the most up-to-date terminfo tables
 # It is possible to check which one is active with `infocmp -x tmux-256color`
-export PATH="$(brew --prefix ncurses)/bin:$PATH"
+PATH="$(brew --prefix ncurses)/bin:$PATH"
+
+# Add pyenv executable to PATH and
+# enable shims by adding the following
+# to ~/.profile and ~/.zprofile:
+export PYENV_ROOT="$XDG_DATA_HOME/.pyenv"
+export PATH="$PATH:$PYENV_ROOT/bin"
+eval "$(pyenv init --path)"
+
+# https://github.com/Schniz/fnm#zsh
+eval "$(fnm env --use-on-cd)"
+
+# Only now yarn will be available as binary in PATH
+PATH="$PATH:$(yarn global bin)"
+export PATH
 
 export INPUTRC="$XDG_CONFIG_HOME/readline/inputrc"
 export HOMEBREW_BREWFILE="$XDG_CONFIG_HOME/brew/Brewfile"
 
 # Opt-out from analytics https://consoledonottrack.com/
 export DO_NOT_TRACK=1
-export HOMEBREW_NO_ANALYTICS=1
+# Opting out only from Google https://brew.sh/2023/02/16/homebrew-4.0.0/
+# Remove after 90 days completely
+export HOMEBREW_NO_GOOGLE_ANALYTICS=1
 
 # To move .zsh_sessions and friends out of the dotfiles repo
 #
@@ -73,7 +90,8 @@ export ZSH=~/.oh-my-zsh
 # How often to auto-update ZSH (in days).
 export UPDATE_ZSH_DAYS=7
 # Needed for fzf plugin https://github.com/ohmyzsh/ohmyzsh/tree/master/plugins/fzf#fzf_base
-export FZF_BASE=$(brew --prefix fzf)
+FZF_BASE=$(brew --prefix fzf)
+export FZF_BASE
 export FZF_DEFAULT_COMMAND="rg --files --no-ignore-vcs --hidden"
 
 export MANPATH="/usr/local/man:$MANPATH"
@@ -83,7 +101,8 @@ export MANPAGER="col -b | nvim -c 'set ft=man nomod nolist ignorecase' -"
 export SSH_KEY_PATH=~/.ssh/id_rsa
 export SSH_TEST_KEY_PATH=~/.ssh/id_rsa-test
 # Required for the ssh-askpass https://github.com/theseal/ssh-askpass/blob/master/ssh-askpass.plist#L14-L15
-export SSH_ASKPASS="$(brew --prefix theseal/ssh-askpass/ssh-askpass)/bin/ssh-askpass"
+SSH_ASKPASS="$(brew --prefix theseal/ssh-askpass/ssh-askpass)/bin/ssh-askpass"
+export SSH_ASKPASS
 # Sudo prompt with be taken from SSH_ASKPASS
 export SUDO_ASKPASS="$SSH_ASKPASS"
 
@@ -112,17 +131,7 @@ export PYTHONIOENCODING='UTF-8'
 export PYTHONSTARTUP="$XDG_CONFIG_HOME/python/pythonstartup.py"
 
 # To correctly link and build psycopg2: https://stackoverflow.com/a/69403177/12349023
-export LDFLAGS="-L$(brew --prefix libpq)/lib -L$(brew --prefix openssl)/lib"
-export CPPFLAGS="-I$(brew --prefix libpq)/include -I$(brew --prefix openssl)/include"
-
-# Add pyenv executable to PATH and
-# enable shims by adding the following
-# to ~/.profile and ~/.zprofile:
-export PYENV_ROOT="$XDG_DATA_HOME/.pyenv"
-export PATH="$PATH:$PYENV_ROOT/bin"
-eval "$(pyenv init --path)"
-
-# https://github.com/Schniz/fnm#zsh
-eval "$(fnm env --use-on-cd)"
-# Only now yarn will be available as binary in PATH
-export PATH="$PATH:$(yarn global bin)"
+LDFLAGS="-L$(brew --prefix libpq)/lib -L$(brew --prefix openssl)/lib"
+export LDFLAGS
+CPPFLAGS="-I$(brew --prefix libpq)/include -I$(brew --prefix openssl)/include"
+export CPPFLAGS
