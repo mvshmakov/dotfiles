@@ -43,6 +43,7 @@ else
   compinit -C -d "$XDG_CACHE_HOME/zsh/zcompdump-$ZSH_VERSION"
 fi
 
+eval "$(bw completion --shell zsh); compdef _bw bw;"
 _comp_options+=(globdots)
 
 # Uncomment the following line to enable command auto-correction.
