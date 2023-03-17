@@ -210,6 +210,13 @@ cask "keka"
 # Is payed + has annoying paywall notifications
 # cask "betterzip"
 
+# Window managers
+# cask "amethyst" # superseded by yabai & skhd + is a bit more buggy than the latter combo
+# These two work together, one for window management, another for keyboard shortcuts
+tap "koekeishiya/formulae"
+brew "yabai"
+brew "skhd"
+
 # Browsers
 cask "chromium"
 cask "google-chrome"
