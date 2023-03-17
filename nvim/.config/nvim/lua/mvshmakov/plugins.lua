@@ -179,7 +179,8 @@ return packer.startup(function(use)
 
     -- Utils
     use("nvim-lua/plenary.nvim") -- Useful lua functions used by lots of plugins (Telescope, etc.)
-    use("nvim-lua/popup.nvim") -- required for the telescope-z
+    use("nvim-lua/popup.nvim") -- Required for the telescope-z
+    use("smithbm2316/centerpad.nvim") -- Centers vim buffer
 
     -- Automatically set up your configuration after cloning packer.nvim
     -- Put this at the end after all plugins
