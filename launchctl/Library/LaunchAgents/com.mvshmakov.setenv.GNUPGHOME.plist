@@ -18,7 +18,5 @@
         </array>
         <key>RunAtLoad</key>
         <true />
-        <key>ServiceIPC</key>
-        <false />
     </dict>
 </plist>
