@@ -38,11 +38,24 @@ PATH="$PATH:$(yarn global bin)"
 export PATH
 
 export INPUTRC="$XDG_CONFIG_HOME/readline/inputrc"
+
+# All env variables: https://docs.brew.sh/Manpage#environment
+# Runs 'brew autoremove' (remove formulas installed as dependencies that are
+# no longer needed) when one runs 'brew cleanup' and 'brew uninstall'
+export HOMEBREW_AUTOREMOVE=1
+# Uses `bat` on `brew cat`
+export HOMEBREW_BAT=1
+# Suppress the warning about controlling Homebrew with environment variables
+export HOMEBREW_NO_ENV_HINTS=1
+export HOMEBREW_VERBOSE=1
 export HOMEBREW_BREWFILE="$XDG_CONFIG_HOME/brew/Brewfile"
+# GitHub will allow a greater number of API requests with PAT
+HOMEBREW_GITHUB_API_TOKEN="$(gh auth token)"
+export HOMEBREW_GITHUB_API_TOKEN
 
 # Opt-out from analytics https://consoledonottrack.com/
 export DO_NOT_TRACK=1
-# Opting out only from Google https://brew.sh/2023/02/16/homebrew-4.0.0/
+# Opting out only from Google Analytics https://brew.sh/2023/02/16/homebrew-4.0.0/
 # Remove after 90 days completely
 export HOMEBREW_NO_GOOGLE_ANALYTICS=1
 
