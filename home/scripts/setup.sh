@@ -13,8 +13,6 @@ mkdir -p "${XDG_CACHE_HOME:=$HOME/.cache}"/zsh/
 # Directory is required to create a ZSH history file
 mkdir -p "${XDG_DATA_HOME:=$HOME/.local/share}"/zsh/
 
-ssh-keygen -t rsa
-
 # Running main scripts
 ./macos.sh
 ./brew.sh

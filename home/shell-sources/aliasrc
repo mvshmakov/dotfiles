@@ -1,14 +1,12 @@
+#!/usr/bin/env sh
+#
 # To list all aliases just type `alias`
 
 # TODO: do we need color=auto?
 # alias ls='ls --color=auto'
 alias cp='cp -r'
 alias df='df -h'
-
-alias v='nvim'
-alias vim='nvim'
 alias g='git'
-alias r='ranger'
 
 alias ll='ls -alF'
 alias la='ls -A'
@@ -37,7 +35,7 @@ alias safari='/Applications/Safari.app/Contents/MacOS/Safari'
 alias opera='/Applications/Opera.app/Contents/MacOS/Opera'
 
 # Reload the shell (i.e. invoke as a login shell)
-alias reload="exec ${SHELL} -l"
+alias reload='exec $SHELL -l'
 
 # Print each PATH entry on a separate line
 alias path='echo -e ${PATH//:/\\n}'

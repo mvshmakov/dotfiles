@@ -15,8 +15,7 @@ git clone https://github.com/mvshmakov/dotfiles.git && cd dotfiles
 git submodule update --recursive --init
 stow --stow -vt ~ */
 
-/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
-brew bundle install --file ~/.config/brew/Brewfile
+./home/scripts/setup.sh
 ```
 
 To restow/repair the symlinks, use `stow --restow -vt ~ */`. To simulate the stow process outcome without modifying the filesystem, use `stow --stow --no -vt ~ */`. `*/` is the ZSH glob, which expands only in the folders.
