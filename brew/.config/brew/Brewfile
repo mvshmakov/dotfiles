@@ -10,8 +10,13 @@ tap "homebrew/aliases"
 tap "homebrew/bundle"
 tap "homebrew/cask"
 tap "homebrew/cask-fonts"
+# Brew casks extended ability
+tap "homebrew/cask-versions"
+# Yubikey manager, etc.
+tap "homebrew/cask-drivers"
 tap "homebrew/core"
-tap "heroku/brew"
+# PDR and other docs reader
+tap "zegervdv/zathura"
 # Rust implementation of `age`
 tap "str4d.xyz/rage", "https://str4d.xyz/rage"
 
@@ -51,10 +56,11 @@ brew "gnu-tar"
 brew "gnu-which"
 brew "gotop"
 brew "grc"
-brew "heroku"
-# Is required to fix the ranger's freezes
-# https://github.com/ranger/ranger/issues/1787#issuecomment-691528698https://github.com/ranger/ranger/issues/1787#issuecomment-691528698
-brew "highlight"
+
+# Heroku - in case we want to deploy using the heroku-cli
+# tap "heroku/brew"
+# brew "heroku"
+
 brew "htop"
 brew "i2p"
 brew "imagemagick"
@@ -75,7 +81,6 @@ brew "texlive"
 brew "biber"
 # PostgreSQl
 brew "libpq"
-brew "logrotate"
 brew "lsyncd"
 brew "lua"
 brew "luarocks" # lua package manager
@@ -88,7 +93,13 @@ brew "mpv"
 # Replaces a built-in MacOS version of ncurses for the sake of having an up-to-date terminfo
 brew "ncurses"
 brew "neofetch"
+
 brew "neovim"
+# brew "ranger" # File browser, superseded by nvim
+# Is required to fix the ranger's freezes
+# https://github.com/ranger/ranger/issues/1787#issuecomment-691528698https://github.com/ranger/ranger/issues/1787#issuecomment-691528698
+# brew "highlight"
+
 brew "nginx"
 brew "onefetch"
 brew "openjdk"
@@ -106,7 +117,6 @@ brew "postgresql"
 brew "pyenv"
 brew "qemu"
 brew "rage"
-brew "ranger"
 # GNU utility to edit the command lines as they are typed in.
 # Was extracted from bash, now used pretty much everywhere the prompt
 # exists. zsh uses zle instead.
@@ -138,14 +148,13 @@ brew "wget"
 brew "ykman"
 brew "yq"
 brew "eth-p/software/bat-extras"
-brew "zegervdv/zathura/zathura"
-brew "zegervdv/zathura/zathura-djvu"
-brew "zegervdv/zathura/zathura-pdf-poppler"
+brew "zathura"
+brew "zathura-djvu"
+brew "zathura-pdf-poppler"
 
 cask "1password"
 cask "adobe-acrobat-reader"
 cask "alt-tab"
-cask "amethyst"
 # As no Android devices at the moment
 # cask "android-file-transfer"
 # cask "android-platform-tools"
@@ -200,8 +209,12 @@ cask "microsoft-edge"
 cask "firefox"
 cask "brave-browser"
 cask "tor-browser"
-# Browsers manager
-cask "browserosaurus"
+# Browsers managers
+mas "Velja", id: 1607635845
+# cask "browserosaurus"
+
+# Sindre Sorhus apps (https://sindresorhus.com/)
+mas "Hyperduck", id: 2145267525
 
 # The only feature-rich terminal emulator for MacOS with blur background/ligatures is iTerm2
 cask "iterm2"
@@ -214,9 +227,13 @@ cask "launchcontrol"
 # brew "lunchy"
 
 cask "lantern"
+cask "mendeley"
+
+# Objective-See (objective-see.org) security-related apps
 # Nice and open-source outbound firewall
 cask "lulu"
-cask "mendeley"
+# Prevents "evil-maid" attacks (listens to the lid open events)
+cask "do-not-disturb"
 
 # Microsoft Office stuff can be replaced with LibreOffice
 # cask "microsoft-auto-update"
@@ -295,8 +312,7 @@ cask "zeplin"
 cask "cryptomator"
 cask "veracrypt"
 mas "Bitwarden", id: 1352778147
-# Authy is superseeded by the KeePass
-# cask "authy"
+# cask "authy" # Superseeded by the KeePass
 cask "keepassxc"
 
 # Yubikey tools
@@ -338,12 +354,10 @@ brew "zsh-history-substring-search"
 # MeetingBar + Apple Calendar combo works the best
 cask "meetingbar"
 
-# Superseded by obsidian
-# cask "joplin"
+# cask "joplin" # Superseded by Obsidian
 cask "obsidian"
 
-# Superseded by bartender
-# cask "hiddenbar"
+# cask "hiddenbar" # Superseded by bartender
 cask "bartender"
 
 # Cloud mount/manipulation tools.
