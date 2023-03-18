@@ -75,7 +75,10 @@ export _Z_DATA="$XDG_DATA_HOME/z"
 export ZSHZ_DATA="$XDG_DATA_HOME/z"
 
 # Resetting base directories to comply with XDG Base Directory spec
-export GNUPGHOME="$XDG_DATA_HOME/gnupg"
+
+# GPG is very hard to make work with XDG Base Directory spec
+# Mainly due to GPG Tools not supporting it properly
+# export GNUPGHOME="$XDG_DATA_HOME/gnupg"
 export LESSHISTFILE="$XDG_DATA_HOME/less/history"
 
 export DBUS_SESSION_BUS_ADDRESS="unix:path=$DBUS_LAUNCHD_SESSION_BUS_SOCKET"
@@ -133,8 +136,8 @@ export HIGHLIGHT_STYLE=nord
 # Faster than $(tty), source: https://github.com/romkatv/powerlevel10k#how-do-i-export-gpg_tty-when-using-instant-prompt
 export GPG_TTY=$TTY
 # Just for the convenience, e.g.
-# gpg --edit-key $GPGKEY
-export GPGKEY="88C371E66837B278"
+# gpg --edit-key $GPG_KEY
+export GPG_KEY="88C371E66837B278"
 
 # Make ~/.wgetrc, ~/.wget-hsts compliant with XDG Base Directory spec.
 # Note: wget does not support env variables in wgetrc, so need to use an absolute path.
