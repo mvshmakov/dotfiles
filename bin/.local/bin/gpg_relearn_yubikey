@@ -1,0 +1,10 @@
+#!/usr/bin/env sh
+#
+# Allows to change a serial number of the smartcard connected to a GnuPG master key.
+# New serial number will be grabbed from the connected Yubikey. This is useful when
+# you have two identical Yubikeys with the same OpenPGP keys and want to switch
+# between them.
+#
+# Context: https://github.com/drduh/YubiKey-Guide/issues/19
+
+gpg-connect-agent "scd serialno" "learn --force" /bye
