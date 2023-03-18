@@ -1,3 +1,3 @@
 eval "$(rbenv init -)"
 
-export PATH="$XDG_BIN_HOME:$PATH"
+export PATH="/opt/homebrew/bin:$PATH:$XDG_BIN_HOME"
