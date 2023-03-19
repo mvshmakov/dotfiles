@@ -83,7 +83,7 @@ return packer.startup(function(use)
     use({
         "xiyaowong/nvim-transparent", -- Makes nvim background transparent
         config = function()
-            require("transparent").setup({ enable = true })
+            require("transparent").setup()
         end,
     })
 

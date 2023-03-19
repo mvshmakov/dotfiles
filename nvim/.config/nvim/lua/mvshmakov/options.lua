@@ -61,6 +61,7 @@ vim.g.netrw_browse_split = 3 -- open new file in the right split
 vim.g.netrw_preview = 1 -- preview file on the right split
 
 vim.g.vimtex_view_method = "zathura"
+vim.g.transparent_enabled = true -- enable transparent.nvim
 
 vim.opt.scrolloff = 999 -- keeps cursor in the center of screen if possible
 vim.opt.sidescrolloff = 8 -- keeps 8 chars from left/right of the screen when scrolling
