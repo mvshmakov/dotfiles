@@ -44,7 +44,11 @@ brew "cheat"
 brew "circleci"
 brew "clang-format"
 brew "coreutils"
+
+# wget is not present on every OS, so better stick to curl
+# brew "wget"
 brew "curl"
+
 brew "direnv"
 brew "eksctl"
 # Reads/modifies EXIF and video metadata
@@ -152,7 +156,6 @@ brew "tmux"
 brew "tmuxinator"
 brew "trash"
 brew "tree"
-brew "wget"
 brew "ykman"
 brew "yq"
 brew "eth-p/software/bat-extras"
@@ -163,9 +166,13 @@ brew "zathura-pdf-poppler"
 cask "1password"
 cask "adobe-acrobat-reader"
 cask "alt-tab"
+
 # As no Android devices at the moment
 # cask "android-file-transfer"
 # cask "android-platform-tools"
+# KDE Connect for Mac (pairs MacOS, iOS, Android and Linux together)
+cask "soduto"
+
 cask "anydesk"
 cask "appcleaner"
 cask "browserstacklocal"
@@ -200,7 +207,12 @@ cask "inkscape"
 cask "gimp"
 cask "gog-galaxy"
 cask "gnucash"
-cask "grammarly"
+
+# Grammar checking tools
+brew "languagetool"
+cask "languagetool"
+# cask "grammarly"
+
 cask "hazeover"
 cask "karabiner-elements"
 cask "keycastr"
