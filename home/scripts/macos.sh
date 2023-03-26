@@ -123,4 +123,13 @@ defaults write com.apple.mail BundleCompatibilityVersion 4
 # View attachments as files, without previews
 defaults write com.apple.mail DisableInlineAttachmentViewing -bool yes
 
+###############################################################################
+# Fonts setup                                                                 #
+###############################################################################
+
+# Thin strokes are suitable for retina displays. Alacritty by default uses font
+# smoothing, which makes fonts look bold.
+# https://github.com/alacritty/alacritty/issues/4616#issuecomment-1236413444
+defaults write org.alacritty AppleFontSmoothing -int 0
+
 echo "MacOS setup completed!"
