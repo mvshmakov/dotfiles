@@ -1,6 +1,7 @@
 home/.ssh/id_rsa*
 # TODO: version both in dotfiles-private
-home/.ssh/known_hosts*
+home/.ssh/known_hosts
+home/.ssh/authorized_keys
 home/.bash_history
 
 nvim/.config/nvim/plugin/packer_compiled.lua
