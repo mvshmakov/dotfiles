@@ -30,7 +30,14 @@ yabai -m config mouse_action2 resize
 yabai -m config mouse_drop_action swap
 
 # Disable specific apps from being managed with yabai
-yabai -m rule --add app="^System Settings$" manage=off
+yabai -m rule --add app="^Raycast$" manage=off
 yabai -m rule --add app="^Calculator$" manage=off
 yabai -m rule --add app="^LaunchControl$" manage=off
-yabai -m rule --add app="^Karabiner-Elements$" manage=off
+yabai -m rule --add app="^Karabiner-(Elements|EventViewer)$" manage=off
+yabai -m rule --add app="^System (Information|Preferences|Settings)$" manage=off
+# Do not manage TouchID prompts because the Firefox Bitwarden extension closes
+# on window resize caused by yabai. The app name was found with Karabiner-EventViewer
+# as `yabai -m query --windows` does not list it
+yabai -m rule --add app="^coreautha$" manage=off
+
+yabai -m rule --add title="^(Picture in Picture|Picture-in-Picture)$" manage=off
