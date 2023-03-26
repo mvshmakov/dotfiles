@@ -25,13 +25,6 @@ fi
 # Injects profiling code for zsh
 # zmodload zsh/zprof
 
-# Load brew-hosted ZSH completions. Should go before the compinit call.
-# https://docs.brew.sh/Shell-Completion#configuring-completions-in-zsh
-if type brew &>/dev/null
-then
-  export FPATH="$(brew --prefix)/share/zsh/site-functions:${FPATH}"
-fi
-
 # TODO: speed up zsh compinit by only checking cache once a day.
 # TODO: check if this even works
 # https://gist.github.com/ctechols/ca1035271ad134841284

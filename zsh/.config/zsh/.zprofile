@@ -8,34 +8,48 @@ export XDG_CONFIG_HOME="$HOME/.config"
 export XDG_CACHE_HOME="$HOME/.cache"
 export XDG_DATA_HOME="$HOME/.local/share"
 export XDG_STATE_HOME="$HOME/.local/state"
+
 # Non-standard XDG env variable name, but recommended location
 # https://specifications.freedesktop.org/basedir-spec/basedir-spec-latest.html
 # https://github.com/rust-lang/cargo/issues/1734#issuecomment-665247169
 export XDG_BIN_HOME="$HOME/.local/bin"
-
 # pip install --user, also cargo installs user binaries there, see
 # https://github.com/rust-lang/cargo/issues/1734#issuecomment-163936588
-PATH="$XDG_BIN_HOME:$PATH"
-# Cannot be a $(brew --prefix)
-PATH="/opt/homebrew/bin:$PATH"
-PATH="$(brew --prefix)/sbin:$(brew --prefix coreutils)/libexec/gnubin:$PATH"
+export PATH="$XDG_BIN_HOME:$PATH"
+
+# `brew` is not yet available in the shell yet, so we have to use the full path
+# This sets HOMEBREW_PREFIX, HOMEBREW_CELLAR, HOMEBREW_REPOSITORY and
+# adds itself to the PATH, MANPATH and INFOPATH
+# https://docs.brew.sh/Manpage#shellenv
+eval "$(/opt/homebrew/bin/brew shellenv)"
+# Make GNU coreutils available in the shell without a prefix
+PATH="$(brew --prefix coreutils)/libexec/gnubin:$PATH"
 # Use latest ncurses version for the most up-to-date terminfo tables
-# It is possible to check which one is active with `infocmp -x tmux-256color`
+# Check which one is active with `infocmp -x tmux-256color`
 PATH="$(brew --prefix ncurses)/bin:$PATH"
 
-# Add pyenv executable to PATH and
-# enable shims by adding the following
-# to ~/.profile and ~/.zprofile:
+# Add pyenv executable to PATH and enable shims
+# PYENV_ROOT is needed for XDG Base Directory compliance
+# https://github.com/pyenv/pyenv#set-up-your-shell-environment-for-pyenv
 export PYENV_ROOT="$XDG_DATA_HOME/.pyenv"
-export PATH="$PATH:$PYENV_ROOT/bin"
-eval "$(pyenv init --path)"
+command -v pyenv >/dev/null || PATH="$PYENV_ROOT/bin:$PATH"
+eval "$(pyenv init -)"
 
 # https://github.com/Schniz/fnm#zsh
 eval "$(fnm env --use-on-cd)"
+# Only after fnm is added to PATH yarn will be available as binary
+PATH="$(yarn global bin):$PATH"
 
-# Only now yarn will be available as binary in PATH
-PATH="$PATH:$(yarn global bin)"
+# Export modified PATH to make it available to (sub)shell(s)
+# Check path for validness with echo `"$PATH" | tr ':' '\n'`
 export PATH
+
+# Load brew-hosted ZSH completions. Should go before the compinit call.
+# https://docs.brew.sh/Shell-Completion#configuring-completions-in-zsh
+if type brew &>/dev/null; then
+    FPATH="$(brew --prefix)/share/zsh/site-functions:${FPATH}"
+    export FPATH
+fi
 
 export INPUTRC="$XDG_CONFIG_HOME/readline/inputrc"
 
@@ -112,8 +126,7 @@ FZF_BASE=$(brew --prefix fzf)
 export FZF_BASE
 export FZF_DEFAULT_COMMAND="rg --files --no-ignore-vcs --hidden"
 
-export MANPATH="/usr/local/man:$MANPATH"
-# Use nvim for man pager https://muru.dev/2015/08/28/vim-for-man.html
+# Use nvim in man pages https://muru.dev/2015/08/28/vim-for-man.html
 export MANPAGER="col -b | nvim -c 'set ft=man nomod nolist ignorecase' -"
 
 export SSH_KEY_PATH=~/.ssh/id_rsa
