@@ -199,3 +199,7 @@ eval "$(pyenv init -)"
 
 # Activate *direnv* https://direnv.net/docs/hook.html#zsh
 (( ${+commands[direnv]} )) && emulate zsh -c "$(direnv hook zsh)"
+
+# Setup alias convenience commands for github-copilot-cli
+# https://www.npmjs.com/package/@githubnext/github-copilot-cli#user-content-setup-alias-convenience-commands
+eval "$(github-copilot-cli alias -- "$0")"
