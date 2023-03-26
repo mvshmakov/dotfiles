@@ -26,6 +26,13 @@ end
 lspconfig["bashls"].setup(opts)
 lspconfig["jsonls"].setup(opts)
 
+local ltex_opts = vim.tbl_deep_extend("force", {
+    cmd = { "ltex-ls" },
+    filetypes = { "markdown", "text" },
+    flags = { debounce_text_changes = 300 },
+}, opts)
+lspconfig["ltex"].setup(ltex_opts)
+
 -- require('mason-tool-installer').setup {
 --     -- a list of all tools you want to ensure are installed upon
 --     -- start; they should be the names Mason uses for each tool
