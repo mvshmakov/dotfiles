@@ -1,0 +1,42 @@
+#!/usr/bin/env sh
+#
+# Takes a photo from a MacBook M1's webcam, screenshots currently
+# opened windows and locks the laptop screen.
+#
+# List all ffmpeg-accessible devices with:
+# ffmpeg -f avfoundation -list_devices true -i ""
+#
+# To make DoNotDisturb trigger the Shortcut, run:
+# osascript -e 'tell application "Shortcuts Events" to run shortcut "DND Lid Open"'
+# OR
+# osascript -e 'do shell script "shortcuts run \"DND Lid Open\""'
+
+DND_DIR=~/Pictures/'DND Objective See'
+
+# Checking if the directory exists
+if [ ! -d "$DND_DIR" ]; then
+    mkdir -p "$DND_DIR"
+fi
+
+# Take a photo from the webcam
+ffmpeg -f avfoundation \
+    -pixel_format yuyv422 \
+    -probesize 32M \
+    -framerate 30 \
+    -i "FaceTime HD Camera" \
+    -vframes 1 \
+    -strftime 1 \
+    "$DND_DIR"/%Y-%m-%d_%H-%M-%S_camera.jpg
+
+# Take a desktop screenshot
+ffmpeg -f avfoundation \
+    -pixel_format yuyv422 \
+    -probesize 32M \
+    -framerate 30 \
+    -i "Capture screen 0" \
+    -vframes 1 \
+    -strftime 1 \
+    "$DND_DIR"/%Y-%m-%d_%H-%M-%S_screenshot.jpg
+
+# Lock the screen
+pmset displaysleepnow
