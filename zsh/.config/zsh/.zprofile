@@ -109,8 +109,9 @@ else
 fi
 
 export READER="zathura"
-export BROWSER="Brave.app"
+export BROWSER="Velja.app"
 export VIDEO="mpv"
+# TODO: use "lucc/nvimpager" instead both
 export PAGER="less"
 export GIT_PAGER="delta"
 
@@ -138,7 +139,7 @@ export SSH_ASKPASS
 export SUDO_ASKPASS="$SSH_ASKPASS"
 
 # Use bat as fzf preview tool
-# TODO: does not work well for reverse-i-search
+# TODO: preview does not work well for reverse-i-search
 export FZF_DEFAULT_OPTS="--preview 'bat --color=always --style=numbers --line-range=:500 {}'"
 # Preview all themes:
 # bat --list-themes | fzf --preview="bat --theme={} --color=always /path/to/file"
@@ -162,7 +163,7 @@ export PYTHONIOENCODING='UTF-8'
 export PYTHONSTARTUP="$XDG_CONFIG_HOME/python/pythonstartup.py"
 
 # To correctly link and build psycopg2: https://stackoverflow.com/a/69403177/12349023
-LDFLAGS="-L$(brew --prefix libpq)/lib -L$(brew --prefix openssl)/lib"
-export LDFLAGS
-CPPFLAGS="-I$(brew --prefix libpq)/include -I$(brew --prefix openssl)/include"
-export CPPFLAGS
+LIBPQ_PREFIX="$(brew --prefix libpq)"
+OPENSSL_PREFIX="$(brew --prefix openssl)"
+export LDFLAGS="-L$LIBPQ_PREFIX/lib -L$OPENSSL_PREFIX/lib"
+export CPPFLAGS="-I$LIBPQ_PREFIX/include -I$OPENSSL_PREFIX/include"
