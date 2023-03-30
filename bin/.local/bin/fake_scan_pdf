@@ -1,0 +1,14 @@
+#!/usr/bin/env sh
+#
+# Creates a "scanned version of the PDF
+# Usage: fake_scan_pdf original.pdf fake.pdf
+#
+# Source: https://news.ycombinator.com/item?id=35132018
+
+ROTATION=$(shuf -n 1 -e '-' '')$(shuf -n 1 -e "$(seq 0.05 .5)")
+convert -density 150 "$1" \
+	-linear-stretch '1.5%x2%' \
+	-rotate "$ROTATION" \
+	-attenuate '0.01' \
+	+noise Multiplicative \
+	-colorspace 'gray' "$2"
