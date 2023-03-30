@@ -23,6 +23,6 @@ ln -s "$(brew --prefix)/bin/gsha256sum" "$(brew --prefix)/usr/bin/env sha256sum"
 # Cleaning all brew intermediate staff
 brew cleanup
 brew autoremove
-brew autoupdate start
+brew autoupdate start --greedy
 
 echo "Brew setup completed!"
