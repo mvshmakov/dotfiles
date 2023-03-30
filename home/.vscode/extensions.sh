@@ -1,3 +1,5 @@
+#!/usr/bin/env sh
+
 code --install-extension akamud.vscode-theme-onedark
 code --install-extension blairleduc.touch-bar-display
 code --install-extension bradlc.vscode-tailwindcss
