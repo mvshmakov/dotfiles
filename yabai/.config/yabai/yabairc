@@ -2,6 +2,7 @@
 #
 # yabai configuration file
 # Mosty taken from https://www.josean.com/posts/yabai-setup
+# TODO: instead of this one, grab example from /opt/homebrew/opt/yabai/share/yabai/examples/yabairc
 
 # Default layout (can be bsp, stack or float)
 yabai -m config layout bsp
@@ -31,6 +32,8 @@ yabai -m config mouse_drop_action swap
 
 # Disable specific apps from being managed with yabai
 yabai -m rule --add app="^Raycast$" manage=off
+# Do not manage Calendar popups which do not have a title (mostly for event name autocomplete)
+yabai -m rule --add app="^Calendar$" title="^$" manage=off
 yabai -m rule --add app="^Calculator$" manage=off
 yabai -m rule --add app="^LaunchControl$" manage=off
 yabai -m rule --add app="^Karabiner-(Elements|EventViewer)$" manage=off
