@@ -2,26 +2,21 @@
 #
 # TODO: unify it with .zshrc
 
-# Uncomment the following line to enable command auto-correction.
-ENABLE_CORRECTION="true"
-
-# Uncomment the following line to display red dots whilst waiting for completion.
-COMPLETION_WAITING_DOTS="true"
-
 # Increase Bash history size. Allow 1 000 000 entries; the default is 500.
 HISTSIZE=1000000
-SAVEHIST=10000000
 HISTFILESIZE=1000000000
 # Omit duplicates and commands that begin with a space from history.
 HISTCONTROL="ignoreboth"
 HISTFILE="$XDG_DATA_HOME/bash/history"
+
+eval "$(/opt/homebrew/bin/brew shellenv)"
 
 # Be quiet on success
 ssh-add -q --apple-use-keychain "$SSH_KEY_PATH"
 ssh-add -q --apple-use-keychain "$SSH_TEST_KEY_PATH"
 
 # Colorizes common UNIX tools output (GRC - Generic Colorizer)
-GRC_ALIASES=true
+export GRC_ALIASES=true
 [[ -s "$(brew --prefix)/etc/grc.sh" ]] && source "$(brew --prefix)/etc/grc.sh"
 
 source "$HOME"/shell-sources/aliasrc
@@ -44,14 +39,13 @@ eval "$(fnm env --use-on-cd)"
 # Activate *direnv* https://direnv.net/docs/hook.html#bash
 eval "$(direnv hook bash)"
 
-[ -f ~/.fzf.bash ] && source "$HOME"/.fzf.bash
+[ -f "$HOME"/.fzf.bash ] && source "$HOME"/.fzf.bash
 
 source "$(brew --prefix)/etc/profile.d/z.sh"
 
 # Configuring Homebrew shell completions
 # https://docs.brew.sh/Shell-Completion#configuring-completions-in-bash
 if type brew &>/dev/null; then
-	HOMEBREW_PREFIX="$(brew --prefix)"
 	if [[ -r "${HOMEBREW_PREFIX}/etc/profile.d/bash_completion.sh" ]]; then
 		source "${HOMEBREW_PREFIX}/etc/profile.d/bash_completion.sh"
 	else
