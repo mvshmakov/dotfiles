@@ -19,4 +19,4 @@ jobs:
           ignore_paths: _archive
           # ShellCheck doesn't support zsh yet
           # https://github.com/koalaman/shellcheck/issues/809
-          ignore_names: *.zsh
+          ignore_names: '*.zsh'
