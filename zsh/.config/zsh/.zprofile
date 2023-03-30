@@ -59,10 +59,22 @@ export INPUTRC="$XDG_CONFIG_HOME/readline/inputrc"
 export HOMEBREW_AUTOREMOVE=1
 # Uses `bat` on `brew cat`
 export HOMEBREW_BAT=1
-# Suppress the warning about controlling Homebrew with environment variables
-export HOMEBREW_NO_ENV_HINTS=1
 export HOMEBREW_VERBOSE=1
-export HOMEBREW_BREWFILE="$XDG_CONFIG_HOME/brew/Brewfile"
+# Prints install times for each formula at the end of the run
+export HOMEBREW_DISPLAY_INSTALL_TIMES=1
+# Use Bootsnap to speed up repeated brew calls
+export HOMEBREW_BOOTSNAP=1
+# Always use a Homebrew-installed curl & git
+export HOMEBREW_FORCE_BREWED_CURL=1
+export HOMEBREW_FORCE_BREWED_GIT=1
+# Forbid HTTPS to HTTP redirects
+export HOMEBREW_NO_INSECURE_REDIRECT=1
+# Use GUI when asking for a password (invoke `sudo -A`)
+export SUDO_ASKPASS=1
+export HOMEBREW_CASK_OPTS="--greedy"
+export HOMEBREW_LOGS="$XDG_STATE_HOME/brew"
+export HOMEBREW_CACHE="$XDG_CACHE_HOME/brew"
+export HOMEBREW_BUNDLE_FILE="$XDG_CONFIG_HOME/brew/Brewfile"
 # GitHub will allow a greater number of API requests with PAT
 HOMEBREW_GITHUB_API_TOKEN="$(gh auth token)"
 export HOMEBREW_GITHUB_API_TOKEN
