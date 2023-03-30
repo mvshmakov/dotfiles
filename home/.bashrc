@@ -1,4 +1,7 @@
+#!/usr/bin/env bash
+#
 # TODO: unify it with .zshrc
+
 # Uncomment the following line to enable command auto-correction.
 ENABLE_CORRECTION="true"
 
@@ -14,15 +17,15 @@ HISTCONTROL="ignoreboth"
 HISTFILE="$XDG_DATA_HOME/bash/history"
 
 # Be quiet on success
-ssh-add -q --apple-use-keychain $SSH_KEY_PATH
-ssh-add -q --apple-use-keychain $SSH_TEST_KEY_PATH
+ssh-add -q --apple-use-keychain "$SSH_KEY_PATH"
+ssh-add -q --apple-use-keychain "$SSH_TEST_KEY_PATH"
 
 # Colorizes common UNIX tools output (GRC - Generic Colorizer)
 GRC_ALIASES=true
 [[ -s "$(brew --prefix)/etc/grc.sh" ]] && source "$(brew --prefix)/etc/grc.sh"
 
-source ~/shell-sources/aliasrc
-source ~/shell-sources/.functions
+source "$HOME"/shell-sources/aliasrc
+source "$HOME"/shell-sources/.functions
 
 # Add tab completion for SSH hostnames based on ~/.ssh/config, ignoring wildcards
 [ -e "$HOME/.ssh/config" ] && complete -o "default" -o "nospace" -W "$(grep "^Host" ~/.ssh/config | grep -v "[?*]" | cut -d " " -f2- | tr ' ' '\n')" scp sftp ssh
@@ -38,22 +41,22 @@ eval "$(pyenv init -)"
 # https://github.com/Schniz/fnm#bash
 eval "$(fnm env --use-on-cd)"
 
-# Activate *direnv* https://direnv.net/docs/hook.html#zsh
+# Activate *direnv* https://direnv.net/docs/hook.html#bash
 eval "$(direnv hook bash)"
 
-[ -f ~/.fzf.bash ] && source ~/.fzf.bash
+[ -f ~/.fzf.bash ] && source "$HOME"/.fzf.bash
 
 source "$(brew --prefix)/etc/profile.d/z.sh"
 
 # Configuring Homebrew shell completions
 # https://docs.brew.sh/Shell-Completion#configuring-completions-in-bash
 if type brew &>/dev/null; then
-    HOMEBREW_PREFIX="$(brew --prefix)"
-    if [[ -r "${HOMEBREW_PREFIX}/etc/profile.d/bash_completion.sh" ]]; then
-        source "${HOMEBREW_PREFIX}/etc/profile.d/bash_completion.sh"
-    else
-        for COMPLETION in "${HOMEBREW_PREFIX}/etc/bash_completion.d/"*; do
-            [[ -r "${COMPLETION}" ]] && source "${COMPLETION}"
-        done
-    fi
+	HOMEBREW_PREFIX="$(brew --prefix)"
+	if [[ -r "${HOMEBREW_PREFIX}/etc/profile.d/bash_completion.sh" ]]; then
+		source "${HOMEBREW_PREFIX}/etc/profile.d/bash_completion.sh"
+	else
+		for COMPLETION in "${HOMEBREW_PREFIX}/etc/bash_completion.d/"*; do
+			[[ -r "$COMPLETION" ]] && source "$COMPLETION"
+		done
+	fi
 fi
