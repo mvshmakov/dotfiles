@@ -1,6 +1,7 @@
 # SKHD - Simple hotkey daemon for macOS (configuration file)
 # Config is mostly taken from https://www.josean.com/posts/yabai-setup
 # More explanatios: https://www.youtube.com/watch?v=k94qImbFKWE&ab_channel=JoseanMartinez
+# TODO: instead of this one, grab example from /opt/homebrew/opt/yabai/share/yabai/examples/skhd
 
 # Change window focus within space
 alt - j : yabai -m window --focus south
@@ -64,3 +65,5 @@ ctrl + alt - r : brew services restart yabai
 
 # Yubikey
 ctrl + alt - y : gpg_relearn_yubikey
+# TODO: remove it for the sake of `toggle_desktop`
+ctrl + alt - d : hide_desktop
