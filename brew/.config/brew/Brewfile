@@ -6,13 +6,6 @@
 
 # TODO: migrate it all on Nix and leave here only what cannot be installed through Nix
 
-# Upgrades all brew packages and checks for issues
-# All env variables: https://docs.brew.sh/Manpage#environment
-# * `brew update` (update brew itself) is superseded by `brew autoupdate start`
-# * `brew cleanup` and `brew autoremove` (clean up old versions of installed formulae) is superseded
-#    by setting HOMEBREW_AUTOREMOVE and not setting HOMEBREW_NO_INSTALL_CLEANUP
-alias upgrade='brew upgrade --greedy --display-times'
-
 # Brew aliases functionality
 tap "homebrew/aliases"
 tap "homebrew/bundle"
@@ -154,6 +147,7 @@ brew "tealdeer"
 brew "testdisk" 
 brew "tmux"
 brew "tmuxinator"
+# Using it instead of the rm for soft-deletion
 brew "trash"
 brew "tree"
 brew "ykman"
