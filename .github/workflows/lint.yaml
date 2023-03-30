@@ -14,5 +14,9 @@ jobs:
       - uses: actions/checkout@v3
       - name: Run ShellCheck
         uses: ludeeus/action-shellcheck@master
-        with: 
+        with:
+          # TODO: get rid of _archive ignore
           ignore_paths: _archive
+          # ShellCheck doesn't support zsh yet
+          # https://github.com/koalaman/shellcheck/issues/809
+          ignore_names: *.zsh
