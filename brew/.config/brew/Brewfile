@@ -6,8 +6,6 @@
 
 # TODO: migrate it all on Nix and leave here only what cannot be installed through Nix
 
-# Brew aliases functionality
-tap "homebrew/aliases"
 tap "homebrew/bundle"
 tap "homebrew/cask"
 tap "homebrew/cask-fonts"
