@@ -1,3 +1,5 @@
+#!/usr/bin/env zsh
+#
 # Manually setting up language environment for double-width characters
 # https://sw.kovidgoyal.net/kitty/faq/#keys-such-as-arrow-keys-backspace-delete-home-end-etc-do-not-work-when-using-su-or-sudo
 export LANG=en_US.UTF-8 LC_ALL=en_US.UTF-8
