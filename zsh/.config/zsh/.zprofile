@@ -179,5 +179,7 @@ export PYTHONSTARTUP="$XDG_CONFIG_HOME/python/pythonstartup.py"
 # To correctly link and build psycopg2: https://stackoverflow.com/a/69403177/12349023
 LIBPQ_PREFIX="$(brew --prefix libpq)"
 OPENSSL_PREFIX="$(brew --prefix openssl)"
-export LDFLAGS="-L$LIBPQ_PREFIX/lib -L$OPENSSL_PREFIX/lib"
-export CPPFLAGS="-I$LIBPQ_PREFIX/include -I$OPENSSL_PREFIX/include"
+# Also, add the HOMEBREW_PREFIX/(lib|include) to the LDFLAGS and CPPFLAGS
+# https://docs.brew.sh/Homebrew-and-Python#brewed-python-modules
+export LDFLAGS="-L$LIBPQ_PREFIX/lib -L$OPENSSL_PREFIX/lib -L$HOMEBREW_PREFIX/lib"
+export CPPFLAGS="-I$LIBPQ_PREFIX/include -I$OPENSSL_PREFIX/include -L$HOMEBREW_PREFIX/include"
