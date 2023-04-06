@@ -41,7 +41,6 @@ One should also enable the `Reduced motion` option in the `System Preferences` t
 
 ## Comments for packages in the `brew` folder
 
-- `ql` is an alias for a quick look MacOS files feature.
 - The `bat` is a good alternative to the `cat` for `JSON` files.
 
 If you want your current system configuration to match your Brewfile (purge all non-fixed deps)
