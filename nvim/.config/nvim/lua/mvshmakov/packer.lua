@@ -160,7 +160,7 @@ return packer.startup(function(use)
     use("airblade/vim-gitgutter") -- +- signs inside the files
     use("tpope/vim-fugitive") -- git commands inside nvim
     use("kdheepak/lazygit.nvim") -- lazygit support
-    -- use "lewis6991/gitsigns.nvim"
+    -- use("lewis6991/gitsigns.nvim")
 
     -- Direnv integration (proper hook execution + .envrc syntax)
     use("direnv/direnv.vim")

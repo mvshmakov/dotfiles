@@ -1,6 +1,6 @@
 require("mvshmakov.options")
 require("mvshmakov.keymaps")
-require("mvshmakov.plugins")
+require("mvshmakov.packer")
 require("mvshmakov.autocommands")
 require("mvshmakov.colorscheme")
 require("mvshmakov.cmp")
