@@ -58,10 +58,10 @@ shift + alt - 5 : yabai -m window --space 5
 shift + alt - 6 : yabai -m window --space 6
 shift + alt - 7 : yabai -m window --space 7
 
-# Stop/Start/Restart Yabai
+# Stop/Start/Restart Yabai & SKDH
 ctrl + alt - q : brew services stop yabai
 ctrl + alt - s : brew services start yabai
-ctrl + alt - r : brew services restart yabai
+ctrl + alt - r : brew services restart skhd && brew services restart yabai
 
 # Custom scripts must be run with full path as brew formulae
 # rewrites the PATH to the fixed string
