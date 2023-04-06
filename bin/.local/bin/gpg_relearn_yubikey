@@ -7,4 +7,7 @@
 #
 # Context: https://github.com/drduh/YubiKey-Guide/issues/19
 
+set -eu
+IFS=$(printf '\n\t')
+
 gpg-connect-agent "scd serialno" "learn --force" /bye

@@ -5,6 +5,9 @@
 #
 # Source: https://news.ycombinator.com/item?id=35132018
 
+set -eu
+IFS=$(printf '\n\t')
+
 ROTATION=$(shuf -n 1 -e '-' '')$(shuf -n 1 -e "$(seq 0.05 .5)")
 convert -density 150 "$1" \
 	-linear-stretch '1.5%x2%' \

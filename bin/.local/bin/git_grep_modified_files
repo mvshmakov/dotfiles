@@ -1,12 +1,12 @@
-#!/usr/bin/env bash
+#!/usr/bin/env sh
 
-set -euo pipefail
-IFS=$'\n\t'
+set -eu
+IFS=$(print '\n\t')
 
 [ "$#" -eq 1 ] || {
-    usage
-    echo >&2 "1 argument required, $# provided"
-    exit 1
+	usage
+	echo >&2 "1 argument required, $# provided"
+	exit 1
 }
 
 # Grep with extended regexp + ignore case through all the modified files

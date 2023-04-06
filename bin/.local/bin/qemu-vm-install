@@ -1,17 +1,19 @@
-#! /usr/bin/env bash
+#!/usr/bin/env sh
 #
+# Creates a qemu image and runs it
 # Inspired by https://github.com/tsoding/wisp
 # TODO: rewrite this script to use on MacOS ARM
 
-set -xe
+set -eu
+IFS=$(printf '\n\t')
 
 ISO_PATH="$1"
 QCOW2_IMAGE="$2"
 
 qemu-img create -f qcow2 "$QCOW2_IMAGE" 20G
 qemu-system-x86_64 \
-    -enable-kvm \
-    -m 4096 \
-    -cdrom "$ISO_PATH" \
-    -hda "$QCOW2_IMAGE" \
-    -boot d
+	-enable-kvm \
+	-m 4096 \
+	-cdrom "$ISO_PATH" \
+	-hda "$QCOW2_IMAGE" \
+	-boot d

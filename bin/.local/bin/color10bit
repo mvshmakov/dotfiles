@@ -1,6 +1,9 @@
 #!/usr/bin/env sh
 #
-# Print a sequence of 10-bit colors to the terminal.
+# Prints a sequence of 10-bit colors to the terminal.
+
+set -eu
+IFS=$(printf '\n\t')
 
 awk -v term_cols="${width:-$(tput cols || echo 80)}" 'BEGIN{
     s="/\\";

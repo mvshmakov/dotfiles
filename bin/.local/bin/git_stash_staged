@@ -1,7 +1,7 @@
-#!/usr/bin/env bash
+#!/usr/bin/env sh
 
-set -euo pipefail
-IFS=$'\n\t'
+set -eu
+IFS=$(print '\n\t')
 
 # Source: https://davidwalsh.name/more-awesome-git-aliases#stash-staged
 # Stash staged changes

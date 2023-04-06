@@ -1,0 +1,8 @@
+#!/usr/bin/env sh
+#
+# Install global packages from system-requirements.txt
+
+set -eu
+IFS=$(printf '\n\t')
+
+python -m pip install -r "$XDG_CONFIG_HOME"/python/system-requirements.txt

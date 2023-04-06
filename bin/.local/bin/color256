@@ -1,9 +1,17 @@
-#! /usr/bin/env bash
+#!/usr/bin/env sh
+#
+# Prints 256 colors with escape characters
 
-# TODO: should be able to execute with POSIX shell
-for i in {0..255}; do
-    printf "\x1b[48;5;%sm%3d\e[0m " "$i" "$i"
-    if ((i == 15)) || ((i > 15)) && (((i - 15) % 6 == 0)); then
-        printf "\n"
-    fi
+set -eu
+IFS=$(printf '\n\t')
+
+i=0
+while [ "$i" -ne 256 ]; do
+	printf "\x1b[48;5;%sm%3d\e[0m " "$i" "$i"
+
+	if [ "$i" -gt 15 ] || [ "$i" -eq 15 ] && [ $(((i - 15) % 6)) -eq 0 ]; then
+		printf "\n"
+	fi
+
+	i=$((i + 1))
 done
