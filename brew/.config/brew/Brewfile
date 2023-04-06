@@ -3,6 +3,9 @@
 # 
 # A big list of comonly used brew packages
 # https://github.com/joelparkerhenderson/brewfile/blob/master/Brewfile
+#
+# Brew always calls tap on the packages that are not in the core, so
+# having an explicit tap does not add any overhead
 
 # TODO: migrate it all on Nix and leave here only what cannot be installed through Nix
 
@@ -22,10 +25,8 @@ brew "macos-fuse-t/homebrew-cask/fuse-t"
 cask "macfuse"
 
 brew "antigen"
-brew "avifquicklook"
 brew "awscli"
 brew "axel"
-brew "bat"
 brew "bitwarden-cli"
 brew "cheat"
 brew "circleci"
@@ -148,12 +149,17 @@ brew "trash"
 brew "tree"
 brew "ykman"
 brew "yq"
-brew "eth-p/software/bat-extras"
+
+# Cat alternative
+brew "bat"
+tap "eth-p/software"
+brew "bat-extras"
 
 # PDR and other docs reader
-brew "zegervdv/zathura/zathura"
-brew "zegervdv/zathura/zathura-djvu"
-brew "zegervdv/zathura/zathura-pdf-poppler"
+tap "zegervdv/zathura"
+brew "zathura"
+brew "zathura-djvu"
+brew "zathura-pdf-poppler"
 
 cask "1password"
 cask "adobe-acrobat-reader"
@@ -216,9 +222,12 @@ cask "keka"
 
 # Window managers
 # cask "amethyst" # superseded by yabai & skhd + is a bit more buggy than the latter combo
-# These two work together, one for window management, another for keyboard shortcuts
-brew "koekeishiya/formulae/yabai"
-brew "koekeishiya/formulae/skhd"
+# The following two work together, one for window management, another for keyboard shortcuts
+# Each reinstall requires to remove explicitly apps from the a11y settings and add on ask
+tap "koekeishiya/formulae"
+brew "yabai"
+# --with-logging adds log files to the plist
+brew "skhd", args: ["with-logging"]
 
 # Browsers
 cask "chromium"
@@ -281,7 +290,9 @@ cask "monero-wallet"
 cask "postman"
 # cask "insomnia"
 
-cask "prismatik"
+# Apple QuickLook plugins
+# `ql` is an alias for QuickLook
+cask "avifquicklook"
 cask "qlcolorcode"
 cask "qlimagesize"
 cask "qlmarkdown"
@@ -289,6 +300,8 @@ cask "qlstephen"
 cask "qlvideo"
 cask "quicklook-json"
 cask "quicklookase"
+
+cask "prismatik"
 cask "quik"
 cask "raycast"
 cask "raspberry-pi-imager"
@@ -345,7 +358,8 @@ brew "pinentry-mac"
 # GPG modern analogue, can use SSH key for encryption
 # https://github.com/C2SP/C2SP/blob/main/age.md
 # Rust implementation
-brew "str4d.xyz/rage/rage"
+tap "str4d.xyz/rage"
+brew "rage"
 # brew "age"
 
 # OpenPGP key archivation to paper / unarchivation from it
