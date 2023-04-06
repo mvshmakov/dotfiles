@@ -37,6 +37,7 @@ yabai -m rule --add app="^Calendar$" title="^$" manage=off
 yabai -m rule --add app="^Calculator$" manage=off
 yabai -m rule --add app="^LaunchControl$" manage=off
 yabai -m rule --add app="^Karabiner-(Elements|EventViewer)$" manage=off
+yabai -m rule --add app="^LuLu$" title="LuLu Alert" manage=off
 yabai -m rule --add app="^System (Information|Preferences|Settings)$" manage=off
 # Do not manage TouchID prompts because the Firefox Bitwarden extension closes
 # on window resize caused by yabai. The app name was found with Karabiner-EventViewer
