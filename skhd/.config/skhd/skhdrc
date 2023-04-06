@@ -63,7 +63,8 @@ ctrl + alt - q : brew services stop yabai
 ctrl + alt - s : brew services start yabai
 ctrl + alt - r : brew services restart yabai
 
-# Yubikey
-ctrl + alt - y : gpg_relearn_yubikey
-# TODO: remove it for the sake of `toggle_desktop`
-ctrl + alt - d : hide_desktop
+# Custom scripts must be run with full path as brew formulae
+# rewrites the PATH to the fixed string
+# https://github.com/koekeishiya/skhd/issues/85
+ctrl + alt - y : $HOME/.local/bin/gpg_relearn_yubikey
+ctrl + alt - d : $HOME/.local/bin/toggle_desktop_items

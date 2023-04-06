@@ -1,0 +1,20 @@
+#!/usr/bin/env sh
+#
+# Hides and shows desktop items
+
+set -eu
+IFS=$(printf '\n\t')
+
+CURRENT_FILENAME=${0##*/}
+CREATE_DESKTOP_STATE=$(defaults read com.apple.finder CreateDesktop)
+
+if [ "$CREATE_DESKTOP_STATE" = "true" ]; then
+	defaults write com.apple.finder CreateDesktop false
+	terminal-notifier -title "$CURRENT_FILENAME" -message "Desktop items are hidden"
+else
+	defaults write com.apple.finder CreateDesktop true
+	terminal-notifier -title "$CURRENT_FILENAME" -message "Desktop items are shown"
+fi
+
+# This is required to reflect the changes
+killall Finder

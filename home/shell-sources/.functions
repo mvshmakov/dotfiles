@@ -66,15 +66,3 @@ function speedup_spotlight() {
 		-prune -o -type d -name 'node_modules' -exec touch '{}/.metadata_never_index' \; \
 		-print
 }
-
-# Hides and restores all the files
-# on the desktop (the `presentation mode`)
-function hide_desktop() {
-	defaults write com.apple.finder CreateDesktop false
-	killall Finder
-}
-
-function show_desktop() {
-	defaults write com.apple.finder CreateDesktop true
-	killall Finder
-}

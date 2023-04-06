@@ -78,6 +78,9 @@ brew "lazygit"
 brew "texlive"
 # Backend processor for BibLaTeX
 brew "biber"
+# To be able to send notifications from the scripts
+# Required for some items in ../../../bin/.local/bin/
+brew "terminal-notifier"
 # PostgreSQl
 brew "libpq"
 brew "lsyncd"
