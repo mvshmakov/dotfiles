@@ -37,6 +37,12 @@ keymap("n", "<leader>fg", ":Telescope live_grep<CR>", opts)
 keymap("n", "<leader>fb", ":Telescope buffers<CR>", opts)
 keymap("n", "<leader>fh", ":Telescope help_tags<CR>", opts)
 
+-- Toggle Undo Tree
+keymap("n", "<leader>u", vim.cmd.UndotreeToggle)
+
+-- Git fugitive
+keymap("n", "<leader>gs", ":Git<CR>", opts)
+
 keymap("n", "]t", function()
     require("todo-comments").jump_next()
 end, { desc = "Next todo comment" })
