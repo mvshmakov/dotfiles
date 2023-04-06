@@ -59,6 +59,9 @@ export INPUTRC="$XDG_CONFIG_HOME/readline/inputrc"
 # Runs 'brew autoremove' (remove formulas installed as dependencies that are
 # no longer needed) when one runs 'brew cleanup' and 'brew uninstall'
 export HOMEBREW_AUTOREMOVE=1
+# Pass --greedy to cask upgrade command
+# https://github.com/Homebrew/brew/issues/15097
+export HOMEBREW_UPGRADE_GREEDY=1
 # Uses `bat` on `brew cat`
 export HOMEBREW_BAT=1
 export HOMEBREW_VERBOSE=1
@@ -149,7 +152,7 @@ export SSH_TEST_KEY_PATH=~/.ssh/id_rsa-test
 # Required for the ssh-askpass https://github.com/theseal/ssh-askpass/blob/master/ssh-askpass.plist#L14-L15
 SSH_ASKPASS="$(brew --prefix theseal/ssh-askpass/ssh-askpass)/bin/ssh-askpass"
 export SSH_ASKPASS
-# Sudo prompt with be taken from SSH_ASKPASS
+# Sudo prompt will be taken from SSH_ASKPASS
 export SUDO_ASKPASS="$SSH_ASKPASS"
 
 # Use bat as fzf preview tool
