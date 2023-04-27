@@ -1,33 +1,168 @@
 {
-  "cSpell.language": "en,en-US,ru",
-  "cSpell.userWords": ["Shmakov", "mvshmakov", "telegraf"],
-
-  "diffEditor.ignoreTrimWhitespace": false,
-
-  "editor.accessibilitySupport": "off",
-  "editor.defaultFormatter": "esbenp.prettier-vscode",
-  "editor.fontFamily": "FiraCode-Retina",
+  /** Editor settings */
+  "editor.fontFamily": "FiraCode Nerd Font Mono",
   "editor.fontLigatures": true,
-  "editor.formatOnSave": true,
+  "editor.formatOnPaste": true,
   "editor.suggestSelection": "first",
+  "editor.linkedEditing": true,
+  "editor.hover.enabled": true,
+  "editor.bracketPairColorization.enabled": true,
+  "editor.formatOnSave": true,
+  "editor.formatOnSaveMode": "modificationsIfAvailable",
+  "editor.inlineSuggest.enabled": true,
+  "editor.unicodeHighlight.ambiguousCharacters": false,
+  "editor.stickyScroll.enabled": true,
+  "editor.minimap.enabled": false,
+  /** File-specific settings */
+  // Optional but recommended for eslint-prettier
+  "files.autoSave": "onFocusChange",
+  "files.associations": {
+    "config": "gitconfig",
+    "tmux.conf": "tmux",
+    "inputrc": "shellscript",
+    "gitmessage": "plaintext",
+    "*.nix": "nix",
+    "*.sh": "shellscript"
+  },
+  "files.exclude": {
+    "**/.git": false,
+    "**/.hg": false,
+    "**/.svn": false
+  },
+  /** Language-specific settings */
+  "[typescriptreact][typescript][javascriptreact][javascript][json][jsonc][yaml]": {
+    // Prettier-eslint recommended settings
+    "editor.defaultFormatter": "rvest.vs-code-prettier-eslint",
+    "editor.formatOnPaste": false, // required
+    "editor.formatOnType": false, // required
+    "editor.formatOnSaveMode": "file" // required to format on save
+  },
   "[python]": {
+    // Fixes for black formatter
+    // https://stackoverflow.com/questions/62427817/black-does-not-support-format-selection-command-vs-code-error
+    "editor.formatOnSaveMode": "file",
+    "editor.formatOnPaste": false,
     "editor.defaultFormatter": "ms-python.python"
   },
-
+  "[shellscript]": {
+    "editor.defaultFormatter": "foxundermoon.shell-format"
+  },
+  "[html]": {
+    "editor.defaultFormatter": "vscode.html-language-features"
+  },
+  "[markdown]": {
+    "editor.defaultFormatter": "DavidAnson.vscode-markdownlint"
+  },
+  "[lua]": {
+    "editor.defaultFormatter": "JohnnyMorganz.stylua"
+  },
+  "[dockerfile]": {
+    "editor.defaultFormatter": "ms-azuretools.vscode-docker"
+  },
+  /** Frontend tooling settings */
+  "jest.autoRun": "off",
+  "svg.preview.background": "transparent",
+  /** Python tooling settings */
+  "python.linting.enabled": true,
+  "python.linting.flake8Enabled": true,
+  "python.formatting.provider": "black",
+  "python.languageServer": "Pylance",
+  "python.envFile": "${workspaceFolder}/.envrc",
+  "dvc.pythonPath": "",
+  "dvc.doNotShowCliUnavailable": false,
+  "jupyter.askForKernelRestart": false,
+  "notebook.lineNumbers": "on",
+  "notebook.cellToolbarLocation": {
+    "default": "right",
+    "jupyter-notebook": "left"
+  },
+  /** Git settings */
   "git.confirmSync": false,
   "git.autofetch": true,
-
-  "python.languageServer": "Default",
-  "python.linting.flake8Enabled": true,
-
-  "tabnine.experimentalAutoImports": true,
-
+  "githubPullRequests.terminalLinksHandler": "github",
+  "githubPullRequests.pullBranch": "never",
+  /** Nix-specific settings */
+  "nix.enableLanguageServer": true,
+  "nix.formatterPath": "nixpkgs-fmt",
+  "nix.serverPath": "nil",
+  /** Lua-specific settings */
+  "Lua.diagnostics.globals": [
+    "vim"
+  ],
+  "stylua.styluaPath": "/opt/homebrew/bin/stylua",
+  "stylua.searchParentDirectories": true,
+  /** Workbench-specific settings */
+  "workbench.colorTheme": "Nord",
+  "workbench.iconTheme": "city-lights-icons-vsc",
+  "workbench.productIconTheme": "material-product-icons",
+  "workbench.startupEditor": "newUntitledFile",
+  "workbench.editorAssociations": {
+    "*.ipynb": "jupyter-notebook"
+  },
+  /** (N)vim-specific settings */
+  "vim.camelCaseMotion.enable": true,
+  "vscode-neovim.neovimExecutablePaths.darwin": "/opt/homebrew/bin/nvim",
+  /** AI-specific settings */
+  "aws.codeWhisperer.shareCodeWhispererContentWithAWS": false,
+  "aws.suppressPrompts": {
+    "codeWhispererConnectionExpired": true
+  },
+  "github.copilot.enable": {
+    "*": true
+  },
+  /** Telemetry settings */
+  "telemetry.telemetryLevel": "off",
+  "redhat.telemetry.enabled": false,
+  "aws.telemetry": false,
+  "gitlens.telemetry.enabled": false,
+  /** Visual settings */
+  "zenMode.hideTabs": false,
+  "explorer.confirmDragAndDrop": false,
+  "diffEditor.ignoreTrimWhitespace": false,
   "vsicons.dontShowNewVersionMessage": true,
+  /** Functional settings */
+  "search.useGlobalIgnoreFiles": true,
+  "emmet.includeLanguages": {
+    "django-html": "html"
+  },
+  "projectManager.git.baseFolders": [
+    "~/projects"
+  ],
+  /** Miscellaneous */
+  "direnv.path.executable": "/opt/homebrew/bin/direnv",
   "vsintellicode.modify.editor.suggestSelection": "automaticallyOverrodeDefaultValue",
-
-  "window.zoomLevel": 0,
-
-  "workbench.colorTheme": "Atom One Dark",
-  "workbench.iconTheme": "vscode-icons",
-  "workbench.startupEditor": "none"
+  "security.workspace.trust.untrustedFiles": "open",
+  /** Todo-tree settings */
+  "todo-tree.regex.regex": "(//|#|<!--|;|/\\*|^|^\\s*(-|\\d+.))\\s*($TAGS)",
+  "todo-tree.general.tags": [
+    "BUG",
+    "HACK",
+    "FIXME",
+    "TODO",
+    "XXX",
+    "[ ]",
+    "[x]"
+  ],
+  /** cSpell settings */
+  "cSpell.language": "en,ru",
+  "cSpell.userWords": [
+    "apos",
+    "avif",
+    "createadmin",
+    "creds",
+    "denormalized",
+    "Immer",
+    "isempty",
+    "memfs",
+    "mvshmakov",
+    "nondefault",
+    "nondefaultname",
+    "saschazar",
+    "semibold",
+    "Shmakov",
+    "telegraf",
+    "wasm",
+    "yametrika",
+    "sudo"
+  ]
 }
