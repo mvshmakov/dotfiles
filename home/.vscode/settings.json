@@ -68,8 +68,7 @@
   "python.formatting.provider": "black",
   "python.languageServer": "Pylance",
   "python.envFile": "${workspaceFolder}/.envrc",
-  "dvc.pythonPath": "",
-  "dvc.doNotShowCliUnavailable": false,
+  "dvc.studio.shareExperimentsLive": true,
   "jupyter.askForKernelRestart": false,
   "notebook.lineNumbers": "on",
   "notebook.cellToolbarLocation": {
@@ -163,6 +162,11 @@
     "telegraf",
     "wasm",
     "yametrika",
-    "sudo"
-  ]
+    "sudo",
+    "Brewfile",
+    "dotfiles",
+    "googlecode",
+    "iterm",
+    "restow"
+  ],
 }
