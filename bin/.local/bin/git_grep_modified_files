@@ -1,7 +1,7 @@
 #!/usr/bin/env sh
 
 set -eu
-IFS=$(print '\n\t')
+IFS=$(printf '\n\t')
 
 [ "$#" -eq 1 ] || {
 	usage

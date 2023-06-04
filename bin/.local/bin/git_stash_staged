@@ -1,7 +1,7 @@
 #!/usr/bin/env sh
 
 set -eu
-IFS=$(print '\n\t')
+IFS=$(printf '\n\t')
 
 # Source: https://davidwalsh.name/more-awesome-git-aliases#stash-staged
 # Stash staged changes

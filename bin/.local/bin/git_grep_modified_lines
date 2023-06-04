@@ -1,9 +1,10 @@
-#!/usr/bin/env bash
+#!/usr/bin/env sh
 #
-# TODO: migrate this to POSIX shell
+# Grep with extended regexp through all the modified lines
+# Source: https://stackoverflow.com/a/26622262/12349023
 
-set -euo pipefail
-IFS=$'\n\t'
+set -eu
+IFS=$(printf '\n\t')
 
 [ "$#" -eq 1 ] || {
 	usage
