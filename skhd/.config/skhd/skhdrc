@@ -31,6 +31,7 @@ shift + alt - t : yabai -m window --toggle float --grid 4:4:1:1:2:2
 shift + alt - m : yabai -m window --toggle zoom-fullscreen
 
 # Balance out tree of windows (resize to occupy same area)
+# shift + alt - = is not supported
 shift + alt - e : yabai -m space --balance
 
 # Shortcuts For Moving Windows Around (Swap Windows Within Space)
@@ -59,9 +60,12 @@ shift + alt - 6 : yabai -m window --space 6
 shift + alt - 7 : yabai -m window --space 7
 
 # Stop/Start/Restart Yabai & SKDH
-ctrl + alt - q : brew services stop yabai
-ctrl + alt - s : brew services start yabai
-ctrl + alt - r : brew services restart skhd && brew services restart yabai
+# Brew services integration was removed https://github.com/koekeishiya/yabai/issues/867#issuecomment-1531122057
+# Can be restored in the future and better to stick with it in this case
+# ctrl + alt - q : brew services stop yabai
+ctrl + alt - q : yabai --stop-service
+ctrl + alt - s : yabai --start-service
+ctrl + alt - r : yabai --restart-service && skhd --restart-service
 
 # Custom scripts must be run with full path as brew formulae
 # rewrites the PATH to the fixed string
