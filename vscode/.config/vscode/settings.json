@@ -92,7 +92,7 @@
   "stylua.searchParentDirectories": true,
   /** Workbench-specific settings */
   "workbench.colorTheme": "Nord",
-  "workbench.iconTheme": "city-lights-icons-vsc",
+  "workbench.iconTheme": "city-lights-icons-vsc-light",
   "workbench.productIconTheme": "material-product-icons",
   "workbench.startupEditor": "newUntitledFile",
   "workbench.editorAssociations": {
@@ -127,7 +127,6 @@
   "projectManager.git.baseFolders": [
     "~/projects"
   ],
-  /** Miscellaneous */
   "direnv.path.executable": "/opt/homebrew/bin/direnv",
   "vsintellicode.modify.editor.suggestSelection": "automaticallyOverrodeDefaultValue",
   "security.workspace.trust.untrustedFiles": "open",
@@ -147,26 +146,49 @@
   "cSpell.userWords": [
     "apos",
     "avif",
+    "Brewfile",
     "createadmin",
     "creds",
     "denormalized",
+    "dotfiles",
+    "googlecode",
     "Immer",
     "isempty",
+    "iterm",
     "memfs",
     "mvshmakov",
     "nondefault",
     "nondefaultname",
+    "restow",
     "saschazar",
     "semibold",
     "Shmakov",
+    "Statoscope",
+    "sudo",
     "telegraf",
     "wasm",
-    "yametrika",
-    "sudo",
-    "Brewfile",
-    "dotfiles",
-    "googlecode",
-    "iterm",
-    "restow"
+    "yametrika"
   ],
+  "terminal.integrated.env.osx": {},
+  "totalTypeScript.hideAllTips": false,
+  "totalTypeScript.hideBasicTips": true,
+  "totalTypeScript.hiddenTips": [
+    "passing-generics-to-types",
+    "record-utility-type",
+    "partial-utility-type",
+    "pick-utility-type",
+    "tuple-type",
+    "type-alias-with-generics",
+    "type-alias-with-multiple-generics",
+    "never-keyword",
+    "conditional-type",
+    "nested-conditional-type",
+    "returntype-utility-type",
+    "keyof",
+    "generic-slots-in-functions",
+    "type-predicate",
+    "typeof",
+    "in-operator-narrowing"
+  ],
+  "dvc.doNotShowWalkthroughAfterInstall": true
 }
