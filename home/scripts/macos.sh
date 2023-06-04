@@ -1,4 +1,4 @@
-#! /usr/bin/env sh
+#!/usr/bin/env sh
 
 ###############################################################################
 # Screenshots                                                                 #
@@ -6,8 +6,8 @@
 
 # Saving screenshots in ~/screenshots
 if [ ! -d ~/screenshots ]; then
-	mkdir ~/screenshots
-	echo 'created ~/screenshots'
+  mkdir ~/screenshots
+  echo 'created ~/screenshots'
 fi
 
 echo 'Screenshots will be saved to ~/screenshots'
@@ -41,6 +41,9 @@ sudo systemsetup -settimezone "Europe/Moscow" >/dev/null
 
 # Disable the "Are you sure you want to open this application?" dialog
 defaults write com.apple.LaunchServices LSQuarantine -bool false
+
+# Expand "Save panel by default
+defaults write NSGlobalDomain NSNavPanelExpandedStateForSaveMode -bool true
 
 ###############################################################################
 # Finder                                                                      #
