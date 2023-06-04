@@ -1,22 +1,8 @@
-require("mvshmakov.options")
-require("mvshmakov.keymaps")
-require("mvshmakov.packer")
-require("mvshmakov.autocommands")
-require("mvshmakov.colorscheme")
-require("mvshmakov.cmp")
-require("mvshmakov.telescope")
-require("mvshmakov.treesitter")
--- require "mvshmakov.autopairs"
--- require "mvshmakov.comment"
-require("mvshmakov.gitsigns")
--- require "mvshmakov.nvim-tree"
--- require "mvshmakov.bufferline"
-require("mvshmakov.lualine")
-require("mvshmakov.toggleterm")
--- require "mvshmakov.project"
--- require "mvshmakov.impatient"
--- require "mvshmakov.illuminate"
--- require "mvshmakov.indentline"
--- require "mvshmakov.alpha"
-require("mvshmakov.lsp")
--- require "mvshmakov.dap"
+-- Adds byte-compilcation and caching of lua, added in 0.9.0
+-- https://github.com/neovim/neovim/blob/release-0.9/runtime/doc/news.txt
+vim.loader.enable()
+
+require("core.plugins")
+require("core.keymaps")
+require("core.autocommands")
+require("core.options")
