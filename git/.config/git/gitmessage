@@ -7,6 +7,7 @@
 # Body: Explain *what* and *why* (not *how*). Include task ID (GitHub issue).
 # Wrap at 72 chars. ################################## which is here:  #
 
+Signed-off-by: Maxim Shmakov <mvshmakov@mail.ru>
 
 # At the end: Include Co-authored-by for all contributors. 
 # Include at least one empty line before it. Format: 

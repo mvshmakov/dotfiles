@@ -96,6 +96,7 @@
     # Detect moved blocks of code and style them
     # differently from the usual removed/added lines
     colorMoved = default
+    tool = nvimdiff3
 [log]
     showSignature = true
 [merge]
@@ -125,6 +126,11 @@
     # Allow to rebase even on a dirty worktree
     # e.g., allow pull --rebase with local changes
     autoStash = true
+[rerere]
+    # Reuse recorded resolution of conflicted merges
+    # https://git-scm.com/docs/git-rerere
+    enabled = true
+    autoupdate = true
 [help]
     # Ask to autocorrect misspelled command
     autoCorrect = prompt
