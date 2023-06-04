@@ -1,11 +1,3 @@
-local version = vim.version()
--- At least 0.9.0
-if version.minor >= 9 or version.major > 0 then
-    vim.opt.splitkeep = "screen"
-    -- Improves diff mode: https://github.com/neovim/neovim/pull/14537
-    vim.opt.diffopt:append("linematch:60")
-end
-
 -- Disable unneeded host providers
 vim.g.loaded_perl_provider = 0
 vim.g.loaded_ruby_provider = 0
@@ -67,3 +59,7 @@ vim.opt.showmode = false -- we don't need to see things like -- INSERT -- as we 
 vim.opt.conceallevel = 0 -- so that `` is visible in markdown files
 vim.opt.pumheight = 10 -- completion pop up menu height (otherwise it is huge)
 vim.opt.termguicolors = true -- set term gui colors
+
+vim.opt.splitkeep = "screen"
+-- Improves diff mode: https://github.com/neovim/neovim/pull/14537
+vim.opt.diffopt:append("linematch:60")

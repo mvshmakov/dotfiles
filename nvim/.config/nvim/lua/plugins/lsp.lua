@@ -23,7 +23,7 @@ return {
     config = function()
         local lsp = require("lsp-zero").preset("recommended")
 
-        lsp.on_attach(function(client, bufnr)
+        lsp.on_attach(function(_, bufnr)
             lsp.default_keymaps({ buffer = bufnr })
         end)
 
@@ -40,5 +40,18 @@ return {
         })
 
         lsp.setup()
+
+        vim.keymap.set(
+            "n",
+            "gn",
+            "<Cmd>lua vim.lsp.diagnostic.goto_next()<CR>",
+            { desc = "Navigate to the next diagnostic" }
+        )
+        vim.keymap.set(
+            "n",
+            "gp",
+            "<Cmd>lua vim.lsp.diagnostic.goto_prev()<CR>",
+            { desc = "Navigate to the previous diagnostic" }
+        )
     end,
 }
