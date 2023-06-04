@@ -27,10 +27,12 @@ return {
     },
     config = function()
         local cmp = require("cmp")
-        local luasnip = require("luasnip")
         local lspkind = require("lspkind")
         local nvim_autopairs = require("nvim-autopairs")
         local cmp_autopairs = require("nvim-autopairs.completion.cmp")
+
+        local luasnip = require("luasnip")
+        require("luasnip.loaders.from_vscode").load()
 
         cmp.setup({
             -- REQUIRED - you must specify a snippet engine
@@ -62,11 +64,11 @@ return {
                 ["<CR>"] = cmp.mapping.confirm({ select = true }),
             }),
             sources = cmp.config.sources({
+                { name = "luasnip" },
                 { name = "nvim_lsp" },
                 { name = "nvim_lua" },
                 { name = "buffer" },
                 { name = "path" },
-                { name = "luasnip" },
             }),
         })
 
