@@ -1,0 +1,22 @@
+#!/usr/bin/env zsh
+#
+# Contains ZSH-only suffix aliases, so that Bash will be able to source shared ones
+# Suffix aliases allow to, say, paste just the URL, hit enter and ZSH will open the $BROWSER.
+# Mostly taken from: https://github.com/ohmyzsh/ohmyzsh/blob/master/plugins/common-aliases/common-aliases.plugin.zsh#L53-L87
+# Simplified with (a nice read): https://www.stefanjudis.com/today-i-learned/suffix-aliases-in-zsh/
+
+alias -s {htm,html,de,org,net,com,ru,php}=$BROWSER
+alias -s {txt,tex,js,ts,jsx,tsx,lua,sh,zsh,py}=$VISUAL
+alias -s {jpg,jpeg,png,gif,tiff}=$IMG_VIEWER
+alias -s {avi,mpg,mpeg,mov,mkv}=$VIDEO
+alias -s {mp3,wav,ogg}=$VIDEO
+alias -s {pdf,djvu}=$READER
+
+# Auto-clone git URLs
+alias -s git="git clone"
+
+# List whats inside packed file
+alias -s zip="unzip -l"
+alias -s rar="unrar l"
+alias -s tar="tar tf"
+alias -s tar.gz="echo"
