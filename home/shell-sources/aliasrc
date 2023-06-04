@@ -1,28 +1,30 @@
 #!/usr/bin/env sh
 #
-# To list all aliases just type `alias`
+# To list all aliases in shell type `alias`. Big portion of the list is from oh-my-zsh:
+# https://github.com/ohmyzsh/ohmyzsh/blob/master/plugins/common-aliases/common-aliases.plugin.zsh#LL26C20-L26C20
 
-# TODO: do we need color=auto?
-# alias ls='ls --color=auto'
-alias cp='cp -r'
-alias df='df -h'
-alias g='git'
+## Colorization ##
 
-alias ll='ls -alF'
-alias la='ls -A'
-alias l='ls -CF'
-
-# Always enable colored `grep` output
-# Note: `GREP_OPTIONS="--color=auto"` is deprecated, hence the alias usage.
+# It is still required to colorize the tools explicitly, because CLICOLOR
+# is only for the MacOS/BSD: https://unix.stackexchange.com/a/2904
+alias ls='ls --color=auto'
 alias grep='grep --color=auto'
 alias fgrep='fgrep --color=auto'
 alias egrep='egrep --color=auto'
 
+## Safety ##
+
+# Forcing the tools to ask for the deletion confirmation
+alias rm='rm -i'
+alias cp='cp -i'
+alias mv='mv -i'
+
+## CLI shortcuts ##
+
 alias ..='cd ..'
-alias ..2='cd ../..'
-alias ..3='cd ../../..'
-alias ..4='cd ../../../..'
-alias ..5='cd ../../../../..'
+alias ll='ls -lAFh' # Long list, show almost all, show type, human readable
+
+alias zshrc='${=EDITOR} ${ZDOTDIR:-$HOME}/.zshrc' # Quick access to the .zshrc file
 
 ## General ##
 
