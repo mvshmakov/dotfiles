@@ -56,4 +56,3 @@ Inspired by https://github.com/yarnpkg/yarn/issues/6453#issuecomment-476048618
 defaults read $PLIST Exclusions
 defaults write $PLIST Exclusions -array-add $PATH
 */
-
