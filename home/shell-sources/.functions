@@ -1,5 +1,13 @@
 #!/usr/bin/env bash
 
+function update-all() {
+	brew update
+	brew upgrade
+  npm install -g npm
+	npm update -g
+	zplug update
+}
+
 # Create a directory and enter in it
 function mkd() {
 	mkdir -p "$@" && cd "$@"
@@ -46,6 +54,7 @@ function fs() {
 	else
 		local arg=-sh
 	fi
+
 	if [[ -n "$@" ]]; then
 		du "$arg" -- "$@"
 	else
@@ -56,13 +65,4 @@ function fs() {
 # Run `dig` and display the most useful info
 function digga() {
 	dig +nocmd "$1" any +multiline +noall +answer
-}
-
-function speedup_spotlight() {
-	find . -type d -path './.*' \
-		-prune -o -path './Pictures*' \
-		-prune -o -path './Library*' \
-		-prune -o -path '*node_modules/*' \
-		-prune -o -type d -name 'node_modules' -exec touch '{}/.metadata_never_index' \; \
-		-print
 }

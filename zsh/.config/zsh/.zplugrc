@@ -1,0 +1,52 @@
+#!/usr/bin/env zsh
+#
+# Completion plugins are mostly useless as brew has built-in method to provide
+# completions and it works.
+#
+# "from:github" is the default namespace.
+#
+# zplug stores packages in "$(brew --prefix zplug)/repos"
+
+# Let zplug manage zplug: https://github.com/zplug/zplug#let-zplug-manage-zplug
+zplug "zplug/zplug", hook-build:"zplug --self-manage"
+zplug "gnachman/iTerm2-shell-integration", use:"shell_integration/zsh"
+
+# Keeps track of the last used working directory and automatically jumps into it for new shells
+zplug "plugins/last-working-dir", from:oh-my-zsh
+# Enables suggestions to install the program through the package manager
+zplug "plugins/command-not-found", from:oh-my-zsh
+# Unpacks any passed archive
+zplug "plugins/extract", from:oh-my-zsh
+# Completion plugins
+zplug "plugins/autopep8", from:oh-my-zsh
+
+# Speeds up original https://github.com/rupa/z tool
+zplug "agkozak/zsh-z"
+# Colorizes the cat/sed/awk/grep output of a file with structured syntax using `highlight` CLI tool
+# TODO: it makes zplug load with `usage: grep` in verbose mode, do something with it?
+zplug "l4u/zsh-output-highlighting"
+# Contains completion scripts that are not yet merged to the ZSH upstream (e.g., yarn, node, shellcheck)
+zplug "zsh-users/zsh-completions"
+# Grayed out autosuggestions from the history - must have
+zplug "zsh-users/zsh-autosuggestions"
+# Colorizes the commands as they are getting typed on the fly
+# Should be the last plugin https://github.com/zsh-users/zsh-syntax-highlighting/blob/master/INSTALL.md#antigen
+zplug "zsh-users/zsh-syntax-highlighting", defer:2
+
+# Themes
+# zplug "romkatv/powerlevel10k", as:theme              # Has an ugly configuration file and uglifies zshrc, but is fast
+# zplug "spaceship-prompt/spaceship-prompt", as:theme  # Too slow
+# zplug "agnoster", from:oh-my-zsh, as:theme           # Not the best customizability
+
+# Install plugins if there are plugins that have not been installed
+if ! zplug check --verbose; then
+    printf "Install? [y/N]: "
+    if read -q; then
+        echo
+        zplug install
+    fi
+fi
+
+# Then, source plugins and add commands to $PATH
+# Use `zplug load --verbose` to print plugins info
+zplug load

@@ -1,8 +1,17 @@
 #!/usr/bin/env zsh
 #
+# Mostly setting the env variables here
+
 # Manually setting up language environment for double-width characters
 # https://sw.kovidgoyal.net/kitty/faq/#keys-such-as-arrow-keys-backspace-delete-home-end-etc-do-not-work-when-using-su-or-sudo
-export LANG=en_US.UTF-8 LC_ALL=en_US.UTF-8
+export LANG="en_US.UTF-8"
+export LC_ALL="$LANG"
+export LC_COLLATE="$LANG"
+export LC_CTYPE="$LANG"
+export LC_MESSAGES="$LANG"
+export LC_MONETARY="$LANG"
+export LC_NUMERIC="$LANG"
+export LC_TIME="$LANG"
 
 # XDG Base Directory specification
 # https://specifications.freedesktop.org/basedir-spec/basedir-spec-latest.html
@@ -17,18 +26,21 @@ export XDG_STATE_HOME="$HOME/.local/state"
 export XDG_BIN_HOME="$HOME/.local/bin"
 # pip install --user, also cargo installs user binaries there, see
 # https://github.com/rust-lang/cargo/issues/1734#issuecomment-163936588
-export PATH="$XDG_BIN_HOME:$PATH"
+PATH="$XDG_BIN_HOME:$PATH"
 
 # `brew` is not yet available in the shell yet, so we have to use the full path
 # This sets HOMEBREW_PREFIX, HOMEBREW_CELLAR, HOMEBREW_REPOSITORY and
 # adds itself to the PATH, MANPATH and INFOPATH
 # https://docs.brew.sh/Manpage#shellenv
-eval "$(/opt/homebrew/bin/brew shellenv)"
+eval "$(/opt/homebrew/bin/brew shellenv zsh)"
 # Make GNU coreutils available in the shell without a prefix
 PATH="$(brew --prefix coreutils)/libexec/gnubin:$PATH"
 # Use latest ncurses version for the most up-to-date terminfo tables
 # Check which one is active with `infocmp -x tmux-256color`
 PATH="$(brew --prefix ncurses)/bin:$PATH"
+# For Docker CLI tools to be accessible in the shell
+# https://github.com/Homebrew/homebrew-cask/blob/bb82248bb7bfc6ff7fbc4b02dbb63f6f3aaead03/Casks/docker.rb#L118-L122
+PATH="$HOME/.docker/bin:$PATH"
 
 # Add pyenv executable to PATH and enable shims
 # PYENV_ROOT is needed for XDG Base Directory compliance
@@ -49,8 +61,8 @@ export PATH
 # Load brew-hosted ZSH completions. Should go before the compinit call.
 # https://docs.brew.sh/Shell-Completion#configuring-completions-in-zsh
 if type brew &>/dev/null; then
-    FPATH="$(brew --prefix)/share/zsh/site-functions:${FPATH}"
-    export FPATH
+  FPATH="$(brew --prefix)/share/zsh/site-functions:${FPATH}"
+  export FPATH
 fi
 
 export INPUTRC="$XDG_CONFIG_HOME/readline/inputrc"
@@ -99,14 +111,6 @@ export HOMEBREW_NO_GOOGLE_ANALYTICS=1
 export SHELL_SESSION_DIR="$XDG_STATE_HOME/zsh/sessions"
 export SHELL_SESSION_FILE="$SHELL_SESSION_DIR/$TERM_SESSION_ID"
 
-# Is needed for bash's rupa/z package
-# https://github.com/agkozak/zsh-z/issues/20#issuecomment-743363567
-export _Z_DATA="$XDG_DATA_HOME/z"
-# Is needed for zsh's agkozak/zsh-z alternative
-export ZSHZ_DATA="$XDG_DATA_HOME/z"
-
-# Resetting base directories to comply with XDG Base Directory spec
-
 # GPG is very hard to make work with XDG Base Directory spec
 # Mainly due to GPG Tools not supporting it properly
 # export GNUPGHOME="$XDG_DATA_HOME/gnupg"
@@ -116,33 +120,55 @@ export DBUS_SESSION_BUS_ADDRESS="unix:path=$DBUS_LAUNCHD_SESSION_BUS_SOCKET"
 
 # Preferred editor for local and remote sessions
 if [[ -n $SSH_CONNECTION ]]; then
-    # Remote editor
-    export EDITOR='vim'
-    export VISUAL="vim"
+  # Remote editor
+  export EDITOR='vim'
+  export VISUAL="vim"
 else
-    # Local editor
-    export EDITOR='nvim'
-    export VISUAL="nvim"
+  # Local editor
+  export EDITOR='nvim'
+  export VISUAL="nvim"
 fi
 
 export READER="zathura"
 export BROWSER="Velja.app"
+# TODO: a non-standard one, find the correct name
+export IMG_VIEWER="viu"
 export VIDEO="mpv"
 # TODO: use "lucc/nvimpager" instead both
 export PAGER="less"
 export GIT_PAGER="delta"
 
+# Needed for some programs to check if 24bit colors are supported by the terminal emulator
+# https://marvinh.dev/blog/terminal-colors/
 export COLORTERM="truecolor"
+# Works only on MacOS/BSD - enables the CLI tools color by default
+# https://unix.stackexchange.com/a/2904
+export CLICOLOR=1
 
-# ZSH-related
-# Path to your oh-my-zsh installation.
-export ZSH=~/.oh-my-zsh
-# How often to auto-update ZSH (in days).
-export UPDATE_ZSH_DAYS=7
+export BAT_THEME="Nord"
+# For the `hightlight` CLI tool (syntax highlighting)
+export HIGHLIGHT_STYLE=nord
+
 # Needed for fzf plugin https://github.com/ohmyzsh/ohmyzsh/tree/master/plugins/fzf#fzf_base
 FZF_BASE=$(brew --prefix fzf)
 export FZF_BASE
 export FZF_DEFAULT_COMMAND="rg --files --no-ignore-vcs --hidden"
+# Using bat as the fzf preview tool + went through all the fzf customization options.
+# Nord theme for the FZF (background is stripped for transparency, colors are corrected):
+# https://github.com/junegunn/fzf/blob/master/ADVANCED.md#color-themes
+export FZF_DEFAULT_OPTS='
+--preview "$XDG_CONFIG_HOME/fzf/preview_renderer {}"
+--border none
+--no-scrollbar
+--no-separator
+--info inline
+--cycle --ansi
+--color=hl:#81A1C1,hl+:#81A1C1
+--color=fg:#D8DEE9,fg+:#D8DEE9
+--color=pointer:#81A1C1,marker:#81A1C1
+--color=spinner:#81A1C1,header:#81A1C1
+--color=info:#81A1C1,prompt:#81A1C1
+'
 
 # Use nvim in man pages https://muru.dev/2015/08/28/vim-for-man.html
 export MANPAGER="col -b | nvim -c 'set ft=man nomod nolist ignorecase' -"
@@ -155,17 +181,9 @@ export SSH_ASKPASS
 # Sudo prompt will be taken from SSH_ASKPASS
 export SUDO_ASKPASS="$SSH_ASKPASS"
 
-# Use bat as fzf preview tool
-# TODO: preview does not work well for reverse-i-search
-export FZF_DEFAULT_OPTS="--preview 'bat --color=always --style=numbers --line-range=:500 {}'"
-# Preview all themes:
-# bat --list-themes | fzf --preview="bat --theme={} --color=always /path/to/file"
-export BAT_THEME="Nord"
-export HIGHLIGHT_STYLE=nord
-
 # For pinentry-mac
 # Faster than $(tty), source: https://github.com/romkatv/powerlevel10k#how-do-i-export-gpg_tty-when-using-instant-prompt
-export GPG_TTY=$TTY
+export GPG_TTY="$TTY"
 # Just for the convenience, e.g.
 # gpg --edit-key $GPG_KEY
 export GPG_KEY="88C371E66837B278"
@@ -184,5 +202,5 @@ LIBPQ_PREFIX="$(brew --prefix libpq)"
 OPENSSL_PREFIX="$(brew --prefix openssl)"
 # Also, add the HOMEBREW_PREFIX/(lib|include) to the LDFLAGS and CPPFLAGS
 # https://docs.brew.sh/Homebrew-and-Python#brewed-python-modules
-export LDFLAGS="-L$LIBPQ_PREFIX/lib -L$OPENSSL_PREFIX/lib -L$HOMEBREW_PREFIX/lib"
-export CPPFLAGS="-I$LIBPQ_PREFIX/include -I$OPENSSL_PREFIX/include -L$HOMEBREW_PREFIX/include"
+export LDFLAGS="-L$HOMEBREW_PREFIX/lib -L$LIBPQ_PREFIX/lib -L$OPENSSL_PREFIX/lib"
+export CPPFLAGS="-I$HOMEBREW_PREFIX/include -I$LIBPQ_PREFIX/include -I$OPENSSL_PREFIX/include"
