@@ -2,46 +2,27 @@
 #
 # Create some directories and symlinks
 
-# Creation of projects and Yandex.Disk folders
-if [ ! -d ~/projects ]; then
-    mkdir ~/projects
-    echo ~/projects directory created
-else
-    echo ~/projects already exists
-fi
+set -eu
+IFS=$(printf '\n\t')
 
-if [ ! -d ~/Yandex.Disk.localized ]; then
-    mkdir ~/Yandex.Disk.localized
-    echo ~/Yandex.Disk.localized directory created
-else
-    echo ~/Yandex.Disk.localized already exists
-fi
+## Ordinary VSCode
 
-# Creation of symlinks for projects and Yandex.Disk folders
-if [ -L ~/Desktop/projects ]; then
-    if [ -e ~/Desktop/projects ]; then
-        echo Symlink already exists on Desktop!
-    else
-        echo Symlink ~/Desktop/projects is broken!
-    fi
-elif [ -e ~/Desktop/projects ]; then
-    echo Something with name \"projects\" already exists on Desktop!
-else
-    ln -s ~/projects ~/Desktop/projects
-    echo ~/Desktop/projects symlink created
-fi
+mv ~/Library/Application\ Support/Code/User/settings.json ~/Library/Application\ Support/Code/User/settings.backup.json
+ln -s "$XDG_CONFIG_HOME"/vscode/settings.json ~/Library/Application\ Support/Code/User/settings.json
 
-if [ -L ~/Desktop/Yandex.Disk ]; then
-    if [ -e ~/Desktop/Yandex.Disk ]; then
-        echo Symlink already exists on Desktop!
-    else
-        echo Symlink \"~/Desktop/Yandex.Disk\" is broken!
-    fi
-elif [ -e ~/Desktop/Yandex.Disk ]; then
-    echo Something with name \"Yandex.Disk\" already exists on Desktop!
-else
-    ln -s ~/Yandex.Disk.localized ~/Desktop/Yandex.Disk
-    echo ~/Desktop/Yandex.Disk symlink created
-fi
+mv ~/Library/Application\ Support/Code/User/keybindings.json ~/Library/Application\ Support/Code/User/keybindings.backup.json
+ln -s "$XDG_CONFIG_HOME"/vscode/keybindings.json ~/Library/Application\ Support/Code/User/keybindings.json
+
+## VSCode Insiders
+
+mv ~/Library/Application\ Support/Code\ -\ Insiders/User/settings.json ~/Library/Application\ Support/Code\ -\ Insiders/User/settings.backup.json
+ln -s "$XDG_CONFIG_HOME"/vscode/settings.json ~/Library/Application\ Support/Code\ -\ Insiders/User/settings.json
+
+mv ~/Library/Application\ Support/Code\ -\ Insiders/User/keybindings.json ~/Library/Application\ Support/Code\ -\ Insiders/User/keybindings.backup.json
+ln -s "$XDG_CONFIG_HOME"/vscode/keybindings.json ~/Library/Application\ Support/Code\ -\ Insiders/User/keybindings.json
+
+## iTerm 2
+mv ~/Library/Preferences/com.googlecode.iterm2.plist ~/Library/Preferences/com.googlecode.iterm2.backup.plist
+ln -s "$XDG_CONFIG_HOME"/iterm2/com.googlecode.iterm2.plist ~/Library/Preferences/com.googlecode.iterm2.plist
 
 echo 'All of the symlinks created!'
