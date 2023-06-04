@@ -16,6 +16,7 @@ return {
             orgmode.setup_ts_grammar()
         end,
     },
+    { "petertriho/nvim-scrollbar", config = {} }, -- purely to faster see the diagnostics
 
     -- Replace the 'surroundings', e.g., parenthesis, XML, etc.
     -- Use cs"' to replace double quote by the single one. To replace something to a tag, use cst
@@ -125,7 +126,14 @@ return {
             vim.keymap.set("n", "<leader>gs", vim.cmd.Git, { desc = "Git status" })
         end,
     },
-    "lewis6991/gitsigns.nvim",
+    {
+        "lewis6991/gitsigns.nvim",
+        dependencies = "petertriho/nvim-scrollbar",
+        config = function()
+            require("gitsigns").setup()
+            require("scrollbar.handlers.gitsigns").setup()
+        end,
+    },
     "f-person/git-blame.nvim", -- git blame
     -- Generate GitHub shareable links
     {
