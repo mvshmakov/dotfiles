@@ -18,18 +18,17 @@ tap "homebrew/cask-fonts"
 tap "homebrew/cask-versions"
 # Yubikey manager, etc.
 tap "homebrew/cask-drivers"
+# Needed to enable command installation suggestions for ZSH if not found
 
 # FUSE implementations
 brew "macos-fuse-t/homebrew-cask/fuse-t"
 # More of a deprecated one since macOS 12.3 (https://docs.cryptomator.org/en/1.7/desktop/volume-type/#macfuse)
 cask "macfuse"
 
-brew "antigen"
 brew "awscli"
 brew "axel"
 brew "bitwarden-cli"
 brew "cheat"
-brew "circleci"
 brew "clang-format"
 brew "coreutils"
 
@@ -97,6 +96,8 @@ brew "ncurses"
 brew "neofetch"
 
 brew "neovim"
+# From checkhealth: vimtex#view#inverse_search is better if pstree is available
+brew "pstree"
 # brew "ranger" # File browser, superseded by nvim
 # Is required to fix the ranger's freezes
 # https://github.com/ranger/ranger/issues/1787#issuecomment-691528698https://github.com/ranger/ranger/issues/1787#issuecomment-691528698
@@ -105,19 +106,24 @@ brew "neovim"
 brew "nginx"
 brew "onefetch"
 brew "openjdk"
-# Mainly for PostgreSQl 
-brew "openssl"
-# Make SSH up to date
-brew "openssh"
 # Same as pinentry for GPG, but for SSH
 brew "theseal/ssh-askpass/ssh-askpass"
 brew "openvpn"
 brew "perl"
 brew "php"
-brew "pipenv"
 brew "postgresql"
-brew "pyenv"
 brew "qemu"
+
+brew "pipenv"
+brew "pyenv"
+# Fixes the issue with the missing Tkinter module during Python 3.11 build
+# https://stackoverflow.com/a/67465708
+brew "python-tk"
+
+# Mainly for PostgreSQl 
+brew "openssl"
+# Make SSH up to date
+brew "openssh"
 
 # GNU utility to edit the command lines as they are typed in.
 # Was extracted from bash, now used pretty much everywhere the prompt
@@ -195,10 +201,11 @@ cask "element"
 cask "fbreader"
 cask "figma"
 cask "flash-npapi"
+# Flipper Zero app
+cask "qflipper"
 
-# Nerd fonts for the powerlevel10k and vim-airline
+# Nerd fonts for the icons within terminal
 cask "font-fira-code-nerd-font"
-cask "font-fira-mono-nerd-font"
 cask "font-jetbrains-mono-nerd-font"
 cask "font-sauce-code-pro-nerd-font"
 # Free font builder
@@ -220,6 +227,8 @@ cask "keycastr"
 
 # Best archiving tool so far
 cask "keka"
+# Required to make Keka default archiving program
+cask "kekaexternalhelper"
 # Is payed + has annoying paywall notifications
 # cask "betterzip"
 
@@ -281,9 +290,14 @@ cask "numi"
 cask "obs"
 cask "opera"
 cask "openemu"
+cask "porting-kit"
+
+# Gaming apps
+cask "steam"
+cask "epic-games"
+cask "gog-galaxy"
 cask "origin"
 cask "playonmac"
-cask "porting-kit"
 
 # Crypto wallets
 cask "electrum"
@@ -313,7 +327,6 @@ cask "raspberry-pi-imager"
 cask "shottr"
 cask "skype"
 cask "slack"
-cask "steam"
 cask "stats"
 
 # DB manupulation/browsing tools
@@ -340,7 +353,12 @@ cask "whatsapp"
 cask "wireshark"
 cask "wkhtmltopdf"
 cask "yandex"
+
+# Sound & music
 cask "yandex-music-unofficial"
+# Allows to granularly control the volume on the level of apps
+cask "background-music"
+
 cask "zeplin"
 
 cask "cryptomator"
@@ -382,11 +400,17 @@ cask "mailtrackerblocker"
 
 # Shells & shell-related
 brew "bash"
+# Fancy cd using frecency, agkozak/zsh-z (rupa/z) alternative
+brew "zoxide"
 brew "checkbashisms"
 brew "shellcheck"
 brew "shfmt"
+# ZSH-related
 brew "zsh"
-brew "zsh-history-substring-search"
+brew "starship"
+tap "homebrew/command-not-found"
+# brew "antigen" # very slow and is not really maintained
+brew "zplug"
 
 # Does not show the event details in the tray
 # cask "itsycal"
