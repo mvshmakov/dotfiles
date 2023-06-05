@@ -174,6 +174,7 @@ return {
         "ruifm/gitlinker.nvim",
         dependencies = "nvim-lua/plenary.nvim",
     },
+    "sindrets/diffview.nvim", -- view diffs in splits
 
     -- Direnv integration (proper hook execution + .envrc syntax)
     "direnv/direnv.vim",
