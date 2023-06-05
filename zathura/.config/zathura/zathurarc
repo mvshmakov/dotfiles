@@ -26,7 +26,7 @@ map p print
 map g goto top
 
 # Nord theme for the viewer
-# https://github.com/arcticicestudio/nord/issues/143
+# https://github.com/nordtheme/nord/issues/143
 set recolor               true
 
 set default-bg              "#2e3440" # nord0

@@ -1,5 +1,5 @@
 -- Colorscheme
--- Using it instead of `arcticicestudio/nord-vim` because of nicer errors and theme overall
+-- Using it instead of `nordtheme/vim` because of nicer errors and theme overall
 return {
     "shaunsingh/nord.nvim",
     dependencies = "xiyaowong/nvim-transparent", -- Makes nvim background transparent
