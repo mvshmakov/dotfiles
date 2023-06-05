@@ -6,7 +6,6 @@ return {
         version = "*",
         dependencies = "nvim-tree/nvim-web-devicons",
     },
-    "RRethy/vim-illuminate", -- highlights the word under the cursor (kind of as a *)
     {
         "nvim-orgmode/orgmode", -- orgmode for neovim
         config = function()
