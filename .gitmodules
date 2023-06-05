@@ -2,13 +2,10 @@
 	path = kitty/.config/kitty/nord-kitty
 	url = https://github.com/connorholyday/nord-kitty.git
 
-[submodule "nord-dircolors"]
-	path = dircolors/.config/dircolors/nord-dircolors
-	url = https://github.com/arcticicestudio/nord-dircolors.git
-
 [submodule "tmux-plugin-manager"]
 	path = tmux/.config/tmux/plugins/tpm
 	url = https://github.com/tmux-plugins/tpm.git
+
 [submodule "bin/.local/bin/yubitouch"]
 	path = bin/.local/bin/yubitouch
 	url = https://github.com/a-dma/yubitouch
