@@ -37,7 +37,7 @@ complete -W "NSGlobalDomain" defaults
 # to ~/.profile and ~/.zprofile:
 export PYENV_ROOT="$XDG_DATA_HOME/pyenv"
 PATH="$PATH:$PYENV_ROOT/bin"
-PATH=$PATH:~/.console-ninja/.bin
+PATH=~/.console-ninja/.bin:$PATH
 export PATH
 # Load pyenv into the shell
 eval "$(pyenv init -)"
