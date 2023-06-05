@@ -2,7 +2,7 @@
 return {
     {
         "jose-elias-alvarez/null-ls.nvim",
-        dependencies = "jayp0521/mason-null-ls.nvim", -- mason <> null-ls bridge
+        dependencies = "jayp0521/mason-null-ls.nvim", -- mason <> null-ls bridge (allows to specify formatters to install)
         config = function()
             local null_ls = require("null-ls")
             local augroup = vim.api.nvim_create_augroup("LspFormatting", {})

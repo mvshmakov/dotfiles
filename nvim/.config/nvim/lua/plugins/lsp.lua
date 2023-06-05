@@ -12,16 +12,12 @@ return {
                 "williamboman/mason-lspconfig.nvim", -- Mason <-> lspconfig bridge (optional)
                 "RubixDev/mason-update-all", -- adds MasonUpdateAll command to update all mason deps
             },
-            config = {
-                ensure_installed = {
-                    "tsserver",
-                    "eslint",
-                },
-            },
         },
     },
     config = function()
-        local lsp = require("lsp-zero").preset("recommended")
+        local lsp = require("lsp-zero")
+
+        lsp.preset("recommended")
 
         lsp.on_attach(function(_, bufnr)
             lsp.default_keymaps({ buffer = bufnr })
