@@ -71,5 +71,6 @@ return {
         vim.keymap.set("n", "<leader>fgf", builtin.git_files, { desc = "Git files" })
         vim.keymap.set("n", "<leader>fgc", builtin.git_commits, { desc = "Git commits" })
         vim.keymap.set("n", "<leader>fgb", builtin.git_branches, { desc = "Git branches" })
+        vim.keymap.set("n", "<leader>fgs", builtin.git_stash, { desc = "Git list stashes" })
     end,
 }
