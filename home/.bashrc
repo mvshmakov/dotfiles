@@ -36,7 +36,9 @@ complete -W "NSGlobalDomain" defaults
 # enable shims by adding the following
 # to ~/.profile and ~/.zprofile:
 export PYENV_ROOT="$XDG_DATA_HOME/pyenv"
-export PATH="$PATH:$PYENV_ROOT/bin"
+PATH="$PATH:$PYENV_ROOT/bin"
+PATH=$PATH:~/.console-ninja/.bin
+export PATH
 # Load pyenv into the shell
 eval "$(pyenv init -)"
 
