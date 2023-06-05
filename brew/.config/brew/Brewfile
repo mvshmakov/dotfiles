@@ -69,7 +69,6 @@ brew "jc"
 # https://github.com/kellyjonbrazil/jc
 brew "jq"
 brew "jupyterlab"
-brew "lazydocker"
 brew "lazygit"
 # VimTeX uses latexmk as the default compiler backend
 # latexmk is getting bundled with texlive
@@ -193,7 +192,11 @@ cask "devtoys"
 cask "discord"
 cask "dotnet-sdk"
 cask "djview"
+
+# Do not using the formulae as cask contains both CLI and GUI 
 cask "docker"
+brew "lazydocker"
+
 # Nicest diagramming/drawing app
 cask "drawio"
 cask "duplicati"
