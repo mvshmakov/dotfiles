@@ -20,8 +20,8 @@ zplug "plugins/extract", from:oh-my-zsh
 # Completion plugins
 zplug "plugins/autopep8", from:oh-my-zsh
 
-# Speeds up original https://github.com/rupa/z tool
-zplug "agkozak/zsh-z"
+# Speeds up original https://github.com/rupa/z tool, superseded by zoxide
+# zplug "agkozak/zsh-z"
 # Colorizes the cat/sed/awk/grep output of a file with structured syntax using `highlight` CLI tool
 # TODO: it makes zplug load with `usage: grep` in verbose mode, do something with it?
 zplug "l4u/zsh-output-highlighting"

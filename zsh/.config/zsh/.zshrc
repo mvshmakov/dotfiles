@@ -51,6 +51,13 @@ eval "$(zoxide init zsh)"
 # Store the .zcompdump and friends in the cache home directory
 compinit -C -d $XDG_CACHE_HOME/zsh/.zcompdump
 
+# bun completions
+[ -s "/Users/mvshmakov/.bun/_bun" ] && source "/Users/mvshmakov/.bun/_bun"
+# npm completions
+eval "$(npm completion)"
+# docker completions
+eval "$(docker completion zsh)"
+
 # Load pyenv into the shell by adding
 # the following to ~/.zshrc:
 eval "$(pyenv init -)"
@@ -182,10 +189,3 @@ fi
 source ~/.fzf.zsh
 
 eval "$(starship init zsh)"
-
-# bun completions
-[ -s "/Users/mvshmakov/.bun/_bun" ] && source "/Users/mvshmakov/.bun/_bun"
-# npm completions
-eval "$(npm completion)"
-# docker completions
-eval "$(docker completion zsh)"

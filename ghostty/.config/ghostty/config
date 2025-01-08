@@ -1,0 +1,8 @@
+theme = nord
+font-family = FiraCode Nerd Font Mono
+
+background-opacity = 0.9
+background-blur-radius = 20
+
+window-padding-balance = true
+window-colorspace = display-p3
