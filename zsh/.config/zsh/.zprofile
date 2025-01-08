@@ -52,6 +52,7 @@ eval "$(pyenv init -)"
 # asdf is preferred now
 # Init asdf shims
 source "$(brew --prefix asdf)/libexec/asdf.sh"
+source "$XDG_CONFIG_HOME"/asdf-direnv/zshrc
 
 # https://github.com/Schniz/fnm#zsh
 # eval "$(fnm env --use-on-cd)"
