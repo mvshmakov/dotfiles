@@ -60,7 +60,7 @@ eval "$(pyenv init -)"
 
 # Setup alias convenience commands for github-copilot-cli
 # https://www.npmjs.com/package/@githubnext/github-copilot-cli#user-content-setup-alias-convenience-commands
-eval "$(github-copilot-cli alias -- "$0")"
+eval "$(gh copilot alias -- zsh)"
 
 # Colorizes common UNIX tools output (GRC - Generic Colorizer)
 # GRC_BINARY="$(brew --prefix)/etc/grc.zsh"
@@ -166,19 +166,22 @@ test -r "$XDG_CONFIG_HOME/dircolors/dir_colors" && eval $(dircolors "$XDG_CONFIG
 
 # Create a `main` session and load it by default to the shell
 # https://unix.stackexchange.com/a/113768
-# if command -v tmux &>/dev/null &&
-#   [ -n "$PS1" ] &&
-#   # Uncomment to enable tmux init in more broad cases
-#   # [[ ! "$TERM" =~ screen ]] &&
-#   # [[ ! "$TERM" =~ tmux ]] &&
-#   # Init tmux only in kitty
-#   [ "$TERM" = "xterm-kitty" ] &&
-#   [ -z "$TMUX" ]; then
-#   exec tmux new-session -A -s main
-# fi
+if command -v tmux &>/dev/null && [ -n "$PS1" ] && [ -z "$TMUX" ] &&
+  { 
+    # Uncomment to enable tmux init in more broad cases
+    [[ "$TERM_PROGRAM" = "iTerm.app" ]] ||
+    [[ "$TERM_PROGRAM" = "ghostty" ]];
+  }; then
+  exec tmux new-session -A -s main
+fi
 
 # Auto-inserted by $(brew --prefix)/opt/fzf/install
 # Can be uninstalled with uninstall script
 source ~/.fzf.zsh
 
 eval "$(starship init zsh)"
+
+# bun completions
+[ -s "/Users/mvshmakov/.bun/_bun" ] && source "/Users/mvshmakov/.bun/_bun"
+# npm completions
+eval "$(npm completion)"

@@ -49,10 +49,19 @@ export PYENV_ROOT="$XDG_DATA_HOME/.pyenv"
 command -v pyenv >/dev/null || PATH="$PYENV_ROOT/bin:$PATH"
 eval "$(pyenv init -)"
 
+# asdf is preferred now
+# Init asdf shims
+source "$(brew --prefix asdf)/libexec/asdf.sh"
+
 # https://github.com/Schniz/fnm#zsh
-eval "$(fnm env --use-on-cd)"
-# Only after fnm is added to PATH yarn will be available as binary
-PATH="$(yarn global bin):$PATH"
+# eval "$(fnm env --use-on-cd)"
+
+# export NVM_DIR="$HOME/.nvm"
+# [ -s "/opt/homebrew/opt/nvm/nvm.sh" ] && \. "/opt/homebrew/opt/nvm/nvm.sh"  # This loads nvm
+# [ -s "/opt/homebrew/opt/nvm/etc/bash_completion.d/nvm" ] && \. "/opt/homebrew/opt/nvm/etc/bash_completion.d/nvm"  # This loads nvm bash_completion
+
+# Only after fnm/nvm/asdf is added to PATH yarn will be available as binary
+# PATH="$(yarn global bin):$PATH"
 
 # Export modified PATH to make it available to (sub)shell(s)
 # Check path for validness with echo `"$PATH" | tr ':' '\n'`
@@ -68,9 +77,6 @@ fi
 export INPUTRC="$XDG_CONFIG_HOME/readline/inputrc"
 
 # All env variables: https://docs.brew.sh/Manpage#environment
-# Runs 'brew autoremove' (remove formulas installed as dependencies that are
-# no longer needed) when one runs 'brew cleanup' and 'brew uninstall'
-export HOMEBREW_AUTOREMOVE=1
 # Pass --greedy to cask upgrade command
 # https://github.com/Homebrew/brew/issues/15097
 export HOMEBREW_UPGRADE_GREEDY=1
@@ -204,3 +210,8 @@ OPENSSL_PREFIX="$(brew --prefix openssl)"
 # https://docs.brew.sh/Homebrew-and-Python#brewed-python-modules
 export LDFLAGS="-L$HOMEBREW_PREFIX/lib -L$LIBPQ_PREFIX/lib -L$OPENSSL_PREFIX/lib"
 export CPPFLAGS="-I$HOMEBREW_PREFIX/include -I$LIBPQ_PREFIX/include -I$OPENSSL_PREFIX/include"
+
+# Nuilding non-native docker images on Mac
+# export DOCKER_DEFAULT_PLATFORM=linux/amd64
+# Added by OrbStack: command-line tools and integration
+# source ~/.orbstack/shell/init.zsh 2>/dev/null || :

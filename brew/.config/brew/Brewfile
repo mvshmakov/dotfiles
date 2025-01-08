@@ -88,7 +88,7 @@ brew "luajit-openresty"
 brew "make"
 brew "mas"
 brew "midnight-commander"
-brew "mobile-shell"
+brew "mosh"
 brew "mpv"
 # Replaces a built-in MacOS version of ncurses for the sake of having an up-to-date terminfo
 brew "ncurses"
@@ -122,7 +122,8 @@ brew "python-tk"
 # Mainly for PostgreSQl 
 brew "openssl"
 # Make SSH up to date
-brew "openssh"
+# Commented out because this one does not support the --apple-use-keychain flag
+# brew "openssh"
 
 # GNU utility to edit the command lines as they are typed in.
 # Was extracted from bash, now used pretty much everywhere the prompt
@@ -165,9 +166,9 @@ brew "bat-extras"
 
 # PDR and other docs reader
 tap "zegervdv/zathura"
-brew "zathura"
-brew "zathura-djvu"
-brew "zathura-pdf-poppler"
+brew "zegervdv/zathura/zathura"
+brew "zegervdv/zathura/zathura-djvu"
+brew "zegervdv/zathura/zathura-pdf-poppler"
 
 cask "1password"
 cask "adobe-acrobat-reader"
@@ -193,8 +194,10 @@ cask "discord"
 cask "dotnet-sdk"
 cask "djview"
 
-# Do not using the formulae as cask contains both CLI and GUI 
+# Do not using the formulae as cask contains both CLI and GUI
 cask "docker"
+# Orbstack was useful for the ARM Macs before many containers supported ARM, now obsolete
+# cask "orbstack"
 brew "lazydocker"
 
 # Nicest diagramming/drawing app
@@ -216,7 +219,6 @@ cask "birdfont"
 
 cask "inkscape"
 cask "gimp"
-cask "gog-galaxy"
 cask "gnucash"
 
 # Grammar checking tools
@@ -240,9 +242,9 @@ cask "kekaexternalhelper"
 # The following two work together, one for window management, another for keyboard shortcuts
 # Each reinstall requires to remove explicitly apps from the a11y settings and add on ask
 tap "koekeishiya/formulae"
-brew "yabai"
+brew "koekeishiya/formulae/yabai"
 # --with-logging adds log files to the plist
-brew "skhd", args: ["with-logging"]
+brew "koekeishiya/formulae/skhd", args: ["with-logging"]
 
 # Browsers
 cask "chromium"
@@ -429,10 +431,7 @@ cask "obsidian"
 cask "bartender"
 
 # Cloud mount/manipulation tools.
-# Superseded by mountain duck, but it does not really
-# play nicely with Cryptomator vaults natively, so still
-# using the standalone Cryptomator app
-# cask "google-drive"
+cask "google-drive"
 cask "yandex-disk"
 # iOS does not work well with background syncs, so syncthing is not really convenient to use
 # cask "syncthing"

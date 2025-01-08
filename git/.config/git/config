@@ -16,7 +16,7 @@
 [includeIf "gitdir:~/projects/work/iterative/"]
     path = config-iterative
 [gpg]
-    program = /opt/homebrew/bin/gpg
+    program = /usr/local/MacGPG2/bin/gpg
 [github]
     user = mvshmakov
 [sendemail]
