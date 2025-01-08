@@ -187,3 +187,5 @@ eval "$(starship init zsh)"
 [ -s "/Users/mvshmakov/.bun/_bun" ] && source "/Users/mvshmakov/.bun/_bun"
 # npm completions
 eval "$(npm completion)"
+# docker completions
+eval "$(docker completion zsh)"
