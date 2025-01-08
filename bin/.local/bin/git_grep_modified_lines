@@ -23,7 +23,7 @@ IFS=$(printf '\n\t')
 #     # git --no-pager diff HEAD $file | grep -iE "$1"
 # done
 
-for file in "$(git ls-files -com --exclude-standard)"; do
+for file in $(git ls-files -com --exclude-standard); do
 	if test "$#" = 0; then
 		git --no-pager diff --no-index -- /dev/null "$file" | grep -iE "TODO"
 	else
