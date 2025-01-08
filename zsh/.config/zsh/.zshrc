@@ -157,7 +157,9 @@ bindkey -M menuselect '^[[Z' reverse-menu-complete
 
 # Be quiet on success
 eval "$(ssh-add -q --apple-use-keychain $SSH_KEY_PATH)"
-eval "$(ssh-add -q --apple-use-keychain $SSH_TEST_KEY_PATH)"
+if [[ -n "$SSH_TEST_KEY_PATH" ]]; then
+  eval "$(ssh-add -q --apple-use-keychain $SSH_TEST_KEY_PATH)"
+fi
 
 # Sets up and exports correct LS_COLORS to provide the highliting for different UNIX tools output (e.g., ls, tree, etc.)
 # See https://www.gnu.org/software/coreutils/manual/html_node/dircolors-invocation.html#dircolors-invocation

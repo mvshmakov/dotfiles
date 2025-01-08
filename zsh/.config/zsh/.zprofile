@@ -180,8 +180,22 @@ export FZF_DEFAULT_OPTS='
 # Use nvim in man pages https://muru.dev/2015/08/28/vim-for-man.html
 export MANPAGER="col -b | nvim -c 'set ft=man nomod nolist ignorecase' -"
 
-export SSH_KEY_PATH=~/.ssh/id_rsa
-export SSH_TEST_KEY_PATH=~/.ssh/id_rsa-test
+if [[ -f ~/.ssh/id_ed25519 ]]; then
+  export SSH_KEY_PATH=~/.ssh/id_ed25519
+elif [[ -f ~/.ssh/id_rsa ]]; then
+  export SSH_KEY_PATH=~/.ssh/id_rsa
+else 
+  echo "No SSH key found in ~/.ssh, please generate one"
+fi
+
+if [[ -f ~/.ssh/id_ed25519-test ]]; then
+  export SSH_TEST_KEY_PATH=~/.ssh/id_ed25519-test
+elif [[ -f ~/.ssh/id_rsa-test ]]; then
+  export SSH_TEST_KEY_PATH=~/.ssh/id_rsa-test
+else
+  unset SSH_TEST_KEY_PATH
+fi
+
 # Required for the ssh-askpass https://github.com/theseal/ssh-askpass/blob/master/ssh-askpass.plist#L14-L15
 SSH_ASKPASS="$(brew --prefix theseal/ssh-askpass/ssh-askpass)/bin/ssh-askpass"
 export SSH_ASKPASS

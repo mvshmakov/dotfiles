@@ -14,7 +14,9 @@ eval "$(/opt/homebrew/bin/brew shellenv bash)"
 
 # Be quiet on success
 ssh-add -q --apple-use-keychain "$SSH_KEY_PATH"
-ssh-add -q --apple-use-keychain "$SSH_TEST_KEY_PATH"
+if [[ -n "$SSH_TEST_KEY_PATH" ]]; then
+  ssh-add -q --apple-use-keychain "$SSH_TEST_KEY_PATH"
+fi
 
 # Colorizes common UNIX tools output (GRC - Generic Colorizer)
 export GRC_ALIASES=true
