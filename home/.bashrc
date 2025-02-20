@@ -58,6 +58,8 @@ eval "$(atuin init bash)"
 # Brew should have the binary in PATH already
 eval "$(fzf --bash)"
 
+eval "$(gh copilot alias -- zsh)"
+
 # Configuring Homebrew shell completions
 # https://docs.brew.sh/Shell-Completion#configuring-completions-in-bash
 if type brew &>/dev/null; then

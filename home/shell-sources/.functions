@@ -3,9 +3,9 @@
 function update-all() {
 	brew update
 	brew upgrade
-  	# npm install -g npm
-	# npm update -g
 	zplug update
+	gh extension upgrade --all
+	# TODO: update asdf plugins
 }
 
 # Create a directory and enter in it
