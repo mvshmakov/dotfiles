@@ -79,7 +79,7 @@ export DBUS_SESSION_BUS_ADDRESS="unix:path=$DBUS_LAUNCHD_SESSION_BUS_SOCKET"
 
 # Increase ZSH history size. Allow 1 000 000 entries; the default is 500.
 # Exporting for e.g., atuin (https://docs.atuin.sh/reference/import/#atuin-import)
-# and  $XDG_CONFIG_HOME/python/pythonstartup.py
+# and $XDG_CONFIG_HOME/python/pythonstartup.py
 export HISTSIZE=1000000
 export SAVEHIST=10000000
 export HISTFILESIZE=1000000000

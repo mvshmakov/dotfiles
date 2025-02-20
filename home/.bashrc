@@ -3,12 +3,13 @@
 # TODO: unify it with .zshrc
 # TODO: go through `man bash` documentation and enable interesting options
 
-# Increase Bash history size. Allow 1 000 000 entries; the default is 500.
-HISTSIZE=1000000
-HISTFILESIZE=1000000000
+# Increase Bash history size. Allow 1 000 000 entries; the default is 500
+# Exporting for e.g., atuin (https://docs.atuin.sh/reference/import/#atuin-import).
+export HISTSIZE=1000000
+export HISTFILESIZE=1000000000
+export HISTFILE="$XDG_DATA_HOME/bash/history"
 # Omit duplicates and commands that begin with a space from history.
-HISTCONTROL="ignoreboth"
-HISTFILE="$XDG_DATA_HOME/bash/history"
+export HISTCONTROL="ignorespace"
 
 eval "$(/opt/homebrew/bin/brew shellenv bash)"
 
@@ -44,8 +45,9 @@ export PATH
 # Load pyenv into the shell
 eval "$(pyenv init -)"
 
+# Replaced with asdf
 # https://github.com/Schniz/fnm#bash
-eval "$(fnm env --use-on-cd)"
+# eval "$(fnm env --use-on-cd)"
 
 # Activate *direnv* https://direnv.net/docs/hook.html#bash
 eval "$(direnv hook bash)"
@@ -55,8 +57,6 @@ eval "$(atuin init bash)"
 
 # Brew should have the binary in PATH already
 eval "$(fzf --bash)"
-
-source "$(brew --prefix)/etc/profile.d/z.sh"
 
 # Configuring Homebrew shell completions
 # https://docs.brew.sh/Shell-Completion#configuring-completions-in-bash
