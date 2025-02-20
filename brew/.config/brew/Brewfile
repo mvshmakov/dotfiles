@@ -405,6 +405,7 @@ cask "mailtrackerblocker"
 
 # Shells & shell-related
 brew "bash"
+brew "atuin"
 # Fancy cd using frecency, agkozak/zsh-z (rupa/z) alternative
 brew "zoxide"
 brew "checkbashisms"

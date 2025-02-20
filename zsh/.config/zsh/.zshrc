@@ -58,10 +58,6 @@ eval "$(npm completion)"
 # docker completions
 eval "$(docker completion zsh)"
 
-# Load pyenv into the shell by adding
-# the following to ~/.zshrc:
-# eval "$(pyenv init -)"
-
 # https://github.com/romkatv/powerlevel10k#how-do-i-initialize-direnv-when-using-instant-prompt
 (( ${+commands[direnv]} )) && emulate zsh -c "$(direnv export zsh)"
 
