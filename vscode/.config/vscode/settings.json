@@ -2,17 +2,23 @@
   /** Editor settings */
   "editor.fontFamily": "FiraCode Nerd Font Mono",
   "editor.fontLigatures": true,
-  "editor.formatOnPaste": true,
   "editor.suggestSelection": "first",
   "editor.linkedEditing": true,
   "editor.hover.enabled": true,
   "editor.bracketPairColorization.enabled": true,
+  "editor.inlineSuggest.enabled": true,
+  "editor.unicodeHighlight.ambiguousCharacters": true,
+  "editor.stickyScroll.enabled": true,
+  // Takes the space, not really useful
+  "editor.minimap.enabled": false,
+  "eslint.format.enable": true,
+  "editor.formatOnPaste": true,
+  "editor.formatOnType": true,
   "editor.formatOnSave": true,
   "editor.formatOnSaveMode": "modificationsIfAvailable",
-  "editor.inlineSuggest.enabled": true,
-  "editor.unicodeHighlight.ambiguousCharacters": false,
-  "editor.stickyScroll.enabled": true,
-  "editor.minimap.enabled": false,
+  "editor.codeActionsOnSave": {
+    "source.fixAll": true
+  },
   /** File-specific settings */
   // Optional but recommended for eslint-prettier
   "files.autoSave": "onFocusChange",
@@ -30,19 +36,17 @@
     "**/.svn": false
   },
   /** Language-specific settings */
-  "[typescriptreact][typescript][javascriptreact][javascript][json][jsonc][yaml]": {
-    // Prettier-eslint recommended settings
-    "editor.defaultFormatter": "rvest.vs-code-prettier-eslint",
-    "editor.formatOnPaste": false, // required
-    "editor.formatOnType": false, // required
-    "editor.formatOnSaveMode": "file" // required to format on save
+  "[typescriptreact][typescript][javascriptreact][javascript]": {
+    "editor.defaultFormatter": "dbaeumer.vscode-eslint",
+  },
+  "[json][jsonc][yaml]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
   },
   "[python]": {
+    "editor.defaultFormatter": "ms-python.python",
     // Fixes for black formatter
     // https://stackoverflow.com/questions/62427817/black-does-not-support-format-selection-command-vs-code-error
-    "editor.formatOnSaveMode": "file",
-    "editor.formatOnPaste": false,
-    "editor.defaultFormatter": "ms-python.python"
+    "editor.formatOnSaveMode": "file"
   },
   "[shellscript]": {
     "editor.defaultFormatter": "foxundermoon.shell-format"
@@ -59,16 +63,23 @@
   "[dockerfile]": {
     "editor.defaultFormatter": "ms-azuretools.vscode-docker"
   },
+  "[postcss][css]": {
+    "editor.defaultFormatter": "stylelint.vscode-stylelint"
+  },
   /** Frontend tooling settings */
-  "jest.autoRun": "off",
+  "jest.autoRevealOutput": "on-run",
+  "jest.autoRun": "on-save",
+  "typescript.updateImportsOnFileMove.enabled": "always",
+  "eslint.debug": true,
   "svg.preview.background": "transparent",
+  "figma.autocompleteBlocks": true,
   /** Python tooling settings */
   "python.linting.enabled": true,
   "python.linting.flake8Enabled": true,
   "python.formatting.provider": "black",
   "python.languageServer": "Pylance",
   "python.envFile": "${workspaceFolder}/.envrc",
-  "dvc.studio.shareExperimentsLive": true,
+  "dvc.doNotShowWalkthroughAfterInstall": true,
   "jupyter.askForKernelRestart": false,
   "notebook.lineNumbers": "on",
   "notebook.cellToolbarLocation": {
@@ -85,9 +96,7 @@
   "nix.formatterPath": "nixpkgs-fmt",
   "nix.serverPath": "nil",
   /** Lua-specific settings */
-  "Lua.diagnostics.globals": [
-    "vim"
-  ],
+  "Lua.diagnostics.globals": ["vim"],
   "stylua.styluaPath": "/opt/homebrew/bin/stylua",
   "stylua.searchParentDirectories": true,
   /** Workbench-specific settings */
@@ -117,17 +126,16 @@
   /** Visual settings */
   "zenMode.hideTabs": false,
   "explorer.confirmDragAndDrop": false,
-  "diffEditor.ignoreTrimWhitespace": false,
   "vsicons.dontShowNewVersionMessage": true,
+  /** Terminal settings */
+  "terminal.integrated.env.osx": {},
   /** Functional settings */
   "search.useGlobalIgnoreFiles": true,
   "emmet.includeLanguages": {
     "django-html": "html"
   },
-  "projectManager.git.baseFolders": [
-    "~/projects"
-  ],
-  "direnv.path.executable": "/opt/homebrew/bin/direnv",
+  "projectManager.git.baseFolders": ["~/projects"],
+  "direnv.path.executable": "/Users/mvshmakov/.asdf/shims/direnv",
   "vsintellicode.modify.editor.suggestSelection": "automaticallyOverrodeDefaultValue",
   "security.workspace.trust.untrustedFiles": "open",
   /** Todo-tree settings */
@@ -146,30 +154,41 @@
   "cSpell.userWords": [
     "apos",
     "avif",
+    "behaviour",
     "Brewfile",
+    "codecov",
+    "codemirror",
     "createadmin",
     "creds",
     "denormalized",
     "dotfiles",
+    "evenodd",
     "googlecode",
+    "hyperparameters",
+    "IIAFE",
     "Immer",
     "isempty",
     "iterm",
+    "Listbox",
     "memfs",
     "mvshmakov",
     "nondefault",
     "nondefaultname",
+    "refactorings",
     "restow",
     "saschazar",
     "semibold",
     "Shmakov",
+    "sonarjs",
+    "sourcemaps",
     "Statoscope",
     "sudo",
     "telegraf",
+    "Tensorboard",
+    "upsert",
     "wasm",
     "yametrika"
   ],
-  "terminal.integrated.env.osx": {},
   "totalTypeScript.hideAllTips": false,
   "totalTypeScript.hideBasicTips": true,
   "totalTypeScript.hiddenTips": [
@@ -188,7 +207,53 @@
     "generic-slots-in-functions",
     "type-predicate",
     "typeof",
-    "in-operator-narrowing"
+    "in-operator-narrowing",
+    "as-const",
+    "interface-with-generics",
+    "omit-utility-type",
+    "as-const-on-object",
+    "mapped-type",
+    "interface-with-multiple-generics",
+    "exclude-utility-type",
+    "infer",
+    "bigint",
+    "required-utility-type",
+    "readonly-utility-type",
+    "parameters-utility-type",
+    "extract-utility-type",
+    "nonnullable-utility-type",
+    "awaited-utility-type"
   ],
-  "dvc.doNotShowWalkthroughAfterInstall": true
+  "[typescript]": {
+    "editor.defaultFormatter": "dbaeumer.vscode-eslint"
+  },
+  "[typescriptreact]": {
+    "editor.defaultFormatter": "dbaeumer.vscode-eslint"
+  },
+  "diffEditor.ignoreTrimWhitespace": false,
+  "[json]": {
+    "editor.defaultFormatter": "vscode.json-language-features"
+  },
+  "console-ninja.showWhatsNew": false,
+  "dvc.doNotShowSetupAfterInstall": true,
+
+  "javascript.inlayHints.enumMemberValues.enabled": true,
+  "javascript.inlayHints.functionLikeReturnTypes.enabled": true,
+  "javascript.inlayHints.parameterNames.enabled": "all",
+  "javascript.inlayHints.parameterTypes.enabled": true,
+  "javascript.inlayHints.propertyDeclarationTypes.enabled": true,
+
+  "typescript.inlayHints.enumMemberValues.enabled": true,
+  "typescript.inlayHints.functionLikeReturnTypes.enabled": true,
+  "typescript.inlayHints.parameterNames.enabled": "all",
+  "typescript.inlayHints.parameterTypes.enabled": true,
+  "typescript.inlayHints.propertyDeclarationTypes.enabled": true,
+
+  "python.analysis.inlayHints.callArgumentNames": "all",
+  "python.analysis.inlayHints.functionReturnTypes": true,
+  "python.analysis.inlayHints.pytestParameters": true,
+  "python.analysis.inlayHints.variableTypes": true,
+
+  "editor.inlayHints.padding": true,
+  "Lua.hint.enable": true
 }

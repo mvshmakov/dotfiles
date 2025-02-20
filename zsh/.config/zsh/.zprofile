@@ -42,16 +42,13 @@ PATH="$(brew --prefix ncurses)/bin:$PATH"
 # https://github.com/Homebrew/homebrew-cask/blob/bb82248bb7bfc6ff7fbc4b02dbb63f6f3aaead03/Casks/docker.rb#L118-L122
 PATH="$HOME/.docker/bin:$PATH"
 
-# Add pyenv executable to PATH and enable shims
-# PYENV_ROOT is needed for XDG Base Directory compliance
-# https://github.com/pyenv/pyenv#set-up-your-shell-environment-for-pyenv
-export PYENV_ROOT="$XDG_DATA_HOME/.pyenv"
-command -v pyenv >/dev/null || PATH="$PYENV_ROOT/bin:$PATH"
-eval "$(pyenv init -)"
+# Initialize asdf
+source "$(brew --prefix asdf)/libexec/asdf.sh"
 
-# https://github.com/Schniz/fnm#zsh
-eval "$(fnm env --use-on-cd)"
-# Only after fnm is added to PATH yarn will be available as binary
+# Initialize direnv
+eval "$(asdf exec direnv hook zsh)"
+
+# Only after Node.js is added to PATH yarn will be available as binary
 PATH="$(yarn global bin):$PATH"
 
 # Export modified PATH to make it available to (sub)shell(s)
@@ -69,8 +66,9 @@ export INPUTRC="$XDG_CONFIG_HOME/readline/inputrc"
 
 # All env variables: https://docs.brew.sh/Manpage#environment
 # Runs 'brew autoremove' (remove formulas installed as dependencies that are
-# no longer needed) when one runs 'brew cleanup' and 'brew uninstall'
-export HOMEBREW_AUTOREMOVE=1
+# no longer needed) when one runs 'brew cleanup' and 'brew uninstall'.
+# No relevant anymore as it is a default behavior.
+# export HOMEBREW_AUTOREMOVE=1
 # Pass --greedy to cask upgrade command
 # https://github.com/Homebrew/brew/issues/15097
 export HOMEBREW_UPGRADE_GREEDY=1
@@ -98,9 +96,6 @@ export HOMEBREW_GITHUB_API_TOKEN
 
 # Opt-out from analytics https://consoledonottrack.com/
 export DO_NOT_TRACK=1
-# Opting out only from Google Analytics https://brew.sh/2023/02/16/homebrew-4.0.0/
-# Remove after 90 days completely
-export HOMEBREW_NO_GOOGLE_ANALYTICS=1
 
 # To move .zsh_sessions and friends out of the dotfiles repo
 #
@@ -110,6 +105,11 @@ export HOMEBREW_NO_GOOGLE_ANALYTICS=1
 # https://unix.stackexchange.com/questions/654663/problem-with-zsh-history-file
 export SHELL_SESSION_DIR="$XDG_STATE_HOME/zsh/sessions"
 export SHELL_SESSION_FILE="$SHELL_SESSION_DIR/$TERM_SESSION_ID"
+
+# Store the .zcompdump and friends in the cache home directory
+# Variable is non-standard, but taken from the omz:
+# https://github.com/ohmyzsh/ohmyzsh/blob/68f3ebb4de11aa2013ccc5252d4415840e0d7342/oh-my-zsh.sh#L144
+export ZSH_COMPDUMP="$XDG_CACHE_HOME/zsh/zcompdump-$ZSH_VERSION"
 
 # GPG is very hard to make work with XDG Base Directory spec
 # Mainly due to GPG Tools not supporting it properly

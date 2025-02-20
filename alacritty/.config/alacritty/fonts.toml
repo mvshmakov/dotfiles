@@ -1,0 +1,63 @@
+[font.bold]
+family = "FiraCode Nerd Font"
+style = "Bold"
+
+[font.bold_italic]
+family = "FiraCode Nerd Font"
+style = "Bold Italic"
+
+[font.italic]
+family = "FiraCode Nerd Font"
+style = "Italic"
+
+[font.normal]
+family = "FiraCode Nerd Font"
+style = "Retina"
+
+[schemes.default.bold]
+family = "Menlo"
+style = "Bold"
+
+[schemes.default.bold_italic]
+family = "Menlo"
+style = "Bold Italic"
+
+[schemes.default.italic]
+family = "Menlo"
+style = "Italic"
+
+[schemes.default.normal]
+family = "Menlo"
+style = "Regular"
+
+[schemes.fira_code.bold]
+family = "FiraCode Nerd Font"
+style = "Bold"
+
+[schemes.fira_code.bold_italic]
+family = "FiraCode Nerd Font"
+style = "Bold Italic"
+
+[schemes.fira_code.italic]
+family = "FiraCode Nerd Font"
+style = "Italic"
+
+[schemes.fira_code.normal]
+family = "FiraCode Nerd Font"
+style = "Retina"
+
+[schemes.iosevka.bold]
+family = "Iosevka Nerd Font"
+style = "Bold"
+
+[schemes.iosevka.bold_italic]
+family = "Iosevka Nerd Font"
+style = "Bold Italic"
+
+[schemes.iosevka.italic]
+family = "Iosevka Nerd Font"
+style = "Italic"
+
+[schemes.iosevka.normal]
+family = "Iosevka Nerd Font"
+style = "Regular"

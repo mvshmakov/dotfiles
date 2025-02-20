@@ -1,6 +1,5 @@
 -- Status line. Alternatives:
 -- { "vim-airline/vim-airline", dependencies = "vim-airline/vim-airline-themes" }
-
 return {
     "nvim-lualine/lualine.nvim",
     dependencies = {

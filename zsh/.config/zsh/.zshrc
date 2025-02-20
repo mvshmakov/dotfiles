@@ -1,13 +1,50 @@
 #!/usr/bin/env zsh
-#
+
 # Main ZSH config file
 # TODO: go through `man zsh` documentation and enable interesting options
 
-# Run to measure startup time:
-# https://blog.askesis.pl/post/2017/04/how-to-debug-zsh-startup-time.html
-# time  zsh -i -c exit
-# Injects profiling code for zsh
+# Start/atach tmux in interactive shell: https://unix.stackexchange.com/a/113768
+# Initializing this sooner helps startup time
+if command -v tmux &>/dev/null &&
+  [ -n "$PS1" ] &&
+  [[ ! "$TERM_PROGRAM" =~ vscode ]] &&
+  [[ ! "$TERM" =~ screen ]] &&
+  [[ ! "$TERM" =~ tmux ]] &&
+  [ -z "$TMUX" ]; then
+  # If the `exec` is used, it becomes impossible to detach the session
+  tmux new-session -A -s main
+fi
+
+# Injects profiling code for zsh with `zprof` command
 # zmodload zsh/zprof
+
+# Fancy cd using frecency, agkozak/zsh-z (rupa/z) alternative
+# Should be added after compinit is autoloaded, but before the compinit call
+eval "$(zoxide init zsh)"
+
+export ZIM_HOME=$XDG_CACHE_HOME/zim
+# Download zimfw plugin manager if missing
+if [[ ! -e $ZIM_HOME/zimfw.zsh ]]; then
+  curl -fsSL --create-dirs -o $ZIM_HOME/zimfw.zsh \
+    https://github.com/zimfw/zimfw/releases/latest/download/zimfw.zsh
+fi
+
+# Install missing modules, and update $ZIM_HOME/init.zsh if missing or outdated
+if [[ ! $ZIM_HOME/init.zsh -nt ${ZDOTDIR:-${HOME}}/.zimrc ]]; then
+  source $ZIM_HOME/zimfw.zsh init
+fi
+
+# Necessary at least for the `last-working-dir` plugin from omz
+export ZSH_CACHE_DIR="$XDG_CACHE_HOME/zsh"
+ZSH_AUTOSUGGEST_MANUAL_REBIND=1
+
+# Initialize modules
+source $ZIM_HOME/init.zsh
+
+# Load ngrok completion after compdef init (as in brew caveats)
+if command -v ngrok &>/dev/null; then
+  eval "$(ngrok completion)"
+fi
 
 # Required to make Shift-Tab to work with menu select  (exposes required function)
 zmodload zsh/complist
@@ -31,12 +68,6 @@ zstyle ':completion:*' menu select
 zstyle ':completion:*' complete-options true
 # Define the order of completers we want to use
 zstyle ':completion:*' completer _extensions _complete _approximate
-# Required to make the groups work: https://stackoverflow.com/a/40869479
-zstyle ':completion:*:*:*:*:descriptions' format '%F{blue}-- %d --%f'
-zstyle ':completion:*' group-name ''
-# TODO: fix this for the ls -l
-# Colors for files and directories ((s.:.) splits colors into an array)
-zstyle ':completion:*' list-colors "${(s.:.)LS_COLORS}"
 zstyle ':completion:*' dirinfo-format '%f '$'\e[93m%i\e[0m'
 # Acts as a `ls -al` when listing the files
 zstyle ':completion:*' file-list all
@@ -50,13 +81,6 @@ autoload -Uz compinit
 eval "$(zoxide init zsh)"
 # Store the .zcompdump and friends in the cache home directory
 compinit -C -d $XDG_CACHE_HOME/zsh/.zcompdump
-
-# Load pyenv into the shell by adding
-# the following to ~/.zshrc:
-eval "$(pyenv init -)"
-
-# https://github.com/romkatv/powerlevel10k#how-do-i-initialize-direnv-when-using-instant-prompt
-(( ${+commands[direnv]} )) && emulate zsh -c "$(direnv export zsh)"
 
 # Setup alias convenience commands for github-copilot-cli
 # https://www.npmjs.com/package/@githubnext/github-copilot-cli#user-content-setup-alias-convenience-commands
@@ -95,31 +119,29 @@ setopt HIST_FIND_NO_DUPS      # Ctrl + R will ignore dups durng a search
 setopt HIST_EXPIRE_DUPS_FIRST # delete duplicates first when HISTFILE size exceeds HISTSIZE
 setopt HIST_VERIFY            # show command with history expansion to user before running it
 
-setopt GLOB_COMPLETE          # Trigger the completion after a glob * instead of expanding it.
-setopt MENU_COMPLETE          # Automatically highlight first element of completion menu
-setopt COMPLETE_IN_WORD       # Complete from both ends of a word.
-setopt AUTO_LIST              # Automatically list choices on ambiguous completion.
-setopt LIST_PACKED            # Completion menu will take less space
-setopt LIST_ROWS_FIRST        # Matches are sorted in rows instead of columns.
-setopt GLOBDOTS               # Lists hidden files during the completion: https://unix.stackexchange.com/a/366137
+setopt GLOB_COMPLETE    # Trigger the completion after a glob * instead of expanding it.
+setopt MENU_COMPLETE    # Automatically highlight first element of completion menu
+setopt COMPLETE_IN_WORD # Complete from both ends of a word.
+setopt AUTO_LIST        # Automatically list choices on ambiguous completion.
+setopt LIST_PACKED      # Completion menu will take less space
+setopt LIST_ROWS_FIRST  # Matches are sorted in rows instead of columns.
+setopt GLOBDOTS         # Lists hidden files during the completion: https://unix.stackexchange.com/a/366137
 
-# setopt COMPLETE_ALIASES     # TODO: setting this disables zsh-z completion: https://github.com/agkozak/zsh-z#complete_aliases
+unsetopt COMPLETE_ALIASES # TODO: setting this disables zsh-z completion: https://github.com/agkozak/zsh-z#complete_aliases
 
-setopt AUTO_PUSHD             # Makes cd work as pushd
+setopt AUTO_PUSHD # Makes cd work as pushd
 setopt PUSHD_IGNORE_DUPS
-setopt PUSHDMINUS             # Exchanges the meanings of '+'' and '-' when used with a number to specify a directory in the stack.
-setopt AUTO_CD                # Allows to cd into a directory even without an explicit `cd` command, e.g.: ../directory
+setopt PUSHDMINUS # Exchanges the meanings of '+'' and '-' when used with a number to specify a directory in the stack.
+setopt AUTO_CD    # Allows to cd into a directory even without an explicit `cd` command, e.g.: ../directory
 
-unsetopt LIST_BEEP            # So that ZSH will not beep on each completion, only on errors
+unsetopt LIST_BEEP # So that ZSH will not beep on each completion, only on errors
 
 # Will try all of the suggestion types starting from the first
 ZSH_AUTOSUGGEST_STRATEGY=(history completion match_prev_cmd)
 
-# source $(brew --prefix)/share/antigen/antigen.zsh
-# antigen init $XDG_CONFIG_HOME/zsh/.antigenrc
-export ZPLUG_HOME=/opt/homebrew/opt/zplug
-source $ZPLUG_HOME/init.zsh
-source $XDG_CONFIG_HOME/zsh/.zplugrc
+# Auto-inserted by $(brew --prefix)/opt/fzf/install
+# Can be uninstalled with uninstall script
+source ~/.fzf.zsh
 
 # Needed to make command-not-found plugin work
 source "$(brew --repository)/Library/Taps/homebrew/homebrew-command-not-found/handler.sh"
@@ -128,8 +150,20 @@ source ~/shell-sources/aliasrc
 source ~/shell-sources/zsh-aliasrc
 source ~/shell-sources/.functions
 
-# Enable vi keymap mode
-bindkey -v
+# asdf <> direnv integration
+source "${XDG_CONFIG_HOME:-$HOME/.config}/asdf-direnv/zshrc"
+
+####
+# Key bindings
+#
+# ^X^V enables vim mode in ZSH, so no need to bindkey -v
+####
+
+# Edit the current command line in $EDITOR
+# Nice default from OMZ: https://github.com/ohmyzsh/ohmyzsh/blob/9650861e56a3404313adc35cbcb1f32a7015b99d/lib/key-bindings.zsh#L62-L65
+autoload -U edit-command-line
+zle -N edit-command-line
+bindkey '\C-x\C-e' edit-command-line
 
 # The following block of bindings enables the support of
 # zsh-history-substring-search in vi, emacs and UP/DOWN ways
@@ -152,8 +186,9 @@ bindkey "^[[3~" delete-char
 bindkey "^[^N" newtab
 bindkey "^?" backward-delete-char
 
-# Enables Shift+Tab in autocomplete menu
-bindkey -M menuselect '^[[Z' reverse-menu-complete
+# Enables Tab/Shift+Tab in autocomplete menu
+bindkey '\t' menu-select "$terminfo[kcbt]" menu-select
+bindkey -M menuselect '\t' menu-complete "$terminfo[kcbt]" reverse-menu-complete
 
 # Be quiet on success
 eval "$(ssh-add -q --apple-use-keychain $SSH_KEY_PATH)"
@@ -162,23 +197,12 @@ eval "$(ssh-add -q --apple-use-keychain $SSH_TEST_KEY_PATH)"
 # Sets up and exports correct LS_COLORS to provide the highliting for different UNIX tools output (e.g., ls, tree, etc.)
 # See https://www.gnu.org/software/coreutils/manual/html_node/dircolors-invocation.html#dircolors-invocation
 # Also https://www.nordtheme.com/docs/ports/dircolors/installation
+#
+# [Vivid](https://github.com/sharkdp/vivid) is also an option, but colors are a
+# bit off for the nord pallette
 test -r "$XDG_CONFIG_HOME/dircolors/dir_colors" && eval $(dircolors "$XDG_CONFIG_HOME/dircolors/dir_colors")
 
-# Create a `main` session and load it by default to the shell
-# https://unix.stackexchange.com/a/113768
-# if command -v tmux &>/dev/null &&
-#   [ -n "$PS1" ] &&
-#   # Uncomment to enable tmux init in more broad cases
-#   # [[ ! "$TERM" =~ screen ]] &&
-#   # [[ ! "$TERM" =~ tmux ]] &&
-#   # Init tmux only in kitty
-#   [ "$TERM" = "xterm-kitty" ] &&
-#   [ -z "$TMUX" ]; then
-#   exec tmux new-session -A -s main
-# fi
-
-# Auto-inserted by $(brew --prefix)/opt/fzf/install
-# Can be uninstalled with uninstall script
-source ~/.fzf.zsh
-
+# Reads config from $XDG_CONFIG_HOME/starship.toml
 eval "$(starship init zsh)"
+
+source /Users/mvshmakov/.config/broot/launcher/bash/br

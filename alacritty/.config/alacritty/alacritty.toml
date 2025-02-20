@@ -1,0 +1,29 @@
+
+[cursor]
+blinking = "Never"
+style = "Block"
+unfocused_hollow = true
+
+[font]
+draw_bold_text_with_bright_colors = true
+size = 12.0
+
+[window]
+blur = true
+decorations = "transparent"
+dynamic_padding = true
+dynamic_title = true
+opacity = 0.9
+startup_mode = "Windowed"
+title = "Alacritty"
+
+[window.dimensions]
+columns = 120
+lines = 40
+
+[window.padding]
+x = 10
+y = 30
+
+[general]
+import = ["/Users/mvshmakov/.config/alacritty/colors.toml", "/Users/mvshmakov/.config/alacritty/fonts.toml"]
