@@ -60,7 +60,7 @@ eval "$(docker completion zsh)"
 
 # Load pyenv into the shell by adding
 # the following to ~/.zshrc:
-eval "$(pyenv init -)"
+# eval "$(pyenv init -)"
 
 # https://github.com/romkatv/powerlevel10k#how-do-i-initialize-direnv-when-using-instant-prompt
 (( ${+commands[direnv]} )) && emulate zsh -c "$(direnv export zsh)"
@@ -82,14 +82,15 @@ COMPLETION_WAITING_DOTS="true"
 export DBUS_SESSION_BUS_ADDRESS="unix:path=$DBUS_LAUNCHD_SESSION_BUS_SOCKET"
 
 # Increase ZSH history size. Allow 1 000 000 entries; the default is 500.
-# Exporting for the $XDG_CONFIG_HOME/python/pythonstartup.py
+# Exporting for e.g., atuin and  $XDG_CONFIG_HOME/python/pythonstartup.py
 export HISTSIZE=1000000
-SAVEHIST=10000000
-HISTFILESIZE=1000000000
-HISTFILE="$XDG_DATA_HOME/zsh/history"
+export SAVEHIST=10000000
+export HISTFILESIZE=1000000000
+export HISTFILE="$XDG_DATA_HOME/zsh/history"
 
-# Omit duplicates and commands that begin with a space from history.
-HISTCONTROL="ignoreboth"
+# Ignore storing the commands that on begin with a space, duplicates are
+# still useful for e.g., atuin stats
+export HISTCONTROL="ignorespace"
 
 # Ensures that commands are added to the history immediately.
 # Otherwise, the history appended only when the shell exits and it could be lost.
@@ -184,8 +185,8 @@ if command -v tmux &>/dev/null && [ -n "$PS1" ] && [ -z "$TMUX" ] &&
   exec tmux new-session -A -s main
 fi
 
-# Auto-inserted by $(brew --prefix)/opt/fzf/install
-# Can be uninstalled with uninstall script
-source ~/.fzf.zsh
+source <(fzf --zsh)
+# Atuin needs to re-bind the `^R` after the `fzf` https://setup.atuin.sh/
+eval "$(atuin init zsh --disable-up-arrow)"
 
 eval "$(starship init zsh)"

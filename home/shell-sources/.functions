@@ -3,8 +3,8 @@
 function update-all() {
 	brew update
 	brew upgrade
-  npm install -g npm
-	npm update -g
+  	# npm install -g npm
+	# npm update -g
 	zplug update
 }
 

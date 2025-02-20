@@ -39,7 +39,7 @@ complete -W "NSGlobalDomain" defaults
 # to ~/.profile and ~/.zprofile:
 export PYENV_ROOT="$XDG_DATA_HOME/pyenv"
 PATH="$PATH:$PYENV_ROOT/bin"
-PATH=~/.console-ninja/.bin:$PATH
+
 export PATH
 # Load pyenv into the shell
 eval "$(pyenv init -)"
@@ -50,7 +50,11 @@ eval "$(fnm env --use-on-cd)"
 # Activate *direnv* https://direnv.net/docs/hook.html#bash
 eval "$(direnv hook bash)"
 
-[ -f "$HOME"/.fzf.bash ] && source "$HOME"/.fzf.bash
+# Activate atuin https://setup.atuin.sh/
+eval "$(atuin init bash)"
+
+# Brew should have the binary in PATH already
+eval "$(fzf --bash)"
 
 source "$(brew --prefix)/etc/profile.d/z.sh"
 

@@ -47,12 +47,10 @@ PATH="$HOME/.docker/bin:$PATH"
 # https://github.com/pyenv/pyenv#set-up-your-shell-environment-for-pyenv
 export PYENV_ROOT="$XDG_DATA_HOME/.pyenv"
 command -v pyenv >/dev/null || PATH="$PYENV_ROOT/bin:$PATH"
-eval "$(pyenv init -)"
 
-# asdf is preferred now
 # Init asdf shims
-source "$(brew --prefix asdf)/libexec/asdf.sh"
 source "$XDG_CONFIG_HOME"/asdf-direnv/zshrc
+export PATH="${ASDF_DATA_DIR:-$HOME/.asdf}/shims:$PATH"
 
 # https://github.com/Schniz/fnm#zsh
 # eval "$(fnm env --use-on-cd)"
@@ -105,9 +103,6 @@ export HOMEBREW_GITHUB_API_TOKEN
 
 # Opt-out from analytics https://consoledonottrack.com/
 export DO_NOT_TRACK=1
-# Opting out only from Google Analytics https://brew.sh/2023/02/16/homebrew-4.0.0/
-# Remove after 90 days completely
-export HOMEBREW_NO_GOOGLE_ANALYTICS=1
 
 # To move .zsh_sessions and friends out of the dotfiles repo
 #
@@ -157,13 +152,13 @@ export BAT_THEME="Nord"
 export HIGHLIGHT_STYLE=nord
 
 # Needed for fzf plugin https://github.com/ohmyzsh/ohmyzsh/tree/master/plugins/fzf#fzf_base
-FZF_BASE=$(brew --prefix fzf)
-export FZF_BASE
+export FZF_BASE=$(brew --prefix fzf)
 export FZF_DEFAULT_COMMAND="rg --files --no-ignore-vcs --hidden"
 # Using bat as the fzf preview tool + went through all the fzf customization options.
 # Nord theme for the FZF (background is stripped for transparency, colors are corrected):
 # https://github.com/junegunn/fzf/blob/master/ADVANCED.md#color-themes
 export FZF_DEFAULT_OPTS='
+--style full
 --preview "$XDG_CONFIG_HOME/fzf/preview_renderer {}"
 --border none
 --no-scrollbar

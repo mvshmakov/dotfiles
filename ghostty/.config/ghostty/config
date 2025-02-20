@@ -6,3 +6,6 @@ background-blur-radius = 20
 
 window-padding-balance = true
 window-colorspace = display-p3
+macos-titlebar-style = hidden
+
+confirm-close-surface = false
