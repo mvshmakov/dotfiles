@@ -183,6 +183,7 @@ fi
 
 source <(fzf --zsh)
 # Atuin needs to re-bind the `^R` after the `fzf` https://setup.atuin.sh/
+# Disabling the up arrow as it is easy enough to filter with subsequent `^R`
 eval "$(atuin init zsh --disable-up-arrow)"
 
 eval "$(starship init zsh)"
