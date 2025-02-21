@@ -160,8 +160,11 @@ export FZF_DEFAULT_COMMAND="rg --files --no-ignore-vcs --hidden"
 # Nord theme for the FZF (background is stripped for transparency, colors are corrected):
 # https://github.com/junegunn/fzf/blob/master/ADVANCED.md#color-themes
 export FZF_DEFAULT_OPTS='
+--tmux
+--height 40% --tmux bottom,40%
+--preview "fzf-preview-extended {}"
+--preview-window "wrap"
 --style full
---preview "$XDG_CONFIG_HOME/fzf/preview_renderer {}"
 --border none
 --no-scrollbar
 --no-separator
@@ -194,8 +197,7 @@ else
 fi
 
 # Required for the ssh-askpass https://github.com/theseal/ssh-askpass/blob/master/ssh-askpass.plist#L14-L15
-SSH_ASKPASS="$(brew --prefix theseal/ssh-askpass/ssh-askpass)/bin/ssh-askpass"
-export SSH_ASKPASS
+export SSH_ASKPASS="$(brew --prefix theseal/ssh-askpass/ssh-askpass)/bin/ssh-askpass"
 # Sudo prompt will be taken from SSH_ASKPASS
 export SUDO_ASKPASS="$SSH_ASKPASS"
 
@@ -222,8 +224,3 @@ OPENSSL_PREFIX="$(brew --prefix openssl)"
 # https://docs.brew.sh/Homebrew-and-Python#brewed-python-modules
 export LDFLAGS="-L$HOMEBREW_PREFIX/lib -L$LIBPQ_PREFIX/lib -L$OPENSSL_PREFIX/lib"
 export CPPFLAGS="-I$HOMEBREW_PREFIX/include -I$LIBPQ_PREFIX/include -I$OPENSSL_PREFIX/include"
-
-# Nuilding non-native docker images on Mac
-# export DOCKER_DEFAULT_PLATFORM=linux/amd64
-# Added by OrbStack: command-line tools and integration
-# source ~/.orbstack/shell/init.zsh 2>/dev/null || :
