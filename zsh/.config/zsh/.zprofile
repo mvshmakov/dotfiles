@@ -103,6 +103,8 @@ export HOMEBREW_GITHUB_API_TOKEN
 
 # Opt-out from analytics https://consoledonottrack.com/
 export DO_NOT_TRACK=1
+# Opt-out from motion animations https://docs.atuin.sh/configuration/config/#prefers_reduced_motion
+export NO_MOTION=1
 
 # To move .zsh_sessions and friends out of the dotfiles repo
 #
