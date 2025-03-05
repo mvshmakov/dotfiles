@@ -16,6 +16,8 @@ function update-all() (
 	# subshell
 	(set +x && zimfw update && zimfw upgrade)
 
+	"$XDG_CONFIG_HOME"/tmux/plugins/tpm/bin/update_plugins all
+
 	# Update Lazy packages and exit on LazySync event
 	nvim --headless -c 'autocmd User LazySync quitall' -c 'Lazy sync'
 	# Update Mason packages and quit

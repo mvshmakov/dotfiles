@@ -49,10 +49,9 @@ export PYENV_ROOT="$XDG_DATA_HOME/.pyenv"
 command -v pyenv >/dev/null || PATH="$PYENV_ROOT/bin:$PATH"
 
 # Initialize direnv
-eval "$(asdf exec direnv hook zsh)"
-# Init asdf shims
 source "$XDG_CONFIG_HOME"/asdf-direnv/zshrc
-export PATH="${$ASDF_DATA_DIR:-$HOME/.asdf}/shims:$PATH"
+# Check path for validness with echo `"$PATH" | tr ':' '\n'`
+export PATH="${ASDF_DATA_DIR:-$HOME/.asdf}/shims:$PATH"
 
 # https://github.com/Schniz/fnm#zsh
 # eval "$(fnm env --use-on-cd)"
@@ -63,10 +62,6 @@ export PATH="${$ASDF_DATA_DIR:-$HOME/.asdf}/shims:$PATH"
 
 # Only after fnm/nvm/asdf is added to PATH yarn will be available as binary
 # PATH="$(yarn global bin):$PATH"
-
-# Export modified PATH to make it available to (sub)shell(s)
-# Check path for validness with echo `"$PATH" | tr ':' '\n'`
-export PATH
 
 # Load brew-hosted ZSH completions. Should go before the compinit call.
 # https://docs.brew.sh/Shell-Completion#configuring-completions-in-zsh

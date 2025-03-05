@@ -36,11 +36,19 @@ fi
 
 # Necessary at least for the `last-working-dir` plugin from omz
 export ZSH_CACHE_DIR="$XDG_CACHE_HOME/zsh"
-ZSH_AUTOSUGGEST_MANUAL_REBIND=1
+export ZSH_AUTOSUGGEST_MANUAL_REBIND=1
 
-# Initialize modules
+# Initialize modules, all the completions must be defined beforehand
 source $ZIM_HOME/init.zsh
 
+# Fancy cd using frecency, agkozak/zsh-z (rupa/z) alternative
+eval "$(zoxide init zsh)"
+# bun completions
+[ -s "/Users/mvshmakov/.bun/_bun" ] && source "/Users/mvshmakov/.bun/_bun"
+# npm completions
+eval "$(npm completion)"
+# docker completions
+eval "$(docker completion zsh)"
 # Load ngrok completion after compdef init (as in brew caveats)
 if command -v ngrok &>/dev/null; then
   eval "$(ngrok completion)"
@@ -81,20 +89,6 @@ zstyle ':completion:*' file-list all
 # https://github.com/ohmyzsh/ohmyzsh/blob/master/plugins/common-aliases/common-aliases.plugin.zsh#L89-L90
 zstyle -e ':completion:*:(ssh|scp|sftp|rsh|rsync):hosts' hosts 'reply=(${=${${(f)"$(cat {/etc/ssh_,~/.ssh/known_}hosts(|2)(N) /dev/null)"}%%[# ]*}//,/ })'
 
-autoload -Uz compinit
-# Fancy cd using frecency, agkozak/zsh-z (rupa/z) alternative
-# Should be added after autoload compinit, but before the compinit call
-eval "$(zoxide init zsh)"
-# Store the .zcompdump and friends in the cache home directory
-compinit -C -d $XDG_CACHE_HOME/zsh/.zcompdump
-
-# bun completions
-[ -s "/Users/mvshmakov/.bun/_bun" ] && source "/Users/mvshmakov/.bun/_bun"
-# npm completions
-eval "$(npm completion)"
-# docker completions
-eval "$(docker completion zsh)"
-
 # https://github.com/romkatv/powerlevel10k#how-do-i-initialize-direnv-when-using-instant-prompt
 (( ${+commands[direnv]} )) && emulate zsh -c "$(direnv export zsh)"
 
@@ -107,10 +101,10 @@ eval "$(gh copilot alias -- zsh)"
 # [[ -f "$GRC_BINARY" ]] && source "$GRC_BINARY"
 
 # Uncomment the following line to enable command auto-correction.
-ENABLE_CORRECTION="true"
+export ENABLE_CORRECTION="true"
 
 # Uncomment the following line to display red dots whilst waiting for completion.
-COMPLETION_WAITING_DOTS="true"
+export COMPLETION_WAITING_DOTS="true"
 
 export DBUS_SESSION_BUS_ADDRESS="unix:path=$DBUS_LAUNCHD_SESSION_BUS_SOCKET"
 
@@ -155,7 +149,7 @@ setopt AUTO_CD                # Allows to cd into a directory even without an ex
 unsetopt LIST_BEEP            # So that ZSH will not beep on each completion, only on errors
 
 # Will try all of the suggestion types starting from the first
-ZSH_AUTOSUGGEST_STRATEGY=(history completion match_prev_cmd)
+export ZSH_AUTOSUGGEST_STRATEGY=(history completion match_prev_cmd)
 
 # Needed to make command-not-found plugin work
 source "$(brew --repository)/Library/Taps/homebrew/homebrew-command-not-found/handler.sh"
