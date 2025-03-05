@@ -25,4 +25,5 @@ y = 30
 [general]
 import = [
     "/Users/mvshmakov/.config/alacritty/alacritty-theme/themes/nord.toml",
+    "/Users/mvshmakov/.config/alacritty/fonts.toml",
 ]

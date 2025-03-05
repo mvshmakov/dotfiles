@@ -1,16 +1,32 @@
 #!/usr/bin/env bash
 
-function update-all() {
+# () function body create a subshell to have `set -x` only in the subshell
+# https://stackoverflow.com/a/74525211
+function update-all() (
+	set -x
+
 	brew update
 	brew upgrade
-	zplug update
+	npm update -g
+
+	asdf plugin update --all
 	gh extension upgrade --all
-	# TODO: update asdf plugins
-}
+	# As zimfw uses the shell script under the hood, `-x` option will print all
+	# lines and pollute the output. So, using the `+x` and updating in the
+	# subshell
+	(set +x && zimfw update && zimfw upgrade)
+
+	# Update Lazy packages and exit on LazySync event
+	nvim --headless -c 'autocmd User LazySync quitall' -c 'Lazy sync'
+	# Update Mason packages and quit
+	nvim --headless -c 'autocmd User MasonUpdateAllComplete quitall' -c 'MasonUpdate' -c 'MasonUpdateAll'
+	# Updates TS parsers as well
+	nvim --headless -c 'TSUpdateSync' -c q
+)
 
 # Create a directory and enter in it
 function mkd() {
-	mkdir -p "$@" && cd "$@"
+	mkdir -p "$@" && cd "$@" || exit
 }
 
 # Create a .tar.gz archive, using `zopfli`, `pigz` or `gzip` for compression

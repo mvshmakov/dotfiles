@@ -1,2 +1,1 @@
-disable=SC1090
-disable=SC1091
+./shellcheck/.config/shellcheckrc

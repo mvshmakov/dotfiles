@@ -36,13 +36,17 @@ brew "coreutils"
 # brew "wget"
 brew "curl"
 
-brew "direnv"
+# Unified tools version manager (nodejs, python, etc.)
+brew "asdf"
+# brew "direnv"
+# brew "fnm"
+# brew "pipenv"
+# brew "pyenv"
+
 brew "eksctl"
 # Reads/modifies EXIF and video metadata
 brew "exiftool"
 brew "ffmpeg"
-brew "findutils"
-brew "fnm"
 brew "fzf"
 brew "gawk"
 brew "gh"
@@ -97,6 +101,7 @@ brew "neofetch"
 brew "neovim"
 # From checkhealth: vimtex#view#inverse_search is better if pstree is available
 brew "pstree"
+brew "findutils"
 # brew "ranger" # File browser, superseded by nvim
 # Is required to fix the ranger's freezes
 # https://github.com/ranger/ranger/issues/1787#issuecomment-691528698https://github.com/ranger/ranger/issues/1787#issuecomment-691528698
@@ -113,8 +118,6 @@ brew "php"
 brew "postgresql"
 brew "qemu"
 
-brew "pipenv"
-brew "pyenv"
 # Fixes the issue with the missing Tkinter module during Python 3.11 build
 # https://stackoverflow.com/a/67465708
 brew "python-tk"
@@ -134,7 +137,11 @@ brew "openssl"
 brew "readline"
 # Nice backup tool
 brew "restic"
+
 brew "ripgrep"
+# Grep AST
+brew "ast-grep"
+
 brew "rsync"
 brew "ruby"
 brew "sox"
@@ -211,11 +218,32 @@ cask "flash-npapi"
 cask "qflipper"
 
 # Nerd fonts for the icons within terminal
+# Patched nerd fonts for the icons within terminal
+# Not yet possible to get rid of those, because Alacritty does not support
+# fallback fonts yet: https://github.com/alacritty/alacritty/issues/957
 cask "font-fira-code-nerd-font"
 cask "font-jetbrains-mono-nerd-font"
 cask "font-sauce-code-pro-nerd-font"
+cask "font-martian-mono-nerd-font"
+# To be able to use non-patched fonts, it is possible to use original with a
+# patched icon-only font: https://sw.kovidgoyal.net/kitty/faq/#kitty-is-not-able-to-use-my-favorite-font
+cask "font-fira-code" # Perfect
+cask "font-jetbrains-mono" # Perfect, but does not have "---" ligature (nvim)
+cask "font-source-code-pro"
+cask "font-symbols-only-nerd-font"
+# Does not have ligatures + is not patched with nerd-fonts
+# cask "font-input"
+# Does not have ligatures
+# cask "font-intel-one-mono"
+# Very readable, but too big parenthesis and lack of "---" ligature
+# cask "font-juliamono"
 # Free font builder
 cask "birdfont"
+
+# ebook library
+cask "calibre"
+# scientific papers library
+cask "mendeley"
 
 cask "inkscape"
 cask "gimp"
@@ -271,13 +299,14 @@ cask "launchcontrol"
 # brew "lunchy"
 
 cask "lantern"
-cask "mendeley"
 
 # Objective-See (objective-see.org) security-related apps
 # Nice and open-source outbound firewall
 cask "lulu"
 # Prevents "evil-maid" attacks (listens to the lid open events)
 cask "do-not-disturb"
+# Sends notifications when the video device becomes active
+cask "oversight"
 
 # Microsoft Office stuff can be replaced with LibreOffice
 # cask "microsoft-auto-update"
@@ -359,8 +388,6 @@ cask "wireshark"
 cask "wkhtmltopdf"
 cask "yandex"
 
-# Sound & music
-cask "yandex-music-unofficial"
 # Allows to granularly control the volume on the level of apps
 cask "background-music"
 
@@ -416,7 +443,7 @@ brew "zsh"
 brew "starship"
 tap "homebrew/command-not-found"
 # brew "antigen" # very slow and is not really maintained
-brew "zplug"
+# brew "zplug" # slow as well
 
 # Does not show the event details in the tray
 # cask "itsycal"

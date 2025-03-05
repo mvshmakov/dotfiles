@@ -6,8 +6,49 @@
 # Run to measure startup time:
 # https://blog.askesis.pl/post/2017/04/how-to-debug-zsh-startup-time.html
 # time  zsh -i -c exit
+
+# Create a `main` tmux session and load it by default to the shell
+# Initializing this sooner helps startup time
+# https://unix.stackexchange.com/a/113768
+if command -v tmux &>/dev/null && [ -n "$PS1" ] && [ -z "$TMUX" ] &&
+  { 
+    # Uncomment to enable tmux init in more broad cases
+    [[ "$TERM_PROGRAM" = "iTerm.app" ]] ||
+    [[ "$TERM_PROGRAM" = "ghostty" ]];
+  }; then
+  exec tmux new-session -A -s main
+fi
+
 # Injects profiling code for zsh
 # zmodload zsh/zprof
+
+# Fancy cd using frecency, agkozak/zsh-z (rupa/z) alternative
+# Should be added after compinit is autoloaded, but before the compinit call
+eval "$(zoxide init zsh)"
+
+export ZIM_HOME=$XDG_CACHE_HOME/zim
+# Download zimfw plugin manager if missing
+if [[ ! -e $ZIM_HOME/zimfw.zsh ]]; then
+  curl -fsSL --create-dirs -o $ZIM_HOME/zimfw.zsh \
+    https://github.com/zimfw/zimfw/releases/latest/download/zimfw.zsh
+fi
+
+# Install missing modules, and update $ZIM_HOME/init.zsh if missing or outdated
+if [[ ! $ZIM_HOME/init.zsh -nt ${ZDOTDIR:-${HOME}}/.zimrc ]]; then
+  source $ZIM_HOME/zimfw.zsh init
+fi
+
+# Necessary at least for the `last-working-dir` plugin from omz
+export ZSH_CACHE_DIR="$XDG_CACHE_HOME/zsh"
+ZSH_AUTOSUGGEST_MANUAL_REBIND=1
+
+# Initialize modules
+source $ZIM_HOME/init.zsh
+
+# Load ngrok completion after compdef init (as in brew caveats)
+if command -v ngrok &>/dev/null; then
+  eval "$(ngrok completion)"
+fi
 
 # Required to make Shift-Tab to work with menu select  (exposes required function)
 zmodload zsh/complist
@@ -120,12 +161,6 @@ unsetopt LIST_BEEP            # So that ZSH will not beep on each completion, on
 # Will try all of the suggestion types starting from the first
 ZSH_AUTOSUGGEST_STRATEGY=(history completion match_prev_cmd)
 
-# source $(brew --prefix)/share/antigen/antigen.zsh
-# antigen init $XDG_CONFIG_HOME/zsh/.antigenrc
-export ZPLUG_HOME=/opt/homebrew/opt/zplug
-source $ZPLUG_HOME/init.zsh
-source $XDG_CONFIG_HOME/zsh/.zplugrc
-
 # Needed to make command-not-found plugin work
 source "$(brew --repository)/Library/Taps/homebrew/homebrew-command-not-found/handler.sh"
 
@@ -135,6 +170,18 @@ source ~/shell-sources/.functions
 
 # Enable vi keymap mode
 bindkey -v
+
+####
+# Key bindings
+#
+# ^X^V enables vim mode in ZSH, so no need to bindkey -v
+####
+
+# Edit the current command line in $EDITOR
+# Nice default from OMZ: https://github.com/ohmyzsh/ohmyzsh/blob/9650861e56a3404313adc35cbcb1f32a7015b99d/lib/key-bindings.zsh#L62-L65
+autoload -U edit-command-line
+zle -N edit-command-line
+bindkey '\C-x\C-e' edit-command-line
 
 # The following block of bindings enables the support of
 # zsh-history-substring-search in vi, emacs and UP/DOWN ways
@@ -169,22 +216,16 @@ fi
 # Sets up and exports correct LS_COLORS to provide the highliting for different UNIX tools output (e.g., ls, tree, etc.)
 # See https://www.gnu.org/software/coreutils/manual/html_node/dircolors-invocation.html#dircolors-invocation
 # Also https://www.nordtheme.com/docs/ports/dircolors/installation
+#
+# [Vivid](https://github.com/sharkdp/vivid) is also an option, but colors are a
+# bit off for the nord pallette
 test -r "$XDG_CONFIG_HOME/dircolors/dir_colors" && eval $(dircolors "$XDG_CONFIG_HOME/dircolors/dir_colors")
 
-# Create a `main` session and load it by default to the shell
-# https://unix.stackexchange.com/a/113768
-if command -v tmux &>/dev/null && [ -n "$PS1" ] && [ -z "$TMUX" ] &&
-  { 
-    # Uncomment to enable tmux init in more broad cases
-    [[ "$TERM_PROGRAM" = "iTerm.app" ]] ||
-    [[ "$TERM_PROGRAM" = "ghostty" ]];
-  }; then
-  exec tmux new-session -A -s main
-fi
-
 source <(fzf --zsh)
+
 # Atuin needs to re-bind the `^R` after the `fzf` https://setup.atuin.sh/
 # Disabling the up arrow as it is easy enough to filter with subsequent `^R`
 eval "$(atuin init zsh --disable-up-arrow)"
 
+# Reads config from $XDG_CONFIG_HOME/starship.toml
 eval "$(starship init zsh)"

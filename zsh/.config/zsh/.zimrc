@@ -1,0 +1,48 @@
+#!/usr/bin/env zsh
+#
+# Completion plugins are mostly useless as brew has built-in method to provide
+# completions and it works.
+#
+# zimfw stores packages in $ZIM_HOME/modules
+
+# Contains completion scripts that are not yet merged to the ZSH upstream (e.g., yarn, node, shellcheck)
+zmodule zsh-users/zsh-completions --fpath src
+# Provides AWS profiles completions, that are missing in the brew
+zmodule eastokes/aws-plugin-zsh --fpath .
+# Completion for autopep8 (only for the -- options)
+zmodule ohmyzsh/ohmyzsh --fpath plugins/autopep8
+# Native zimfw completion, contains stylistic improvements and calls `compinit` for us, so all
+# completion-related plugins that modify FPATH should be initialized beforehand
+zmodule completion
+
+zmodule gnachman/iTerm2-shell-integration --source shell_integration/zsh
+
+# Keeps track of the last used working directory and automatically jumps into it for new shells
+zmodule ohmyzsh/ohmyzsh --root plugins/last-working-dir
+# Enables suggestions to install the program through the package manager
+zmodule ohmyzsh/ohmyzsh --root plugins/command-not-found
+# Unpacks any passed archive
+zmodule ohmyzsh/ohmyzsh --root plugins/extract
+
+# Displays all connected hooks with `zhooks` command
+# TODO: load on command execution, not immediately
+zmodule agkozak/zhooks
+# Auto-closes, deletes and skips over matching delimiters in the command line
+zmodule hlissner/zsh-autopair
+# Grayed out autosuggestions from the history - must have
+zmodule zsh-users/zsh-autosuggestions
+# Colorizes the cat/sed/awk/grep output of a file with structured syntax using `highlight` CLI tool
+zmodule l4u/zsh-output-highlighting
+# Real-time type-ahead completion for Zsh. Asynchronous find-as-you-type autocompletion
+# zmodule marlonrichert/zsh-autocomplete
+# Colorizes the commands as they are getting typed on the fly
+# Should be the last plugin https://github.com/zsh-users/zsh-syntax-highlighting/blob/master/INSTALL.md#antigen
+zmodule zsh-users/zsh-syntax-highlighting
+
+# Themes
+# Has an ugly configuration file and uglifies zshrc, but is fast
+# zmodule romkatv/powerlevel10k
+# Too slow
+# zmodule spaceship-prompt/spaceship-prompt
+# Not the best customizability
+# zmodule ohmyzsh/ohmyzsh --root themes/agnoster

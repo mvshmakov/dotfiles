@@ -9,7 +9,8 @@
 
 vim.keymap.set("n", "<leader>pv", vim.cmd.Ex, { desc = "Open netrw explorer" })
 
-vim.keymap.set("n", "\\", ":noh<CR>", { desc = "Clear search highlights on pressing \\\\ (double backslash)" })
+-- This one is already available in NVIM through `CTRL+L`
+-- vim.keymap.set("n", "\\", ":noh<CR>", { desc = "Clear search highlights on pressing \\\\ (double backslash)" })
 vim.keymap.set("n", "<cr>", "ciw", { desc = "Change inside the word" })
 
 vim.keymap.set("v", "J", ":m '>+1<CR>gv==kgvo<esc>=kgvo", { desc = "Move highlighted text down" })

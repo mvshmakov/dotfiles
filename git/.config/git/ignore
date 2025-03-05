@@ -52,6 +52,8 @@ tags
 .envrc
 # directory created by direnv's "layout python"
 .direnv
+# asdf tool versions
+.tool-versions
 
 # Next.js build output
 .next

@@ -35,22 +35,12 @@ fi
 # You could just use -g instead, but I like being explicit
 complete -W "NSGlobalDomain" defaults
 
-# Add pyenv executable to PATH and
-# enable shims by adding the following
-# to ~/.profile and ~/.zprofile:
-export PYENV_ROOT="$XDG_DATA_HOME/pyenv"
-PATH="$PATH:$PYENV_ROOT/bin"
-
-export PATH
-# Load pyenv into the shell
-eval "$(pyenv init -)"
-
 # Replaced with asdf
 # https://github.com/Schniz/fnm#bash
 # eval "$(fnm env --use-on-cd)"
 
-# Activate *direnv* https://direnv.net/docs/hook.html#bash
-eval "$(direnv hook bash)"
+# Activate direnv https://direnv.net/docs/hook.html#bash, but through asdf
+eval "$(asdf exec direnv hook bash)"
 
 # Activate atuin https://setup.atuin.sh/
 eval "$(atuin init bash)"
@@ -58,7 +48,7 @@ eval "$(atuin init bash)"
 # Brew should have the binary in PATH already
 eval "$(fzf --bash)"
 
-eval "$(gh copilot alias -- zsh)"
+eval "$(gh copilot alias -- bash)"
 
 # Configuring Homebrew shell completions
 # https://docs.brew.sh/Shell-Completion#configuring-completions-in-bash

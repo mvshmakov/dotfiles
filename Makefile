@@ -21,6 +21,10 @@ lint-shell:
 activate:
 	stow -vt ~ $(args)
 
+.PHONY: deactivate ## Unlink linked config directory
+activate:
+	stow -D -vt ~ $(args)
+
 .PHONY: help ## Print this help
 help:
 	@echo "COMMANDS"

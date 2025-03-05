@@ -48,9 +48,11 @@ PATH="$HOME/.docker/bin:$PATH"
 export PYENV_ROOT="$XDG_DATA_HOME/.pyenv"
 command -v pyenv >/dev/null || PATH="$PYENV_ROOT/bin:$PATH"
 
+# Initialize direnv
+eval "$(asdf exec direnv hook zsh)"
 # Init asdf shims
 source "$XDG_CONFIG_HOME"/asdf-direnv/zshrc
-export PATH="${ASDF_DATA_DIR:-$HOME/.asdf}/shims:$PATH"
+export PATH="${$ASDF_DATA_DIR:-$HOME/.asdf}/shims:$PATH"
 
 # https://github.com/Schniz/fnm#zsh
 # eval "$(fnm env --use-on-cd)"
@@ -114,6 +116,11 @@ export NO_MOTION=1
 # https://unix.stackexchange.com/questions/654663/problem-with-zsh-history-file
 export SHELL_SESSION_DIR="$XDG_STATE_HOME/zsh/sessions"
 export SHELL_SESSION_FILE="$SHELL_SESSION_DIR/$TERM_SESSION_ID"
+
+# Store the .zcompdump and friends in the cache home directory
+# Variable is non-standard, but taken from the omz:
+# https://github.com/ohmyzsh/ohmyzsh/blob/68f3ebb4de11aa2013ccc5252d4415840e0d7342/oh-my-zsh.sh#L144
+export ZSH_COMPDUMP="$XDG_CACHE_HOME/zsh/zcompdump-$ZSH_VERSION"
 
 # GPG is very hard to make work with XDG Base Directory spec
 # Mainly due to GPG Tools not supporting it properly
