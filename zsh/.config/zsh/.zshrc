@@ -22,10 +22,6 @@ fi
 # Injects profiling code for zsh
 # zmodload zsh/zprof
 
-# Fancy cd using frecency, agkozak/zsh-z (rupa/z) alternative
-# Should be added after compinit is autoloaded, but before the compinit call
-eval "$(zoxide init zsh)"
-
 export ZIM_HOME=$XDG_CACHE_HOME/zim
 # Download zimfw plugin manager if missing
 if [[ ! -e $ZIM_HOME/zimfw.zsh ]]; then
