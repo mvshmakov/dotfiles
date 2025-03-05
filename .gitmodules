@@ -13,3 +13,7 @@
 [submodule "bin/.local/bin/yubitouch"]
 	path = bin/.local/bin/yubitouch
 	url = https://github.com/a-dma/yubitouch
+
+[submodule "alacritty/.config/alacritty/alacritty-theme"]
+	path = alacritty/.config/alacritty/alacritty-theme
+	url = https://github.com/alacritty/alacritty-theme
