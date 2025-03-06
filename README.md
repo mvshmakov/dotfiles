@@ -74,7 +74,7 @@ How to upgrade brew:
 
 ## Literature
 
-- [macOS Config](https://www.alchemists.io/mac-os-config/)]
+- [macOS Config](https://www.alchemists.io/mac-os-config/)
 - [Colors in terminal](https://gist.github.com/XVilka/8346728#true-color-detection)
 - [ANSI Escape Sequences](https://gist.github.com/fnky/458719343aabd01cfb17a3a4f7296797)
 - ["\[WTF IS \033\[30;47m???", a practical cheat-sheet](https://gist.github.com/DNA/ebb9258089e9e1dfd08c58695b3cd6f1)
