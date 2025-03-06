@@ -9,8 +9,12 @@
 export HISTSIZE=1000000
 export HISTFILESIZE=1000000000
 export HISTFILE="$XDG_DATA_HOME/bash/history"
+# When the shell exits, append to the history file instead of overwriting it
+shopt -s histappend
 # Omit duplicates and commands that begin with a space from history.
 export HISTCONTROL="ignorespace"
+# Stores the timestamps in the bash history
+export HISTTIMEFORMAT='%s '
 
 eval "$(/opt/homebrew/bin/brew shellenv bash)"
 

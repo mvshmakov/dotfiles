@@ -115,38 +115,37 @@ export HISTSIZE=1000000
 export SAVEHIST=10000000
 export HISTFILESIZE=1000000000
 export HISTFILE="$XDG_DATA_HOME/zsh/history"
-
 # Ignore storing the commands that on begin with a space, duplicates are
 # still useful for e.g., atuin stats
 export HISTCONTROL="ignorespace"
 
-# Ensures that commands are added to the history immediately.
+# Ensures that commands are added to the history immediately + recording the elapsed time correctly.
 # Otherwise, the history appended only when the shell exits and it could be lost.
-setopt INC_APPEND_HISTORY
-setopt EXTENDED_HISTORY       # record timestamp of command in HISTFILE
-setopt SHARE_HISTORY          # share command history data
-setopt HIST_IGNORE_SPACE      # ignore commands that start with space
-setopt HIST_IGNORE_ALL_DUPS   # Complete command duplicates are not added to the history
-setopt HIST_FIND_NO_DUPS      # Ctrl + R will ignore dups durng a search
-setopt HIST_EXPIRE_DUPS_FIRST # delete duplicates first when HISTFILE size exceeds HISTSIZE
-setopt HIST_VERIFY            # show command with history expansion to user before running it
+setopt INC_APPEND_HISTORY_TIME # INC_APPEND_HISTORY{_TIME} and SHARE_HISTORY are mutually exclusive 
+# setopt SHARE_HISTORY           # share command history data - atuin takes care about it now
+setopt EXTENDED_HISTORY        # record timestamp of command in HISTFILE
+setopt HIST_IGNORE_SPACE       # ignore commands that start with space
+# setopt HIST_IGNORE_ALL_DUPS  # Complete command duplicates are not added to the history - we want to have full history, dups are handled by atuin
+setopt HIST_FIND_NO_DUPS       # Ctrl + R will ignore duplicates during a search
+setopt HIST_EXPIRE_DUPS_FIRST  # delete duplicates first when HISTFILE size exceeds HISTSIZE
+setopt HIST_VERIFY             # show command with history expansion to user before running it
 
-setopt GLOB_COMPLETE          # Trigger the completion after a glob * instead of expanding it.
-setopt MENU_COMPLETE          # Automatically highlight first element of completion menu
-setopt COMPLETE_IN_WORD       # Complete from both ends of a word.
-setopt AUTO_LIST              # Automatically list choices on ambiguous completion.
-setopt LIST_PACKED            # Completion menu will take less space
-setopt LIST_ROWS_FIRST        # Matches are sorted in rows instead of columns.
-setopt GLOBDOTS               # Lists hidden files during the completion: https://unix.stackexchange.com/a/366137
+setopt GLOB_COMPLETE           # Trigger the completion after a glob * instead of expanding it.
+setopt MENU_COMPLETE           # Automatically highlight first element of completion menu
+setopt COMPLETE_IN_WORD        # Complete from both ends of a word.
+setopt AUTO_LIST               # Automatically list choices on ambiguous completion.
+setopt LIST_PACKED             # Completion menu will take less space
+setopt LIST_ROWS_FIRST         # Matches are sorted in rows instead of columns.
+setopt GLOBDOTS                # Lists hidden files during the completion: https://unix.stackexchange.com/a/366137
 
 # setopt COMPLETE_ALIASES     # TODO: setting this disables zsh-z completion: https://github.com/agkozak/zsh-z#complete_aliases
 
-setopt AUTO_PUSHD             # Makes cd work as pushd
+setopt AUTO_PUSHD              # Makes cd work as pushd
 setopt PUSHD_IGNORE_DUPS
-setopt PUSHDMINUS             # Exchanges the meanings of '+'' and '-' when used with a number to specify a directory in the stack.
-setopt AUTO_CD                # Allows to cd into a directory even without an explicit `cd` command, e.g.: ../directory
+setopt PUSHDMINUS              # Exchanges the meanings of '+'' and '-' when used with a number to specify a directory in the stack.
+setopt AUTO_CD                 # Allows to cd into a directory even without an explicit `cd` command, e.g.: ../directory
 
-unsetopt LIST_BEEP            # So that ZSH will not beep on each completion, only on errors
+unsetopt LIST_BEEP             # So that ZSH will not beep on each completion, only on errors
 
 # Will try all of the suggestion types starting from the first
 export ZSH_AUTOSUGGEST_STRATEGY=(history completion match_prev_cmd)
