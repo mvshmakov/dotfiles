@@ -7,7 +7,6 @@ function update-all() (
 
 	brew update
 	brew upgrade
-	npm update -g
 
 	asdf plugin update --all
 	gh extension upgrade --all

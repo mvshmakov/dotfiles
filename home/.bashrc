@@ -2,6 +2,7 @@
 #
 # TODO: unify it with .zshrc
 # TODO: go through `man bash` documentation and enable interesting options
+# TODO: https://forum.atuin.sh/t/first-command-after-opening-a-new-terminal-session-is-not-being-saved/822/4
 
 # Increase Bash history size. Allow 1 000 000 entries; the default is 500
 # Exporting for e.g., atuin (https://docs.atuin.sh/reference/import/#atuin-import).
@@ -43,7 +44,7 @@ complete -W "NSGlobalDomain" defaults
 eval "$(asdf exec direnv hook bash)"
 
 # Activate atuin https://setup.atuin.sh/
-eval "$(atuin init bash)"
+eval "$(atuin init bash  --disable-up-arrow)"
 
 # Brew should have the binary in PATH already
 eval "$(fzf --bash)"
