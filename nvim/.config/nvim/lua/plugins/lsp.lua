@@ -24,7 +24,8 @@ return {
     end)
 
     lsp.ensure_installed({
-      'tsserver',
+      -- TODO: setup this correctly
+      -- 'tsserver',
       -- 'eslint',
       "lua_ls",
     })
