@@ -11,8 +11,7 @@ function update-all() (
 	asdf plugin update --all
 	gh extension upgrade --all
 	# As zimfw uses the shell script under the hood, `-x` option will print all
-	# lines and pollute the output. So, using the `+x` and updating in the
-	# subshell
+	# lines and pollute the output. So, using the `+x` and updating in the subshell
 	(set +x && zimfw update && zimfw upgrade)
 
 	"$XDG_CONFIG_HOME"/tmux/plugins/tpm/bin/update_plugins all

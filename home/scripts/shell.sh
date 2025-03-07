@@ -6,9 +6,9 @@ IFS=$'\n\t'
 
 chsh -s "$(which zsh)"
 
-# Select dash as the default POSIX-compiant shell (#!/usr/bin/env sh)
+# Select dash as the default POSIX-compliant shell (#!/usr/bin/env sh)
 # Not a direct symlink to /usr/bin/env sh due it is a symlink for /var/select/sh https://mckern.sh/post/bash-by-the-numbers/
-# Impoves sh perfomance https://unix.stackexchange.com/questions/148035/is-dash-or-some-other-shell-faster-than-bash
+# Improves sh performance https://unix.stackexchange.com/questions/148035/is-dash-or-some-other-shell-faster-than-bash
 
 case "$OSTYPE" in
 darwin*) sudo ln -sf /bin/dash /var/select/sh ;;

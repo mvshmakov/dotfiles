@@ -65,9 +65,8 @@ export PATH="${ASDF_DATA_DIR:-$HOME/.asdf}/shims:$PATH"
 
 # Load brew-hosted ZSH completions. Should go before the compinit call.
 # https://docs.brew.sh/Shell-Completion#configuring-completions-in-zsh
-if type brew &>/dev/null; then
+if type docker &>/dev/null; then
   FPATH="$HOME/.docker/completions:${FPATH}"
-  FPATH="$(brew --prefix)/share/zsh/site-functions:${FPATH}"
   export FPATH
 fi
 
