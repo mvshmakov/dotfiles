@@ -15,12 +15,6 @@
 tap "homebrew/bundle"
 # Yubikey manager, etc.
 tap "homebrew/cask-drivers"
-# Needed to enable command installation suggestions for ZSH if not found
-
-# FUSE implementations
-brew "fuse-t"
-# More of a deprecated one since macOS 12.3 (https://docs.cryptomator.org/en/1.7/desktop/volume-type/#macfuse)
-cask "macfuse"
 
 brew "awscli"
 brew "axel"
@@ -393,6 +387,10 @@ cask "background-music"
 
 cask "zeplin"
 
+# FUSE implementations are needed for the Cryptomator mounts
+brew "fuse-t"
+# Deprecated one since macOS 12.3 (https://docs.cryptomator.org/en/1.7/desktop/volume-type/#macfuse)
+# cask "macfuse"
 cask "cryptomator"
 cask "veracrypt"
 mas "Bitwarden", id: 1352778147
