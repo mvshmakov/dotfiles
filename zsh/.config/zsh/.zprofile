@@ -50,6 +50,8 @@ command -v pyenv >/dev/null || PATH="$PYENV_ROOT/bin:$PATH"
 
 # Initialize direnv
 source "$XDG_CONFIG_HOME"/asdf-direnv/zshrc
+# Sets GOROOT: https://github.com/asdf-community/asdf-golang#goroot
+source "$HOME"/.asdf/plugins/golang/set-env.zsh
 # Check path for validness with echo `"$PATH" | tr ':' '\n'`
 export PATH="${ASDF_DATA_DIR:-$HOME/.asdf}/shims:$PATH"
 

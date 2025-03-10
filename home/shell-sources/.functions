@@ -24,6 +24,19 @@ function update-all() (
 	nvim --headless -c 'TSUpdateSync' -c q
 )
 
+# TODO: add the nvim :checkhealth support
+function diagnose-all() (
+	set -x
+
+	brew doctor
+)
+
+function clean-all() (
+	set -x
+
+	brew cleanup
+)
+
 # Create a directory and enter in it
 function mkd() {
 	mkdir -p "$@" && cd "$@" || exit

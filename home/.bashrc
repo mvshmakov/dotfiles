@@ -47,6 +47,9 @@ complete -W "NSGlobalDomain" defaults
 # Activate direnv https://direnv.net/docs/hook.html#bash, but through asdf
 eval "$(asdf exec direnv hook bash)"
 
+# Sets GOROOT: https://github.com/asdf-community/asdf-golang#goroot
+source "$HOME"/.asdf/plugins/golang/set-env.bash
+
 # Activate atuin https://setup.atuin.sh/
 eval "$(atuin init bash  --disable-up-arrow)"
 

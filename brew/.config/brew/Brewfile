@@ -13,15 +13,12 @@
 # unless developing a formulae:
 # https://brew.sh/2023/02/16/homebrew-4.0.0/
 tap "homebrew/bundle"
-tap "homebrew/cask-fonts"
-# Brew casks extended ability
-tap "homebrew/cask-versions"
 # Yubikey manager, etc.
 tap "homebrew/cask-drivers"
 # Needed to enable command installation suggestions for ZSH if not found
 
 # FUSE implementations
-brew "macos-fuse-t/homebrew-cask/fuse-t"
+brew "fuse-t"
 # More of a deprecated one since macOS 12.3 (https://docs.cryptomator.org/en/1.7/desktop/volume-type/#macfuse)
 cask "macfuse"
 
@@ -168,7 +165,6 @@ brew "yq"
 
 # Cat alternative
 brew "bat"
-tap "eth-p/software"
 brew "bat-extras"
 
 # PDR and other docs reader
@@ -190,8 +186,12 @@ cask "soduto"
 cask "anydesk"
 cask "appcleaner"
 cask "browserstacklocal"
+
 # Hold the command key a bit longer to get a list of all active shortcuts of the current application
-cask "cheatsheet"
+# Got discontinued, so migrated to another one
+# cask "cheatsheet"
+cask "keyclu"
+
 cask "cloudflare-warp"
 cask "crossover"
 cask "dash"
