@@ -35,6 +35,7 @@ function clean-all() (
 	set -x
 
 	brew cleanup
+	brew autoremove
 )
 
 # Create a directory and enter in it

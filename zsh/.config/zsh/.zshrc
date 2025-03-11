@@ -106,8 +106,6 @@ export ENABLE_CORRECTION="true"
 # Uncomment the following line to display red dots whilst waiting for completion.
 export COMPLETION_WAITING_DOTS="true"
 
-export DBUS_SESSION_BUS_ADDRESS="unix:path=$DBUS_LAUNCHD_SESSION_BUS_SOCKET"
-
 # Increase ZSH history size. Allow 1 000 000 entries; the default is 500.
 # Exporting for e.g., atuin (https://docs.atuin.sh/reference/import/#atuin-import)
 # and $XDG_CONFIG_HOME/python/pythonstartup.py

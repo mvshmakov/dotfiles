@@ -35,13 +35,11 @@ One should also enable the `Reduced motion` option in the `System Preferences` t
 3. Dump all VSCode extensions to shell commands: `code --list-extensions | xargs -L 1 echo code --install-extension`
 4. `stow --restow {directory}`
 
-## Z-based navigation
+## Zoxide-based navigation
 
 - `z {pattern}[TAB]` will expand the path Z detected
 
-## Comments for packages in the `brew` folder
-
-- The `bat` is a good alternative to the `cat` for `JSON` files.
+## `brew`
 
 If you want your current system configuration to match your Brewfile (purge all non-fixed deps)
 
@@ -49,7 +47,7 @@ If you want your current system configuration to match your Brewfile (purge all 
 
 How to upgrade brew:
 
-- `brew update` (update brew itself) is superseded by `brew autoupdate start --greedy`
+- `brew update` update brew itself
 - `brew upgrade --greedy` update all the packages together with :latest and :auto_update
 
 ## Neovim after stow

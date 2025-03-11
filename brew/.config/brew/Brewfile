@@ -13,8 +13,6 @@
 # unless developing a formulae:
 # https://brew.sh/2023/02/16/homebrew-4.0.0/
 tap "homebrew/bundle"
-# Yubikey manager, etc.
-tap "homebrew/cask-drivers"
 
 brew "awscli"
 brew "axel"
@@ -87,7 +85,9 @@ brew "mosh"
 brew "mpv"
 # Replaces a built-in MacOS version of ncurses for the sake of having an up-to-date terminfo
 brew "ncurses"
-brew "neofetch"
+
+# neofetch got deprecated
+# brew "neofetch"
 
 brew "neovim"
 # From checkhealth: vimtex#view#inverse_search is better if pstree is available
@@ -136,7 +136,6 @@ brew "ast-grep"
 brew "rsync"
 brew "ruby"
 brew "sox"
-brew "speedtest-cli"
 # As education have finished
 # brew "spin"
 brew "stow"
@@ -234,19 +233,19 @@ cask "font-symbols-only-nerd-font"
 # Free font builder
 cask "birdfont"
 
-# ebook library
+# E-Book library
 cask "calibre"
-# scientific papers library
-cask "mendeley"
+# Scientific papers library
+# cask "mendeley" # Got deprecated
+cask "mendeley-reference-manager"
 
 cask "inkscape"
 cask "gimp"
 cask "gnucash"
 
 # Grammar checking tools
-brew "languagetool"
 cask "languagetool"
-# cask "grammarly"
+# cask "grammarly" # Deprecated in favour of web app
 
 cask "hazeover"
 cask "karabiner-elements"
@@ -298,7 +297,7 @@ cask "lantern"
 # Nice and open-source outbound firewall
 cask "lulu"
 # Prevents "evil-maid" attacks (listens to the lid open events)
-cask "do-not-disturb"
+# cask "do-not-disturb" # Unfortunately, got deprecated
 # Sends notifications when the video device becomes active
 cask "oversight"
 
@@ -337,9 +336,9 @@ cask "postman"
 
 # Apple QuickLook plugins
 # `ql` is an alias for QuickLook
+# cask "qlimagesize" # Got deprecated
 cask "avifquicklook"
 cask "qlcolorcode"
-cask "qlimagesize"
 cask "qlmarkdown"
 cask "qlstephen"
 cask "qlvideo"
@@ -379,7 +378,6 @@ cask "vlc"
 cask "webpquicklook"
 cask "whatsapp"
 cask "wireshark"
-cask "wkhtmltopdf"
 cask "yandex"
 
 # Allows to granularly control the volume on the level of apps
@@ -398,6 +396,7 @@ mas "Bitwarden", id: 1352778147
 cask "keepassxc"
 
 # Yubikey tools
+brew "pam-u2f"
 cask "yubico-yubikey-manager"
 cask "yubico-yubikey-personalization-gui"
 cask "yubico-yubikey-piv-manager"
@@ -431,15 +430,16 @@ cask "mailtrackerblocker"
 # Shells & shell-related
 brew "bash"
 brew "atuin"
+tap "homebrew/command-not-found"
 # Fancy cd using frecency, agkozak/zsh-z (rupa/z) alternative
 brew "zoxide"
 brew "checkbashisms"
+brew "shellfirm"
 brew "shellcheck"
 brew "shfmt"
 # ZSH-related
 brew "zsh"
 brew "starship"
-tap "homebrew/command-not-found"
 # brew "antigen" # very slow and is not really maintained
 # brew "zplug" # slow as well
 
@@ -462,7 +462,8 @@ cask "yandex-disk"
 # iOS does not work well with background syncs, so syncthing is not really convenient to use
 # cask "syncthing"
 brew "rclone"
-cask "kapitainsky-rclone-browser"
+# Got unsupported, the alternative is `rclone rcd --rc-web-gui`
+# cask "kapitainsky-rclone-browser"
 cask "mountain-duck"
 # Creates a TmpFS disk in RAM on login
 cask "tmpdisk"

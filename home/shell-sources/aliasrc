@@ -53,9 +53,6 @@ alias cp_test_pubkey="more ~/.ssh/id_rsa-test.pub | pbcopy | echo '=> Public key
 alias mergepdf='gs -q -dNOPAUSE -dBATCH -sDEVICE=pdfwrite -sOutputFile=_merged.pdf'
 alias mergepdf_local='ls -a | grep .pdf$ | xargs gs -q -dNOPAUSE -dBATCH -sDEVICE=pdfwrite -sOutputFile=_merged.pdf'
 
-# Convert ipynb to pdf using wkhtmltopdf
-alias ipynb2pdf='jupyter nbconvert --to html notebook.ipynb && wkhtmltopdf notebook.html notebook.pdf'
-
 # Locks the screen
 alias afk="/System/Library/CoreServices/Menu\ Extras/User.menu/Contents/Resources/CGSession -suspend"
 
