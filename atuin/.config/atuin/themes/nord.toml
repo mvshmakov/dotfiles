@@ -1,0 +1,10 @@
+[colors]
+AlertError = "indianred"      # nord11 (#BF616A, red for errors)
+AlertWarn  = "lightsalmon"    # nord12 (#D08770, orange for warnings)
+AlertInfo  = "darkseagreen"   # nord14 (#A3BE8C, green for informational/success)
+Annotation = "lightslategray" # nord3  (#4C566A, annotations subtle but readable)
+Guidance   = "cadetblue"      # nord9  (#81A1C1, blue for guidance/actions)
+Important  = "aliceblue"      # nord6  (#ECEFF4, highlighting key info)
+Muted      = "slategray"      # nord2  (#434C5E, darker muted secondary text)
+Title      = "darkcyan"       # nord7  (#8FBCBB, bright teal for titles)
+Base       = "lightgray"      # nord4  (#D8DEE9, default readable text)
