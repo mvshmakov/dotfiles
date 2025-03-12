@@ -50,11 +50,12 @@ eval "$(asdf exec direnv hook bash)"
 # Sets GOROOT: https://github.com/asdf-community/asdf-golang#goroot
 source "$HOME"/.asdf/plugins/golang/set-env.bash
 
-# Activate atuin https://setup.atuin.sh/
-eval "$(atuin init bash  --disable-up-arrow)"
-
 # Brew should have the binary in PATH already
 eval "$(fzf --bash)"
+
+# Atuin needs to re-bind the `^R` after the `fzf` https://setup.atuin.sh/
+# Disabling the up arrow as it is easy enough to filter with subsequent `^R`
+eval "$(atuin init bash  --disable-up-arrow)"
 
 eval "$(gh copilot alias -- bash)"
 

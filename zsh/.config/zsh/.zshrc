@@ -14,7 +14,9 @@ if command -v tmux &>/dev/null && [ -n "$PS1" ] && [ -z "$TMUX" ] &&
   { 
     # Uncomment to enable tmux init in more broad cases
     [[ "$TERM_PROGRAM" = "iTerm.app" ]] ||
-    [[ "$TERM_PROGRAM" = "ghostty" ]];
+    [[ "$TERM_PROGRAM" = "ghostty" ]] ||
+    [[ "$TERM" = "alacritty" ]] ||
+    [[ "$TERM" = "xterm-kitty" ]];
   }; then
   exec tmux new-session -A -s main
 fi
@@ -200,7 +202,7 @@ if [[ -n "$SSH_TEST_KEY_PATH" ]]; then
   eval "$(ssh-add -q --apple-use-keychain $SSH_TEST_KEY_PATH)"
 fi
 
-# Sets up and exports correct LS_COLORS to provide the highliting for different UNIX tools output (e.g., ls, tree, etc.)
+# Sets up and exports correct LS_COLORS to provide the highlighting for different UNIX tools output (e.g., ls, tree, etc.)
 # See https://www.gnu.org/software/coreutils/manual/html_node/dircolors-invocation.html#dircolors-invocation
 # Also https://www.nordtheme.com/docs/ports/dircolors/installation
 #
