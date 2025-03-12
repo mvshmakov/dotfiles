@@ -363,6 +363,8 @@ cask "dbeaver-community"
 
 # Editors
 cask "visual-studio-code"
+cask "visual-studio-code@insiders"
+cask "zed"
 mas "Xcode", id: 497799835
 
 # Difftool, not needed anymore due to NVIM and VSCode
