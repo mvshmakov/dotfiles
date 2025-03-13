@@ -456,8 +456,10 @@ cask "meetingbar"
 # cask "joplin" # Superseded by Obsidian
 cask "obsidian"
 
-# cask "hiddenbar" # Superseded by bartender
-cask "bartender"
+# Both are superseded by ice for different reasons
+# cask "hiddenbar"
+# cask "bartender"
+cask "jordanbaird-ice"
 
 # Cloud mount/manipulation tools.
 cask "google-drive"
