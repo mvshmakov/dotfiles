@@ -205,7 +205,6 @@ cask "drawio"
 cask "duplicati"
 cask "element"
 cask "fbreader"
-cask "figma"
 cask "flash-npapi"
 # Flipper Zero app
 cask "qflipper"
@@ -373,8 +372,6 @@ mas "Xcode", id: 497799835
 cask "tunnelblick"
 # Desktop widgets
 cask "ubersicht"
-cask "virtualbox"
-cask "virtualbox-extension-pack"
 cask "vk-messenger"
 cask "vlc"
 cask "webpquicklook"
@@ -382,9 +379,14 @@ cask "whatsapp"
 cask "wireshark"
 cask "yandex"
 
+cask "virtualbox"
+# This cask got deprecated https://github.com/orgs/Homebrew/discussions/4263
+# cask "virtualbox-extension-pack"
+
 # Allows to granularly control the volume on the level of apps
 cask "background-music"
 
+cask "figma"
 cask "zeplin"
 
 # FUSE implementations are needed for the Cryptomator mounts
