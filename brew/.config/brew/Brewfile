@@ -107,7 +107,6 @@ brew "openvpn"
 brew "perl"
 brew "php"
 brew "postgresql"
-brew "qemu"
 
 # Fixes the issue with the missing Tkinter module during Python 3.11 build
 # https://stackoverflow.com/a/67465708
@@ -379,6 +378,7 @@ cask "whatsapp"
 cask "wireshark"
 cask "yandex"
 
+brew "qemu"
 cask "virtualbox"
 # This cask got deprecated https://github.com/orgs/Homebrew/discussions/4263
 # cask "virtualbox-extension-pack"
