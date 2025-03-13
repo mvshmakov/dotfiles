@@ -321,7 +321,7 @@ cask "porting-kit"
 cask "steam"
 cask "epic-games"
 cask "gog-galaxy"
-cask "origin"
+cask "ea" # Successor of `cask "origin"`
 cask "playonmac"
 
 # Crypto wallets
@@ -379,6 +379,7 @@ cask "wireshark"
 cask "yandex"
 
 brew "qemu"
+cask "vmware-fusion" # Just-open Windows machine
 cask "virtualbox"
 # This cask got deprecated https://github.com/orgs/Homebrew/discussions/4263
 # cask "virtualbox-extension-pack"

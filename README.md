@@ -54,6 +54,10 @@ How to upgrade brew:
 
 - Run `:Copilot setup`
 
+## Atuin
+
+- Daemon mode requires a socket to be available, the `brew services start atuin` solves this
+
 ## TODO
 
 - Warn about exiting from the git commit message template on non-empty message.
