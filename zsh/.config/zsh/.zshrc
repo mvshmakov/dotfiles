@@ -44,7 +44,7 @@ export ZSH_AUTOSUGGEST_MANUAL_REBIND=1
 source $ZIM_HOME/init.zsh
 
 # Fancy cd using frecency, agkozak/zsh-z (rupa/z) alternative
-eval "$(zoxide init zsh)"
+eval "$(zoxide init --cmd=cd zsh)"
 # bun completions
 [ -s "/Users/mvshmakov/.bun/_bun" ] && source "/Users/mvshmakov/.bun/_bun"
 # npm completions
