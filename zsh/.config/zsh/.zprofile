@@ -221,6 +221,9 @@ export PYTHONIOENCODING='UTF-8'
 # Use a startup file for the interactive shell
 export PYTHONSTARTUP="$XDG_CONFIG_HOME/python/pythonstartup.py"
 
+# Store REPL history according to XDG Base Directory
+export NODE_REPL_HISTORY="$XDG_DATA_HOME/node/history"
+
 # To correctly link and build psycopg2: https://stackoverflow.com/a/69403177/12349023
 LIBPQ_PREFIX="$(brew --prefix libpq)"
 OPENSSL_PREFIX="$(brew --prefix openssl)"

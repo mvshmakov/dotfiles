@@ -7,14 +7,14 @@
 # https://docs.python.org/3/library/readline.html?highlight=readline#example
 #
 # The goal is to store interactive Python shell history in
-# $XDG_STATE_HOME/python/python_history instead of ~/.python_history.
+# $XDG_DATA_HOME/python/history instead of ~/.python_history.
 
 import atexit
 import os
 import readline
 
 histfile = os.path.join(
-    os.getenv("XDG_STATE_HOME", "~/.local/state"), "python", "python_history"
+    os.getenv("XDG_DATA_HOME", "~/.local/share"), "python", "history"
 )
 
 if not os.path.exists(histfile):

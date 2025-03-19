@@ -356,6 +356,8 @@ cask "stats"
 
 # DB manupulation/browsing tools
 cask "dbeaver-community"
+# Open-source data exploration tool
+cask "datasette"
 # Nice UI, but is proprietory and paid
 # cask "tableplus"
 
