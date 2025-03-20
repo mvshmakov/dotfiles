@@ -18,7 +18,6 @@ Icon\r\r
 # IDE-related things
 .idea
 .history
-.vscode
 
 # NeoVim
 # Swap

@@ -157,14 +157,23 @@ source ~/shell-sources/aliasrc
 source ~/shell-sources/zsh-aliasrc
 source ~/shell-sources/.functions
 
-# Enable vi keymap mode
-bindkey -v
 
 ####
 # Key bindings
 #
 # ^X^V enables vim mode in ZSH, so no need to bindkey -v
 ####
+
+# Enable vi keymap mode
+bindkey -v
+
+# To support built-in zsh functions documentation like bash does (e.g., `man bindkey`)
+# By default, zsh aliases `run-help` to `man`, which does not have detailed descriptions.
+# https://superuser.com/a/1563859/1916321
+unalias run-help
+autoload run-help
+export HELPDIR=$(command brew --prefix)/share/zsh/help
+alias help=run-help
 
 # Edit the current command line in $EDITOR
 # Nice default from OMZ: https://github.com/ohmyzsh/ohmyzsh/blob/9650861e56a3404313adc35cbcb1f32a7015b99d/lib/key-bindings.zsh#L62-L65
