@@ -16,7 +16,6 @@ tap "homebrew/bundle"
 
 brew "awscli"
 brew "axel"
-brew "bitwarden-cli"
 brew "cheat"
 brew "clang-format"
 brew "coreutils"
@@ -72,9 +71,11 @@ brew "biber"
 # To be able to send notifications from the scripts
 # Required for some items in ../../../bin/.local/bin/
 brew "terminal-notifier"
+
 # PostgreSQl
 brew "libpq"
-brew "lsyncd"
+brew "postgresql"
+
 brew "lua"
 brew "luarocks" # lua package manager
 brew "luajit-openresty"
@@ -103,10 +104,8 @@ brew "onefetch"
 brew "openjdk"
 # Same as pinentry for GPG, but for SSH
 brew "theseal/ssh-askpass/ssh-askpass"
-brew "openvpn"
 brew "perl"
 brew "php"
-brew "postgresql"
 
 # Fixes the issue with the missing Tkinter module during Python 3.11 build
 # https://stackoverflow.com/a/67465708
@@ -125,14 +124,11 @@ brew "openssl"
 # https://www.youtube.com/watch?v=MxRTh8wlmJk
 # https://tiswww.case.edu/php/chet/readline/rltop.html
 brew "readline"
-# Nice backup tool
-brew "restic"
 
-brew "ripgrep"
 # Grep AST
 brew "ast-grep"
+brew "ripgrep"
 
-brew "rsync"
 brew "ruby"
 brew "sox"
 # As education have finished
@@ -146,9 +142,9 @@ brew "svgo"
 brew "tealdeer"
 # brew "tldr"
 
-brew "testdisk" 
 brew "tmux"
 brew "tmuxinator"
+
 # Using it instead of the rm for soft-deletion
 brew "trash"
 brew "tree"
@@ -177,14 +173,12 @@ cask "soduto"
 
 cask "anydesk"
 cask "appcleaner"
-cask "browserstacklocal"
 
 # Hold the command key a bit longer to get a list of all active shortcuts of the current application
 # Got discontinued, so migrated to another one
 # cask "cheatsheet"
 cask "keyclu"
 
-cask "cloudflare-warp"
 cask "crossover"
 cask "dash"
 cask "deluge"
@@ -201,7 +195,6 @@ brew "lazydocker"
 
 # Nicest diagramming/drawing app
 cask "drawio"
-cask "duplicati"
 cask "element"
 cask "fbreader"
 cask "flash-npapi"
@@ -239,14 +232,12 @@ cask "mendeley-reference-manager"
 
 cask "inkscape"
 cask "gimp"
-cask "gnucash"
 
 # Grammar checking tools
 cask "languagetool"
 # cask "grammarly" # Deprecated in favour of web app
 
 cask "hazeover"
-cask "karabiner-elements"
 cask "keycastr"
 
 # Best archiving tool so far
@@ -264,6 +255,7 @@ tap "koekeishiya/formulae"
 brew "koekeishiya/formulae/yabai"
 # --with-logging adds log files to the plist
 brew "koekeishiya/formulae/skhd", args: ["with-logging"]
+cask "karabiner-elements"
 
 # Browsers
 cask "chromium"
@@ -272,15 +264,18 @@ cask "microsoft-edge"
 cask "firefox"
 cask "brave-browser"
 cask "tor-browser"
+cask "yandex"
 # Browsers managers
 mas "Velja", id: 1607635845
 # cask "browserosaurus"
+cask "browserstacklocal"
 
 # Sindre Sorhus apps (https://sindresorhus.com/)
 mas "Hyperduck", id: 2145267525
 
 # The only feature-rich terminal emulator for MacOS with blur background/ligatures is iTerm2
-cask "iterm2"
+cask "ghostty"
+# cask "iterm2"
 # cask "alacritty"
 # cask "kitty"
 
@@ -289,7 +284,10 @@ cask "launchcontrol"
 # A convenient wrapper around launchctl
 # brew "lunchy"
 
-cask "lantern"
+# VPNs
+cask "cloudflare-warp"
+cask "tunnelblick"
+brew "openvpn"
 
 # Objective-See (objective-see.org) security-related apps
 # Nice and open-source outbound firewall
@@ -310,7 +308,6 @@ cask "mqttfx"
 # The perfect open-source RSS reading tool
 cask "netnewswire"
 cask "ngrok"
-cask "notion"
 cask "numi"
 cask "obs"
 cask "opera"
@@ -350,9 +347,11 @@ cask "raspberry-pi-imager"
 # Replaced by Raycast's built-in emoji searcher
 # cask "rocket"
 cask "shottr"
+
 cask "skype"
 cask "slack"
-cask "stats"
+cask "vk-messenger"
+cask "whatsapp"
 
 # DB manupulation/browsing tools
 cask "dbeaver-community"
@@ -370,15 +369,15 @@ mas "Xcode", id: 497799835
 # Difftool, not needed anymore due to NVIM and VSCode
 # cask "ksdiff"
 
-cask "tunnelblick"
 # Desktop widgets
 cask "ubersicht"
-cask "vk-messenger"
-cask "vlc"
+cask "stats"
+
+# cask "vlc"
+cask "iina"
+
 cask "webpquicklook"
-cask "whatsapp"
 cask "wireshark"
-cask "yandex"
 
 brew "qemu"
 cask "vmware-fusion" # Just-open Windows machine
@@ -386,6 +385,8 @@ cask "virtualbox"
 # This cask got deprecated https://github.com/orgs/Homebrew/discussions/4263
 # cask "virtualbox-extension-pack"
 
+cask "yandex-music"
+# cask "yandex-music-unofficial" # Now Mac app is official
 # Allows to granularly control the volume on the level of apps
 cask "background-music"
 
@@ -396,9 +397,10 @@ cask "zeplin"
 cask "fuse-t"
 # Deprecated one since macOS 12.3 (https://docs.cryptomator.org/en/1.7/desktop/volume-type/#macfuse)
 # cask "macfuse"
-cask "cryptomator"
-cask "veracrypt"
+
+# Password managers
 mas "Bitwarden", id: 1352778147
+brew "bitwarden-cli"
 # cask "authy" # Superseeded by the KeePass
 cask "keepassxc"
 
@@ -460,6 +462,7 @@ cask "meetingbar"
 
 # cask "joplin" # Superseded by Obsidian
 cask "obsidian"
+cask "notion"
 
 # Both are superseded by ice for different reasons
 # cask "hiddenbar"
@@ -472,11 +475,20 @@ cask "yandex-disk"
 # iOS does not work well with background syncs, so syncthing is not really convenient to use
 # cask "syncthing"
 brew "rclone"
+# Backup/sync tools
+brew "rsync"
+brew "lsyncd"
+# Nice backup tool
+brew "restic"
+cask "duplicati"
 # Got unsupported, the alternative is `rclone rcd --rc-web-gui`
 # cask "kapitainsky-rclone-browser"
 cask "mountain-duck"
 # Creates a TmpFS disk in RAM on login
 cask "tmpdisk"
+brew "testdisk"
+cask "cryptomator"
+cask "veracrypt"
 
 # Best todo list tracker
 cask "ticktick"
