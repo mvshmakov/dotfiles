@@ -48,8 +48,10 @@ brew "gnu-which"
 brew "gotop"
 brew "grc"
 
+# Cloud CLIs
 # Heroku - in case we want to deploy using the heroku-cli
 # brew "heroku/brew/heroku"
+brew "doctl"
 
 brew "htop"
 brew "i2p"
