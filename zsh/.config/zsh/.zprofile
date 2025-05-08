@@ -53,7 +53,7 @@ source "$XDG_CONFIG_HOME"/asdf-direnv/zshrc
 # Sets GOROOT: https://github.com/asdf-community/asdf-golang#goroot
 source "$HOME"/.asdf/plugins/golang/set-env.zsh
 # Check path for validness with echo `"$PATH" | tr ':' '\n'`
-export PATH="${ASDF_DATA_DIR:-$HOME/.asdf}/shims:$PATH"
+PATH="${ASDF_DATA_DIR:-$HOME/.asdf}/shims:$PATH"
 
 # https://github.com/Schniz/fnm#zsh
 # eval "$(fnm env --use-on-cd)"
@@ -68,8 +68,7 @@ export PATH="${ASDF_DATA_DIR:-$HOME/.asdf}/shims:$PATH"
 # Load brew-hosted ZSH completions. Should go before the compinit call.
 # https://docs.brew.sh/Shell-Completion#configuring-completions-in-zsh
 if type docker &>/dev/null; then
-  FPATH="$HOME/.docker/completions:${FPATH}"
-  export FPATH
+  FPATH="${FPATH}:$HOME/.docker/completions"
 fi
 
 export INPUTRC="$XDG_CONFIG_HOME/readline/inputrc"

@@ -350,7 +350,9 @@ cask "raspberry-pi-imager"
 # cask "rocket"
 cask "shottr"
 
-cask "skype"
+# Skype is superseded by Teams
+# cask "skype"
+cask "microsoft-teams"
 cask "slack"
 cask "vk-messenger"
 cask "whatsapp"

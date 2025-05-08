@@ -17,6 +17,7 @@ return {
     },
     config = function()
         require("nvim-treesitter.configs").setup({
+            modules = {},
             ensure_installed = {
                 "typescript",
                 "javascript",
@@ -27,7 +28,7 @@ return {
                 "vimdoc",
             },
             -- The list of parsers to ignore installing
-            ignore_installed = {
+            ignore_install = {
                 "latex", -- As suggested in h vimtex-faq-treesitter"
             },
             -- Install parsers synchronously (only applied to `ensure_installed`)

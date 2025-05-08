@@ -1,7 +1,7 @@
 -- Language Server Protocol (LSP) support
 return {
     "VonHeikemen/lsp-zero.nvim",
-    branch = "v2.x",
+    branch = "v4.x",
     dependencies = {
         "neovim/nvim-lspconfig", -- Contains default LSP configurations (required)
         "jose-elias-alvarez/null-ls.nvim",
@@ -22,13 +22,6 @@ return {
         lsp.on_attach(function(_, bufnr)
             lsp.default_keymaps({ buffer = bufnr })
         end)
-
-        lsp.ensure_installed({
-            -- TODO: setup this correctly
-            -- 'tsserver',
-            -- 'eslint',
-            "lua_ls",
-        })
 
         -- Tell neovim explicitly where to lookup lua 3rd party packages
         local library = vim.api.nvim_get_runtime_file("", true)
@@ -82,9 +75,12 @@ return {
         require("mason").setup({ ui = { border = "rounded" } })
         require("mason-null-ls").setup({
             automatic_setup = true,
+            automatic_installation = true,
             -- TODO: here goes all formatters/linters
             -- https://github.com/jay-babu/mason-null-ls.nvim#primary-source-of-truth-is-mason-null-ls
-            ensure_installed = {},
+            ensure_installed = {
+                "lua_ls",
+            },
         })
 
         local augroup = vim.api.nvim_create_augroup("LspFormatting", {})

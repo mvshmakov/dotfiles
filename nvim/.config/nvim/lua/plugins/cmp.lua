@@ -1,5 +1,4 @@
 -- Autocompletion
--- TODO: Make sure you setup `cmp` after lsp-zero
 return {
     "hrsh7th/nvim-cmp",
     event = "InsertEnter",

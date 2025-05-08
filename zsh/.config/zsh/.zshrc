@@ -2,6 +2,7 @@
 #
 # Main ZSH config file
 # TODO: go through `man zsh` documentation and enable interesting options
+# TODO: split login, non-login and interactive shells: https://ghostty.org/docs/help/macos-login-shells#why-login-shells
 
 # Run to measure startup time:
 # https://blog.askesis.pl/post/2017/04/how-to-debug-zsh-startup-time.html
