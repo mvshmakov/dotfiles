@@ -15,7 +15,7 @@ lint:
 
 .PHONY: lint-shell ## Run shellcheck on relevants scripts
 lint-shell:
-	shellcheck $(or $(args),./bin/.local/bin/*)
+	find $(or $(args),./bin/.local/bin) -maxdepth 1 -type f -exec shellcheck {} +
 
 .PHONY: activate ## Link all of the local repo files to the system
 activate:
