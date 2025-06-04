@@ -11,11 +11,11 @@ all:
 # E.g., `shellcheck` exists in both filesystem and in the commands
 .PHONY: lint ## Lint all the scripts in the codebase
 lint:
-	lint-shell
+	$(MAKE) lint-shell
 
 .PHONY: lint-shell ## Run shellcheck on relevants scripts
 lint-shell:
-	shellcheck $(args) || ./bin/.local/bin/*
+	shellcheck $(or $(args),./bin/.local/bin/*)
 
 .PHONY: activate ## Link all of the local repo files to the system
 activate:

@@ -464,6 +464,8 @@ brew "starship"
 # MeetingBar + Apple Calendar combo works the best
 cask "meetingbar"
 
+# linear.app
+cask "linear-linear"
 # cask "joplin" # Superseded by Obsidian
 cask "obsidian"
 cask "notion"

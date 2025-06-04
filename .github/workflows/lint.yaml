@@ -8,17 +8,11 @@ on:
 name: "Making sure the codebase is perfect"
 jobs:
   shellcheck:
-    name: Shellcheck
+    name: Run ShellCheck
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
+      - name: Set up ShellCheck
+        run: sudo apt-get update && sudo apt-get install -y shellcheck
       - name: Run ShellCheck
-        uses: ludeeus/action-shellcheck@master
-        with:
-          # TODO: get rid of _archive ignore
-          # TODO: this does not really check things appropriately, need to fix it + make it work locally as well
-          # ShellCheck doesn't support zsh yet
-          # https://github.com/koalaman/shellcheck/issues/809
-          ignore_paths: >-
-            _archive
-            zsh
+        run: make lint

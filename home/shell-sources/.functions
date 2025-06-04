@@ -34,6 +34,19 @@ function clean-all() (
 function doctor-all() (
 	set -x
 
+    local dotfiles_dir="$HOME/projects/personal/dotfiles"
+    local main_branch="main"
+
+    cd "${dotfiles_dir}" || return 1
+    echo "Checking repo: git fetch && git rev-list HEAD..origin/${main_branch}"
+    git fetch
+    if [ "$(git rev-list HEAD..origin/${main_branch} --count)" -gt 0 ]; then
+        echo "Repo behind upstream. Please run: git pull"
+        return 1
+    fi
+	
+    nvim --headless -c "checkhealth" -c q
+
 	brew doctor
 )
 

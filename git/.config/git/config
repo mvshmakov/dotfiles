@@ -67,7 +67,7 @@
     fixup = "!git log -n 50 --pretty=format:'%h %s' --no-show-signature --no-merges | fzf | cut -c -7 | xargs -o git commit --fixup"
 [commit]
     verbose = true
-    gpgSign = true
+    # gpgSign = true
     template = ~/.config/git/gitmessage
 [tag]
     gpgSign = true
