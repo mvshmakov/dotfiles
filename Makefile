@@ -13,8 +13,9 @@ all:
 lint:
 	$(MAKE) lint-shell
 
-.PHONY: lint-shell ## Run shellcheck on relevants scripts
+.PHONY: lint-shell ## Run shellcheck on relevant scripts
 lint-shell:
+	# Restrict search to avoid shellchecking submodules
 	find $(or $(args),./bin/.local/bin) -maxdepth 1 -type f -exec shellcheck {} +
 
 .PHONY: activate ## Link all of the local repo files to the system

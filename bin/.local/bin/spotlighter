@@ -5,9 +5,11 @@
 
 set -eu
 
-DIR="${ROOT_DIR:-/Users/$USER/projects}"
+DIR="$PWD"
 PLIST="/System/Volumes/Data/.Spotlight-V100/VolumeConfiguration.plist"
 PLIST_BUDDY_BIN="/usr/libexec/PlistBuddy"
+FORCE=false
+VERBOSE=false
 
 get_exclusions() {
   sudo "$PLIST_BUDDY_BIN" -c 'Print :Exclusions' "$PLIST" \
@@ -20,7 +22,19 @@ find_candidates() {
 
 add_missing() {
   candidates="$(find_candidates)"
-  existing="$(get_exclusions)"
+
+  if [ "$FORCE" = true ]; then
+    sudo "$PLIST_BUDDY_BIN" -c 'Delete :Exclusions' "$PLIST" 2>/dev/null || true
+    sudo "$PLIST_BUDDY_BIN" -c 'Add :Exclusions array' "$PLIST"
+    existing=""
+  else
+    existing="$(get_exclusions)"
+  fi
+
+  if [ "$VERBOSE" = true ]; then
+    printf 'Candidates: %s\n' "$(printf '%s\n' "$candidates" | wc -l)"
+    printf 'Existing: %s\n' "$(printf '%s\n' "$existing" | wc -l)"
+  fi
 
   printf '%s\n' "$candidates" | while IFS= read -r path; do
     if ! printf '%s\n' "$existing" | grep -Fxq "$path"; then
@@ -31,22 +45,59 @@ add_missing() {
   sudo launchctl stop com.apple.metadata.mds
   sudo launchctl start com.apple.metadata.mds
 
-  printf 'Current content of Exclusions:\n'
+  if [ "$VERBOSE" = true ]; then
+    printf 'Current content of Exclusions:\n'
+  fi
   get_exclusions
   printf '\n\xF0\x9F\x91\x80 Check and verify at System Settings > Siri & Spotlight > Spotlight Privacy\n'
 }
 
 usage() {
   cat <<USAGE
-Usage: $(basename "$0") [command]
+Usage: $(basename "$0") [options] [command]
 Commands:
   add     Find node_modules directories and add them to Spotlight exclusions (default)
   show    Show current Spotlight exclusions
   find    Print candidate node_modules directories
+Options:
+  -d DIR, --dir DIR     Directory to search (default: current directory)
+  -f, --force           Rebuild exclusions from scratch
+  -v, --verbose         Print additional information
+  -h, --help            Show this help message
 USAGE
 }
 
-cmd="${1:-add}"
+cmd="add"
+while [ $# -gt 0 ]; do
+  case "$1" in
+    add|show|find)
+      cmd="$1"
+      shift
+      ;;
+    -d|--dir)
+      DIR="$2"
+      shift 2
+      ;;
+    -f|--force)
+      FORCE=true
+      shift
+      ;;
+    -v|--verbose)
+      VERBOSE=true
+      shift
+      ;;
+    -h|--help)
+      usage
+      exit 0
+      ;;
+    *)
+      printf 'Unknown option: %s\n' "$1" >&2
+      usage >&2
+      exit 1
+      ;;
+  esac
+done
+
 case "$cmd" in
   add)
     add_missing
@@ -62,3 +113,4 @@ case "$cmd" in
     exit 1
     ;;
 esac
+
