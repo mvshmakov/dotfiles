@@ -8,6 +8,9 @@ home/.bash_history
 tmux/.config/tmux/plugins
 !tmux/.config/tmux/plugins/tpm
 
+zed/.config/zed
+!zed/.config/zed/settings.json
+
 karabiner/.config/karabiner/assets
 karabiner/.config/karabiner/automatic_backups
 
