@@ -21,7 +21,7 @@ defaults write com.apple.screencapture location ~/screenshots
 echo 'Set key repeat to 2'
 defaults write -g KeyRepeat -int 2
 
-echo 'Set intitinal key repeat to 15'
+echo 'Set initial key repeat to 15'
 defaults write -g InitialKeyRepeat -int 15
 
 # Always show scrollbars
