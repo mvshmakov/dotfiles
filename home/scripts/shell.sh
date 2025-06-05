@@ -11,8 +11,8 @@ chsh -s "$(which zsh)"
 # Improves sh performance https://unix.stackexchange.com/questions/148035/is-dash-or-some-other-shell-faster-than-bash
 
 case "$OSTYPE" in
-darwin*) sudo ln -sf /bin/dash /var/select/sh ;;
-*) sudo ln -sfT dash /usr/usr/bin/env sh ;;
+  darwin*) sudo ln -sf /bin/dash /var/select/sh ;;
+  *) sudo ln -sfT dash /usr/usr/bin/env sh ;;
 esac
 
 # Increase key speed via a rate change
