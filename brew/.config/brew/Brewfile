@@ -344,7 +344,11 @@ cask "quicklookase"
 
 cask "prismatik"
 cask "quik"
+
+tap "mvshmakov/spotlighter"
+brew "spotlighter"
 cask "raycast"
+
 cask "raspberry-pi-imager"
 # Replaced by Raycast's built-in emoji searcher
 # cask "rocket"
