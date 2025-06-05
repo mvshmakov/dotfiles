@@ -53,20 +53,20 @@ find_candidates() {
 
   while [[ $# -gt 0 ]]; do
     case "$1" in
-    --type)
-      if [[ "$2" =~ ^(js|python|direnv|all)$ ]]; then
-        FIND_ARGS="$2"
-        shift
-        shift
-      else
-        echo "Invalid value for --type: $2"
+      --type)
+        if [[ "$2" =~ ^(js|python|direnv|all)$ ]]; then
+          FIND_ARGS="$2"
+          shift
+          shift
+        else
+          echo "Invalid value for --type: $2"
+          exit 1
+        fi
+        ;;
+      *)
+        echo "Unknown option: $1"
         exit 1
-      fi
-      ;;
-    *)
-      echo "Unknown option: $1"
-      exit 1
-      ;;
+        ;;
     esac
   done
 
@@ -83,28 +83,28 @@ TO_ADD=$(comm -23 <(echo "$CANDIDATES") <(echo "$EXISTING"))
 # Parse the command line arguments
 while [[ $# -gt 0 ]]; do
   case "$1" in
-  -v | --verbose)
-    VERBOSE=true
-    shift
-    ;;
-  # -p | --port)
-  #   port="$2"
-  #   shift
-  #   shift
-  #   ;;
-  show)
-    show_exclusions
-    exit 0
-    ;;
-  find)
-    find_candidates "$@"
-    exit 0
-    ;;
-  *)
-    echo "Unknown command: $1"
-    usage
-    exit 1
-    ;;
+    -v | --verbose)
+      VERBOSE=true
+      shift
+      ;;
+    # -p | --port)
+    #   port="$2"
+    #   shift
+    #   shift
+    #   ;;
+    show)
+      show_exclusions
+      exit 0
+      ;;
+    find)
+      find_candidates "$@"
+      exit 0
+      ;;
+    *)
+      echo "Unknown command: $1"
+      usage
+      exit 1
+      ;;
   esac
 done
 

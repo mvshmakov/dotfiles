@@ -9,12 +9,12 @@ IFS=$(printf '\n\t')
 INPUT="$1"
 
 if [ -d "$INPUT" ]; then
-    tree -a "$INPUT"
+  tree -a "$INPUT"
 elif [ -f "$INPUT" ]; then
-    case "$INPUT" in
+  case "$INPUT" in
     *".pdf" | *".djvu") zathura "$INPUT" ;;
     *) fzf-preview.sh "$INPUT" ;;
-    esac
+  esac
 else
-    printf "%s" "$INPUT"
+  printf "%s" "$INPUT"
 fi

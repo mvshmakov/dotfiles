@@ -9,13 +9,18 @@ all:
 
 # Using .PHONY to avoid conflicts with files named the same as the target
 # E.g., `shellcheck` exists in both filesystem and in the commands
-.PHONY: lint ## Lint all the scripts in the codebase
+.PHONY: lint ## Lint and format the shell scripts
 lint:
+	$(MAKE) fmt-check
 	$(MAKE) lint-shell
 
-.PHONY: lint-shell ## Run shellcheck on relevants scripts
+.PHONY: fmt-check ## Verify shell script formatting
+fmt-check:
+	shfmt -i 2 -ci -bn -l -d .
+
+.PHONY: lint-shell ## Run shellcheck on relevant scripts
 lint-shell:
-	shellcheck $(or $(args),./bin/.local/bin/*)
+	shellcheck $(or $(args),$(shell find ./bin/.local/bin -maxdepth 1 -type f -not -name optimize_spotlight))
 
 .PHONY: activate ## Link all of the local repo files to the system
 activate:
