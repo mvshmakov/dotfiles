@@ -12,12 +12,12 @@ all:
 # E.g., `shellcheck` exists in both filesystem and in the commands
 .PHONY: lint ## Lint and check formatting of shell scripts
 lint:
-	$(MAKE) fmt-check
+	$(MAKE) format-check
 	$(MAKE) lint-shell
 
 # Verify shell script formatting
-.PHONY: fmt-check
-fmt-check:
+.PHONY: format-check
+format-check:
 	shfmt -i 2 -ci -bn -l -d .
 
 # Run shellcheck on relevant scripts
