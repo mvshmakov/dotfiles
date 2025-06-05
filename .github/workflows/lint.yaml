@@ -7,12 +7,12 @@ on:
 
 name: "Making sure the codebase is perfect"
 jobs:
-  shellcheck:
-    name: Run ShellCheck
+  lint:
+    name: Run linters
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - name: Set up ShellCheck
-        run: sudo apt-get update && sudo apt-get install -y shellcheck
-      - name: Run ShellCheck
+      - name: Install linters
+        run: sudo apt-get update && sudo apt-get install -y shellcheck shfmt
+      - name: Run lint checks
         run: make lint

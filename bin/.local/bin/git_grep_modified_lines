@@ -7,9 +7,9 @@ set -eu
 IFS=$(printf '\n\t')
 
 [ "$#" -eq 1 ] || {
-	usage
-	echo >&2 "1 argument required, $# provided"
-	exit 1
+  usage
+  echo >&2 "1 argument required, $# provided"
+  exit 1
 }
 
 # TODO: finish this up
@@ -24,9 +24,9 @@ IFS=$(printf '\n\t')
 # done
 
 for file in $(git ls-files -com --exclude-standard); do
-	if test "$#" = 0; then
-		git --no-pager diff --no-index -- /dev/null "$file" | grep -iE "TODO"
-	else
-		git --no-pager diff "$file" | grep -iE "TODO"
-	fi
+  if test "$#" = 0; then
+    git --no-pager diff --no-index -- /dev/null "$file" | grep -iE "TODO"
+  else
+    git --no-pager diff "$file" | grep -iE "TODO"
+  fi
 done

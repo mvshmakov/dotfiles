@@ -10,9 +10,15 @@ all:
 
 # Using .PHONY to avoid conflicts with files named the same as the target
 # E.g., `shellcheck` exists in both filesystem and in the commands
-.PHONY: lint ## Lint all the scripts in the codebase
+.PHONY: lint ## Lint and check formatting of shell scripts
 lint:
+	$(MAKE) format-check
 	$(MAKE) lint-shell
+
+# Verify shell script formatting
+.PHONY: format-check
+format-check:
+	shfmt -i 2 -ci -bn -l -d .
 
 # Run shellcheck on relevant scripts
 # Restricts search to avoid shellchecking submodules
@@ -21,7 +27,7 @@ lint-shell:
 	find $(or $(args),./bin/.local/bin) -maxdepth 1 -type f -exec shellcheck {} +
 
 # Link all of the local repo files to the system
-.PHONY: activate 
+.PHONY: activate
 activate:
 	stow -vt ~ $(args)
 
@@ -38,6 +44,5 @@ help:
 	@grep -E '^\.PHONY: [a-zA-Z_-]+ .*?## .*$$' $(MAKEFILE_LIST) | awk 'BEGIN {FS = "(: |##)"}; {printf "  %-15s %s\n", $$2, $$3}'
 
 # Wildcard target to support passing additional arguments to commands.
-# This is required to ensure `make shellcheck .bashrc` does what you expect.
 %:
 	@:

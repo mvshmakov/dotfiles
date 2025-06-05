@@ -8,63 +8,63 @@ YELLOW=$(tput setaf 3) # Yellow color
 NORMAL=$(tput sgr0)    # No color
 
 _log() {
-	echo "use_fnm: $1"
+  echo "use_fnm: $1"
 }
 
 _warn() {
-	echo "use_fnm: ${YELLOW}$1${NORMAL}"
+  echo "use_fnm: ${YELLOW}$1${NORMAL}"
 }
 
 _success() {
-	echo "use_fnm: ${GREEN}$1${NORMAL}"
+  echo "use_fnm: ${GREEN}$1${NORMAL}"
 }
 
 _error() {
-	echo "use_fnm: ${RED}$1${NORMAL}"
-	exit 1
+  echo "use_fnm: ${RED}$1${NORMAL}"
+  exit 1
 }
 
 # Manual custom script to setup fnm in direnv
 # TODO: submit this script the direnv upstream
 # TODO: read engine version from package.json
 use_fnm() {
-	if [ "$FNM_DIR" = "" ]; then
-		_error "no FNM_DIR found in PATH, so assuming no fnm is installed${NORMAL}"
-		exit 1
-	fi
+  if [ "$FNM_DIR" = "" ]; then
+    _error "no FNM_DIR found in PATH, so assuming no fnm is installed${NORMAL}"
+    exit 1
+  fi
 
-	VERSION_ARG="v$1"
-	NVMRC_FILE="$PWD"/.nvmrc
-	NODE_VERSION_FILE="$PWD"/.node-version
+  VERSION_ARG="v$1"
+  NVMRC_FILE="$PWD"/.nvmrc
+  NODE_VERSION_FILE="$PWD"/.node-version
 
-	if [ "$1" != "" ]; then
-		_log "using version provided in an argument ($VERSION_ARG)"
-		NODE_VERSION="$VERSION_ARG"
-	elif [ -f "$NODE_VERSION_FILE" ]; then
-		if [ -f "$NVMRC_FILE" ]; then
-			_warn "both .nvmrc and .node-version are present. Using .node-version to setup node"
-		else
-			_log "using .node-version to setup node"
-		fi
+  if [ "$1" != "" ]; then
+    _log "using version provided in an argument ($VERSION_ARG)"
+    NODE_VERSION="$VERSION_ARG"
+  elif [ -f "$NODE_VERSION_FILE" ]; then
+    if [ -f "$NVMRC_FILE" ]; then
+      _warn "both .nvmrc and .node-version are present. Using .node-version to setup node"
+    else
+      _log "using .node-version to setup node"
+    fi
 
-		watch_file .node-version
-		NODE_VERSION="$(cat "$PWD"/.node-version)"
-	elif [ -f "$NVMRC_FILE" ]; then
-		_log "using .nvmrc to setup node"
+    watch_file .node-version
+    NODE_VERSION="$(cat "$PWD"/.node-version)"
+  elif [ -f "$NVMRC_FILE" ]; then
+    _log "using .nvmrc to setup node"
 
-		watch_file .nvmrc
-		NODE_VERSION="$(cat "$PWD"/.nvmrc)"
-	else
-		_warn "neither .node-version nor .nvmrc were found, so skipping node setup"
-		exit 0
-	fi
+    watch_file .nvmrc
+    NODE_VERSION="$(cat "$PWD"/.nvmrc)"
+  else
+    _warn "neither .node-version nor .nvmrc were found, so skipping node setup"
+    exit 0
+  fi
 
-	if [ ! -x "$FNM_DIR/node-versions/$NODE_VERSION/installation/bin/node" ]; then
-		if ! fnm install; then
-			_error "Can't install requested Node.js version ($NODE_VERSION)"
-		fi
-	fi
+  if [ ! -x "$FNM_DIR/node-versions/$NODE_VERSION/installation/bin/node" ]; then
+    if ! fnm install; then
+      _error "Can't install requested Node.js version ($NODE_VERSION)"
+    fi
+  fi
 
-	use node "$(printf '%s' "$NODE_VERSION" | cut -c2-)"
-	_success "Node.js ${NODE_VERSION%?} setup finished"
+  use node "$(printf '%s' "$NODE_VERSION" | cut -c2-)"
+  _success "Node.js ${NODE_VERSION%?} setup finished"
 }
