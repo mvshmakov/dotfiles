@@ -3,7 +3,8 @@ args = $(filter-out $@,$(MAKECMDGOALS))
 
 .DEFAULT_GOAL := all
 
-.PHONY: all ## Run all the checks
+# Run all the checks
+.PHONY: all
 all:
 	lint
 
@@ -13,19 +14,24 @@ all:
 lint:
 	$(MAKE) lint-shell
 
-.PHONY: lint-shell ## Run shellcheck on relevants scripts
+# Run shellcheck on relevant scripts
+# Restricts search to avoid shellchecking submodules
+.PHONY: lint-shell
 lint-shell:
-	shellcheck $(or $(args),./bin/.local/bin/*)
+	find $(or $(args),./bin/.local/bin) -maxdepth 1 -type f -exec shellcheck {} +
 
-.PHONY: activate ## Link all of the local repo files to the system
+# Link all of the local repo files to the system
+.PHONY: activate 
 activate:
 	stow -vt ~ $(args)
 
-.PHONY: deactivate ## Unlink linked config directory
+# Unlink linked config directory
+.PHONY: deactivate
 deactivate:
 	stow -D -vt ~ $(args)
 
-.PHONY: help ## Print this help
+# Print this help
+.PHONY: help
 help:
 	@echo "COMMANDS"
 	@echo
