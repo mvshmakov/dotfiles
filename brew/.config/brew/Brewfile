@@ -12,7 +12,7 @@
 # No need to tap homebrew/core and homebrew/cask anymore,
 # unless developing a formulae:
 # https://brew.sh/2023/02/16/homebrew-4.0.0/
-tap "homebrew/bundle"
+# homebrew/bundle and homebrew-services are also included 
 
 brew "awscli"
 brew "axel"
@@ -49,8 +49,7 @@ brew "gotop"
 brew "grc"
 
 # Cloud CLIs
-# Heroku - in case we want to deploy using the heroku-cli
-# brew "heroku/brew/heroku"
+brew "heroku"
 brew "doctl"
 
 brew "htop"

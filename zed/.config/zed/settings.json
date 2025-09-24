@@ -7,7 +7,18 @@
 // custom settings, run the `open default settings` command
 // from the command palette or from `Zed` application menu.
 {
-  "buffer_font_size": 15,
+  "agent": {
+    "default_model": {
+      "provider": "zed.dev",
+      "model": "claude-sonnet-4-thinking"
+    },
+    "model_parameters": [],
+    "default_profile": "ask",
+    "version": "2"
+  },
+  "buffer_font_family": "FiraCode Nerd Font",
+  "buffer_font_size": 12,
+  "ui_font_size": 14,
   "features": {
     "edit_prediction_provider": "zed"
   },

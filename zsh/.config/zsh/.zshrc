@@ -56,6 +56,9 @@ eval "$(docker completion zsh)"
 if command -v ngrok &>/dev/null; then
   eval "$(ngrok completion)"
 fi
+if command -v heroku &>/dev/null; then
+  eval "$(heroku autocomplete:script zsh)"
+fi
 
 # Required to make Shift-Tab to work with menu select  (exposes required function)
 zmodload zsh/complist
@@ -152,7 +155,7 @@ unsetopt LIST_BEEP             # So that ZSH will not beep on each completion, o
 export ZSH_AUTOSUGGEST_STRATEGY=(history completion match_prev_cmd)
 
 # Needed to make command-not-found plugin work
-source "$(brew --repository)/Library/Taps/homebrew/homebrew-command-not-found/handler.sh"
+source "$(brew --repository)/Library/Homebrew/command-not-found/handler.sh"
 
 source ~/shell-sources/aliasrc
 source ~/shell-sources/zsh-aliasrc
