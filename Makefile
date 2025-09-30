@@ -18,7 +18,7 @@ lint:
 # Verify shell script formatting
 .PHONY: format-check
 format-check:
-	shfmt -i 2 -ci -bn -l -d .
+	git ls-files | grep -E '\\.(sh|bash|zsh|ksh)$$' | grep -v '^_archive/' | xargs shfmt -i 2 -ci -bn -l -d
 
 # Run shellcheck on relevant scripts
 # Restricts search to avoid shellchecking submodules
