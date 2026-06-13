@@ -35,6 +35,10 @@ symbol = " "
 [fossil_branch]
 symbol = " "
 
+[gcloud]
+# Hide active gcloud account/project from the prompt
+disabled = true
+
 [git_branch]
 symbol = " "
 

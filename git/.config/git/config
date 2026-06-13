@@ -87,7 +87,7 @@
     # Auto track the origin on checkout
     # and auto rebase stuff on pull
     # https://stackoverflow.com/a/22147540
-    autoSetupMerge = always
+	  autoSetupMerge = true
     autoSetupRebase = always
     sort = -committerdate
 [checkout]
@@ -98,7 +98,7 @@
     colorMoved = default
     tool = nvimdiff3
 [log]
-    showSignature = true
+    # showSignature = true
 [merge]
     log = true
     tool = nvimdiff3

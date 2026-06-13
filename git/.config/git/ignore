@@ -53,6 +53,8 @@ tags
 .direnv
 # asdf tool versions
 .tool-versions
+venv
+.venv
 
 # Next.js build output
 .next
@@ -79,3 +81,5 @@ lerna-debug.log*
 
 # git-sim artefacts
 git-sim_media/
+
+**/.claude/settings.local.json

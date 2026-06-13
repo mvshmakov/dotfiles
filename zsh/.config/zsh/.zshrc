@@ -25,6 +25,8 @@ fi
 # Injects profiling code for zsh
 # zmodload zsh/zprof
 
+# Some sandboxed shells don't provide XDG_CACHE_HOME.
+export XDG_CACHE_HOME="${XDG_CACHE_HOME:-$HOME/.cache}"
 export ZIM_HOME=$XDG_CACHE_HOME/zim
 # Download zimfw plugin manager if missing
 if [[ ! -e $ZIM_HOME/zimfw.zsh ]]; then
@@ -40,6 +42,13 @@ fi
 # Necessary at least for the `last-working-dir` plugin from omz
 export ZSH_CACHE_DIR="$XDG_CACHE_HOME/zsh"
 export ZSH_AUTOSUGGEST_MANUAL_REBIND=1
+
+# Initialize Homebrew early so tools in /opt/homebrew/bin are available.
+if [[ -x /opt/homebrew/bin/brew ]]; then
+  eval "$(/opt/homebrew/bin/brew shellenv)"
+fi
+# Must come after brew shellenv so asdf shims take precedence over /opt/homebrew/bin
+PATH="${ASDF_DATA_DIR:-$HOME/.asdf}/shims:$PATH"
 
 # Initialize modules, all the completions must be defined beforehand
 source $ZIM_HOME/init.zsh
@@ -98,9 +107,11 @@ zstyle -e ':completion:*:(ssh|scp|sftp|rsh|rsync):hosts' hosts 'reply=(${=${${(f
 # https://github.com/romkatv/powerlevel10k#how-do-i-initialize-direnv-when-using-instant-prompt
 (( ${+commands[direnv]} )) && emulate zsh -c "$(direnv export zsh)"
 
-# Setup alias convenience commands for github-copilot-cli
-# https://www.npmjs.com/package/@githubnext/github-copilot-cli#user-content-setup-alias-convenience-commands
-eval "$(gh copilot alias -- zsh)"
+if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
+  source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
+fi
+
+(( ${+commands[direnv]} )) && emulate zsh -c "$(direnv hook zsh)"
 
 # Colorizes common UNIX tools output (GRC - Generic Colorizer)
 # GRC_BINARY="$(brew --prefix)/etc/grc.zsh"
@@ -188,8 +199,8 @@ bindkey '\C-x\C-e' edit-command-line
 # The following block of bindings enables the support of
 # zsh-history-substring-search in vi, emacs and UP/DOWN ways
 # https://github.com/zsh-users/zsh-history-substring-search#usage
-bindkey "$terminfo[kcuu1]" history-substring-search-up
-bindkey "$terminfo[kcud1]" history-substring-search-down
+# bindkey "$terminfo[kcuu1]" history-substring-search-up
+# bindkey "$terminfo[kcud1]" history-substring-search-down
 bindkey -M emacs '^P' history-substring-search-up
 bindkey -M emacs '^N' history-substring-search-down
 bindkey -M vicmd 'k' history-substring-search-up
@@ -229,5 +240,6 @@ source <(fzf --zsh)
 # Disabling the up arrow as it is easy enough to filter with subsequent `^R`
 eval "$(atuin init zsh --disable-up-arrow)"
 
-# Reads config from $XDG_CONFIG_HOME/starship.toml
+# Config lives one level deep (stow package nests it), so point Starship at it explicitly
+export STARSHIP_CONFIG="$XDG_CONFIG_HOME/starship/starship.toml"
 eval "$(starship init zsh)"

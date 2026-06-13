@@ -44,8 +44,8 @@ complete -W "NSGlobalDomain" defaults
 # https://github.com/Schniz/fnm#bash
 # eval "$(fnm env --use-on-cd)"
 
-# Activate direnv https://direnv.net/docs/hook.html#bash, but through asdf
-eval "$(asdf exec direnv hook bash)"
+# Activate direnv https://direnv.net/docs/hook.html#bash
+eval "$(direnv hook bash)"
 
 # Sets GOROOT: https://github.com/asdf-community/asdf-golang#goroot
 source "$HOME"/.asdf/plugins/golang/set-env.bash
@@ -56,8 +56,6 @@ eval "$(fzf --bash)"
 # Atuin needs to re-bind the `^R` after the `fzf` https://setup.atuin.sh/
 # Disabling the up arrow as it is easy enough to filter with subsequent `^R`
 eval "$(atuin init bash  --disable-up-arrow)"
-
-eval "$(gh copilot alias -- bash)"
 
 # Configuring Homebrew shell completions
 # https://docs.brew.sh/Shell-Completion#configuring-completions-in-bash
