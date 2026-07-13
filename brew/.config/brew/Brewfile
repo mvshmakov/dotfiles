@@ -48,6 +48,11 @@ brew "gnu-sed"
 brew "gnu-tar"
 brew "gnu-which"
 brew "gotop"
+# Grafana Alloy (telemetry collector), used by the grafana-alloy VS Code
+# extension. NOTE: a bare `brew install alloy` resolves to the unrelated MIT
+# alloy-analyzer (old formula name) - always use the fully-qualified tap name
+tap "grafana/grafana"
+brew "grafana/grafana/alloy"
 brew "grc"
 
 # Cloud CLIs
