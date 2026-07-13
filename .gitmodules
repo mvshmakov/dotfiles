@@ -4,7 +4,7 @@
 
 [submodule "dircolors/.config/dircolors"]
 	path = dircolors/.config/dircolors
-	url = https://github.com/nordtheme/tmux
+	url = https://github.com/nordtheme/dircolors
 
 [submodule "tmux-plugin-manager"]
 	path = tmux/.config/tmux/plugins/tpm

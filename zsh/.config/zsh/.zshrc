@@ -241,7 +241,7 @@ fi
 #
 # [Vivid](https://github.com/sharkdp/vivid) is also an option, but colors are a
 # bit off for the nord pallette
-test -r "$XDG_CONFIG_HOME/dircolors/dir_colors" && eval $(dircolors "$XDG_CONFIG_HOME/dircolors/dir_colors")
+test -r "$XDG_CONFIG_HOME/dircolors/src/dir_colors" && eval $(dircolors "$XDG_CONFIG_HOME/dircolors/src/dir_colors")
 
 source <(fzf --zsh)
 
