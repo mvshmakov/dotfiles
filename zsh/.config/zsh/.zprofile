@@ -41,6 +41,10 @@ PATH="$(brew --prefix ncurses)/bin:$PATH"
 # For Docker CLI tools to be accessible in the shell
 # https://github.com/Homebrew/homebrew-cask/blob/bb82248bb7bfc6ff7fbc4b02dbb63f6f3aaead03/Casks/docker.rb#L118-L122
 PATH="$HOME/.docker/bin:$PATH"
+# The `antigravity`/`agy` launchers of the Antigravity IDE (its installer
+# appends this to ~/.zshrc, which is shadowed by ZDOTDIR). The -x check also
+# skips the dangling symlinks left behind when an app update drops the CLI.
+[ -x "$HOME/.antigravity/antigravity/bin/antigravity" ] && PATH="$HOME/.antigravity/antigravity/bin:$PATH"
 
 # Add pyenv executable to PATH and enable shims
 # PYENV_ROOT is needed for XDG Base Directory compliance

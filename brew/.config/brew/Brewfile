@@ -154,6 +154,8 @@ brew "tmuxinator"
 # Using it instead of the rm for soft-deletion
 brew "trash"
 brew "tree"
+# Required by nvim-treesitter (main branch) to compile parsers
+brew "tree-sitter-cli"
 brew "ykman"
 brew "yq"
 
@@ -168,6 +170,8 @@ brew "zegervdv/zathura/zathura-djvu"
 brew "zegervdv/zathura/zathura-pdf-poppler"
 
 cask "1password"
+# The `op` CLI, required by the 1Password VS Code extension among others
+cask "1password-cli"
 cask "adobe-acrobat-reader"
 cask "alt-tab"
 

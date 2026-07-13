@@ -50,6 +50,15 @@ fi
 # Must come after brew shellenv so asdf shims take precedence over /opt/homebrew/bin
 PATH="${ASDF_DATA_DIR:-$HOME/.asdf}/shims:$PATH"
 
+# VS Code captures the environment for its extension host by running a
+# login+interactive probe shell with VSCODE_RESOLVING_ENVIRONMENT=1. Only the
+# env exports above matter to it, so skip the interactive-only setup below to
+# stay under the probe's 10s timeout (a timeout leaves extensions with a bare
+# PATH, e.g. the 1Password extension not finding the `op` CLI).
+if [[ -n "$VSCODE_RESOLVING_ENVIRONMENT" ]]; then
+  return
+fi
+
 # Initialize modules, all the completions must be defined beforehand
 source $ZIM_HOME/init.zsh
 
