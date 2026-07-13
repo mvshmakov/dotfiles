@@ -21,5 +21,13 @@ zsh/.config/zsh/.zcompdump*
 zsh/.config/zsh/.zsh_history
 zsh/.config/zsh/.zsh_sessions
 
+# ~/Library/LaunchAgents is stowed from here, so every app that registers a
+# login item deposits its plist into the repo; only the hand-managed window
+# manager agents are tracked, the app-owned rest stays ignored
+launchctl/Library/LaunchAgents/*
+!launchctl/Library/LaunchAgents/.gitkeep
+!launchctl/Library/LaunchAgents/com.asmvik.yabai.plist
+!launchctl/Library/LaunchAgents/com.koekeishiya.skhd.plist
+
 # Include VSCode config
 !home/.vscode
