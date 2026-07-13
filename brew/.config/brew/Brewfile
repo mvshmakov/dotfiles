@@ -35,6 +35,8 @@ brew "eksctl"
 # Reads/modifies EXIF and video metadata
 brew "exiftool"
 brew "ffmpeg"
+# Fast `find` alternative; used by telescope.nvim for file listing
+brew "fd"
 brew "fzf"
 brew "gawk"
 brew "gh"

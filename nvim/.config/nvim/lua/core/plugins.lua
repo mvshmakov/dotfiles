@@ -23,4 +23,8 @@ vim.g.mapleader = " "
 vim.g.maplocalleader = " "
 
 -- Lua will concatenate all the files within the plugins directory
-return require("lazy").setup("plugins", { ui = { border = "rounded" } })
+return require("lazy").setup("plugins", {
+    ui = { border = "rounded" },
+    -- No plugin needs luarocks; disabling silences the lua 5.1 healthcheck
+    rocks = { enabled = false },
+})

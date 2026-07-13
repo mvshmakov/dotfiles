@@ -26,7 +26,7 @@ return {
         "saadparwaiz1/cmp_luasnip", -- snippet completions
         {
             "roobert/tailwindcss-colorizer-cmp.nvim",
-            config = {
+            opts = {
                 color_square_width = 2,
             },
         },

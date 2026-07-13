@@ -1,6 +1,8 @@
--- Disable unneeded host providers
+-- Disable unneeded host providers (no remote plugins in use)
 vim.g.loaded_perl_provider = 0
 vim.g.loaded_ruby_provider = 0
+vim.g.loaded_python3_provider = 0
+vim.g.loaded_node_provider = 0
 
 vim.opt.encoding = "utf-8"
 vim.opt.spelllang = "en_us,ru"
