@@ -104,19 +104,15 @@ export DO_NOT_TRACK=1
 # Opt-out from motion animations https://docs.atuin.sh/configuration/config/#prefers_reduced_motion
 export NO_MOTION=1
 
-# To move .zsh_sessions and friends out of the dotfiles repo
+# Terminal.app session restore stays enabled. Its directory cannot be moved:
+# /etc/zshrc_Apple_Terminal assigns SHELL_SESSION_DIR="$ZDOTDIR/.zsh_sessions"
+# unconditionally (exporting SHELL_SESSION_DIR here never worked), so the
+# session files land inside the repo and are covered by .gitignore instead.
+# To turn the mechanism off: export SHELL_SESSIONS_DISABLE=1 in .zshenv.
 #
-# These are used by Apple in /etc/zshrc, which is sourced _before_ .zshrc
-# Wouldn't have to go in .zprofile otherwise.
-# We could put them in .zshenv, but that file is best kept as small as possible.
-# https://unix.stackexchange.com/questions/654663/problem-with-zsh-history-file
-export SHELL_SESSION_DIR="$XDG_STATE_HOME/zsh/sessions"
-export SHELL_SESSION_FILE="$SHELL_SESSION_DIR/$TERM_SESSION_ID"
-
-# Store the .zcompdump and friends in the cache home directory
-# Variable is non-standard, but taken from the omz:
-# https://github.com/ohmyzsh/ohmyzsh/blob/68f3ebb4de11aa2013ccc5252d4415840e0d7342/oh-my-zsh.sh#L144
-export ZSH_COMPDUMP="$XDG_CACHE_HOME/zsh/zcompdump-$ZSH_VERSION"
+# The completion dumpfile location is configured in .zshrc via the
+# ':zim:completion' dumpfile zstyle (the omz-style ZSH_COMPDUMP that used to
+# be exported here is ignored by zim).
 
 # GPG is very hard to make work with XDG Base Directory spec
 # Mainly due to GPG Tools not supporting it properly

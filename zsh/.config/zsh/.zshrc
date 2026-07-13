@@ -43,6 +43,22 @@ fi
 export ZSH_CACHE_DIR="$XDG_CACHE_HOME/zsh"
 export ZSH_AUTOSUGGEST_MANUAL_REBIND=1
 
+# Increase ZSH history size. Allow 1 000 000 entries; the default is 500.
+# Exporting for e.g., atuin (https://docs.atuin.sh/reference/import/#atuin-import)
+# and $XDG_CONFIG_HOME/python/pythonstartup.py
+#
+# Kept above the early returns below so that no shell ever exits with the
+# in-repo default HISTFILE that Apple's /etc/zshrc sets from ZDOTDIR
+export HISTSIZE=1000000
+export SAVEHIST=10000000
+export HISTFILESIZE=1000000000
+# Default XDG_DATA_HOME like XDG_CACHE_HOME above: it is exported in
+# .zprofile, which non-login shells never source
+export HISTFILE="${XDG_DATA_HOME:-$HOME/.local/share}/zsh/history"
+# Ignore storing the commands that on begin with a space, duplicates are
+# still useful for e.g., atuin stats
+export HISTCONTROL="ignorespace"
+
 # Initialize Homebrew early so tools in /opt/homebrew/bin are available.
 if [[ -x /opt/homebrew/bin/brew ]]; then
   eval "$(/opt/homebrew/bin/brew shellenv)"
@@ -58,6 +74,12 @@ PATH="${ASDF_DATA_DIR:-$HOME/.asdf}/shims:$PATH"
 if [[ -n "$VSCODE_RESOLVING_ENVIRONMENT" ]]; then
   return
 fi
+
+# Keep the compdump cache (and its .zwc/.dat/tempfile siblings) out of
+# ZDOTDIR, which lives inside the dotfiles repo; zim defaults to
+# ${ZDOTDIR}/.zcompdump otherwise
+mkdir -p "$ZSH_CACHE_DIR"
+zstyle ':zim:completion' dumpfile "$ZSH_CACHE_DIR/zcompdump"
 
 # Initialize modules, all the completions must be defined beforehand
 source $ZIM_HOME/init.zsh
@@ -131,17 +153,6 @@ export ENABLE_CORRECTION="true"
 
 # Uncomment the following line to display red dots whilst waiting for completion.
 export COMPLETION_WAITING_DOTS="true"
-
-# Increase ZSH history size. Allow 1 000 000 entries; the default is 500.
-# Exporting for e.g., atuin (https://docs.atuin.sh/reference/import/#atuin-import)
-# and $XDG_CONFIG_HOME/python/pythonstartup.py
-export HISTSIZE=1000000
-export SAVEHIST=10000000
-export HISTFILESIZE=1000000000
-export HISTFILE="$XDG_DATA_HOME/zsh/history"
-# Ignore storing the commands that on begin with a space, duplicates are
-# still useful for e.g., atuin stats
-export HISTCONTROL="ignorespace"
 
 # Ensures that commands are added to the history immediately + recording the elapsed time correctly.
 # Otherwise, the history appended only when the shell exits and it could be lost.

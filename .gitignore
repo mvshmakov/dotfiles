@@ -14,5 +14,12 @@ zed/.config/zed
 karabiner/.config/karabiner/assets
 karabiner/.config/karabiner/automatic_backups
 
+# ZDOTDIR points into this repo; ignore any zsh runtime state that still
+# lands here (compdump caches are redirected in .zshrc, Apple session files
+# are disabled in .zshenv, but fresh machines/edge cases may write them)
+zsh/.config/zsh/.zcompdump*
+zsh/.config/zsh/.zsh_history
+zsh/.config/zsh/.zsh_sessions
+
 # Include VSCode config
 !home/.vscode
