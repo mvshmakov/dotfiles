@@ -4,7 +4,6 @@ return {
     "nvim-lualine/lualine.nvim",
     dependencies = {
         "nvim-tree/nvim-web-devicons",
-        "WhoIsSethDaniel/lualine-lsp-progress.nvim", -- Shows LSP progress
     },
     config = function()
         local lualine = require("lualine")
@@ -34,16 +33,13 @@ return {
                     "branch",
                     "filename",
                     {
-                        "lsp_progress",
+                        -- Shows LSP progress (native replacement for the
+                        -- archived lualine-lsp-progress.nvim)
+                        function()
+                            return vim.lsp.status()
+                        end,
                         -- Extracted from nord color pallette
-                        colors = {
-                            percentage = "#81A1C1",
-                            title = "#D8DEE9",
-                            message = "#b48ead",
-                            spinner = "#a3be8c",
-                            lsp_client_name = "#81A1C1",
-                            use = true,
-                        },
+                        color = { fg = "#81A1C1" },
                     },
                 },
                 lualine_x = { "encoding", "fileformat", "filetype" },

@@ -13,7 +13,15 @@ return {
         "nvim-treesitter/nvim-treesitter-refactor",
         "nvim-treesitter/nvim-treesitter-textobjects",
         "windwp/nvim-ts-autotag", -- Automatically close and rename HTML tags
-        "JoosepAlviste/nvim-ts-context-commentstring", -- Sets commentstring based on the cursor location
+        {
+            "JoosepAlviste/nvim-ts-context-commentstring", -- Sets commentstring based on the cursor location
+            init = function()
+                -- The nvim-treesitter module integration is deprecated; the
+                -- plugin is set up standalone (via opts) instead
+                vim.g.skip_ts_context_commentstring_module = true
+            end,
+            opts = {},
+        },
     },
     config = function()
         require("nvim-treesitter.configs").setup({
@@ -46,7 +54,6 @@ return {
                 additional_vim_regex_highlighting = false,
             },
             indent = { enable = true },
-            context_commentstring = { enable = true },
             autotag = { enable = true },
             query_linter = { enable = true },
             incremental_selection = {

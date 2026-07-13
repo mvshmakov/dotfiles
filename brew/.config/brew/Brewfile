@@ -49,8 +49,13 @@ brew "gotop"
 brew "grc"
 
 # Cloud CLIs
+# These ship shell completions with the formula (into brew's zsh
+# site-functions and etc/bash_completion.d), which both .zshrc and
+# .bashrc already load, so no extra completion wiring is needed.
 brew "heroku"
 brew "doctl"
+# Hetzner Cloud
+brew "hcloud"
 
 brew "htop"
 brew "i2p"
@@ -445,6 +450,11 @@ cask "mailtrackerblocker"
 
 # Shells & shell-related
 brew "bash"
+# Enables the lazy-loading completion loader that .bashrc prefers. Without it,
+# .bashrc falls back to eagerly sourcing etc/bash_completion.d/*, which misses
+# the share/bash-completion/completions dir (git, etc.) and errors on files
+# using bash 4.4+ syntax under the ancient system bash 3.2. Needs bash >= 4.2.
+brew "bash-completion@2"
 brew "atuin"
 # Fancy cd using frecency, agkozak/zsh-z (rupa/z) alternative
 brew "zoxide"
