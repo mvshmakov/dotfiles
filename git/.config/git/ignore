@@ -82,4 +82,5 @@ lerna-debug.log*
 # git-sim artefacts
 git-sim_media/
 
-**/.claude/settings.local.json
+# Claude Code project-local config
+.claude/
