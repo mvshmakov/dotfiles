@@ -214,7 +214,6 @@ brew "lazydocker"
 cask "drawio"
 cask "element"
 cask "fbreader"
-cask "flash-npapi"
 # Flipper Zero app
 cask "qflipper"
 
@@ -288,7 +287,8 @@ mas "Velja", id: 1607635845
 cask "browserstacklocal"
 
 # Sindre Sorhus apps (https://sindresorhus.com/)
-mas "Hyperduck", id: 2145267525
+# Hyperduck was delisted from the App Store (mas: "No apps found for ADAM ID")
+# mas "Hyperduck", id: 2145267525
 
 # The only feature-rich terminal emulator for MacOS with blur background/ligatures is iTerm2
 cask "ghostty"
@@ -357,9 +357,6 @@ cask "qlvideo"
 cask "quicklook-json"
 cask "quicklookase"
 
-cask "prismatik"
-cask "quik"
-
 tap "mvshmakov/spotlighter"
 brew "spotlighter"
 cask "raycast"
@@ -403,7 +400,9 @@ cask "webpquicklook"
 cask "wireshark"
 
 brew "qemu"
-cask "vmware-fusion" # Just-open Windows machine
+# vmware-fusion cask was removed from Homebrew (Broadcom moved it behind a
+# login portal); UTM is the free QEMU-based successor (App Store build).
+mas "UTM Virtual Machines", id: 1538878817
 cask "virtualbox"
 # This cask got deprecated https://github.com/orgs/Homebrew/discussions/4263
 # cask "virtualbox-extension-pack"
@@ -429,9 +428,9 @@ cask "keepassxc"
 
 # Yubikey tools
 brew "pam-u2f"
+# yubikey-manager (ykman) supersedes the discontinued personalization-gui and
+# piv-manager casks, both removed from Homebrew.
 cask "yubico-yubikey-manager"
-cask "yubico-yubikey-personalization-gui"
-cask "yubico-yubikey-piv-manager"
 
 # GnuPG & friends
 brew "gnupg"
@@ -439,8 +438,8 @@ brew "pinentry-mac"
 
 # GPG modern analogue, can use SSH key for encryption
 # https://github.com/C2SP/C2SP/blob/main/age.md
-# Rust implementation
-tap "str4d.xyz/rage"
+# Rust implementation. Now in homebrew-core, so the old str4d.xyz/rage tap
+# (repo since removed - 404) is no longer needed.
 brew "rage"
 # brew "age"
 
@@ -457,7 +456,9 @@ brew "zbar"
 # cask "thunderbird"
 # Apple Mail plugin for OpenPGP
 cask "free-gpgmail"
-cask "mailtrackerblocker"
+# Unsupported past macOS Ventura (cask requires macOS <= 13); re-enable if it
+# gains newer-macOS support
+# cask "mailtrackerblocker"
 
 # Shells & shell-related
 brew "bash"
@@ -526,6 +527,8 @@ cask "ticktick"
 mas "Amphetamine", id: 937984704
 mas "Dropover", id: 1355679052
 mas "GIPHY CAPTURE", id: 668208984
+# GoPro Quik desktop was discontinued as a cask; the App Store build lives on
+mas "GoPro Quik", id: 561350520
 mas "Keynote", id: 409183694
 mas "Notchmeister", id: 1599169747
 mas "Pages", id: 409201541

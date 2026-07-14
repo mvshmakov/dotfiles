@@ -8,9 +8,27 @@ IFS=$'\n\t'
 
 /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
 
-# Install brew packages and casks
+# Homebrew 6 refuses formulae from non-official taps unless they're explicitly
+# trusted (HOMEBREW_REQUIRE_TAP_TRUST is on by default). Pre-trust every
+# third-party tap the Brewfile pulls formulae from so the bundle install below
+# runs non-interactively.
+brew trust --tap \
+	grafana/grafana \
+	zegervdv/zathura \
+	theseal/ssh-askpass \
+	koekeishiya/formulae \
+	kaplanelad/tap \
+	mvshmakov/spotlighter
+
+# Install brew packages and casks.
+# --adopt lets Homebrew take over apps already present in /Applications (e.g.
+# installed manually before this ran) when they're identical to the cask.
+# --force additionally overwrites apps present at a *different* version (e.g.
+# self-updating apps that drifted from Homebrew's records), which --adopt alone
+# refuses with "already an App". brew bundle has no such flags of its own, so
+# pass them through the cask options env var.
 brew tap homebrew/bundle
-brew bundle install --file ~/.config/brew/Brewfile
+HOMEBREW_CASK_OPTS="--adopt --force" brew bundle install --file ~/.config/brew/Brewfile
 
 # Transferring libs for zathura: https://github.com/zegervdv/homebrew-zathura#installation
 mkdir -p "$(brew --prefix zathura)"/lib/zathura
