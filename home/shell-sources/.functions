@@ -20,8 +20,10 @@ function update-all() (
 	nvim --headless -c 'autocmd User LazySync quitall' -c 'Lazy sync'
 	# Update Mason packages and quit
 	nvim --headless -c 'autocmd User MasonUpdateAllComplete quitall' -c 'MasonUpdate' -c 'MasonUpdateAll'
-	# Updates TS parsers as well
-	nvim --headless -c 'TSUpdateSync' -c q
+	# Update Treesitter parsers. The `main` branch dropped the synchronous
+	# `TSUpdateSync` command; `update()` is async, so block on the task with
+	# `:wait()` before quitting (5 min timeout).
+	nvim --headless -c 'lua require("nvim-treesitter").update():wait(300000)' -c q
 )
 
 function clean-all() (
