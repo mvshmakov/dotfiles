@@ -13,12 +13,12 @@ IFS=$'\n\t'
 # third-party tap the Brewfile pulls formulae from so the bundle install below
 # runs non-interactively.
 brew trust --tap \
-	grafana/grafana \
-	zegervdv/zathura \
-	theseal/ssh-askpass \
-	koekeishiya/formulae \
-	kaplanelad/tap \
-	mvshmakov/spotlighter
+  grafana/grafana \
+  zegervdv/zathura \
+  theseal/ssh-askpass \
+  koekeishiya/formulae \
+  kaplanelad/tap \
+  mvshmakov/spotlighter
 
 # Install brew packages and casks.
 # --adopt lets Homebrew take over apps already present in /Applications (e.g.
