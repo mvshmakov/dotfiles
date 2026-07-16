@@ -60,7 +60,9 @@ export HISTFILE="${XDG_DATA_HOME:-$HOME/.local/share}/zsh/history"
 export HISTCONTROL="ignorespace"
 
 # Initialize Homebrew early so tools in /opt/homebrew/bin are available.
-if [[ -x /opt/homebrew/bin/brew ]]; then
+# Skip when already initialized (login shells run brew shellenv in .zprofile);
+# only non-login interactive shells, which skip .zprofile, need it here.
+if [[ -x /opt/homebrew/bin/brew && -z "$HOMEBREW_PREFIX" ]]; then
   eval "$(/opt/homebrew/bin/brew shellenv)"
 fi
 # Must come after brew shellenv so asdf shims take precedence over /opt/homebrew/bin
@@ -88,17 +90,27 @@ source $ZIM_HOME/init.zsh
 eval "$(zoxide init --cmd=cd zsh)"
 # bun completions
 [ -s "/Users/mvshmakov/.bun/_bun" ] && source "/Users/mvshmakov/.bun/_bun"
-# npm completions
-eval "$(npm completion)"
-# docker completions
-eval "$(docker completion zsh)"
-# Load ngrok completion after compdef init (as in brew caveats)
-if command -v ngrok &>/dev/null; then
-  eval "$(ngrok completion)"
-fi
-if command -v heroku &>/dev/null; then
-  eval "$(heroku autocomplete:script zsh)"
-fi
+
+# Some tools regenerate their completion script by spawning themselves on every
+# startup, which is slow (npm ~300ms, ngrok ~110ms, heroku ~460ms). Cache the
+# generated script and only rebuild when the tool's binary is newer than the
+# cache, so `update-all` refreshes it automatically. Absent tools degrade
+# gracefully to an empty cache (no error). `rm $ZSH_CACHE_DIR/comp-*.zsh` forces
+# a rebuild. Must stay after zim's compinit so compdef is available.
+_zcompcache() {
+  local name=$1
+  shift
+  local cache="$ZSH_CACHE_DIR/comp-$name.zsh" bin
+  bin=$(command -v "$1" 2>/dev/null)
+  if [[ ! -f $cache || (-n $bin && $bin -nt $cache) ]]; then
+    "$@" >|"$cache" 2>/dev/null
+  fi
+  source "$cache"
+}
+_zcompcache npm npm completion
+_zcompcache docker docker completion zsh
+_zcompcache ngrok ngrok completion
+_zcompcache heroku heroku autocomplete:script zsh
 
 # Required to make Shift-Tab to work with menu select  (exposes required function)
 zmodload zsh/complist
@@ -185,8 +197,9 @@ unsetopt LIST_BEEP             # So that ZSH will not beep on each completion, o
 # Will try all of the suggestion types starting from the first
 export ZSH_AUTOSUGGEST_STRATEGY=(history completion match_prev_cmd)
 
-# Needed to make command-not-found plugin work
-source "$(brew --repository)/Library/Homebrew/command-not-found/handler.sh"
+# Needed to make command-not-found plugin work ($HOMEBREW_REPOSITORY is already
+# exported by brew shellenv above, avoiding another brew subprocess)
+[[ -n "$HOMEBREW_REPOSITORY" ]] && source "$HOMEBREW_REPOSITORY/Library/Homebrew/command-not-found/handler.sh"
 
 source ~/shell-sources/aliasrc
 source ~/shell-sources/zsh-aliasrc
@@ -240,11 +253,21 @@ bindkey "^?" backward-delete-char
 # Enables Shift+Tab in autocomplete menu
 bindkey -M menuselect '^[[Z' reverse-menu-complete
 
-# Be quiet on success
-eval "$(ssh-add -q --apple-use-keychain $SSH_KEY_PATH)"
-if [[ -n "$SSH_TEST_KEY_PATH" ]]; then
-  eval "$(ssh-add -q --apple-use-keychain $SSH_TEST_KEY_PATH)"
-fi
+# Add SSH keys to the agent, but skip the slow --apple-use-keychain call
+# (~320ms each) when the key is already loaded. macOS's launchd ssh-agent keeps
+# keys across shells, so only the first shell after boot pays the cost; the
+# fingerprint check (ssh-keygen + ssh-add -l) is ~20ms.
+_ssh_add_once() {
+  [[ -r $1 ]] || return
+  local fp
+  fp=$(ssh-keygen -lf "$1" 2>/dev/null | awk '{print $2}')
+  if [[ -n $fp ]] && ssh-add -l 2>/dev/null | grep -q "$fp"; then
+    return
+  fi
+  ssh-add -q --apple-use-keychain "$1"
+}
+_ssh_add_once "$SSH_KEY_PATH"
+[[ -n "$SSH_TEST_KEY_PATH" ]] && _ssh_add_once "$SSH_TEST_KEY_PATH"
 
 # Sets up and exports correct LS_COLORS to provide the highlighting for different UNIX tools output (e.g., ls, tree, etc.)
 # See https://www.gnu.org/software/coreutils/manual/html_node/dircolors-invocation.html#dircolors-invocation
