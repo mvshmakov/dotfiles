@@ -6,12 +6,13 @@ function update-all() (
 	set -x
 
 	brew update
-	# --adopt/--force let cask upgrades take over apps whose on-disk version
-	# drifted from brew's records (self-updating apps, manual installs), which
-	# a bare `brew upgrade` refuses with "already an App" and reverts. brew has
-	# no such flags of its own, so pass them through the cask options env var
-	# (same approach as in ~/scripts/brew.sh). No-op for up-to-date casks.
-	HOMEBREW_CASK_OPTS="--adopt --force" brew upgrade
+	brew upgrade --formula
+	# --force lets cask upgrades overwrite apps whose on-disk version drifted
+	# from brew's records (self-updating apps, manual installs), which a bare
+	# `brew upgrade` refuses with "already an App" and reverts. Must be an
+	# explicit flag: brew upgrade ignores HOMEBREW_CASK_OPTS (unlike
+	# install/bundle). No-op for up-to-date casks.
+	brew upgrade --cask --force
 
 	asdf plugin update --all
 	gh extension upgrade --all

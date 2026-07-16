@@ -22,13 +22,13 @@ brew trust --tap \
 
 # Install brew packages and casks.
 # --adopt lets Homebrew take over apps already present in /Applications (e.g.
-# installed manually before this ran) when they're identical to the cask.
-# --force additionally overwrites apps present at a *different* version (e.g.
-# self-updating apps that drifted from Homebrew's records), which --adopt alone
-# refuses with "already an App". brew bundle has no such flags of its own, so
-# pass them through the cask options env var.
+# installed manually before this ran) when they're identical to the cask;
+# brew bundle honors it via the cask options env var. Version-drifted apps are
+# handled by the explicit `brew upgrade --cask --force` in update-all (the env
+# var is ignored by `brew upgrade`, so it can't help there).
 brew tap homebrew/bundle
-HOMEBREW_CASK_OPTS="--adopt --force" brew bundle install --file ~/.config/brew/Brewfile
+HOMEBREW_CASK_OPTS="--adopt" brew bundle install --file ~/.config/brew/Brewfile
+brew upgrade --cask --force
 
 # Transferring libs for zathura: https://github.com/zegervdv/homebrew-zathura#installation
 mkdir -p "$(brew --prefix zathura)"/lib/zathura
