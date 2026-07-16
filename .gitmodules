@@ -9,6 +9,8 @@
 [submodule "tmux-plugin-manager"]
 	path = tmux/.config/tmux/plugins/tpm
 	url = https://github.com/tmux-plugins/tpm.git
+	branch = master
+	update = merge
 
 [submodule "bin/.local/bin/yubitouch"]
 	path = bin/.local/bin/yubitouch
