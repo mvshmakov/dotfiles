@@ -31,8 +31,6 @@ zmodule agkozak/zhooks
 zmodule hlissner/zsh-autopair
 # Grayed out autosuggestions from the history - must have
 zmodule zsh-users/zsh-autosuggestions
-# Colorizes the cat/sed/awk/grep output of a file with structured syntax using `highlight` CLI tool
-zmodule l4u/zsh-output-highlighting
 # Real-time type-ahead completion for Zsh. Asynchronous find-as-you-type autocompletion
 # zmodule marlonrichert/zsh-autocomplete
 # Colorizes the commands as they are getting typed on the fly
