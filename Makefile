@@ -5,8 +5,7 @@ args = $(filter-out $@,$(MAKECMDGOALS))
 
 # Run all the checks
 .PHONY: all
-all:
-	lint
+all: lint
 
 # Using .PHONY to avoid conflicts with files named the same as the target
 # E.g., `shellcheck` exists in both filesystem and in the commands
@@ -15,16 +14,21 @@ lint:
 	$(MAKE) format-check
 	$(MAKE) lint-shell
 
+# First-party shell scripts to lint. Explicit paths + -maxdepth 1 keep
+# submodules (yubitouch), vendored tmux plugins and .history out of scope -
+# that code is not ours to format
+SHELL_SCRIPTS = $(shell find ./bin/.local/bin ./home/scripts ./home/shell-sources -maxdepth 1 -type f) ./direnv/.config/direnv/direnvrc
+
 # Verify shell script formatting
 .PHONY: format-check
 format-check:
-	shfmt -i 2 -ci -bn -l -d .
+	shfmt -i 2 -ci -bn -l -d $(or $(args),$(SHELL_SCRIPTS))
 
 # Run shellcheck on relevant scripts
-# Restricts search to avoid shellchecking submodules
+# zsh files are excluded: shellcheck does not support zsh
 .PHONY: lint-shell
 lint-shell:
-	find $(or $(args),./bin/.local/bin) -maxdepth 1 -type f -exec shellcheck {} +
+	shellcheck $(or $(args),$(filter-out %/zsh-aliasrc,$(SHELL_SCRIPTS)))
 
 # Link all of the local repo files to the system
 .PHONY: activate

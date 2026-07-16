@@ -45,8 +45,9 @@ alias path='echo -e ${PATH//:/\\n}'
 # Recursively delete `.DS_Store` files
 alias clean_ds="find . -type f -name '*.DS_Store' -ls -delete"
 
-alias cp_pubkey="more ~/.ssh/id_rsa.pub | pbcopy | echo '=> Public key copied to pasteboard.'"
-alias cp_test_pubkey="more ~/.ssh/id_rsa-test.pub | pbcopy | echo '=> Public key copied to pasteboard.'"
+# SSH_KEY_PATH/SSH_TEST_KEY_PATH are resolved in .zprofile (ed25519 preferred)
+alias cp_pubkey='pbcopy <"${SSH_KEY_PATH}.pub" && echo "=> Public key copied to pasteboard."'
+alias cp_test_pubkey='pbcopy <"${SSH_TEST_KEY_PATH}.pub" && echo "=> Test public key copied to pasteboard."'
 
 # Merge PDF files, preserving symbolic links
 # Usage: `mergepdf input{1,2,3}.pdf` or `mergepdf_local` for PDFs in folder merge
@@ -84,7 +85,10 @@ alias ttl_65="sudo sysctl -w net.inet.ip.ttl=65"
 # the `.git` and `node_modules` directories, listing directories first.
 # The output gets piped into `less` with options to preserve color and
 # line numbers, unless the output is small enough for one screen.
-alias tree="tree -aC -I '.git|node_modules' --dirsfirst "$@" | less -FRNX"
+# A function instead of an alias so extra arguments land before the pipe.
+tree() {
+  command tree -aC -I '.git|node_modules' --dirsfirst "$@" | less -FRNX
+}
 
 # flake8 does not merge the configuration files
 alias flake8="flake8 --extend-exclude=.venv,.history,.direnv"

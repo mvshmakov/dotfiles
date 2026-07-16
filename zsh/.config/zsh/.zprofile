@@ -35,7 +35,9 @@ PATH="$XDG_BIN_HOME:$PATH"
 eval "$(/opt/homebrew/bin/brew shellenv zsh)"
 # Use latest ncurses version for the most up-to-date terminfo tables
 # Check which one is active with `infocmp -x tmux-256color`
-PATH="$(brew --prefix ncurses)/bin:$PATH"
+# $HOMEBREW_PREFIX/opt/<formula> is a stable symlink, so prefer it over
+# `brew --prefix <formula>` subprocess calls throughout this file
+PATH="$HOMEBREW_PREFIX/opt/ncurses/bin:$PATH"
 # For Docker CLI tools to be accessible in the shell
 # https://github.com/Homebrew/homebrew-cask/blob/bb82248bb7bfc6ff7fbc4b02dbb63f6f3aaead03/Casks/docker.rb#L118-L122
 PATH="$HOME/.docker/bin:$PATH"
@@ -82,20 +84,17 @@ export HOMEBREW_VERBOSE=1
 export HOMEBREW_DISPLAY_INSTALL_TIMES=1
 # Use Bootsnap to speed up repeated brew calls
 export HOMEBREW_BOOTSNAP=1
+# HOMEBREW_GITHUB_API_TOKEN is resolved lazily by the brew() wrapper in
+# .zshrc: `gh auth token` costs ~120ms, too slow for every login shell
 # Always use a Homebrew-installed curl & git
 export HOMEBREW_FORCE_BREWED_CURL=1
 export HOMEBREW_FORCE_BREWED_GIT=1
 # Forbid HTTPS to HTTP redirects
 export HOMEBREW_NO_INSECURE_REDIRECT=1
-# Use GUI when asking for a password (invoke `sudo -A`)
-export SUDO_ASKPASS=1
 export HOMEBREW_CASK_OPTS="--greedy"
 export HOMEBREW_LOGS="$XDG_STATE_HOME/brew"
 export HOMEBREW_CACHE="$XDG_CACHE_HOME/brew"
 export HOMEBREW_BUNDLE_FILE="$XDG_CONFIG_HOME/brew/Brewfile"
-# GitHub will allow a greater number of API requests with PAT
-HOMEBREW_GITHUB_API_TOKEN="$(gh auth token)"
-export HOMEBREW_GITHUB_API_TOKEN
 
 # Opt-out from analytics https://consoledonottrack.com/
 export DO_NOT_TRACK=1
@@ -150,8 +149,6 @@ export BAT_THEME="Nord"
 # For the `hightlight` CLI tool (syntax highlighting)
 export HIGHLIGHT_STYLE=nord
 
-# Needed for fzf plugin https://github.com/ohmyzsh/ohmyzsh/tree/master/plugins/fzf#fzf_base
-export FZF_BASE=$(brew --prefix fzf)
 export FZF_DEFAULT_COMMAND="rg --files --no-ignore-vcs --hidden"
 # Using bat as the fzf preview tool + went through all the fzf customization options.
 # Nord theme for the FZF (background is stripped for transparency, colors are corrected):
@@ -194,7 +191,10 @@ else
 fi
 
 # Required for the ssh-askpass https://github.com/theseal/ssh-askpass/blob/master/ssh-askpass.plist#L14-L15
-export SSH_ASKPASS="$(brew --prefix theseal/ssh-askpass/ssh-askpass)/bin/ssh-askpass"
+# The opt path avoids `brew --prefix theseal/ssh-askpass/ssh-askpass`:
+# tap-qualified names skip brew's shell fast-path and boot the full Ruby
+# stack (~800ms, measured), which used to dominate login-shell startup
+export SSH_ASKPASS="$HOMEBREW_PREFIX/opt/ssh-askpass/bin/ssh-askpass"
 # Sudo prompt will be taken from SSH_ASKPASS
 export SUDO_ASKPASS="$SSH_ASKPASS"
 
@@ -217,10 +217,7 @@ export PYTHONSTARTUP="$XDG_CONFIG_HOME/python/pythonstartup.py"
 export NPM_CONFIG_USERCONFIG="$XDG_CONFIG_HOME/npm/.npmrc"
 export NODE_REPL_HISTORY="$XDG_DATA_HOME/node/history"
 
-# To correctly link and build psycopg2: https://stackoverflow.com/a/69403177/12349023
-LIBPQ_PREFIX="$(brew --prefix libpq)"
-OPENSSL_PREFIX="$(brew --prefix openssl)"
-# Also, add the HOMEBREW_PREFIX/(lib|include) to the LDFLAGS and CPPFLAGS
-# https://docs.brew.sh/Homebrew-and-Python#brewed-python-modules
-export LDFLAGS="-L$HOMEBREW_PREFIX/lib -L$LIBPQ_PREFIX/lib -L$OPENSSL_PREFIX/lib"
-export CPPFLAGS="-I$HOMEBREW_PREFIX/include -I$LIBPQ_PREFIX/include -I$OPENSSL_PREFIX/include"
+# Global LDFLAGS/CPPFLAGS were removed: they affected every compile on the
+# machine, not just the builds that needed brewed libs. Projects that link
+# against brewed libraries (e.g. psycopg2 -> libpq/openssl) now opt in
+# per-project via the `use brew_libs libpq openssl` direnv helper (direnvrc)

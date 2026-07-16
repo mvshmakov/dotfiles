@@ -1,3 +1,5 @@
+name: Lint
+
 on:
   workflow_dispatch:
   pull_request:
@@ -5,14 +7,25 @@ on:
     branches:
       - main
 
-name: "Making sure the codebase is perfect"
+permissions:
+  contents: read
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
 jobs:
   lint:
-    name: Run linters
+    name: shfmt + shellcheck
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+      # Lint scope is defined once in the Makefile (SHELL_SCRIPTS), so CI and
+      # local `make lint` always agree. Submodules are excluded from that
+      # scope, hence no submodule checkout is needed.
       - name: Install linters
         run: sudo apt-get update && sudo apt-get install -y shellcheck shfmt
+      - name: Print linter versions
+        run: shfmt --version && shellcheck --version
       - name: Run lint checks
         run: make lint

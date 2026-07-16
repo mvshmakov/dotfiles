@@ -1,11 +1,15 @@
-#!/usr/bin/env sh
+#!/usr/bin/env bash
+# direnv sources this file with bash (its stdlib is bash), so bashisms
+# like [[ ]] and `local` are fine here
 
 set -e
 
-RED=$(tput setaf 1)    # Red color
-GREEN=$(tput setaf 2)  # Green color
-YELLOW=$(tput setaf 3) # Yellow color
-NORMAL=$(tput sgr0)    # No color
+# `|| true` keeps `set -e` from killing the whole file when there is no
+# usable TERM (editor-spawned direnv, CI): colors just degrade to empty
+RED=$(tput setaf 1 2>/dev/null || true)    # Red color
+GREEN=$(tput setaf 2 2>/dev/null || true)  # Green color
+YELLOW=$(tput setaf 3 2>/dev/null || true) # Yellow color
+NORMAL=$(tput sgr0 2>/dev/null || true)    # No color
 
 _log() {
   echo "use_fnm: $1"
@@ -24,8 +28,30 @@ _error() {
   exit 1
 }
 
+# Build flags for linking against brewed libraries, e.g. psycopg2 needs
+# libpq/openssl: https://stackoverflow.com/a/69403177/12349023
+# Scoped per-project (`use brew_libs libpq openssl` in .envrc) instead of
+# exported globally from .zprofile, where they affected every compile on the
+# machine. Always includes HOMEBREW_PREFIX/(lib|include), per
+# https://docs.brew.sh/Homebrew-and-Python#brewed-python-modules
+use_brew_libs() {
+  local prefix formula
+  prefix="${HOMEBREW_PREFIX:-/opt/homebrew}"
+
+  export LDFLAGS="${LDFLAGS:-} -L$prefix/lib"
+  export CPPFLAGS="${CPPFLAGS:-} -I$prefix/include"
+
+  for formula in "$@"; do
+    if [ ! -d "$prefix/opt/$formula" ]; then
+      echo "use_brew_libs: ${YELLOW}$formula is not installed (brew install $formula)${NORMAL}"
+      continue
+    fi
+    export LDFLAGS="$LDFLAGS -L$prefix/opt/$formula/lib"
+    export CPPFLAGS="$CPPFLAGS -I$prefix/opt/$formula/include"
+  done
+}
+
 layout_poetry() {
-  # shellcheck disable=SC3043
   local VENV
 
   VENV=$(dirname "$(poetry run which python)")
@@ -62,8 +88,8 @@ layout_uv() {
 # TODO: read engine version from package.json
 use_fnm() {
   if [ "$FNM_DIR" = "" ]; then
+    # _error exits by itself
     _error "no FNM_DIR found in PATH, so assuming no fnm is installed${NORMAL}"
-    exit 1
   fi
 
   VERSION_ARG="v$1"

@@ -18,7 +18,9 @@ stow --stow -vt ~ */
 ./home/scripts/setup.sh
 ```
 
-To restow/repair the symlinks, use `stow --restow -vt ~ */`. To simulate the stow process outcome without modifying the file system, use `stow --stow --no -vt ~ */`. `*/` is the ZSH glob, which expands only in the folders.
+Nix is not installed by default; opt in with `INSTALL_NIX=1 ./home/scripts/setup.sh` (see the Brewfile TODO about the Nix migration).
+
+To restow/repair the symlinks, use `stow --restow -vt ~ */`. To simulate the stow process outcome without modifying the file system, use `stow --stow --no -vt ~ */`. `*/` is the ZSH glob, which expands only in the folders. Retired configs live in `.archive/` — hidden so the `*/` glob never stows them.
 
 If you want to add the submodule, consider running `git submodule add --name {name} https://github.com/{author}/{name}.git {tool}/.config/{tool}/{name}` instead of just adding the corresponding submodule definition in the `.gitmodules`. If you want to delete the submodule, see [delete_git_submodule.md](https://gist.github.com/myusuf3/7f645819ded92bda6677?permalink_comment_id=2696221#gistcomment-2696221).
 

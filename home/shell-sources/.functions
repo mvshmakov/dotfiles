@@ -3,62 +3,64 @@
 # () function body creates a subshell to have `set -x` only in the subshell
 # https://stackoverflow.com/a/74525211
 function update-all() (
-	set -x
+  set -x
 
-	brew update
-	brew upgrade --formula
-	# --force lets cask upgrades overwrite apps whose on-disk version drifted
-	# from brew's records (self-updating apps, manual installs), which a bare
-	# `brew upgrade` refuses with "already an App" and reverts. Must be an
-	# explicit flag: brew upgrade ignores HOMEBREW_CASK_OPTS (unlike
-	# install/bundle). No-op for up-to-date casks.
-	brew upgrade --cask --force
+  brew update
+  brew upgrade --formula
+  # --force lets cask upgrades overwrite apps whose on-disk version drifted
+  # from brew's records (self-updating apps, manual installs), which a bare
+  # `brew upgrade` refuses with "already an App" and reverts. Must be an
+  # explicit flag: brew upgrade ignores HOMEBREW_CASK_OPTS (unlike
+  # install/bundle). No-op for up-to-date casks.
+  brew upgrade --cask --force
 
-	asdf plugin update --all
-	gh extension upgrade --all
-	# As zimfw uses the shell script under the hood, `-x` option will print all
-	# lines and pollute the output. So, using the `+x` and updating in the subshell
-	(set +x && zimfw update && zimfw upgrade)
+  asdf plugin update --all
+  gh extension upgrade --all
+  # As zimfw uses the shell script under the hood, `-x` option will print all
+  # lines and pollute the output. So, using the `+x` and updating in the subshell
+  (set +x && zimfw update && zimfw upgrade)
 
-	"$XDG_CONFIG_HOME"/tmux/plugins/tpm/bin/update_plugins all
+  "$XDG_CONFIG_HOME"/tmux/plugins/tpm/bin/update_plugins all
 
-	# Update Lazy packages and exit on LazySync event
-	nvim --headless -c 'autocmd User LazySync quitall' -c 'Lazy sync'
-	# Update Mason packages and quit
-	nvim --headless -c 'autocmd User MasonUpdateAllComplete quitall' -c 'MasonUpdate' -c 'MasonUpdateAll'
-	# Update Treesitter parsers. The `main` branch dropped the synchronous
-	# `TSUpdateSync` command; `update()` is async, so block on the task with
-	# `:wait()` before quitting (5 min timeout).
-	nvim --headless -c 'lua require("nvim-treesitter").update():wait(300000)' -c q
+  # Update Lazy packages and exit on LazySync event
+  nvim --headless -c 'autocmd User LazySync quitall' -c 'Lazy sync'
+  # Update Mason packages and quit
+  nvim --headless -c 'autocmd User MasonUpdateAllComplete quitall' -c 'MasonUpdate' -c 'MasonUpdateAll'
+  # Update Treesitter parsers. The `main` branch dropped the synchronous
+  # `TSUpdateSync` command; `update()` is async, so block on the task with
+  # `:wait()` before quitting (5 min timeout).
+  nvim --headless -c 'lua require("nvim-treesitter").update():wait(300000)' -c q
 )
 
 function clean-all() (
-	set -x
+  set -x
 
-	brew cleanup
-	brew autoremove
+  brew cleanup
+  brew autoremove
 )
 
 function doctor-all() (
-	set -x
+  set -x
 
-    local dotfiles_dir="$HOME/projects/personal/dotfiles"
-    local main_branch="main"
+  local dotfiles_dir="$HOME/projects/personal/dotfiles"
+  local main_branch="main"
 
-    cd "${dotfiles_dir}" || return 1
-    echo "Checking repo: git fetch && git rev-list HEAD..origin/${main_branch}"
-    git fetch
-    if [ "$(git rev-list HEAD..origin/${main_branch} --count)" -gt 0 ]; then
-        echo "Repo behind upstream. Please run: git pull"
-        return 1
-    fi
-	
-    nvim --headless -c "checkhealth" -c q
+  cd "${dotfiles_dir}" || return 1
+  echo "Checking repo: git fetch && git rev-list HEAD..origin/${main_branch}"
+  git fetch
+  if [ "$(git rev-list HEAD..origin/${main_branch} --count)" -gt 0 ]; then
+    echo "Repo behind upstream. Please run: git pull"
+    return 1
+  fi
 
-	brew doctor
+  nvim --headless -c "checkhealth" -c q
+
+  brew doctor
 )
 
-# Create a directory and enter in it
+# Create a directory (or several) and enter the last one.
+# `return`, not `exit`: this runs in the interactive shell, and a failed
+# `cd` must not close the terminal.
 function mkd() {
-	mkdir -p "$@" && cd "$@" || exit
+  mkdir -p "$@" && cd "${@:$#}" || return 1
 }

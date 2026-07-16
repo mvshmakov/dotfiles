@@ -46,18 +46,16 @@ export ZSH_AUTOSUGGEST_MANUAL_REBIND=1
 # Increase ZSH history size. Allow 1 000 000 entries; the default is 500.
 # Exporting for e.g., atuin (https://docs.atuin.sh/reference/import/#atuin-import)
 # and $XDG_CONFIG_HOME/python/pythonstartup.py
+# (bash counterparts like HISTFILESIZE/HISTCONTROL live in .bashrc; zsh
+# ignores them, space-prefixed commands are handled by HIST_IGNORE_SPACE)
 #
 # Kept above the early returns below so that no shell ever exits with the
 # in-repo default HISTFILE that Apple's /etc/zshrc sets from ZDOTDIR
 export HISTSIZE=1000000
-export SAVEHIST=10000000
-export HISTFILESIZE=1000000000
+export SAVEHIST=$HISTSIZE
 # Default XDG_DATA_HOME like XDG_CACHE_HOME above: it is exported in
 # .zprofile, which non-login shells never source
 export HISTFILE="${XDG_DATA_HOME:-$HOME/.local/share}/zsh/history"
-# Ignore storing the commands that on begin with a space, duplicates are
-# still useful for e.g., atuin stats
-export HISTCONTROL="ignorespace"
 
 # Initialize Homebrew early so tools in /opt/homebrew/bin are available.
 # Skip when already initialized (login shells run brew shellenv in .zprofile);
@@ -68,11 +66,24 @@ fi
 # Must come after brew shellenv so asdf shims take precedence over /opt/homebrew/bin
 PATH="${ASDF_DATA_DIR:-$HOME/.asdf}/shims:$PATH"
 
+# GitHub allows a greater number of API requests with a PAT, but resolving it
+# eagerly costs ~120ms per shell (`gh auth token`), so inject it on the first
+# brew call of the session instead
+brew() {
+  if [[ -z "$HOMEBREW_GITHUB_API_TOKEN" ]] && (( ${+commands[gh]} )); then
+    export HOMEBREW_GITHUB_API_TOKEN="$(command gh auth token 2>/dev/null)"
+  fi
+  command brew "$@"
+}
+
 # VS Code captures the environment for its extension host by running a
 # login+interactive probe shell with VSCODE_RESOLVING_ENVIRONMENT=1. Only the
-# env exports above matter to it, so skip the interactive-only setup below to
-# stay under the probe's 10s timeout (a timeout leaves extensions with a bare
-# PATH, e.g. the 1Password extension not finding the `op` CLI).
+# env exports above matter to it (PATH etc.; a probe timeout leaves
+# extensions with a bare PATH, e.g. the 1Password extension not finding the
+# `op` CLI). Startup is fast enough now (~0.05s to this point), but keep the
+# early return: the probe gains nothing from the interactive setup below, a
+# cold cache rebuild (after update-all) is still slow, and _ssh_add_once
+# could pop a GUI askpass prompt from a headless probe on first boot.
 if [[ -n "$VSCODE_RESOLVING_ENVIRONMENT" ]]; then
   return
 fi
@@ -86,31 +97,32 @@ zstyle ':zim:completion' dumpfile "$ZSH_CACHE_DIR/zcompdump"
 # Initialize modules, all the completions must be defined beforehand
 source $ZIM_HOME/init.zsh
 
-# Fancy cd using frecency, agkozak/zsh-z (rupa/z) alternative
-eval "$(zoxide init --cmd=cd zsh)"
-# bun completions
-[ -s "/Users/mvshmakov/.bun/_bun" ] && source "/Users/mvshmakov/.bun/_bun"
-
-# Some tools regenerate their completion script by spawning themselves on every
-# startup, which is slow (npm ~300ms, ngrok ~110ms, heroku ~460ms). Cache the
-# generated script and only rebuild when the tool's binary is newer than the
-# cache, so `update-all` refreshes it automatically. Absent tools degrade
-# gracefully to an empty cache (no error). `rm $ZSH_CACHE_DIR/comp-*.zsh` forces
-# a rebuild. Must stay after zim's compinit so compdef is available.
-_zcompcache() {
+# Many tools generate their shell integration by spawning themselves on every
+# startup, which is slow (npm completion ~300ms, heroku ~460ms, plus the
+# zoxide/fzf/atuin/starship init scripts). Cache the generated script and only
+# rebuild when the tool's binary is newer than the cache, so `update-all`
+# refreshes it automatically. Absent tools degrade gracefully to an empty
+# cache (no error). `rm $ZSH_CACHE_DIR/zcache-*.zsh` forces a rebuild.
+# Completion calls must stay after zim's compinit so compdef is available.
+_zcache() {
   local name=$1
   shift
-  local cache="$ZSH_CACHE_DIR/comp-$name.zsh" bin
+  local cache="$ZSH_CACHE_DIR/zcache-$name.zsh" bin
   bin=$(command -v "$1" 2>/dev/null)
   if [[ ! -f $cache || (-n $bin && $bin -nt $cache) ]]; then
     "$@" >|"$cache" 2>/dev/null
   fi
   source "$cache"
 }
-_zcompcache npm npm completion
-_zcompcache docker docker completion zsh
-_zcompcache ngrok ngrok completion
-_zcompcache heroku heroku autocomplete:script zsh
+_zcache npm npm completion
+_zcache docker docker completion zsh
+_zcache ngrok ngrok completion
+_zcache heroku heroku autocomplete:script zsh
+
+# Fancy cd using frecency, agkozak/zsh-z (rupa/z) alternative
+_zcache zoxide zoxide init --cmd=cd zsh
+# bun completions
+[ -s "$HOME/.bun/_bun" ] && source "$HOME/.bun/_bun"
 
 # Required to make Shift-Tab to work with menu select  (exposes required function)
 zmodload zsh/complist
@@ -147,24 +159,13 @@ zstyle ':completion:*' file-list all
 # https://github.com/ohmyzsh/ohmyzsh/blob/master/plugins/common-aliases/common-aliases.plugin.zsh#L89-L90
 zstyle -e ':completion:*:(ssh|scp|sftp|rsh|rsync):hosts' hosts 'reply=(${=${${(f)"$(cat {/etc/ssh_,~/.ssh/known_}hosts(|2)(N) /dev/null)"}%%[# ]*}//,/ })'
 
-# https://github.com/romkatv/powerlevel10k#how-do-i-initialize-direnv-when-using-instant-prompt
-(( ${+commands[direnv]} )) && emulate zsh -c "$(direnv export zsh)"
-
-if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
-  source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
-fi
-
-(( ${+commands[direnv]} )) && emulate zsh -c "$(direnv hook zsh)"
+# The two-step direnv export + p10k instant-prompt dance was removed together
+# with powerlevel10k (starship is the prompt now); a single hook is enough
+(( ${+commands[direnv]} )) && eval "$(direnv hook zsh)"
 
 # Colorizes common UNIX tools output (GRC - Generic Colorizer)
-# GRC_BINARY="$(brew --prefix)/etc/grc.zsh"
+# GRC_BINARY="$HOMEBREW_PREFIX/etc/grc.zsh"
 # [[ -f "$GRC_BINARY" ]] && source "$GRC_BINARY"
-
-# Uncomment the following line to enable command auto-correction.
-export ENABLE_CORRECTION="true"
-
-# Uncomment the following line to display red dots whilst waiting for completion.
-export COMPLETION_WAITING_DOTS="true"
 
 # Ensures that commands are added to the history immediately + recording the elapsed time correctly.
 # Otherwise, the history appended only when the shell exits and it could be lost.
@@ -220,7 +221,7 @@ bindkey -v
 # https://superuser.com/a/1563859/1916321
 unalias run-help
 autoload run-help
-export HELPDIR=$(command brew --prefix)/share/zsh/help
+export HELPDIR="$HOMEBREW_PREFIX/share/zsh/help"
 alias help=run-help
 
 # Edit the current command line in $EDITOR
@@ -273,12 +274,14 @@ _ssh_add_once "$SSH_KEY_PATH"
 # (sticking to the macOS builtins): the nord dir_colors file had been parsing
 # to an empty LS_COLORS anyway, and BSD ls colorizes via --color=auto natively.
 
-source <(fzf --zsh)
+_zcache fzf fzf --zsh
 
 # Atuin needs to re-bind the `^R` after the `fzf` https://setup.atuin.sh/
 # Disabling the up arrow as it is easy enough to filter with subsequent `^R`
-eval "$(atuin init zsh --disable-up-arrow)"
+_zcache atuin atuin init zsh --disable-up-arrow
 
 # Config lives one level deep (stow package nests it), so point Starship at it explicitly
 export STARSHIP_CONFIG="$XDG_CONFIG_HOME/starship/starship.toml"
-eval "$(starship init zsh)"
+# --print-full-init emits the whole script (cacheable); the default two-stage
+# bootstrap would re-spawn starship on every source, defeating the cache
+_zcache starship starship init zsh --print-full-init
