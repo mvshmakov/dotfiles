@@ -58,6 +58,16 @@ How to upgrade brew:
 
 - Daemon mode requires a socket to be available, the `brew services start atuin` solves this
 
+## yabai & skhd
+
+Both auto-start on boot: their launchd plists are versioned in `launchctl/` (whitelisted in `.gitignore`) and stowed into `~/Library/LaunchAgents`. `home/scripts/services.sh` bootstraps them during setup; afterwards launchd loads them on every login.
+
+- Manage the services with the official commands only: `yabai --start-service` / `--stop-service` / `--restart-service` (same for `skhd`).
+- Never run `--install-service`/`--uninstall-service`: `~/Library/LaunchAgents` is a stow symlink into this repo, so they would overwrite/delete the tracked plists (an unexpected plist diff in `git status` is the telltale). The tracked plists match the generated ones except for `PATH`, which is trimmed to a stable machine-agnostic set instead of a snapshot of the installing shell's `PATH`.
+- One-time manual step per machine: grant Accessibility to `yabai` and `skhd`, plus Input Monitoring to `skhd` (System Settings -> Privacy & Security; macOS prompts on first start).
+- The yabai scripting addition is not used, so no SIP/sudoers changes are needed.
+- The skhd plist/label must stay `com.koekeishiya.skhd` until an skhd release ships the author's account rename (koekeishiya -> asmvik) - the binary hardcodes that label and plist path. yabai has already migrated to `com.asmvik.yabai`.
+
 ## TODO
 
 - Warn about exiting from the git commit message template on non-empty message.

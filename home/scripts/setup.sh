@@ -18,6 +18,8 @@ mkdir -p "${XDG_DATA_HOME:=$HOME/.local/share}"/zsh/
 ./brew.sh
 ./shell.sh
 ./symlinks.sh
+# Requires the stow symlinks (plists) and the brew packages to be in place
+./services.sh
 
 # Install NIX
 sh <(curl -L https://nixos.org/nix/install) --darwin-use-unencrypted-nix-store-volume --daemon

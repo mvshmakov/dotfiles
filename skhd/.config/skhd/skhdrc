@@ -60,7 +60,7 @@ shift + alt - 6 : yabai -m window --space 6
 shift + alt - 7 : yabai -m window --space 7
 
 # Stop/Start/Restart Yabai & SKDH
-# Brew services integration was removed https://github.com/koekeishiya/yabai/issues/867#issuecomment-1531122057
+# Brew services integration was removed https://github.com/asmvik/yabai/issues/867#issuecomment-1531122057
 # Can be restored in the future and better to stick with it in this case
 # ctrl + alt - q : brew services stop yabai
 ctrl + alt - q : yabai --stop-service
@@ -69,6 +69,6 @@ ctrl + alt - r : yabai --restart-service && skhd --restart-service
 
 # Custom scripts must be run with full path as brew formulae
 # rewrites the PATH to the fixed string
-# https://github.com/koekeishiya/skhd/issues/85
+# https://github.com/asmvik/skhd/issues/85
 ctrl + alt - y : $HOME/.local/bin/gpg_relearn_yubikey
 ctrl + alt - d : $HOME/.local/bin/toggle_desktop_items
