@@ -269,13 +269,9 @@ _ssh_add_once() {
 _ssh_add_once "$SSH_KEY_PATH"
 [[ -n "$SSH_TEST_KEY_PATH" ]] && _ssh_add_once "$SSH_TEST_KEY_PATH"
 
-# Sets up and exports correct LS_COLORS to provide the highlighting for different UNIX tools output (e.g., ls, tree, etc.)
-# See https://www.gnu.org/software/coreutils/manual/html_node/dircolors-invocation.html#dircolors-invocation
-# Also https://www.nordtheme.com/docs/ports/dircolors/installation
-#
-# [Vivid](https://github.com/sharkdp/vivid) is also an option, but colors are a
-# bit off for the nord pallette
-test -r "$XDG_CONFIG_HOME/dircolors/src/dir_colors" && eval $(dircolors "$XDG_CONFIG_HOME/dircolors/src/dir_colors")
+# The GNU dircolors-based LS_COLORS setup was removed together with coreutils
+# (sticking to the macOS builtins): the nord dir_colors file had been parsing
+# to an empty LS_COLORS anyway, and BSD ls colorizes via --color=auto natively.
 
 source <(fzf --zsh)
 

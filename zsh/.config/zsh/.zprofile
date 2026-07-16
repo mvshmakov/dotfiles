@@ -33,8 +33,6 @@ PATH="$XDG_BIN_HOME:$PATH"
 # adds itself to the PATH, MANPATH and INFOPATH
 # https://docs.brew.sh/Manpage#shellenv
 eval "$(/opt/homebrew/bin/brew shellenv zsh)"
-# Make GNU coreutils available in the shell without a prefix
-PATH="$(brew --prefix coreutils)/libexec/gnubin:$PATH"
 # Use latest ncurses version for the most up-to-date terminfo tables
 # Check which one is active with `infocmp -x tmux-256color`
 PATH="$(brew --prefix ncurses)/bin:$PATH"

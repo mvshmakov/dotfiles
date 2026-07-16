@@ -18,7 +18,10 @@ brew "awscli"
 brew "axel"
 brew "cheat"
 brew "clang-format"
-brew "coreutils"
+# GNU coreutils/sed/tar/which/findutils/gawk were removed - sticking to the
+# macOS builtins (modern macOS ls/grep support --color natively, and the
+# non-prefixed gnubin PATH caused subtle incompatibilities and brew doctor
+# warnings)
 
 # wget is not present on every OS, so better stick to curl
 # brew "wget"
@@ -38,15 +41,11 @@ brew "ffmpeg"
 # Fast `find` alternative; used by telescope.nvim for file listing
 brew "fd"
 brew "fzf"
-brew "gawk"
 brew "gh"
 brew "git"
 brew "git-delta"
 brew "git-lfs"
 brew "git-absorb"
-brew "gnu-sed"
-brew "gnu-tar"
-brew "gnu-which"
 brew "gotop"
 # Grafana Alloy (telemetry collector), used by the grafana-alloy VS Code
 # extension. NOTE: a bare `brew install alloy` resolves to the unrelated MIT
@@ -106,7 +105,6 @@ brew "ncurses"
 brew "neovim"
 # From checkhealth: vimtex#view#inverse_search is better if pstree is available
 brew "pstree"
-brew "findutils"
 # brew "ranger" # File browser, superseded by nvim
 # Is required to fix the ranger's freezes
 # https://github.com/ranger/ranger/issues/1787#issuecomment-691528698https://github.com/ranger/ranger/issues/1787#issuecomment-691528698
@@ -170,11 +168,12 @@ brew "yq"
 brew "bat"
 brew "bat-extras"
 
-# PDR and other docs reader
-tap "zegervdv/zathura"
-brew "zegervdv/zathura/zathura"
-brew "zegervdv/zathura/zathura-djvu"
-brew "zegervdv/zathura/zathura-pdf-poppler"
+# PDR and other docs reader. The tap moved from zegervdv/zathura to the
+# homebrew-zathura org (GitHub 301 redirect); use the new canonical name.
+tap "homebrew-zathura/zathura"
+brew "homebrew-zathura/zathura/zathura"
+brew "homebrew-zathura/zathura/zathura-djvu"
+brew "homebrew-zathura/zathura/zathura-pdf-poppler"
 
 cask "1password"
 # The `op` CLI, required by the 1Password VS Code extension among others
@@ -198,11 +197,16 @@ cask "keyclu"
 
 cask "crossover"
 cask "dash"
-cask "deluge"
+# deluge was unsigned (failed Gatekeeper, cask disabled 2026-09), and
+# qbittorrent has the same Gatekeeper deprecation - transmission is the
+# properly signed torrent client
+cask "transmission"
 cask "devtoys"
 cask "discord"
 cask "dotnet-sdk"
-cask "djview"
+# djview was unsigned (failed Gatekeeper, cask disabled 2026-09). DjVu is
+# covered by zathura + zathura-djvu (see below) and the App Store reader:
+mas "DjVu Reader", id: 733144595
 
 # Do not using the formulae as cask contains both CLI and GUI
 cask "docker"
@@ -267,14 +271,19 @@ cask "kekaexternalhelper"
 # cask "amethyst" # superseded by yabai & skhd + is a bit more buggy than the latter combo
 # The following two work together, one for window management, another for keyboard shortcuts
 # Each reinstall requires to remove explicitly apps from the a11y settings and add on ask
-tap "koekeishiya/formulae"
-brew "koekeishiya/formulae/yabai"
+# The author renamed their GitHub account koekeishiya -> asmvik (301 redirect);
+# use the new canonical tap name.
+tap "asmvik/formulae"
+brew "asmvik/formulae/yabai"
 # --with-logging adds log files to the plist
-brew "koekeishiya/formulae/skhd", args: ["with-logging"]
+brew "asmvik/formulae/skhd", args: ["with-logging"]
 cask "karabiner-elements"
 
 # Browsers
-cask "chromium"
+# Replaced plain chromium (unsigned, failed Gatekeeper, cask disabled 2026-09)
+# with ungoogled-chromium: same Chromium.app artifact and profile dir, minus
+# the Google integrations
+cask "ungoogled-chromium"
 cask "google-chrome"
 cask "microsoft-edge"
 cask "firefox"
@@ -328,7 +337,10 @@ cask "ngrok"
 cask "numi"
 cask "obs"
 cask "opera"
-cask "openemu"
+# Replaced openemu (dead upstream: last release 2023, Intel-only, unsigned,
+# cask disabled 2026-09) with retroarch - the notarized, Apple Silicon-native
+# multi-system emulator frontend
+cask "retroarch"
 cask "porting-kit"
 
 # Gaming apps
@@ -349,13 +361,15 @@ cask "postman"
 # Apple QuickLook plugins
 # `ql` is an alias for QuickLook
 # cask "qlimagesize" # Got deprecated
-cask "avifquicklook"
-cask "qlcolorcode"
+# Removed avifquicklook, qlcolorcode, qlstephen, quicklookase, webpquicklook:
+# deprecated in Homebrew (disabled 2026-09-22) and these legacy .qlgenerator
+# plugins no longer function on modern macOS anyway. AVIF/WebP previews are
+# native since macOS 13/11; source-code previews come from syntax-highlight
+# below (modern .appex extension, same author as qlmarkdown)
+cask "syntax-highlight"
 cask "qlmarkdown"
-cask "qlstephen"
 cask "qlvideo"
 cask "quicklook-json"
-cask "quicklookase"
 
 tap "mvshmakov/spotlighter"
 brew "spotlighter"
@@ -385,6 +399,11 @@ cask "visual-studio-code"
 cask "visual-studio-code@insiders"
 cask "zed"
 mas "Xcode", id: 497799835
+# AI coding agents
+# The standalone Codex app (cask "codex-app") was merged into the unified
+# ChatGPT desktop app in July 2026 - Codex lives on as a mode inside it,
+# next to Chat and Work (the old ChatGPT app became "ChatGPT Classic")
+cask "chatgpt"
 
 # Difftool, not needed anymore due to NVIM and VSCode
 # cask "ksdiff"
@@ -396,7 +415,6 @@ cask "stats"
 # cask "vlc"
 cask "iina"
 
-cask "webpquicklook"
 cask "wireshark"
 
 brew "qemu"
@@ -494,20 +512,28 @@ cask "linear-linear"
 cask "obsidian"
 cask "notion"
 
-# Both are superseded by ice for different reasons
+# Menu bar managers: hiddenbar and bartender were superseded by ice, and ice
+# (stalled upstream) by thaw - its actively maintained fork
 # cask "hiddenbar"
 # cask "bartender"
-cask "jordanbaird-ice"
+# cask "jordanbaird-ice"
+cask "thaw"
 
 # Cloud mount/manipulation tools.
 cask "google-drive"
 cask "yandex-disk"
-# iOS does not work well with background syncs, so syncthing is not really convenient to use
-# cask "syncthing"
 brew "rclone"
 # Backup/sync tools
 brew "rsync"
-brew "lsyncd"
+# Continuous machine-to-machine sync. The formula ships the daemon/CLI; the
+# GUI cask was skipped back in the day since iOS handles background syncs
+# poorly, making the phone<->laptop use case inconvenient
+brew "syncthing"
+# lsyncd was uninstalled: deprecated in Homebrew (unmaintained upstream, would
+# have been disabled on 2027-05-17). rclone/rsync/syncthing above cover the
+# sync workflows; for event-driven mirroring see also mutagen or
+# watchexec+rsync
+# brew "lsyncd"
 # Nice backup tool
 brew "restic"
 cask "duplicati"
