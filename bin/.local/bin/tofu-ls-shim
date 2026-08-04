@@ -1,0 +1,71 @@
+#!/bin/sh
+#
+# tofu(1) wrapper for the OpenTofu language server, wired up via the
+# machine-scoped VS Code user setting `opentofu.languageServer.tofu.path`.
+#
+# tofu-ls learns provider schemas by running `tofu providers schema -json`
+# in the module directory. In repos where that command needs secrets (e.g.
+# a sops-provided state-encryption passphrase, or backend credentials —
+# the S3 backend lists remote state even for a schema dump), it fails and
+# tofu-ls silently falls back to its stale bundled schemas, producing
+# bogus "unexpected attribute" diagnostics for newer provider versions.
+#
+# This shim passes every command through to the real tofu, but when a
+# `providers schema` dump fails it retries from a secret-free shadow
+# module containing only the *.tf files that pin `required_providers`,
+# reusing the provider binaries already downloaded into the real module's
+# .terraform/providers where possible.
+
+set -eu
+
+TOFU="$(command -v tofu || true)"
+[ -n "$TOFU" ] || TOFU=/opt/homebrew/bin/tofu
+
+if [ "${1:-}" != "providers" ] || [ "${2:-}" != "schema" ]; then
+  exec "$TOFU" "$@"
+fi
+
+# Fast path: modules whose config evaluates without secrets dump fine as-is.
+tmp="$(mktemp)"
+if "$TOFU" "$@" >"$tmp" 2>/dev/null; then
+  cat "$tmp"
+  rm -f "$tmp"
+  exit 0
+fi
+rm -f "$tmp"
+
+src="$PWD"
+shim_dir="${XDG_CACHE_HOME:-$HOME/.cache}/tofu-ls-shim/$(printf '%s' "$src" | shasum -a 256 | cut -c1-16)"
+mkdir -p "$shim_dir"
+
+# Mirror the provider-pin files; rebuild the shadow module when they change
+# (content or count).
+found=0 stale=0
+for f in *.tf; do
+  [ -e "$f" ] || continue
+  grep -q required_providers "$f" || continue
+  found=$((found + 1))
+  cmp -s "$f" "$shim_dir/$f" || stale=1
+done
+# Nothing to shadow — re-run in place so the real error surfaces.
+[ "$found" -gt 0 ] || exec "$TOFU" "$@"
+[ "$found" -eq "$(find "$shim_dir" -maxdepth 1 -name '*.tf' | wc -l | tr -d ' ')" ] || stale=1
+
+if [ "$stale" = 1 ] || [ ! -d "$shim_dir/.terraform" ]; then
+  rm -rf "$shim_dir"
+  mkdir -p "$shim_dir"
+  for f in *.tf; do
+    [ -e "$f" ] || continue
+    grep -q required_providers "$f" || continue
+    cp -- "$f" "$shim_dir/"
+  done
+  cd "$shim_dir"
+  # Prefer the module's already-downloaded provider mirror (offline); fall
+  # back to fetching from the registry.
+  "$TOFU" init -backend=false -plugin-dir "$src/.terraform/providers" >/dev/null 2>&1 ||
+    "$TOFU" init -backend=false >/dev/null 2>&1 || true
+  cd "$src"
+fi
+
+cd "$shim_dir"
+exec "$TOFU" "$@"
