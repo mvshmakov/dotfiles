@@ -62,8 +62,8 @@ if [ "$stale" = 1 ] || [ ! -d "$shim_dir/.terraform" ]; then
   cd "$shim_dir"
   # Prefer the module's already-downloaded provider mirror (offline); fall
   # back to fetching from the registry.
-  "$TOFU" init -backend=false -plugin-dir "$src/.terraform/providers" >/dev/null 2>&1 ||
-    "$TOFU" init -backend=false >/dev/null 2>&1 || true
+  "$TOFU" init -backend=false -plugin-dir "$src/.terraform/providers" >/dev/null 2>&1 \
+    || "$TOFU" init -backend=false >/dev/null 2>&1 || true
   cd "$src"
 fi
 

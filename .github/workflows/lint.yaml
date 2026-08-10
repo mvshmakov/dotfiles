@@ -19,7 +19,7 @@ jobs:
     name: shfmt + shellcheck
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v5
       # Lint scope is defined once in the Makefile (SHELL_SCRIPTS), so CI and
       # local `make lint` always agree. Submodules are excluded from that
       # scope, hence no submodule checkout is needed.
