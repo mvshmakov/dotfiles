@@ -1,4 +1,5 @@
 home/.ssh/id_rsa*
+home/.ssh/id_ed*
 # TODO: version both in dotfiles-private
 home/.ssh/known_hosts
 home/.ssh/authorized_keys
