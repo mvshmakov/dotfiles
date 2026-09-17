@@ -373,7 +373,10 @@ cask "quicklook-json"
 
 tap "mvshmakov/spotlighter"
 brew "spotlighter"
-cask "raycast"
+# Replaced by Tinycast (lightweight Raycast alternative) below
+# cask "raycast"
+tap "abue-ammar/tinycast"
+cask "abue-ammar/tinycast/tinycast"
 
 cask "raspberry-pi-imager"
 # Replaced by Raycast's built-in emoji searcher
