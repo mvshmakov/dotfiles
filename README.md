@@ -13,14 +13,29 @@ mkdir -p ~/projects/personal && cd ~/projects/personal
 git clone https://github.com/mvshmakov/dotfiles.git && cd dotfiles
 
 git submodule update --recursive --init
-stow --stow -vt ~ */
 
 ./home/scripts/setup.sh
 ```
 
-Nix is not installed by default; opt in with `INSTALL_NIX=1 ./home/scripts/setup.sh` (see the Brewfile TODO about the Nix migration).
+Everything is declared in [nix-darwin](nix-darwin/.config/nix-darwin/README.md):
+CLI tools from nixpkgs via home-manager, GUI apps as Homebrew casks, Mac App
+Store apps via `mas`, macOS defaults, and the dotfile symlinks themselves
+(every top-level directory mirrors `$HOME` and is linked into it by
+home-manager, editable in place). `setup.sh` installs Homebrew and
+Determinate Nix and runs the first `darwin-rebuild switch`. Afterwards:
 
-To restow/repair the symlinks, use `stow --restow -vt ~ */`. To simulate the stow process outcome without modifying the file system, use `stow --stow --no -vt ~ */`. `*/` is the ZSH glob, which expands only in the folders. Retired configs live in `.archive/` — hidden so the `*/` glob never stows them.
+```bash
+make nix-check   # build + preflight checks, nothing is activated
+make nix-switch  # apply (sudo)
+make nix-update  # bump flake.lock, then nix-check/nix-switch
+```
+
+The migration from the Brewfile is staged; the runbook with the remaining
+phases lives in `nix-darwin/.config/nix-darwin/README.md`.
+
+Adding a tool's config = adding a `<tool>/.config/<tool>/...` directory and
+running `make nix-switch`; removing it removes the link. Retired configs live
+in `.archive/` (hidden directories are not packages).
 
 If you want to add the submodule, consider running `git submodule add --name {name} https://github.com/{author}/{name}.git {tool}/.config/{tool}/{name}` instead of just adding the corresponding submodule definition in the `.gitmodules`. If you want to delete the submodule, see [delete_git_submodule.md](https://gist.github.com/myusuf3/7f645819ded92bda6677?permalink_comment_id=2696221#gistcomment-2696221).
 
@@ -35,7 +50,6 @@ One should also enable the `Reduced motion` option in the `System Preferences` t
 1. Dump all the installed brew packages: `brew list > packages.txt`
 2. Dump all the installed brew casks: `brew list --cask > casks.txt`
 3. Dump all VSCode extensions to shell commands: `code --list-extensions | xargs -L 1 echo code --install-extension`
-4. `stow --restow {directory}`
 
 ## Zoxide-based navigation
 
@@ -43,16 +57,16 @@ One should also enable the `Reduced motion` option in the `System Preferences` t
 
 ## `brew`
 
-If you want your current system configuration to match your Brewfile (purge all non-fixed deps)
-
-`brew bundle --force cleanup`
+Homebrew is driven by nix-darwin: `make nix-switch` runs `brew bundle` against
+the Brewfile generated from `homebrew.nix` (`HOMEBREW_BUNDLE_FILE` points at
+it). `brew/.config/brew/Brewfile` is frozen until the phase-2 cleanup.
 
 How to upgrade brew:
 
 - `brew update` update brew itself
 - `brew upgrade --greedy` update all the packages together with :latest and :auto_update
 
-## Neovim after stow
+## Neovim after the first switch
 
 - Run `:Copilot setup`
 
@@ -62,10 +76,10 @@ How to upgrade brew:
 
 ## yabai & skhd
 
-Both auto-start on boot: their launchd plists are versioned in `launchctl/` (whitelisted in `.gitignore`) and stowed into `~/Library/LaunchAgents`. `home/scripts/services.sh` bootstraps them during setup; afterwards launchd loads them on every login.
+Both auto-start on boot: their launchd plists are versioned in `launchctl/` (whitelisted in `.gitignore`) and `~/Library/LaunchAgents` is a symlink to that directory. `home/scripts/services.sh` bootstraps them during setup; afterwards launchd loads them on every login.
 
 - Manage the services with the official commands only: `yabai --start-service` / `--stop-service` / `--restart-service` (same for `skhd`).
-- Never run `--install-service`/`--uninstall-service`: `~/Library/LaunchAgents` is a stow symlink into this repo, so they would overwrite/delete the tracked plists (an unexpected plist diff in `git status` is the telltale). The tracked plists match the generated ones except for `PATH`, which is trimmed to a stable machine-agnostic set instead of a snapshot of the installing shell's `PATH`.
+- Never run `--install-service`/`--uninstall-service`: `~/Library/LaunchAgents` is a symlink into this repo, so they would overwrite/delete the tracked plists (an unexpected plist diff in `git status` is the telltale). The tracked plists match the generated ones except for `PATH`, which is trimmed to a stable machine-agnostic set instead of a snapshot of the installing shell's `PATH`.
 - One-time manual step per machine: grant Accessibility to `yabai` and `skhd`, plus Input Monitoring to `skhd` (System Settings -> Privacy & Security; macOS prompts on first start).
 - The yabai scripting addition is not used, so no SIP/sudoers changes are needed.
 - The skhd plist/label must stay `com.koekeishiya.skhd` until an skhd release ships the author's account rename (koekeishiya -> asmvik) - the binary hardcodes that label and plist path. yabai has already migrated to `com.asmvik.yabai`.

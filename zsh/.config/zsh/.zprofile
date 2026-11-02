@@ -33,11 +33,13 @@ PATH="$XDG_BIN_HOME:$PATH"
 # adds itself to the PATH, MANPATH and INFOPATH
 # https://docs.brew.sh/Manpage#shellenv
 eval "$(/opt/homebrew/bin/brew shellenv zsh)"
-# Use latest ncurses version for the most up-to-date terminfo tables
-# Check which one is active with `infocmp -x tmux-256color`
-# $HOMEBREW_PREFIX/opt/<formula> is a stable symlink, so prefer it over
-# `brew --prefix <formula>` subprocess calls throughout this file
-PATH="$HOMEBREW_PREFIX/opt/ncurses/bin:$PATH"
+# nix-darwin's /etc/zshenv already put the Nix profiles first; brew shellenv
+# above re-prepended Homebrew (casks' CLIs and the few remaining formulae),
+# so put the Nix profiles (home-manager packages, system packages) back in front
+PATH="/etc/profiles/per-user/$USER/bin:/run/current-system/sw/bin:$PATH"
+# mise shims for non-interactive shells (scripts, agents, editors); interactive
+# shells get the faster `mise activate` in .zshrc
+PATH="${MISE_DATA_DIR:-$XDG_DATA_HOME/mise}/shims:$PATH"
 # For Docker CLI tools to be accessible in the shell
 # https://github.com/Homebrew/homebrew-cask/blob/bb82248bb7bfc6ff7fbc4b02dbb63f6f3aaead03/Casks/docker.rb#L118-L122
 PATH="$HOME/.docker/bin:$PATH"
@@ -46,14 +48,8 @@ PATH="$HOME/.docker/bin:$PATH"
 # skips the dangling symlinks left behind when an app update drops the CLI.
 [ -x "$HOME/.antigravity/antigravity/bin/antigravity" ] && PATH="$HOME/.antigravity/antigravity/bin:$PATH"
 
-# Add pyenv executable to PATH and enable shims
-# PYENV_ROOT is needed for XDG Base Directory compliance
-# https://github.com/pyenv/pyenv#set-up-your-shell-environment-for-pyenv
-export PYENV_ROOT="$XDG_DATA_HOME/.pyenv"
-command -v pyenv >/dev/null || PATH="$PYENV_ROOT/bin:$PATH"
-
-# Sets GOROOT: https://github.com/asdf-community/asdf-golang#goroot
-source "$HOME"/.asdf/plugins/golang/set-env.zsh
+# Runtime versions (node, python, go, bun, poetry) are managed by mise
+# (~/.tool-versions); it exports GOROOT etc. itself. pyenv/asdf are gone.
 
 # https://github.com/Schniz/fnm#zsh
 # eval "$(fnm env --use-on-cd)"
@@ -86,15 +82,13 @@ export HOMEBREW_DISPLAY_INSTALL_TIMES=1
 export HOMEBREW_BOOTSNAP=1
 # HOMEBREW_GITHUB_API_TOKEN is resolved lazily by the brew() wrapper in
 # .zshrc: `gh auth token` costs ~120ms, too slow for every login shell
-# Always use a Homebrew-installed curl & git
-export HOMEBREW_FORCE_BREWED_CURL=1
-export HOMEBREW_FORCE_BREWED_GIT=1
 # Forbid HTTPS to HTTP redirects
 export HOMEBREW_NO_INSECURE_REDIRECT=1
 export HOMEBREW_CASK_OPTS="--greedy"
 export HOMEBREW_LOGS="$XDG_STATE_HOME/brew"
 export HOMEBREW_CACHE="$XDG_CACHE_HOME/brew"
-export HOMEBREW_BUNDLE_FILE="$XDG_CONFIG_HOME/brew/Brewfile"
+# HOMEBREW_BUNDLE_FILE points at the Brewfile nix-darwin generates from
+# homebrew.nix (set in /etc/zshenv by nix-darwin)
 
 # Opt-out from analytics https://consoledonottrack.com/
 export DO_NOT_TRACK=1
@@ -218,6 +212,5 @@ export NPM_CONFIG_USERCONFIG="$XDG_CONFIG_HOME/npm/.npmrc"
 export NODE_REPL_HISTORY="$XDG_DATA_HOME/node/history"
 
 # Global LDFLAGS/CPPFLAGS were removed: they affected every compile on the
-# machine, not just the builds that needed brewed libs. Projects that link
-# against brewed libraries (e.g. psycopg2 -> libpq/openssl) now opt in
-# per-project via the `use brew_libs libpq openssl` direnv helper (direnvrc)
+# machine. Projects that link against native libraries (e.g. psycopg2 ->
+# libpq/openssl) get them from their own flake dev shell (`use flake`)

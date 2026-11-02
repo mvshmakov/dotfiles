@@ -26,7 +26,8 @@ fi
 
 # Colorizes common UNIX tools output (GRC - Generic Colorizer)
 export GRC_ALIASES=true
-[[ -s "$(brew --prefix)/etc/grc.sh" ]] && source "$(brew --prefix)/etc/grc.sh"
+# shellcheck disable=SC1091
+[[ -s "/etc/profiles/per-user/$USER/etc/profile.d/grc.sh" ]] && source "/etc/profiles/per-user/$USER/etc/profile.d/grc.sh"
 
 source "$HOME"/shell-sources/aliasrc
 source "$HOME"/shell-sources/.functions
@@ -47,8 +48,8 @@ complete -W "NSGlobalDomain" defaults
 # Activate direnv https://direnv.net/docs/hook.html#bash
 eval "$(direnv hook bash)"
 
-# Sets GOROOT: https://github.com/asdf-community/asdf-golang#goroot
-source "$HOME"/.asdf/plugins/golang/set-env.bash
+# Runtime versions (node, python, go, bun, poetry) from ~/.tool-versions
+eval "$(mise activate bash)"
 
 # Brew should have the binary in PATH already
 eval "$(fzf --bash)"
@@ -57,9 +58,12 @@ eval "$(fzf --bash)"
 # Disabling the up arrow as it is easy enough to filter with subsequent `^R`
 eval "$(atuin init bash  --disable-up-arrow)"
 
-# Configuring Homebrew shell completions
+# bash-completion (nixpkgs) + Homebrew's completions for the remaining casks
 # https://docs.brew.sh/Shell-Completion#configuring-completions-in-bash
-if type brew &>/dev/null; then
+# shellcheck disable=SC1091
+if [[ -r "/etc/profiles/per-user/$USER/etc/profile.d/bash_completion.sh" ]]; then
+  source "/etc/profiles/per-user/$USER/etc/profile.d/bash_completion.sh"
+elif type brew &>/dev/null; then
   if [[ -r "${HOMEBREW_PREFIX}/etc/profile.d/bash_completion.sh" ]]; then
     source "${HOMEBREW_PREFIX}/etc/profile.d/bash_completion.sh"
   else

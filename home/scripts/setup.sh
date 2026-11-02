@@ -29,17 +29,20 @@ mkdir -p "$XDG_CACHE_HOME"/zsh/
 mkdir -p "$XDG_DATA_HOME"/zsh/
 
 # Running main scripts
+# macOS defaults not expressible in nix-darwin (the rest is in
+# nix-darwin/.config/nix-darwin/modules/darwin/system.nix)
 ./macos.sh
+# Installs Homebrew itself only; packages, casks and App Store apps are
+# declared in nix-darwin and installed by `darwin-rebuild switch`
 ./brew.sh
+# Installs Determinate Nix and activates the nix-darwin configuration
+# (requires the stow symlinks, in particular ~/.config/nix-darwin)
+./nix.sh
 ./shell.sh
 ./symlinks.sh
 # Requires the stow symlinks (plists) and the brew packages to be in place
 ./services.sh
-
-# Nix is opt-in (INSTALL_NIX=1 ./setup.sh): the nix/ configs are not part of
-# the default setup yet, see the Brewfile TODO about migrating to Nix
-if [[ "${INSTALL_NIX:-0}" == "1" ]]; then
-  sh <(curl -L https://nixos.org/nix/install) --daemon
-fi
+# Requires the claude-code cask, node (mise), uv and atuin (nix) from the steps above
+./claude.sh
 
 echo "Setup completed!"

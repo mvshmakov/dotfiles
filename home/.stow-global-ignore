@@ -1,9 +1,0 @@
-# Stuff ignored by stow globally
-
-.git
-.gitignore
-
-.DS_Store
-
-README.*
-LICENSE

@@ -1,0 +1,7 @@
+# mise (asdf successor): global settings. Versions come from ~/.tool-versions
+# (home/.tool-versions) and per-project .tool-versions / mise.toml. Runtimes
+# are prebuilt downloads by default (python-build-standalone, official
+# node/go/bun archives): nothing compiles locally, no openssl/readline/tk headers.
+[settings]
+# Keep honouring asdf-style .tool-versions files
+legacy_version_file = true

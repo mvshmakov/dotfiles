@@ -5,7 +5,7 @@ args = $(filter-out $@,$(MAKECMDGOALS))
 
 # Run all the checks
 .PHONY: all
-all: lint
+all: lint nix-ci
 
 # Using .PHONY to avoid conflicts with files named the same as the target
 # E.g., `shellcheck` exists in both filesystem and in the commands
@@ -30,15 +30,64 @@ format-check:
 lint-shell:
 	shellcheck $(or $(args),$(filter-out %/zsh-aliasrc %/docker-weekly-prune,$(SHELL_SCRIPTS)))
 
-# Link all of the local repo files to the system
-.PHONY: activate
-activate:
-	stow -vt ~ $(args)
+# nix-darwin flake (stowed to ~/.config/nix-darwin); the darwinConfigurations
+# attribute is a neutral name per machine: `make nix-switch NIX_HOST=mac-2`
+NIX_FLAKE = ./nix-darwin/.config/nix-darwin
+NIX_HOST ?= mac-1
+NIX_SYSTEM = $(NIX_FLAKE)\#darwinConfigurations.$(NIX_HOST).system
 
-# Unlink linked config directory
-.PHONY: deactivate
-deactivate:
-	stow -D -vt ~ $(args)
+# Build the whole system closure without activating anything
+.PHONY: nix-build ## Build the nix-darwin system closure (no activation)
+nix-build:
+	nix build $(NIX_SYSTEM) -o $(NIX_FLAKE)/result
+
+# Build + run nix-darwin's preflight checks (existing /etc files, primary
+# user, Homebrew present, ...); read-only, but darwin-rebuild insists on root
+# for every action that could activate, `check` included
+.PHONY: nix-check ## Build + nix-darwin preflight checks (no activation)
+nix-check: nix-build
+	sudo $(NIX_FLAKE)/result/sw/bin/darwin-rebuild check --flake $(NIX_FLAKE)\#$(NIX_HOST)
+
+# Activate: writes /etc, launchd agents, defaults and runs `brew bundle`
+.PHONY: nix-switch ## Activate the configuration (sudo)
+nix-switch:
+	sudo darwin-rebuild switch --flake $(NIX_FLAKE)\#$(NIX_HOST) || \
+	  sudo nix run nix-darwin/nix-darwin-26.05\#darwin-rebuild -- switch --flake $(NIX_FLAKE)\#$(NIX_HOST)
+
+.PHONY: nix-update ## Update flake.lock
+nix-update:
+	nix flake update --flake $(NIX_FLAKE)
+
+.PHONY: nix-fmt ## Format the Nix files
+nix-fmt:
+	cd $(NIX_FLAKE) && nix fmt
+
+# `--ci` = fail on unformatted files without rewriting them
+.PHONY: nix-fmt-check
+nix-fmt-check:
+	cd $(NIX_FLAKE) && nix fmt -- --ci
+
+.PHONY: nix-lint ## Lint the Nix files (statix + deadnix)
+nix-lint:
+	nix develop $(NIX_FLAKE) -c statix check $(NIX_FLAKE)
+	nix develop $(NIX_FLAKE) -c deadnix --fail $(NIX_FLAKE)
+
+# Flake-level sanity: lock file, outputs schema, devShell/formatter eval
+.PHONY: nix-flake-check
+nix-flake-check:
+	cd $(NIX_FLAKE) && nix flake check
+
+# Evaluate every darwinConfiguration fully (all modules, options and
+# package attributes) without downloading or building the closure
+.PHONY: nix-eval
+nix-eval:
+	for host in $$(nix eval --raw $(NIX_FLAKE)\#darwinConfigurations --apply 'c: builtins.concatStringsSep " " (builtins.attrNames c)'); do \
+	  nix build --dry-run $(NIX_FLAKE)\#darwinConfigurations.$$host.system || exit 1; \
+	done
+
+# Everything CI runs for the Nix side; needs no root and no full build
+.PHONY: nix-ci ## Nix checks as run in CI (format, lint, evaluate)
+nix-ci: nix-fmt-check nix-lint nix-flake-check nix-eval
 
 # Print this help
 .PHONY: help

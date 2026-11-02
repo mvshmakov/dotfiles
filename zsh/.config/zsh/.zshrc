@@ -63,8 +63,6 @@ export HISTFILE="${XDG_DATA_HOME:-$HOME/.local/share}/zsh/history"
 if [[ -x /opt/homebrew/bin/brew && -z "$HOMEBREW_PREFIX" ]]; then
   eval "$(/opt/homebrew/bin/brew shellenv)"
 fi
-# Must come after brew shellenv so asdf shims take precedence over /opt/homebrew/bin
-PATH="${ASDF_DATA_DIR:-$HOME/.asdf}/shims:$PATH"
 
 # GitHub allows a greater number of API requests with a PAT, but resolving it
 # eagerly costs ~120ms per shell (`gh auth token`), so inject it on the first
@@ -117,10 +115,15 @@ _zcache() {
 _zcache npm npm completion
 _zcache docker docker completion zsh
 _zcache ngrok ngrok completion
+# Cask ships only the binary, no completion in brew's site-functions
+_zcache sentry-cli sentry-cli completions zsh
 _zcache heroku heroku autocomplete:script zsh
 
 # Fancy cd using frecency, agkozak/zsh-z (rupa/z) alternative
 _zcache zoxide zoxide init --cmd=cd zsh
+# Runtime versions from ~/.tool-versions / per-project files, without shims
+# (the shims dir from .zprofile is for non-interactive shells only)
+_zcache mise mise activate zsh
 # bun completions
 [ -s "$HOME/.bun/_bun" ] && source "$HOME/.bun/_bun"
 
@@ -221,7 +224,7 @@ bindkey -v
 # https://superuser.com/a/1563859/1916321
 unalias run-help
 autoload run-help
-export HELPDIR="$HOMEBREW_PREFIX/share/zsh/help"
+export HELPDIR="/etc/profiles/per-user/$USER/share/zsh/$ZSH_VERSION/help"
 alias help=run-help
 
 # Edit the current command line in $EDITOR

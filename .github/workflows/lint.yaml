@@ -29,3 +29,17 @@ jobs:
         run: shfmt --version && shellcheck --version
       - name: Run lint checks
         run: make lint
+
+  nix:
+    name: nix fmt + statix + deadnix + eval
+    # aarch64-darwin, the platform the darwinConfigurations are for
+    runs-on: macos-latest
+    steps:
+      - uses: actions/checkout@v5
+      # Same Nix distribution as the machines (Determinate Nix)
+      - uses: DeterminateSystems/determinate-nix-action@v3
+      # Formats, lints and evaluates every darwinConfiguration (dry-run
+      # build) - same targets as `make nix-ci` locally. The full closure is
+      # not built here: it is ~12 GiB and `darwin-rebuild check` needs root.
+      - name: Run Nix checks
+        run: make nix-ci

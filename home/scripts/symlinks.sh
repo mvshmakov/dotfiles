@@ -1,11 +1,12 @@
 #!/usr/bin/env sh
 #
-# Symlink configs that live outside stow's reach (app-specific locations).
+# Symlink configs that live outside the $HOME-mirroring layout that
+# dotfiles.nix links (app-specific locations).
 # Idempotent: safe to re-run; existing real files are backed up once.
 #
-# Note: iTerm2's plist is NOT handled here anymore - the iterm2/ stow
-# package ships Library/Preferences/com.googlecode.iterm2.plist, so plain
-# `stow iterm2` covers it.
+# Note: iTerm2's plist is NOT handled here anymore - the iterm2/ package
+# ships Library/Preferences/com.googlecode.iterm2.plist, which dotfiles.nix
+# links like everything else.
 
 set -eu
 IFS=$(printf '\n\t')

@@ -9,7 +9,8 @@ IFS=$'\n\t'
 # The service plists are versioned in launchctl/ and stowed into
 # ~/Library/LaunchAgents, so the official service commands only need to
 # (un)bootstrap them. Never run `--install-service`/`--uninstall-service`:
-# through the stow symlink they would overwrite/delete the tracked plists.
+# through the ~/Library/LaunchAgents symlink they would overwrite/delete the
+# tracked plists.
 for service in yabai skhd; do
   # A full stop + start re-bootstraps the job so launchd picks up plist
   # changes (e.g. environment variables); `--restart-service` alone only

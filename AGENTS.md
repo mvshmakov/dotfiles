@@ -3,6 +3,7 @@
 ## Testing
 
 - Run `make lint` to check formatting and lint shell scripts.
+- Run `make nix-ci` to format-check, lint and evaluate the nix-darwin flake (no root, no full build).
 
 ## Commit Style
 
