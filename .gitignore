@@ -41,6 +41,12 @@ bin/.local/bin/graphify-mcp
 nix-darwin/.config/nix-darwin/result
 nix-darwin/.config/nix-darwin/result-*
 
+# Agent skills (skills-lock.json, `npx skills`): the global ignore hides
+# .claude/ (local settings); only the skill symlinks into .agents/skills are tracked
+!.claude/
+.claude/*
+!.claude/skills/
+
 # direnv: the global ignore hides every .envrc; this one is generic (`use flake`)
 !nix-darwin/.config/nix-darwin/.envrc
 nix-darwin/.config/nix-darwin/.direnv/
