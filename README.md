@@ -84,6 +84,17 @@ Both auto-start on boot: their launchd plists are versioned in `launchctl/` (whi
 - The yabai scripting addition is not used, so no SIP/sudoers changes are needed.
 - The skhd plist/label must stay `com.koekeishiya.skhd` until an skhd release ships the author's account rename (koekeishiya -> asmvik) - the binary hardcodes that label and plist path. yabai has already migrated to `com.asmvik.yabai`.
 
+## Claude
+
+`home/scripts/claude.sh` (run by `setup.sh`, safe to re-run) merges `home/scripts/claude/settings.json` (model, plugins, permissions, opt-outs) into `~/.claude/settings.json`, installs the listed plugins (`enabledPlugins` alone installs nothing on a new machine) and graphify's skill. `~/.claude/settings.json` stays a local file: its `autoMode` rules describe private infrastructure and only work in user settings. A plugin installed later via `/plugin` lands only in the local file; copy it to the repo file to share it.
+
+Manual, once per machine:
+
+- User MCP servers: `claude mcp add --scope user --transport http figma http://127.0.0.1:3845/mcp`; `telegram` carries credentials.
+- Bitwarden CLI for the `bitwarden` MCP server (added by `claude.sh`): `bw config server <your Vaultwarden URL> && bw login --apikey` (Vaultwarden, tailnet-only; personal API key from web vault → Settings → Security → Keys, because the CLI cannot do WebAuthn 2FA and plain `bw login` fails with "No providers available for this client"). Agents then call its `unlock` tool, which asks for the master password in a native dialog; `lock` ends the session.
+- Desktop app (chat/Cowork), with the app quit (a running app rewrites the file from memory): add `chrome-devtools` (`npx -y chrome-devtools-mcp@latest --no-usage-statistics --isolated --config ~/.config/cd4a/config.json`, absolute paths; `--isolated` because the app also hands the server to Code sessions, and two copies cannot share one Chrome profile) to `mcpServers` in `~/Library/Application Support/Claude/claude_desktop_config.json`. `cd4a/.config/cd4a/config.json` turns on the opt-in memory-analysis and PWA tools; released versions read it only via `--config`.
+- Second desktop profile ("Claude Work"): `open -n -a /Applications/Claude.app --args --user-data-dir="$HOME/.claude-instances/work"` (its config is `~/.claude-instances/work/claude_desktop_config.json`).
+
 ## TODO
 
 - Warn about exiting from the git commit message template on non-empty message.

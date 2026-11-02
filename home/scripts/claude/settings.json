@@ -1,0 +1,88 @@
+{
+  "cleanupPeriodDays": 3650,
+  "model": "fable[1m]",
+  "skipWorkflowUsageWarning": true,
+  "agentPushNotifEnabled": true,
+  "env": {
+    "CHROME_DEVTOOLS_MCP_NO_USAGE_STATISTICS": "1"
+  },
+  "permissions": {
+    "allow": [
+      "Bash(npx -y modern-web-guidance@latest *)"
+    ],
+    "ask": [
+      "mcp__bitwarden__list",
+      "mcp__bitwarden__get",
+      "mcp__bitwarden__create_item",
+      "mcp__bitwarden__create_folder",
+      "mcp__bitwarden__create_attachment",
+      "mcp__bitwarden__edit_item",
+      "mcp__bitwarden__edit_folder",
+      "mcp__bitwarden__move",
+      "mcp__bitwarden__restore",
+      "mcp__bitwarden__list_send",
+      "mcp__bitwarden__get_send",
+      "mcp__bitwarden__create_text_send",
+      "mcp__bitwarden__create_file_send",
+      "mcp__bitwarden__edit_send",
+      "mcp__bitwarden__remove_send_password"
+    ],
+    "deny": [
+      "mcp__bitwarden__delete",
+      "mcp__bitwarden__delete_send",
+      "mcp__bitwarden__confirm",
+      "mcp__bitwarden__edit_item_collections",
+      "mcp__bitwarden__device_approval_list",
+      "mcp__bitwarden__device_approval_approve",
+      "mcp__bitwarden__device_approval_approve_all",
+      "mcp__bitwarden__device_approval_deny",
+      "mcp__bitwarden__device_approval_deny_all",
+      "mcp__bitwarden__list_org_collections",
+      "mcp__bitwarden__get_org_collection",
+      "mcp__bitwarden__create_org_collection",
+      "mcp__bitwarden__edit_org_collection",
+      "mcp__bitwarden__update_org_collection",
+      "mcp__bitwarden__delete_org_collection",
+      "mcp__bitwarden__list_org_groups",
+      "mcp__bitwarden__get_org_group",
+      "mcp__bitwarden__get_org_group_members",
+      "mcp__bitwarden__create_org_group",
+      "mcp__bitwarden__update_org_group",
+      "mcp__bitwarden__update_org_group_members",
+      "mcp__bitwarden__delete_org_group",
+      "mcp__bitwarden__list_org_members",
+      "mcp__bitwarden__get_org_member",
+      "mcp__bitwarden__get_org_member_groups",
+      "mcp__bitwarden__invite_org_member",
+      "mcp__bitwarden__reinvite_org_member",
+      "mcp__bitwarden__update_org_member",
+      "mcp__bitwarden__update_org_member_groups",
+      "mcp__bitwarden__remove_org_member",
+      "mcp__bitwarden__revoke_org_member",
+      "mcp__bitwarden__restore_org_member",
+      "mcp__bitwarden__import_org_users_and_groups",
+      "mcp__bitwarden__list_org_policies",
+      "mcp__bitwarden__get_org_policy",
+      "mcp__bitwarden__update_org_policy",
+      "mcp__bitwarden__get_org_events",
+      "mcp__bitwarden__get_org_subscription",
+      "mcp__bitwarden__update_org_subscription"
+    ]
+  },
+  "extraKnownMarketplaces": {
+    "cloudflare": {
+      "source": {
+        "source": "github",
+        "repo": "cloudflare/skills"
+      }
+    }
+  },
+  "enabledPlugins": {
+    "agent-sdk-dev@claude-plugins-official": true,
+    "chrome-devtools-mcp@claude-plugins-official": true,
+    "claude-code-setup@claude-plugins-official": true,
+    "cloudflare@cloudflare": true,
+    "figma@claude-plugins-official": true,
+    "modern-web-guidance@claude-plugins-official": true
+  }
+}
