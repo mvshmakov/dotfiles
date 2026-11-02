@@ -26,10 +26,12 @@
 # auto_sync = true
 
 ## enable or disable automatic update checks
-# update_check = true
+# Off: the check asks api.atuin.sh; Homebrew handles updates anyway.
+update_check = false
 
 ## address of the sync server
-# sync_address = "https://api.atuin.sh"
+# Self-hosted, reachable over the tailnet only.
+sync_address = "https://atuin.mvshmakov.dev"
 
 ## how often to sync history. note that this is only triggered when a command
 ## is ran, so sync intervals may well be longer
@@ -268,4 +270,5 @@ name = "nord"
 filters = [ "global", "directory", "session", "host", "workspace" ]
 
 [ai]
-enabled = true
+# Off: Atuin AI only talks to Atuin Hub (hub.atuin.sh).
+enabled = false
