@@ -44,8 +44,9 @@
     let
       username = "mvshmakov";
 
-      # One entry per machine, under a neutral name (not the machine's
-      # LocalHostName), so switches name it: `--flake .#mac-1`
+      # One entry per machine; the attribute name must match
+      # `scutil --get LocalHostName` so that a bare `darwin-rebuild switch`
+      # picks the right one
       mkDarwinHost =
         hostname:
         nix-darwin.lib.darwinSystem {
@@ -79,7 +80,7 @@
     in
     {
       darwinConfigurations = {
-        mac-1 = mkDarwinHost "mac-1";
+        mvshmakov-neocom-mbp-14 = mkDarwinHost "mvshmakov-neocom-mbp-14";
       };
 
       # `nix fmt` formats the tree with nixfmt (RFC 166 style, the nixpkgs

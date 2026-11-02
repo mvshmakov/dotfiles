@@ -1,5 +1,5 @@
 {
-  "hostname": "mac-1-tailmux",
+  "hostname": "mvshmakov-neocom-mbp-14-tailmux",
   "state_dir": "/var/db/tailmux",
   "socks5": "127.0.0.1:1055",
   "http": "127.0.0.1:1056",

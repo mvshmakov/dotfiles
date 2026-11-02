@@ -31,9 +31,9 @@ lint-shell:
 	shellcheck $(or $(args),$(filter-out %/zsh-aliasrc %/docker-weekly-prune,$(SHELL_SCRIPTS)))
 
 # nix-darwin flake (stowed to ~/.config/nix-darwin); the darwinConfigurations
-# attribute is a neutral name per machine: `make nix-switch NIX_HOST=mac-2`
+# attribute is the machine's LocalHostName
 NIX_FLAKE = ./nix-darwin/.config/nix-darwin
-NIX_HOST ?= mac-1
+NIX_HOST = $(shell scutil --get LocalHostName)
 NIX_SYSTEM = $(NIX_FLAKE)\#darwinConfigurations.$(NIX_HOST).system
 
 # Build the whole system closure without activating anything
@@ -46,13 +46,13 @@ nix-build:
 # for every action that could activate, `check` included
 .PHONY: nix-check ## Build + nix-darwin preflight checks (no activation)
 nix-check: nix-build
-	sudo $(NIX_FLAKE)/result/sw/bin/darwin-rebuild check --flake $(NIX_FLAKE)\#$(NIX_HOST)
+	sudo $(NIX_FLAKE)/result/sw/bin/darwin-rebuild check --flake $(NIX_FLAKE)
 
 # Activate: writes /etc, launchd agents, defaults and runs `brew bundle`
 .PHONY: nix-switch ## Activate the configuration (sudo)
 nix-switch:
-	sudo darwin-rebuild switch --flake $(NIX_FLAKE)\#$(NIX_HOST) || \
-	  sudo nix run nix-darwin/nix-darwin-26.05\#darwin-rebuild -- switch --flake $(NIX_FLAKE)\#$(NIX_HOST)
+	sudo darwin-rebuild switch --flake $(NIX_FLAKE) || \
+	  sudo nix run nix-darwin/nix-darwin-26.05\#darwin-rebuild -- switch --flake $(NIX_FLAKE)
 
 .PHONY: nix-update ## Update flake.lock
 nix-update:

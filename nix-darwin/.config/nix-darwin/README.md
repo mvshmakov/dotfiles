@@ -8,14 +8,13 @@ packages and the dotfile symlinks, on top of
 
 home-manager links this directory to `~/.config/nix-darwin` like every other
 package of the repo; `home/scripts/nix.sh` also symlinks it to
-`/etc/nix-darwin`. Machines have neutral configuration names (`mac-1`), not
-their hostnames, so every switch names one: `--flake <dir>#mac-1`.
+`/etc/nix-darwin` so a bare `sudo darwin-rebuild switch` finds it.
 
 ## Layout
 
 ```
 flake.nix                      inputs (26.05 stable + unstable overlay), hosts, formatter, devShell
-hosts/<name>.nix               per-machine: platform, primary user
+hosts/<LocalHostName>.nix      per-machine: platform, hostname, primary user
 modules/darwin/
   nix.nix                      Determinate module, nix.custom.conf settings, nixpkgs config
   system.nix                   stateVersion, timezone, Touch ID sudo, macOS defaults (from macos.sh)
@@ -74,7 +73,7 @@ for p in */; do p=${p%/}; [ "$p" = home ] || stow -D -t ~ "$p"; done
 #    fonts, home-manager packages + links, and `brew bundle --cleanup`
 #    (uninstalls every formula that moved to nixpkgs, untaps unused taps)
 sudo nix-darwin/.config/nix-darwin/result/sw/bin/darwin-rebuild switch \
-  --flake ./nix-darwin/.config/nix-darwin#mac-1
+  --flake ./nix-darwin/.config/nix-darwin
 sudo ln -sfn "$PWD/nix-darwin/.config/nix-darwin" /etc/nix-darwin
 
 # 3. Verify, in a NEW terminal

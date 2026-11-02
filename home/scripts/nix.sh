@@ -12,7 +12,7 @@ IFS=$'\n\t'
 # first switch
 flake="$(cd "$(dirname "$0")/../../nix-darwin/.config/nix-darwin" && pwd)"
 
-# Lets `sudo darwin-rebuild switch --flake /etc/nix-darwin#<name>` find it
+# Lets a bare `sudo darwin-rebuild switch` find the flake afterwards
 if [[ ! -e /etc/nix-darwin ]]; then
   sudo ln -s "$flake" /etc/nix-darwin
 fi
@@ -33,13 +33,10 @@ fi
 
 # First activation: darwin-rebuild is not on PATH yet, so run it from the
 # pinned nix-darwin release. Subsequent runs: `make nix-switch`.
-# The configuration's name (flake.nix darwinConfigurations), not the
-# machine's hostname
-host="${NIX_HOST:-mac-1}"
 if command -v darwin-rebuild >/dev/null 2>&1; then
-  sudo darwin-rebuild switch --flake "$flake#$host"
+  sudo darwin-rebuild switch --flake "$flake"
 else
-  sudo nix run 'nix-darwin/nix-darwin-26.05#darwin-rebuild' -- switch --flake "$flake#$host"
+  sudo nix run 'nix-darwin/nix-darwin-26.05#darwin-rebuild' -- switch --flake "$flake"
 fi
 
 echo "nix-darwin activated!"
