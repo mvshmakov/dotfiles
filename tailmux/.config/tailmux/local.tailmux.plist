@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<!--
+  tailmux as a root LaunchDaemon (TUN mode), installed by
+  home/scripts/tailmux-root-install.sh. Replaces Homebrew's sh.brew.tailmux:
+  the binary, config and state live in root-owned paths so a user-level
+  compromise cannot swap the binary tailmux re-execs as root
+  (audit 2026-10-20, HIGH 1).
+-->
+<plist version="1.0">
+<dict>
+  <key>Label</key>
+  <string>local.tailmux</string>
+  <key>ProgramArguments</key>
+  <array>
+    <string>/usr/local/libexec/tailmux</string>
+    <string>up</string>
+    <string>-config</string>
+    <string>/Library/Application Support/tailmux/config.json</string>
+  </array>
+  <key>EnvironmentVariables</key>
+  <dict>
+    <!-- no tsnet log upload to log.tailscale.com -->
+    <key>TS_NO_LOGS_NO_SUPPORT</key>
+    <string>1</string>
+    <!-- no UPnP/NAT-PMP/PCP chatter with the local router -->
+    <key>TS_DISABLE_PORTMAPPER</key>
+    <string>1</string>
+    <!-- root must never copy the menu bar app into /Applications -->
+    <key>TAILMUX_NO_APPLICATIONS</key>
+    <string>1</string>
+  </dict>
+  <key>RunAtLoad</key>
+  <true/>
+  <key>KeepAlive</key>
+  <true/>
+  <!-- 0077: everything the daemon creates is root-only -->
+  <key>Umask</key>
+  <integer>63</integer>
+  <key>StandardOutPath</key>
+  <string>/var/log/tailmux.log</string>
+  <key>StandardErrorPath</key>
+  <string>/var/log/tailmux.log</string>
+</dict>
+</plist>
