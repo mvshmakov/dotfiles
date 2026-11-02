@@ -19,7 +19,7 @@ jobs:
     name: shfmt + shellcheck
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v5
+      - uses: actions/checkout@v7
       # Lint scope is defined once in the Makefile (SHELL_SCRIPTS), so CI and
       # local `make lint` always agree. Submodules are excluded from that
       # scope, hence no submodule checkout is needed.
@@ -35,7 +35,7 @@ jobs:
     # aarch64-darwin, the platform the darwinConfigurations are for
     runs-on: macos-latest
     steps:
-      - uses: actions/checkout@v5
+      - uses: actions/checkout@v7
       # Same Nix distribution as the machines (Determinate Nix)
       - uses: DeterminateSystems/determinate-nix-action@v3
       # Formats, lints and evaluates every darwinConfiguration (dry-run
