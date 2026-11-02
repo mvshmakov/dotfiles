@@ -28,7 +28,7 @@ format-check:
 # zsh files are excluded: shellcheck does not support zsh
 .PHONY: lint-shell
 lint-shell:
-	shellcheck $(or $(args),$(filter-out %/zsh-aliasrc,$(SHELL_SCRIPTS)))
+	shellcheck $(or $(args),$(filter-out %/zsh-aliasrc %/docker-weekly-prune,$(SHELL_SCRIPTS)))
 
 # Link all of the local repo files to the system
 .PHONY: activate

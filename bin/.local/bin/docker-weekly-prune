@@ -1,0 +1,8 @@
+#!/bin/zsh
+# Weekly Docker cleanup: build cache older than 7 days and dangling images.
+# Never touches volumes, tagged images or containers.
+DOCKER=~/.docker/bin/docker
+$DOCKER info >/dev/null 2>&1 || exit 0
+date
+$DOCKER builder prune -f --filter until=168h
+$DOCKER image prune -f
